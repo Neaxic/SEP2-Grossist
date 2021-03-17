@@ -1,4 +1,4 @@
 # SEP2-Grossist
 hej.
 
-Andreas (ø) > alle andre
+Andreas (ø) < alle andre
