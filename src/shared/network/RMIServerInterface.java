@@ -1,4 +1,7 @@
 package shared.network;
 
-public interface RMIServerInterface {
+import java.rmi.Remote;
+
+public interface RMIServerInterface extends Remote
+{
 }
