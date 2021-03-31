@@ -1,6 +1,5 @@
 import client.network.CallbackClient;
 
-import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 public class MainTest {
