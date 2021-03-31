@@ -5,18 +5,18 @@ import java.rmi.Remote;
 public interface RMIServerInterface extends Remote {
 
     /**
-     * @return Den ene værdi der er gemt på serveren
+     * @return Værdien gemt på Server
      */
     int getThingFromServer();
 
     /**
-     * @param val Den værdi du vil sætte på serveren
+     * @param val Gemmes på Server
      */
     void setThingOnServer(int val);
 
 
     /**
-     * @return Hvis der kan connectes, så vil værdien være True
+     * @return True hvis der er forbindelse
      */
     boolean ping();
 }
