@@ -4,7 +4,9 @@ import shared.wares.Produce;
 
 public class RISKASSESSPROTO
 {
-  private Produce ware;
 
+  public static void riskAssess(Produce item)
+  {
 
+  }
 }
