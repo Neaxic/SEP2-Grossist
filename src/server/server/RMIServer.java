@@ -1,4 +1,4 @@
-package shared.util;
+package server.server;
 
 import shared.network.RMIServerInterface;
 

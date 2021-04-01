@@ -1,6 +1,7 @@
-package shared.util;
+package server.server;
 
 import shared.network.RMIServerInterface;
+import shared.util.Util;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
