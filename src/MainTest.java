@@ -1,9 +1,10 @@
 import client.network.CallbackClient;
 
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class MainTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException {
         Scanner scanner = new Scanner(System.in);
 
         // Hvis man vil teste klientens metoder
@@ -17,7 +18,7 @@ public class MainTest {
     }
 
 
-    private static void clientTest() {
+    private static void clientTest() throws RemoteException {
         CallbackClient client = new CallbackClient();
         client.start();
         System.out.print("> Client started... \nShould print 0 here: ");

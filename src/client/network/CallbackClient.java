@@ -24,8 +24,11 @@ public class CallbackClient implements Remote {
             Registry registry = LocateRegistry.getRegistry("localhost", 1099);
             server = (RMIServerInterface) registry.lookup(Util.SERVERNAME); // Util klassen har gemt servernavnet som en statisk variabel
             UnicastRemoteObject.exportObject(this, 0);
-            server.ping();
-            System.out.println("Connection Established");
+            if(server.ping()){;
+                System.out.println("Connection Established");}
+            else{
+                System.out.println("Connection failed");
+            }
 
         } catch (RemoteException | NotBoundException e) {
             System.out.println("CallbackClient [start()] > \t" + e.getMessage());
@@ -36,11 +39,11 @@ public class CallbackClient implements Remote {
         System.out.println(number);
     }
 
-    public void updateClientNumber(){
+    public void updateClientNumber() throws RemoteException {
         number = server.getThingFromServer();
     }
 
-    public void setServerNumber(int number){
+    public void setServerNumber(int number) throws RemoteException {
         server.setThingOnServer(number);
     }
 }
