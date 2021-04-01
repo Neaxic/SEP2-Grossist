@@ -1,15 +1,15 @@
 package shared.wares;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public class Produce
 {
   private int stock, soldDaily, deliveryDays;
   private double kgPrice;
-  private Calendar bb;
+  private LocalDate bb;
 
   public Produce(int stock, int soldDaily, int deliveryDays, double kgPrice,
-      Calendar bb)
+      LocalDate bb)
   {
     this.stock = stock;
     this.soldDaily = soldDaily;
@@ -23,6 +23,11 @@ public class Produce
     return stock;
   }
 
+  public int getDeliveryDays()
+  {
+    return deliveryDays;
+  }
+
   public int getSoldDaily()
   {
     return soldDaily;
@@ -33,7 +38,7 @@ public class Produce
     return kgPrice;
   }
 
-  public Calendar getBb()
+  public LocalDate getBb()
   {
     return bb;
   }

@@ -2,15 +2,18 @@ package server.model;
 
 import shared.wares.Produce;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RISKTEST
 {
   public static void main(String[] args)
   {
-    Calendar bb1 = new GregorianCalendar(2021, Calendar.APRIL, 8);
-    Produce tomato = new Produce(1000, 20, 3, 20, bb1);
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    LocalDate bb1 = LocalDate.parse("08/04/2021", dtf);
+    Produce tomato = new Produce(2000, 200, 5, 20, bb1);
 
+    RiskReport riskReport = RISKASSESSPROTO.riskAssess(tomato);
+    System.out.println(riskReport.getSeverity() + ": " + riskReport.getMessage());
   }
 }
