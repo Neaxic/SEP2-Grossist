@@ -41,11 +41,11 @@ public class RISKASSESSPROTO
 
       if (item.getDeliveryDays() >= daysOfStock)
       {
-        reports.add(new RiskReport("yellow", "Stock too low, order new produce."));
+        reports.add(new RiskReport("red", "Stock too low, order new produce."));
       }
       else if (daysOfStock > daysToBb)
       {
-        reports.add(new RiskReport("red", "Too much stock of produce."));
+        reports.add(new RiskReport("yellow", "Too much stock of produce."));
       }
       else
       {
