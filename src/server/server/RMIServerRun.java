@@ -14,6 +14,6 @@ public class RMIServerRun {
         RMIServerInterface server = new RMIServer();
         Registry registry = LocateRegistry.createRegistry(1099);
         registry.bind(Util.SERVERNAME, server);
-        System.out.println("Server starded");
+        System.out.println("Server started");
     }
 }
