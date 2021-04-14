@@ -152,7 +152,7 @@
                                        <children>
                                           <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../images/150placeholder.png" />
+                                                <Image url="@../../../../shared/images/150placeholder.png" />
                                              </image>
                                           </ImageView>
                                           <VBox prefHeight="150.0" prefWidth="439.0">
