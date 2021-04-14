@@ -12,9 +12,9 @@ public class ViewModelFactory
     return instance;
   }
 
-  ModelFactory modelFactory;
+  ModelFactoryEXCLUDED modelFactoryEXCLUDED;
   private ViewModelFactory()
   {
-    modelFactory = ModelFactory.getInstance();
+    modelFactoryEXCLUDED = ModelFactoryEXCLUDED.getInstance();
   }
 }

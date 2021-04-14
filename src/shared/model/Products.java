@@ -1,4 +1,4 @@
-package shared.wares;
+package shared.model;
 
 import java.time.LocalDate;
 

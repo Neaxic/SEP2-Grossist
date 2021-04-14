@@ -1,6 +1,4 @@
-package client.gui;
-
-import javafx.stage.Stage;
+package client.core;
 
 public class ProxyViewHandler implements ViewHandler {
 	private ViewHandler viewHandler;

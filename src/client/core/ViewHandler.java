@@ -1,4 +1,4 @@
-package client.gui;
+package client.core;
 
 public interface ViewHandler {
 	void start();

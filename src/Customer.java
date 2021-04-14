@@ -1,3 +1,5 @@
+import shared.model.Basket;
+
 public class Customer
 {
   private Basket basket;
