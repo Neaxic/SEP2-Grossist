@@ -1,8 +1,10 @@
 package client.core;
 
+import javafx.stage.Stage;
+
 public class CustomerViewHandler implements ViewHandler{
 	@Override
-	public void start() {
+	public void start(Stage primaryStage) {
 
 	}
 
@@ -12,7 +14,7 @@ public class CustomerViewHandler implements ViewHandler{
 	}
 
 	@Override
-	public ViewModelFactory getViewModelByViewName(String viewName) {
+	public ViewModel getViewModelByViewName(String viewName) {
 		return null;
 	}
 }
