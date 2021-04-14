@@ -1,4 +1,4 @@
-package client.customerclient.views.customerbrowse;
+package client.customerclient.views.customerbrowser;
 
 import client.customerclient.views.CustomerViewController;
 import client.customerclient.views.CustomerViewModel;
@@ -33,7 +33,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	public void init(ViewHandler viewHandler, CustomerViewModel viewModel) {
 		this.viewHandler = viewHandler;
 		this.viewModel = (CustomerBrowserViewModel) viewModel;
-		loadAllProducts();
+//		loadAllProducts();
 	}
 
 	public void loadAllProducts() {
@@ -68,11 +68,15 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		viewHandler.openView(sceneName);
 	}
 
-	public void openBasket() throws IOException {
-		swapScene("basket");
+	public void openProductBrowser() throws IOException {
+		swapScene("CustomerBrowser");
 	}
 
 	public void openSubscriptions() throws IOException {
-		swapScene("subscriptions");
+		swapScene("CustomerSubscriptions");
+	}
+
+	public void openBasket() throws IOException {
+		swapScene("CustomerBasket");
 	}
 }

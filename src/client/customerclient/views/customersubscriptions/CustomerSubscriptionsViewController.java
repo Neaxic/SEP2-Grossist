@@ -23,10 +23,6 @@ public class CustomerSubscriptionsViewController implements CustomerViewControll
 		this.viewModel = (PlaceOrderViewModel) customerViewModel;
 	}
 
-	@Override
-	public void swapScene(String sceneName) throws IOException {
-		viewHandler.openView(sceneName);
-	}
 
 	public void removeFromList(HBox subscription) {
 		String subscriptionTitle = ((Text) ((VBox) subscription.getChildren()).getChildren().get(0)).getText();
@@ -34,9 +30,21 @@ public class CustomerSubscriptionsViewController implements CustomerViewControll
 		subscriptionList.getChildren().remove(subscription);
 	}
 
-	public void openBrowse(ActionEvent actionEvent) {
+	// SCENE MANAGING
+	@Override
+	public void swapScene(String sceneName) throws IOException {
+		viewHandler.openView(sceneName);
 	}
 
-	public void openBasket(ActionEvent actionEvent) {
+	public void openProductBrowser() throws IOException {
+		swapScene("CustomerBrowser");
+	}
+
+	public void openSubscriptions() throws IOException {
+		swapScene("CustomerSubscriptions");
+	}
+
+	public void openBasket() throws IOException {
+		swapScene("CustomerBasket");
 	}
 }

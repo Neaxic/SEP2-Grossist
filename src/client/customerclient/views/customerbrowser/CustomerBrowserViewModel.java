@@ -1,4 +1,4 @@
-package client.customerclient.views.customerbrowse;
+package client.customerclient.views.customerbrowser;
 
 import client.customerclient.views.CustomerViewModel;
 

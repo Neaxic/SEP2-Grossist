@@ -1,6 +1,6 @@
 package client.core;
 
-import client.customerclient.views.customerbrowse.CustomerBrowserViewModel;
+import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
 import client.customerclient.views.CustomerViewModel;
 import client.customerclient.views.customerbasket.BasketViewModel;
 import client.customerclient.views.placeorder.PlaceOrderViewModel;

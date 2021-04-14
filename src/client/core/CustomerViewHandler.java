@@ -22,7 +22,7 @@ public class CustomerViewHandler implements ViewHandler{
 
 		this.primaryStage = primaryStage;
 		this.currentScene = new Scene(new Region());
-		openView("customerbrowse");
+		openView("CustomerBrowser");
 	}
 
 	@Override
