@@ -51,42 +51,60 @@
       </VBox>
       <HBox prefHeight="625.0" prefWidth="900.0">
          <children>
-            <ScrollPane prefHeight="553.0" prefWidth="900.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="885.0">
-                     <children>
-                        <HBox layoutX="-1.0" prefWidth="886.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <VBox prefHeight="553.0" prefWidth="900.0">
+               <children>
+                  <ScrollPane prefHeight="496.0" prefWidth="879.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="894.0">
                            <children>
-                              <VBox prefWidth="847.0">
+                              <HBox layoutX="-1.0" prefWidth="886.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                  <children>
-                                    <TableView prefHeight="200.0" prefWidth="845.0">
-                                      <columns>
-                                        <TableColumn prefWidth="750.0" text="Item" />
-                                        <TableColumn prefWidth="95.0" text="Amount" />
-                                      </columns>
-                                    </TableView>
-                                    <HBox alignment="TOP_RIGHT" prefHeight="0.0" prefWidth="845.0">
+                                    <VBox prefWidth="847.0">
                                        <children>
-                                          <Button mnemonicParsing="false" prefWidth="70.0" text="Cancel">
-                                             <HBox.margin>
-                                                <Insets bottom="15.0" left="15.0" right="5.0" top="15.0" />
-                                             </HBox.margin>
-                                          </Button>
-                                          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" text="Save basket">
-                                             <HBox.margin>
-                                                <Insets bottom="15.0" left="5.0" top="15.0" />
-                                             </HBox.margin>
-                                          </Button>
+                                          <TableView prefHeight="200.0" prefWidth="845.0">
+                                            <columns>
+                                              <TableColumn prefWidth="750.0" text="Item" />
+                                              <TableColumn prefWidth="95.0" text="Amount" />
+                                            </columns>
+                                          </TableView>
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="847.0">
+                                             <children>
+                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Edit Basket" />
+                                             </children>
+                                          </HBox>
                                        </children>
-                                    </HBox>
+                                    </VBox>
                                  </children>
-                              </VBox>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+                  <HBox alignment="TOP_RIGHT" prefHeight="0.0" prefWidth="845.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefWidth="70.0" text="Cancel">
+                           <HBox.margin>
+                              <Insets bottom="15.0" left="15.0" right="5.0" top="15.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" text="Place Order">
+                           <HBox.margin>
+                              <Insets bottom="15.0" left="5.0" top="15.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Button>
                      </children>
-                  </AnchorPane>
-              </content>
-            </ScrollPane>
+                     <VBox.margin>
+                        <Insets right="15.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </HBox>
    </children>
