@@ -28,10 +28,6 @@ public class CustomerBrowserViewController implements CustomerViewController {
 
 	private Object[] activeItemList = new Object[2]; // FIXME: Needs to be of the Object, used to create a Product
 
-	public void tempMethodForSettingController() {
-		System.out.println("duh");
-	}
-
 	@Override
 	public void init(ViewHandler viewHandler, ViewModel viewModel) {
 		this.viewHandler = viewHandler;
