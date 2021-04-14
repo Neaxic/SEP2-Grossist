@@ -1,8 +1,10 @@
 package client.core;
 
+import client.CustomerClient.Views.ViewModel;
+
 public interface ViewHandler {
 	void start();
 	void openView(String viewToOpen);
 
-	ViewModelFactory getViewModelByViewName(String viewName);
+	ViewModel getViewModelByViewName(String viewName);
 }
