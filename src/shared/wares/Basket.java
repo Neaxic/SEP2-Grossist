@@ -1,37 +1,39 @@
 package shared.wares;
 
+import javafx.util.Pair;
+
 import java.util.ArrayList;
 
 public class Basket
 {
-  private ArrayList<Products> shoppingList;
-  private double total;
+  private final ArrayList<Pair<Product, Integer>> basket;
 
-  public Basket(ArrayList<Products> shoppingList, double total)
+  public Basket()
   {
-    this.shoppingList = shoppingList;
-    this.total = total;
+    basket = new ArrayList<>();
   }
 
-  public void placeOrder(Basket basket){ }
-
- public void addProduct(Products product)
- {
-   shoppingList.add(product);
- }
-
- public void removeProduct(Products product)
- {
-   shoppingList.remove(product);
- }
-
-  public ArrayList<Products> getShoppingList()
+  public void addProduct(Product product, int amount)
   {
-    return shoppingList;
+    Pair<Product, Integer> ware = new Pair<>(product, amount);
+    basket.add(ware);
   }
 
-  public double getTotal()
+  public void removeProduct(Product product)
   {
-    return total;
+    basket.removeIf(productIntegerPair -> productIntegerPair.getKey().equals(product));
+  }
+
+  public void changeAmount(Product product, int amount)
+  {
+    for (Pair<Product, Integer> productIntegerPair : basket)
+    {
+      if (productIntegerPair.getKey().equals(product))
+      {
+        basket.remove(productIntegerPair);
+        Pair<Product, Integer> ware = new Pair<>(product, amount);
+        basket.add(ware);
+      }
+    }
   }
 }

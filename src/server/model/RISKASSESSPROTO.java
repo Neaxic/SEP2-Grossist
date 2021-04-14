@@ -1,6 +1,6 @@
 package server.model;
 
-import shared.wares.Products;
+import shared.wares.Product;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class RISKASSESSPROTO
 {
 
-  public static RiskReport riskAssess(Products item)
+  public static RiskReport riskAssess(Product item)
   {
     LocalDate today = LocalDate.now(ZoneId.systemDefault());
     long daysToBb = ChronoUnit.DAYS.between(today, item.getBb());
@@ -29,12 +29,12 @@ public class RISKASSESSPROTO
     return new RiskReport("green", "Everything is in order.");
   }
 
-  public static ArrayList<RiskReport> massAssess(ArrayList<Products> items)
+  public static ArrayList<RiskReport> massAssess(ArrayList<Product> items)
   {
     ArrayList<RiskReport> reports = new ArrayList<>();
     LocalDate today = LocalDate.now(ZoneId.systemDefault());
 
-    for (Products item : items)
+    for (Product item : items)
     {
       long daysToBb = ChronoUnit.DAYS.between(today, item.getBb());
       double daysOfStock = (double) item.getStock() / item.getSoldDaily();
