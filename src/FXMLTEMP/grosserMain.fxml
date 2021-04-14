@@ -16,7 +16,7 @@
    <children>
       <VBox prefHeight="120.0" prefWidth="900.0" style="-fx-background-color: lightblue;">
          <children>
-            <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="900.0" style="-fx-border-color: lightgray;">
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: lightgray;">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PLACEHOLDER" wrappingWidth="450.91796112060547">
                      <HBox.margin>
