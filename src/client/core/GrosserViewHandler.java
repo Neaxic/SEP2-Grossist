@@ -48,7 +48,7 @@ public class GrosserViewHandler implements ViewHandler {
 
 	@Override
 	public ViewModel getViewModelByViewName(String viewName) {
-		return swtich(viewName){
+		return switch(viewName){
 			case "Main" -> viewModelFactory.getMain();
 		};
 		//return viewModel;
