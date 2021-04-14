@@ -37,7 +37,6 @@ public class GrosserViewHandler implements ViewHandler {
 				break;
 			}
 
-
 		currentScene.setRoot(root);
 
 		primaryStage.setTitle("Grossist");
@@ -51,7 +50,7 @@ public class GrosserViewHandler implements ViewHandler {
 	public ViewModel getViewModelByViewName(String viewName) {
 		return swtich(viewName){
 			case "Main" -> viewModelFactory.getMain();
-		}
+		};
 		//return viewModel;
 		return null;
 	}
