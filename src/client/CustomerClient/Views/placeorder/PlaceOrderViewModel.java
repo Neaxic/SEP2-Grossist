@@ -1,5 +1,7 @@
 package client.CustomerClient.Views.placeorder;
 
-public class PlaceOrderViewModel
+import client.CustomerClient.Views.ViewModel;
+
+public class PlaceOrderViewModel implements ViewModel
 {
 }

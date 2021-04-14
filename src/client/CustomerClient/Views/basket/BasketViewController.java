@@ -1,5 +1,18 @@
 package client.CustomerClient.Views.basket;
 
-public class BasketViewController
+import client.CustomerClient.Views.CustomerViewController;
+import client.CustomerClient.Views.ViewModel;
+import client.core.ViewHandler;
+
+public class BasketViewController implements CustomerViewController
 {
+  @Override public void init(ViewHandler viewHandler, ViewModel viewModel)
+  {
+    //TODO
+  }
+
+  @Override public void swapScene(String sceneName)
+  {
+ //TODO
+  }
 }

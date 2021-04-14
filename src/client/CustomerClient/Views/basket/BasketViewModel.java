@@ -1,5 +1,7 @@
 package client.CustomerClient.Views.basket;
 
-public class BasketViewModel
+import client.CustomerClient.Views.ViewModel;
+
+public class BasketViewModel implements ViewModel
 {
 }
