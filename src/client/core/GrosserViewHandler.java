@@ -55,6 +55,7 @@ public class GrosserViewHandler implements ViewHandler {
 		//return viewModel;
 		return null;
 	}
+
 	private Region loadGrosserMain(String fxmlFile)
 	{
 		if (GrosserViewController == null)
