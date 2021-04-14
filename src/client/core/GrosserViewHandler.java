@@ -35,7 +35,9 @@ public class GrosserViewHandler implements ViewHandler {
 			case "GrosserAddItemAmount":
 				root = loadGrosserAddItemAmount(viewToOpen+".fxml");
 				break;
-		}
+			}
+
+
 		currentScene.setRoot(root);
 
 		primaryStage.setTitle("Grossist");
@@ -49,12 +51,10 @@ public class GrosserViewHandler implements ViewHandler {
 	public ViewModel getViewModelByViewName(String viewName) {
 		return swtich(viewName){
 			case "Main" -> viewModelFactory.getMain();
-		};
+		}
 		//return viewModel;
 		return null;
 	}
-
-
 	private Region loadGrosserMain(String fxmlFile)
 	{
 		if (GrosserViewController == null)
@@ -62,10 +62,10 @@ public class GrosserViewHandler implements ViewHandler {
 			try
 			{
 				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(getClass().getResource( "../GrosserClient.Views/GrosserMain" +fxmlFile));
+				loader.setLocation(getClass().getResource( "../GrosserClient.Views/GrosserMain/" +fxmlFile));
 				Region root = loader.load();
 				GrosserViewController = loader.getController();
-				GrosserViewController.init(this, viewModelFactory.getViewModelSettings(), root);
+				GrosserViewController.init(this, viewModelFactory.getViewModelMain(), root);
 			}
 			catch (Exception e)
 			{
@@ -80,6 +80,29 @@ public class GrosserViewHandler implements ViewHandler {
 	}
 
 
+	private Region loadGrosserAddItemAmount(String fxmlFile)
+	{
+		if (GrosserAddItemAmountController == null)
+		{
+			try
+			{
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(getClass().getResource( "../GrosserClient.Views/GrosserAddItemAmount/" +fxmlFile));
+				Region root = loader.load();
+				GrosserAddItemAmountController = loader.getController();
+				GrosserAddItemAmountController.init(this, viewModelFactory.getViewModelSettings(), root);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			GrosserViewController.reset();
+		}
+		return GrosserViewController.getRoot();
+	}
 
 
 }

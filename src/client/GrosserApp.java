@@ -1,6 +1,7 @@
 package client;
 
 import client.core.CustomerViewHandler;
+import client.core.ProxyViewHandler;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import javafx.application.Application;
@@ -13,9 +14,9 @@ public class GrosserApp extends Application
     ClientFactory clientFactory = new ClientFactory();
     ModelFactory modelFactory = new ModelFactory(clientFactory);
     ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);
-    ViewHandler viewHandler = new CustomerViewHandler(stage, viewModelFactory);
 
-    viewHandler.start();
+    ViewHandler viewHandler = new ProxyViewHandler(viewModelFactory);
+    viewHandler.start(stage);
   }
 
 }

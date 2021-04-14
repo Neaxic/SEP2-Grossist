@@ -1,15 +1,19 @@
 package client.core;
 
+import client.CustomerClient.Views.ViewModel;
 import javafx.stage.Stage;
+
+import javax.swing.text.View;
 
 public class ProxyViewHandler implements ViewHandler {
 	private ViewHandler viewHandler;
+	private ViewModelFactory viewModelFactory;
 
-	private GrosserViewHandler grosserViewHandler;
-	private CustomerViewHandler customerViewHandler;
+	public ProxyViewHandler(ViewModelFactory viewModelFactory) {
+		this.viewModelFactory = viewModelFactory;
 
-	public ProxyViewHandler(ViewHandler viewHandler) {
-		this.viewHandler = viewHandler;
+		// TODO: Ret constucter til if når login ting er lavet
+		viewHandler = new GrosserViewHandler(viewModelFactory);
 	}
 
 	@Override
@@ -19,16 +23,11 @@ public class ProxyViewHandler implements ViewHandler {
 
 	@Override
 	public void openView(String viewToOpen) {
-		//if(grosserApp.client???){
-	//	grosserViewHandler.start();
-		//} else {
-		// custommerViewHandler.start();
-		// }
 		viewHandler.openView(viewToOpen);
 	}
 
 	@Override
-	public ViewModelFactory getViewModelByViewName(String viewName) {
-		return viewHandler.getViewModelByViewName(viewName);
+	public ViewModel getViewModelByViewName(String viewName) {
+		return null;
 	}
 }
