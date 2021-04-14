@@ -1,4 +1,4 @@
-package shared.model;
+package shared.wares;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package server.model;
 
-import shared.model.Products;
+import shared.wares.Products;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
