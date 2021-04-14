@@ -1,15 +1,16 @@
-package client.CustomerClient.Views.CustomerBrowser;
+package client.customerclient.views.customerbrowse;
 
-import client.CustomerClient.Views.CustomerViewController;
-import client.CustomerClient.Views.ViewModel;
+import client.customerclient.views.CustomerViewController;
+import client.customerclient.views.CustomerViewModel;
 import client.core.ViewHandler;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 public class CustomerBrowserViewController implements CustomerViewController {
 	// Category Labels
@@ -29,7 +30,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	private Object[] activeItemList = new Object[2]; // FIXME: Needs to be of the Object, used to create a Product
 
 	@Override
-	public void init(ViewHandler viewHandler, ViewModel viewModel) {
+	public void init(ViewHandler viewHandler, CustomerViewModel viewModel) {
 		this.viewHandler = viewHandler;
 		this.viewModel = (CustomerBrowserViewModel) viewModel;
 		loadAllProducts();
@@ -63,15 +64,15 @@ public class CustomerBrowserViewController implements CustomerViewController {
 
 	// SCENE MANAGING
 	@Override
-	public void swapScene(String sceneName) {
+	public void swapScene(String sceneName) throws IOException {
 		viewHandler.openView(sceneName);
 	}
 
-	public void openBasket() {
+	public void openBasket() throws IOException {
 		swapScene("basket");
 	}
 
-	public void openSubscriptions() {
+	public void openSubscriptions() throws IOException {
 		swapScene("subscriptions");
 	}
 }

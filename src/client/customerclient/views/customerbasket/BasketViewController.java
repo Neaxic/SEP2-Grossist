@@ -1,7 +1,7 @@
-package client.CustomerClient.Views.basket;
+package client.customerclient.views.customerbasket;
 
-import client.CustomerClient.Views.CustomerViewController;
-import client.CustomerClient.Views.ViewModel;
+import client.customerclient.views.CustomerViewController;
+import client.customerclient.views.CustomerViewModel;
 import client.core.ViewHandler;
 
 public class BasketViewController implements CustomerViewController {
@@ -9,7 +9,7 @@ public class BasketViewController implements CustomerViewController {
 	private BasketViewModel viewModel;
 
 	@Override
-	public void init(ViewHandler viewHandler, ViewModel viewModel) {
+	public void init(ViewHandler viewHandler, CustomerViewModel viewModel) {
 		this.viewHandler = viewHandler;
 		this.viewModel = (BasketViewModel) viewModel;
 	}

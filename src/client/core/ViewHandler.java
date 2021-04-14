@@ -1,14 +1,11 @@
 package client.core;
 
-<<<<<<< Updated upstream
-import client.CustomerClient.Views.ViewModel;
-=======
 import javafx.stage.Stage;
->>>>>>> Stashed changes
+
+import java.io.IOException;
 
 public interface ViewHandler {
-	void start(Stage primaryStage);
-	void openView(String viewToOpen);
-
+	void start(Stage primaryStage, ViewModelFactory viewModelFactory) throws IOException;
+	void openView(String viewToOpen) throws IOException;
 	ViewModel getViewModelByViewName(String viewName);
 }

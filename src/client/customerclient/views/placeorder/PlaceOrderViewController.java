@@ -1,7 +1,7 @@
-package client.CustomerClient.Views.placeorder;
+package client.customerclient.views.placeorder;
 
-import client.CustomerClient.Views.CustomerViewController;
-import client.CustomerClient.Views.ViewModel;
+import client.customerclient.views.CustomerViewController;
+import client.customerclient.views.CustomerViewModel;
 import client.core.ViewHandler;
 
 public class PlaceOrderViewController implements CustomerViewController {
@@ -9,7 +9,7 @@ public class PlaceOrderViewController implements CustomerViewController {
 	private PlaceOrderViewModel viewModel;
 
 	@Override
-	public void init(ViewHandler viewHandler, ViewModel viewModel) {
+	public void init(ViewHandler viewHandler, CustomerViewModel viewModel) {
 		this.viewHandler = viewHandler;
 		this.viewModel = (PlaceOrderViewModel) viewModel;
 	}

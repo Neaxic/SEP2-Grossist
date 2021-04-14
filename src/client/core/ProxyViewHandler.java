@@ -1,9 +1,8 @@
 package client.core;
 
-import client.CustomerClient.Views.ViewModel;
 import javafx.stage.Stage;
 
-import javax.swing.text.View;
+import java.io.IOException;
 
 public class ProxyViewHandler implements ViewHandler {
 	private ViewHandler viewHandler;
@@ -13,16 +12,16 @@ public class ProxyViewHandler implements ViewHandler {
 		this.viewModelFactory = viewModelFactory;
 
 		// TODO: Ret constucter til if når login ting er lavet
-		viewHandler = new GrosserViewHandler(viewModelFactory);
+		viewHandler = new CustomerViewHandler();
 	}
 
 	@Override
-	public void start(Stage primaryStage) {
-		viewHandler.start(primaryStage);
+	public void start(Stage primaryStage, ViewModelFactory viewModelFactory) throws IOException {
+		viewHandler.start(primaryStage, viewModelFactory);
 	}
 
 	@Override
-	public void openView(String viewToOpen) {
+	public void openView(String viewToOpen) throws IOException {
 		viewHandler.openView(viewToOpen);
 	}
 
@@ -30,4 +29,10 @@ public class ProxyViewHandler implements ViewHandler {
 	public ViewModel getViewModelByViewName(String viewName) {
 		return null;
 	}
+/*
+	@Override
+	public CustomerViewModel getViewModelByViewName(String viewName) {
+		return null;
+	}
+ */
 }

@@ -1,8 +1,8 @@
-package client.CustomerClient.Views.CustomerBrowser;
+package client.customerclient.views.customerbrowse;
 
-import client.CustomerClient.Views.ViewModel;
+import client.customerclient.views.CustomerViewModel;
 
-public class CustomerBrowserViewModel implements ViewModel {
+public class CustomerBrowserViewModel implements CustomerViewModel {
 
 
 	public void populate(String category) {
