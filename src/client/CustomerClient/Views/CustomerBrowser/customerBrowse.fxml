@@ -16,9 +16,9 @@
     <children>
         <VBox prefHeight="120.0" prefWidth="900.0" style="-fx-background-color: lightblue;">
             <children>
-                <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="900.0" style="-fx-border-color: #d3d3d3;">
+                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="900.0" style="-fx-border-color: #d3d3d3;" VBox.vgrow="ALWAYS">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PLACEHOLDER" wrappingWidth="450.91796112060547">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PLACEHOLDER" wrappingWidth="390.0">
                             <HBox.margin>
                                 <Insets top="4.0" />
                             </HBox.margin>
@@ -26,27 +26,20 @@
                                 <Font name="System Bold Italic" size="30.0" />
                             </font>
                         </Text>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button">
-                            <HBox.margin>
-                                <Insets left="5.0" right="5.0" top="8.0" />
-                            </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button">
-                            <HBox.margin>
-                                <Insets left="5.0" right="5.0" top="8.0" />
-                            </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button">
-                            <HBox.margin>
-                                <Insets left="5.0" right="5.0" top="8.0" />
-                            </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button">
-                            <HBox.margin>
-                                <Insets left="5.0" right="5.0" top="8.0" />
-                            </HBox.margin>
-                        </Button>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="500.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                              <Button mnemonicParsing="false" onAction="#openSubscriptions" prefHeight="30.0" prefWidth="120.0" text="My Subscriptions" />
+                              <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Nothing" />
+                              <Button mnemonicParsing="false" onAction="#openBasket" prefHeight="30.0" prefWidth="120.0" text="Basket" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </HBox>
                     </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
                 </HBox>
             </children>
         </VBox>
