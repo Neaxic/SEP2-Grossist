@@ -1,3 +1,5 @@
+package client;
+
 import client.core.CustomerViewHandler;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
