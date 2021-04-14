@@ -1,5 +1,5 @@
 package client.CustomerClient.Views;
 
-public interface ViewModel
+public interface CustomerViewModel
 {
 }

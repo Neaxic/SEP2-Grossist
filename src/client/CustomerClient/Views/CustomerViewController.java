@@ -4,6 +4,6 @@ import client.core.ViewHandler;
 
 public interface CustomerViewController
 {
-  void init(ViewHandler viewHandler, ViewModel viewModel);
+  void init(ViewHandler viewHandler, CustomerViewModel customerViewModel);
   void swapScene(String sceneName);
 }
