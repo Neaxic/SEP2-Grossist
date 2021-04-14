@@ -50,9 +50,8 @@ public class GrosserViewHandler implements ViewHandler {
 	@Override
 	public ViewModel getViewModelByViewName(String viewName) {
 		return switch(viewName){
-			//TODO: Usikker på om castingen her er rigtigt.
 			//TODO: HEr skal også laves om på metoden fra vmf men ingen vm's klar endnu.
-			case "customerBrowse" -> (ViewModel) viewModelFactory.customerBrowseViewModel();
+			case "customerBrowse" -> viewModelFactory.customerBrowseViewModel();
 			default -> null;
 		};
 	}

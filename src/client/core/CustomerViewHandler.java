@@ -22,7 +22,7 @@ public class CustomerViewHandler implements ViewHandler{
 
 		this.primaryStage = primaryStage;
 		this.currentScene = new Scene(new Region());
-		openView("customerBasket");
+		openView("customerbrowse");
 	}
 
 	@Override
@@ -52,8 +52,9 @@ public class CustomerViewHandler implements ViewHandler{
 	@Override
 	public ViewModel getViewModelByViewName(String viewName) {
 		return switch(viewName){
-			//TODO: Usikker på om castingen her er rigtigt.
-			case "customerBrowse" -> (ViewModel) viewModelFactory.customerBrowseViewModel();
+			case "customerbrowse" -> viewModelFactory.customerBrowseViewModel();
+			case "customerbasket" -> viewModelFactory.basketViewModel();
+			case "customersubscriptions" -> viewModelFactory.customerBrowseViewModel();
 			default -> null;
 		};
 	}

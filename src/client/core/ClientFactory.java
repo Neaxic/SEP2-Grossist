@@ -14,7 +14,7 @@ public class ClientFactory {
             }
             return client;
 
-            //kun fordi vores client ikke er remote endnu
+            //kun fordi vores client ikke er remote endnu - skal være remote
         } catch (Exception e){
             System.out.println("Remote ClientFactory fail");
         }
