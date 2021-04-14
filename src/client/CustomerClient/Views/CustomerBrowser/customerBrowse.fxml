@@ -57,7 +57,7 @@
                         <HBox prefHeight="32.0" prefWidth="221.0">
                             <children>
                                 <TextField prefHeight="30.0" prefWidth="165.0" style="-fx-background-color: white;" />
-                                <Button mnemonicParsing="false" prefHeight="30.0" text="Search" />
+                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="62.0" text="Search" />
                             </children>
                             <VBox.margin>
                                 <Insets bottom="5.0" top="15.0" />
@@ -68,7 +68,7 @@
                                 <Font name="System Bold" size="22.0" />
                             </font>
                         </Text>
-                        <Text fx:id="categoryColonial" strokeType="OUTSIDE" strokeWidth="0.0" text="● Colonial" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryColonial" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Colonial" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -100,7 +100,7 @@
                               <Insets left="25.0" />
                            </VBox.margin>
                         </Text>-->
-                        <Text fx:id="categoryDiaryAndEggs" strokeType="OUTSIDE" strokeWidth="0.0" text="● Diary and Eggs" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryDiaryAndEggs" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Diary and Eggs" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -108,7 +108,7 @@
                                 <Insets left="8.0" />
                             </VBox.margin>
                         </Text>
-                        <Text fx:id="categoryFrozenFoods" strokeType="OUTSIDE" strokeWidth="0.0" text="● Frozen Food" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryFrozenFoods" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Frozen Food" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -116,7 +116,7 @@
                                 <Insets left="8.0" />
                             </VBox.margin>
                         </Text>
-                        <Text fx:id="categoryFruitAndVegetables" strokeType="OUTSIDE" strokeWidth="0.0" text="● Fruits and Vegetables" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryFruitAndVegetables" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Fruits and Vegetables" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -124,7 +124,7 @@
                                 <Insets left="8.0" />
                             </VBox.margin>
                         </Text>
-                        <Text fx:id="categoryMeatAndSeafoods" strokeType="OUTSIDE" strokeWidth="0.0" text="● Meat and Seafood" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryMeatAndSeafoods" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Meat and Seafood" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -132,7 +132,7 @@
                                 <Insets left="8.0" />
                             </VBox.margin>
                         </Text>
-                        <Text fx:id="categoryDrinks" strokeType="OUTSIDE" strokeWidth="0.0" text="● Beverages (Non-alcohol)" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryDrinks" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Beverages (Non-alcohol)" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -140,7 +140,7 @@
                                 <Insets left="8.0" />
                             </VBox.margin>
                         </Text>
-                        <Text fx:id="categoryAlcohol" strokeType="OUTSIDE" strokeWidth="0.0" text="● Beverages (Alcohol)" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryAlcohol" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Beverages (Alcohol)" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -160,7 +160,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="635.0">
                             <children>
-                                <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+                                <VBox fx:id="productItemList" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
                                     <children>
                                         <HBox prefHeight="150.0" prefWidth="610.0" style="-fx-border-color: lightgray;">
                                             <children>

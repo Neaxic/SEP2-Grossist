@@ -1,5 +1,7 @@
 package client.core;
 
+import client.CustomerClient.Views.ViewModel;
+
 public class GrosserViewHandler implements ViewHandler {
 	@Override
 	public void start() {
@@ -12,7 +14,7 @@ public class GrosserViewHandler implements ViewHandler {
 	}
 
 	@Override
-	public ViewModelFactory getViewModelByViewName(String viewName) {
+	public ViewModel getViewModelByViewName(String viewName) {
 		return null;
 	}
 }

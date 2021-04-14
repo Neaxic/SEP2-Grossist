@@ -12,7 +12,7 @@ public class CustomerViewHandler implements ViewHandler{
 	}
 
 	@Override
-	public ViewModelFactory getViewModelByViewName(String viewName) {
+	public ViewModel getViewModelByViewName(String viewName) {
 		return null;
 	}
 }
