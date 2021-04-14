@@ -1,4 +1,4 @@
-package client.GrosserClient.Views;
+package client.grosserclient.views;
 
 import client.core.ViewModel;
 
