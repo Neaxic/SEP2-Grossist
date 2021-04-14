@@ -1,5 +1,6 @@
 package client.core;
 
+import client.CustomerClient.Views.ViewModel;
 import javafx.stage.Stage;
 
 public class CustomerViewHandler implements ViewHandler{

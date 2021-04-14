@@ -2,13 +2,13 @@ package shared.wares;
 
 import java.time.LocalDate;
 
-public class Products
+public class Product
 {
   private int stock, soldDaily, deliveryDays;
   private double kgPrice;
   private LocalDate bb;
 
-  public Products(int stock, int soldDaily, int deliveryDays, double kgPrice,
+  public Product(int stock, int soldDaily, int deliveryDays, double kgPrice,
       LocalDate bb)
   {
     this.stock = stock;

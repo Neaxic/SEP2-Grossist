@@ -1,6 +1,6 @@
 package server.model;
 
-import shared.wares.Products;
+import shared.wares.Product;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,12 +15,12 @@ public class RISKTEST
     LocalDate bb2 = LocalDate.parse("16/04/2021", dtf);
     LocalDate bb3 = LocalDate.parse("01/05/2021", dtf);
     LocalDate bb4 = LocalDate.parse("26/11/2021", dtf);
-    Products tomato = new Products(2000, 200, 5, 20, bb1);
-    Products tinOfBeans = new Products(20, 5, 10, 0, bb4);
-    Products milk = new Products(5000, 1000, 2, 20, bb2);
-    Products cheese = new Products(4000, 300, 3, 20, bb3);
+    Product tomato = new Product(2000, 200, 5, 20, bb1);
+    Product tinOfBeans = new Product(20, 5, 10, 0, bb4);
+    Product milk = new Product(5000, 1000, 2, 20, bb2);
+    Product cheese = new Product(4000, 300, 3, 20, bb3);
 
-    ArrayList<Products> items = new ArrayList<>();
+    ArrayList<Product> items = new ArrayList<>();
     items.add(tomato);
     items.add(tinOfBeans);
     items.add(milk);

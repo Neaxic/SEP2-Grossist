@@ -5,16 +5,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import client.CustomerClient.Views.ViewModel;
 
 public class GrosserViewHandler implements ViewHandler {
 	private Stage primaryStage;
 	private Scene currentScene;
 
-	private ViewModelFactory viewModel;
+	private ViewModelFactory viewModelFactory;
 
 	public GrosserViewHandler(ViewModelFactory viewModelFactory)
 	{
-		this.viewModel = viewModelFactory;
+		this.viewModelFactory = viewModelFactory;
 	}
 
 	@Override
@@ -47,9 +48,10 @@ public class GrosserViewHandler implements ViewHandler {
 	@Override
 	public ViewModel getViewModelByViewName(String viewName) {
 		return swtich(viewName){
-			case "Main" -> viewModel.getMain();
+			case "Main" -> viewModelFactory.getMain();
 		};
-		return viewModel;
+		//return viewModel;
+		return null;
 	}
 
 
