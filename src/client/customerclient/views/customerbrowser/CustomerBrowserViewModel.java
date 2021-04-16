@@ -2,7 +2,8 @@ package client.customerclient.views.customerbrowser;
 
 import client.customerclient.views.CustomerViewModel;
 
-public class CustomerBrowserViewModel implements CustomerViewModel {
+public class CustomerBrowserViewModel implements CustomerViewModel
+{
 
 
 	public void populate(String category) {

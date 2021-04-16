@@ -9,6 +9,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class CustomerViewHandler implements ViewHandler{
 
@@ -38,7 +39,7 @@ public class CustomerViewHandler implements ViewHandler{
 
 		FXMLLoader loader = new FXMLLoader();
 
-		loader.setLocation(getClass().getResource("../CustomerClient/Views/" + view +"/" +view + ".fxml"));
+		loader.setLocation(getClass().getResource("../customerclient/views/" + view +"/" +view + ".fxml"));
 		root = loader.load();
 
 		CustomerViewController viewController = loader.getController();
@@ -54,7 +55,7 @@ public class CustomerViewHandler implements ViewHandler{
 		return switch(viewName){
 			case "customerbrowse" -> viewModelFactory.customerBrowseViewModel();
 			case "customerbasket" -> viewModelFactory.basketViewModel();
-			case "customersubscriptions" -> viewModelFactory.customerBrowseViewModel();
+			//case "customersubscriptions" -> viewModelFactory.customerBrowseViewModel();
 			default -> null;
 		};
 	}
