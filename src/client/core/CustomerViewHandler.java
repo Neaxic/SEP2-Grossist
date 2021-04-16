@@ -42,7 +42,7 @@ public class CustomerViewHandler implements ViewHandler{
 		root = loader.load();
 
 		CustomerViewController viewController = loader.getController();
-		viewController.init(this, (CustomerViewModel) getViewModelByViewName(view)); //TODO: 'this' giver en customer view handler ikke en proxy.
+		viewController.init(this, (CustomerViewModel) getViewModelByViewName(view)); //TODO: 'this' giver en customer view handler ikke en proxy. Muligvis Singleton?
 
 		scene = new Scene(root);
 		return scene;
