@@ -1,45 +1,23 @@
 package shared.wares;
 
+import javafx.util.Pair;
+
 import java.time.LocalDate;
 
-public class Product
+public abstract class Product
 {
-  private int stock, soldDaily, deliveryDays;
-  private double kgPrice;
+  private Pair<Integer, String> stock;
+  private Pair<Double, String> price;
+  private int soldDaily, deliveryDays;
   private LocalDate bb;
 
-  public Product(int stock, int soldDaily, int deliveryDays, double kgPrice,
+  public Product(Pair<Integer, String> stock, int soldDaily, int deliveryDays, Pair<Double, String> price,
       LocalDate bb)
   {
     this.stock = stock;
     this.soldDaily = soldDaily;
     this.deliveryDays = deliveryDays;
-    this.kgPrice = kgPrice;
+    this.price = price;
     this.bb = bb;
-  }
-
-  public int getStock()
-  {
-    return stock;
-  }
-
-  public int getDeliveryDays()
-  {
-    return deliveryDays;
-  }
-
-  public int getSoldDaily()
-  {
-    return soldDaily;
-  }
-
-  public double getKgPrice()
-  {
-    return kgPrice;
-  }
-
-  public LocalDate getBb()
-  {
-    return bb;
   }
 }

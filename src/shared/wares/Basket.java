@@ -21,7 +21,8 @@ public class Basket
 
   public void removeProduct(Product product)
   {
-    basket.removeIf(productIntegerPair -> productIntegerPair.getKey().equals(product));
+    basket.removeIf(productIntegerPair -> productIntegerPair.getKey().equals(
+        product));
   }
 
   public void changeAmount(Product product, int amount)
