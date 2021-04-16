@@ -9,7 +9,6 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Locale;
 
 public class CustomerViewHandler implements ViewHandler{
 
