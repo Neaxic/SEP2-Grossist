@@ -27,7 +27,7 @@ public class ProxyViewHandler implements ViewHandler {
 
 	@Override
 	public ViewModel getViewModelByViewName(String viewName) {
-		return null;
+		return viewHandler.getViewModelByViewName(viewName);
 	}
 /*
 	@Override
