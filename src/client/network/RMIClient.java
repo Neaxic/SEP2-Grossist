@@ -32,7 +32,7 @@ public class RMIClient implements Client, CallbackClient {
 	/**
 	 * Registers the client on connected server, expecting an ID returned which will be set on the client as a field
 	 */
-	public void registerOnServer() {
+	private void registerOnServer() {
 		try {
 			serverID = server.registerClient(this);
 		} catch (RemoteException remoteException) {
