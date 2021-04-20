@@ -45,7 +45,9 @@ public class RMIServer implements RMIServerInterface {
 
 	@Override
 	public int registerClient(CallbackClient callbackClient) throws RemoteException {
-		currentID++;
+		do {
+			currentID = 1 + (int) (Math.random() * 2048);
+		} while (callbackClients.get(currentID) != null);
 		callbackClients.put(currentID, callbackClient);
 		return currentID;
 	}

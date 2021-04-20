@@ -38,7 +38,6 @@ public class RMIClient implements Client, CallbackClient {
 		} catch (RemoteException remoteException) {
 			System.out.println("RMIClient [registerOnServer()] > \tServer Connection missing");
 		}
-		System.out.println(serverID);
 	}
 
 	@Override
