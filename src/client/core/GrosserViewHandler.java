@@ -15,21 +15,6 @@ public class GrosserViewHandler implements ViewHandler {
 
 	private ViewModelFactory viewModelFactory;
 
-	@Override
-	public void start(Stage primaryStage, ViewModelFactory viewModelFactory) throws IOException {
-		this.viewModelFactory = viewModelFactory;
-		this.primaryStage = primaryStage;
-		this.currentScene = new Scene(new Region());
-		openView("GrosserMain");
-	}
-
-	@Override
-	public void openView(String viewToOpen) throws IOException {
-		Scene scene = sceneLoader(viewToOpen);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
-
 	private Scene sceneLoader(String view) throws IOException {
 		Scene scene;
 		Parent root;
@@ -45,6 +30,21 @@ public class GrosserViewHandler implements ViewHandler {
 
 		scene = new Scene(root);
 		return scene;
+	}
+
+	@Override
+	public void start(Stage primaryStage, ViewModelFactory viewModelFactory) throws IOException {
+		this.viewModelFactory = viewModelFactory;
+		this.primaryStage = primaryStage;
+		this.currentScene = new Scene(new Region());
+		openView("GrosserMain");
+	}
+
+	@Override
+	public void openView(String viewToOpen) throws IOException {
+		Scene scene = sceneLoader(viewToOpen);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
 	@Override

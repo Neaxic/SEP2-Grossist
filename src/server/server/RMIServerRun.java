@@ -10,10 +10,7 @@ import java.rmi.registry.Registry;
 
 public class RMIServerRun {
     public static void main(String[] args) throws RemoteException, AlreadyBoundException {
-        System.out.println("Server starting...");
-        RMIServerInterface server = new RMIServer();
-        Registry registry = LocateRegistry.createRegistry(1099);
-        registry.bind(Util.SERVERNAME, server);
-        System.out.println("Server started");
+        RMIServerInterface grosserServer = new RMIServer();
+        grosserServer.startServer();
     }
 }

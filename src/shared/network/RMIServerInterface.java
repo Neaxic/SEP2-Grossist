@@ -1,23 +1,34 @@
 package shared.network;
 
+import client.network.RMIClient;
+
+import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface RMIServerInterface extends Remote {
+	/**
+	 * Registers RMIServer Implementation on port 1099 and binds it with a namespace
+	 * @throws RemoteException when connection cannot be established
+	 * @throws AlreadyBoundException when a server already is bound with the same name
+	 */
+	void startServer() throws RemoteException, AlreadyBoundException;
 
-    /**
-     * @return Værdien gemt på Server
-     */
-    int getThingFromServer() throws RemoteException;
+	/**
+	 * Registers the callbackClient on the server, allowing the server to easily update the callbackClient using update()
+	 *
+	 * @param callbackClient Userclient which should be registered on the servers list
+	 * @return ID for the given Userclient
+	 * @throws RemoteException
+	 */
+	int registerClient(CallbackClient callbackClient) throws RemoteException;
 
-    /**
-     * @param val Gemmes på Server
-     */
-    void setThingOnServer(int val) throws RemoteException;
+	/**
+	 * Asks server for wares in stock
+	 *
+	 * @param clientID Identification so the server can update the correct client
+	 * @throws RemoteException
+	 */
+	void getWares(int clientID) throws RemoteException;
 
-
-    /**
-     * @return True hvis der er forbindelse
-     */
-    boolean ping() throws RemoteException;
 }

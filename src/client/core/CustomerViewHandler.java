@@ -16,22 +16,6 @@ public class CustomerViewHandler implements ViewHandler{
 	private Scene currentScene;
 	private ViewModelFactory viewModelFactory;
 
-	@Override
-	public void start(Stage primaryStage, ViewModelFactory viewModelFactory) throws IOException {
-		this.viewModelFactory = viewModelFactory;
-
-		this.primaryStage = primaryStage;
-		this.currentScene = new Scene(new Region());
-		openView("CustomerBrowser");
-	}
-
-	@Override
-	public void openView(String viewToOpen) throws IOException {
-		Scene scene = sceneLoader(viewToOpen);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
-
 	private Scene sceneLoader(String view) throws IOException {
 		Scene scene;
 		Parent root;
@@ -46,6 +30,22 @@ public class CustomerViewHandler implements ViewHandler{
 
 		scene = new Scene(root);
 		return scene;
+	}
+
+	@Override
+	public void start(Stage primaryStage, ViewModelFactory viewModelFactory) throws IOException {
+		this.viewModelFactory = viewModelFactory;
+
+		this.primaryStage = primaryStage;
+		this.currentScene = new Scene(new Region());
+		openView("CustomerBrowser");
+	}
+
+	@Override
+	public void openView(String viewToOpen) throws IOException {
+		Scene scene = sceneLoader(viewToOpen);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
 	//Problemet er ViewModel interface forventer viewmodel men vi har kun Customer eller GrosistViewmodel..
