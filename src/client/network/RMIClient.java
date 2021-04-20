@@ -27,6 +27,7 @@ public class RMIClient implements Client, CallbackClient {
 		}
 		registerOnServer();
 		System.out.println("Connection Established...");
+		System.out.println("Press ENTER to send a request to the server, asking for the Ware list currently on it, and printing it out");
 	}
 
 	/**

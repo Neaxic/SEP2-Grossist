@@ -1,7 +1,5 @@
 package shared.network;
 
-import client.network.RMIClient;
-
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -9,7 +7,8 @@ import java.rmi.RemoteException;
 public interface RMIServerInterface extends Remote {
 	/**
 	 * Registers RMIServer Implementation on port 1099 and binds it with a namespace
-	 * @throws RemoteException when connection cannot be established
+	 *
+	 * @throws RemoteException       when connection cannot be established
 	 * @throws AlreadyBoundException when a server already is bound with the same name
 	 */
 	void startServer() throws RemoteException, AlreadyBoundException;
@@ -22,6 +21,14 @@ public interface RMIServerInterface extends Remote {
 	 * @throws RemoteException
 	 */
 	int registerClient(CallbackClient callbackClient) throws RemoteException;
+
+	/**
+	 * Removes the Client from the Server List, leaving the ID available for another user
+	 *
+	 * @param clientID ID for Client to be removed
+	 * @throws RemoteException
+	 */
+	void removeClient(int clientID) throws RemoteException;
 
 	/**
 	 * Asks server for wares in stock

@@ -53,6 +53,11 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
+	public void removeClient(int clientID) throws RemoteException{
+		callbackClients.remove(clientID);
+	}
+
+	@Override
 	public void getWares(int id) throws RemoteException { // TODO: Can overload this, creating a getWares(int id, String category)
 		callbackClients.get(id).update(wares);
 	}
