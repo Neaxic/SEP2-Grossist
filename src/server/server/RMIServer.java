@@ -1,10 +1,8 @@
 package server.server;
 
-import javafx.util.Pair;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.util.Util;
-import shared.wares.Product;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -53,7 +51,7 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public void getWares(int id) throws RemoteException {
+	public void getWares(int id) throws RemoteException { // TODO: Can overload this, creating a getWares(int id, String category)
 		callbackClients.get(id).update(wares);
 	}
 }
