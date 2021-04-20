@@ -29,10 +29,4 @@ public class ProxyViewHandler implements ViewHandler {
 	public ViewModel getViewModelByViewName(String viewName) {
 		return viewHandler.getViewModelByViewName(viewName);
 	}
-/*
-	@Override
-	public CustomerViewModel getViewModelByViewName(String viewName) {
-		return null;
-	}
- */
 }
