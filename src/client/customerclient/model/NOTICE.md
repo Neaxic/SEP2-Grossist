@@ -6,7 +6,7 @@
 
 ## Vigtigt at Huske
 
-* Her kan du se hvordan man laver en bulletpoint, har ikke rigtigt noget vigtigt her endnu
+* Klienten skal tilgåes som et "Client" objekt
 
 ---
 
