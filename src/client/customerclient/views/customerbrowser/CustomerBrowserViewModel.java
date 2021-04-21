@@ -52,6 +52,7 @@ public class CustomerBrowserViewModel implements CustomerViewModel
 			System.out.println("Invalid amount");
 		}
 
-		//TODO HJÆÆÆLP
+		//TODO HJÆÆÆLP, jeg kan ikke trække et helt product ud, men jeg kan få et
+		// varenummer eller titel fra viewet
 	}
 }
