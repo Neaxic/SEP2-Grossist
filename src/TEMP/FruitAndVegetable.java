@@ -3,35 +3,30 @@ package TEMP;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class frost {
+public class FruitAndVegetable {
     String name;
     String oprindelsesLand;
-    String producent;
+    int klasseNo;
     Date produktionsDato; //OVERVEJ HER OM DETTE ER JAVA.UTIL ELLER SQL
-    Date udlobningsDato; //OVERVEJ HER OM DETTE ER JAVA.UTIL ELLER SQL
+    String sort;
     double Salgspris;
     int antal;
     int minKobsMaengde;
     private ArrayList<String> tags = new ArrayList<>();
 
-    public frost(String name, String oprindelsesLand,String producent, Date produktionsDato,Date udlobningsDato,double Salgspris,int antal,int minKobsMaengde) {
+
+    public FruitAndVegetable(String name, String oprindelsesLand, int klasseNo, Date produktionsDato, String sort, double Salgspris, int antal, int minKobsMaengde) {
         this.name = name;
         this.oprindelsesLand = oprindelsesLand;
-        this.producent = producent;
+        this.klasseNo = klasseNo;
         this.produktionsDato = produktionsDato;
-        this.udlobningsDato = udlobningsDato;
+        this.sort = sort;
         this.Salgspris = Salgspris;
         this.antal = antal;
         this.minKobsMaengde = minKobsMaengde;
-        tags.add("Laktosefri");
         tags.add("Øko");
-        tags.add("Vegansk");
-        tags.add("Vegetar");
-        tags.add("Fedtfattig");
         tags.add("Nøgle");
-        tags.add("Halal");
-        tags.add("MSE");
-        tags.add("Sukkerfri");
+        tags.add("GMO");
     }
 
     public void addTag(String tagToAdd) {

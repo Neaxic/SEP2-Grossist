@@ -3,7 +3,7 @@ package TEMP;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Kolonial {
+public class Colonial {
     String name;
     String oprindelsesLand;
     String producent;
@@ -14,7 +14,7 @@ public class Kolonial {
     int minKobsMaengde;
     private ArrayList<String> tags = new ArrayList<>();
 
-    public Kolonial(String name,String oprindelsesLand,String producent, Date produktionsDato,Date udlobningsDato,double Salgspris,int antal,int minKobsMaengde) {
+    public Colonial(String name, String oprindelsesLand, String producent, Date produktionsDato, Date udlobningsDato, double Salgspris, int antal, int minKobsMaengde) {
         this.name = name;
         this.oprindelsesLand = oprindelsesLand;
         this.producent = producent;

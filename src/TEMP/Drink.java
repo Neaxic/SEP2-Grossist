@@ -3,30 +3,28 @@ package TEMP;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class frugtOgGront {
+public class Drink {
     String name;
     String oprindelsesLand;
-    int klasseNo;
+    String producent;
     Date produktionsDato; //OVERVEJ HER OM DETTE ER JAVA.UTIL ELLER SQL
-    String sort;
+    Date udlobningsDato; //OVERVEJ HER OM DETTE ER JAVA.UTIL ELLER SQL
     double Salgspris;
     int antal;
     int minKobsMaengde;
     private ArrayList<String> tags = new ArrayList<>();
 
-
-    public frugtOgGront(String name,String oprindelsesLand,int klasseNo, Date produktionsDato,String sort,double Salgspris,int antal,int minKobsMaengde) {
+    public Drink(String name, String oprindelsesLand, String producent, Date produktionsDato, Date udlobningsDato, double Salgspris, int antal, int minKobsMaengde) {
         this.name = name;
         this.oprindelsesLand = oprindelsesLand;
-        this.klasseNo = klasseNo;
+        this.producent = producent;
         this.produktionsDato = produktionsDato;
-        this.sort = sort;
+        this.udlobningsDato = udlobningsDato;
         this.Salgspris = Salgspris;
         this.antal = antal;
         this.minKobsMaengde = minKobsMaengde;
         tags.add("Øko");
-        tags.add("Nøgle");
-        tags.add("GMO");
+        tags.add("Sukkerfri");
     }
 
     public void addTag(String tagToAdd) {

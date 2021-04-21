@@ -3,7 +3,7 @@ package TEMP;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class KodOgFisk {
+public class CooledAndDairy {
     String name;
     String oprindelsesLand;
     String producent;
@@ -14,7 +14,7 @@ public class KodOgFisk {
     int minKobsMaengde;
     private ArrayList<String> tags = new ArrayList<>();
 
-    public KodOgFisk(String name,String oprindelsesLand,String producent, Date produktionsDato,Date udlobningsDato,double Salgspris,int antal,int minKobsMaengde) {
+    public CooledAndDairy(String name, String oprindelsesLand, String producent, Date produktionsDato, Date udlobningsDato, double Salgspris, int antal, int minKobsMaengde) {
         this.name = name;
         this.oprindelsesLand = oprindelsesLand;
         this.producent = producent;
@@ -23,10 +23,15 @@ public class KodOgFisk {
         this.Salgspris = Salgspris;
         this.antal = antal;
         this.minKobsMaengde = minKobsMaengde;
+        tags.add("Laktosefri");
         tags.add("Øko");
-        tags.add("Halal");
+        tags.add("Vegansk");
+        tags.add("Vegetar");
+        tags.add("Fedtfattig");
         tags.add("Nøgle");
+        tags.add("Halal");
         tags.add("MSE");
+        tags.add("Sukkerfri");
     }
 
     public void addTag(String tagToAdd) {
