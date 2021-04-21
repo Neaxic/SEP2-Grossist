@@ -17,6 +17,10 @@ public class CustomerViewHandler implements ViewHandler{
 	private ViewModelFactory viewModelFactory;
 	private ViewHandler proxyViewHandler;
 
+	public CustomerViewHandler(ViewHandler proxyViewHandler) {
+		this.proxyViewHandler = proxyViewHandler;
+	}
+
 	private Scene sceneLoader(String view) throws IOException {
 		Scene scene;
 		Parent root;
@@ -34,9 +38,8 @@ public class CustomerViewHandler implements ViewHandler{
 	}
 
 	@Override
-	public void start(Stage primaryStage, ViewModelFactory viewModelFactory, ViewHandler proxyViewHandler) throws IOException {
+	public void start(Stage primaryStage) throws IOException {
 		this.viewModelFactory = viewModelFactory;
-		this.proxyViewHandler = proxyViewHandler;
 		this.primaryStage = primaryStage;
 		this.currentScene = new Scene(new Region());
 		openView("CustomerBrowser");
@@ -59,4 +62,5 @@ public class CustomerViewHandler implements ViewHandler{
 			default -> null;
 		};
 	}
+
 }

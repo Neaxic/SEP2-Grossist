@@ -2,8 +2,13 @@ package client.network;
 
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
+import shared.network.Subject;
 import shared.util.Util;
+import shared.wares.Product;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -11,9 +16,14 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class RMIClient implements Client, CallbackClient {
+public class RMIClient implements Client, CallbackClient, Subject {
 	private RMIServerInterface server;
-	private int serverID;
+	private PropertyChangeSupport support;
+	private int clientID;
+
+	public RMIClient() {
+		support = new PropertyChangeSupport(this);
+	}
 
 	@Override
 	public void start() {
@@ -27,7 +37,6 @@ public class RMIClient implements Client, CallbackClient {
 		}
 		registerOnServer();
 		System.out.println("Connection Established...");
-		System.out.println("Press ENTER to send a request to the server, asking for the Ware list currently on it, and printing it out");
 	}
 
 	/**
@@ -35,7 +44,7 @@ public class RMIClient implements Client, CallbackClient {
 	 */
 	private void registerOnServer() {
 		try {
-			serverID = server.registerClient(this);
+			clientID = server.registerClient(this);
 		} catch (RemoteException remoteException) {
 			System.out.println("RMIClient [registerOnServer()] > \tServer Connection missing");
 		}
@@ -44,19 +53,29 @@ public class RMIClient implements Client, CallbackClient {
 	@Override
 	public void getWares() {
 		try {
-			server.getWares(serverID);
+			server.getWares(clientID);
 		} catch (RemoteException remoteException) {
-			System.out.println("RMIClient [getWares()] > \t" + remoteException.getMessage());
+			System.out.println("RMIClient [getWares()] > \t");
+			remoteException.printStackTrace();
 		}
 	}
 
 	@Override
-	public void update(List<String[]> list) {
-		for ( String[] subList : list) {
-			for (String s : subList) {
-				System.out.print(s + ", ");
-			}
-			System.out.print("\n");
-		};
+	public void update(List<Product> list) { // Model.java is a listener
+		support.firePropertyChange("UpdatedWareList", null, list);
+	}
+
+	@Override
+	public void addListener(PropertyChangeListener listener) {
+		support.addPropertyChangeListener(listener);
+	}
+
+	@Override
+	public void removeListener(PropertyChangeListener listener) {
+		support.removePropertyChangeListener(listener);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
 	}
 }

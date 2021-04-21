@@ -6,37 +6,44 @@ import client.customerclient.views.customerbasket.BasketViewModel;
 import client.customerclient.views.placeorder.PlaceOrderViewModel;
 
 public class ViewModelFactory {
+    private static ViewModelFactory instance;
     private final ModelFactory modelFactory;
 
-    private static PlaceOrderViewModel placeOrderViewModel;
-    private static CustomerBrowserViewModel customerBrowseViewModel;
-    private static BasketViewModel basketViewModel;
+    private PlaceOrderViewModel placeOrderViewModel;
+    private CustomerBrowserViewModel customerBrowseViewModel;
+    private BasketViewModel basketViewModel;
 
-    public ViewModelFactory(ModelFactory modelFactory) {
-        this.modelFactory = modelFactory;
+    private ViewModelFactory() {
+        this.modelFactory = ModelFactory.getInstance();
     }
 
-    public static CustomerViewModel placeOrderViewModel(){
-        if(placeOrderViewModel == null){
+    public static ViewModelFactory getInstance() {
+        if (instance == null) {
+            instance = new ViewModelFactory();
+        }
+        return instance;
+    }
+
+    public CustomerViewModel placeOrderViewModel() {
+        if (placeOrderViewModel == null) {
             placeOrderViewModel = new PlaceOrderViewModel();
         }
         return placeOrderViewModel;
     }
 
-    public static CustomerViewModel customerBrowseViewModel(){
-        if(customerBrowseViewModel == null){
+    public CustomerViewModel customerBrowseViewModel() {
+        if (customerBrowseViewModel == null) {
             customerBrowseViewModel = new CustomerBrowserViewModel();
         }
         return customerBrowseViewModel;
     }
 
-    public static CustomerViewModel basketViewModel(){
-        if(basketViewModel == null){
+    public CustomerViewModel basketViewModel() {
+        if (basketViewModel == null) {
             basketViewModel = new BasketViewModel();
         }
         return basketViewModel;
     }
-
 
 
 }

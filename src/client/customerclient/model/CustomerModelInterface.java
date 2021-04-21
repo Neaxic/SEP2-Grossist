@@ -1,4 +1,6 @@
 package client.customerclient.model;
 
-public interface CustomerModelInterface {
+import shared.network.Subject;
+
+public interface CustomerModelInterface extends Subject {
 }

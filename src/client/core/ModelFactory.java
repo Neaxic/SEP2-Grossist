@@ -1,24 +1,30 @@
 package client.core;
 
+import client.customerclient.model.CustomerModelInterface;
+import client.customerclient.model.Model;
 import client.network.Client;
 import client.network.RMIClient;
 
 import java.rmi.RemoteException;
 
 public class ModelFactory {
-    //private Model model;
-    private Client client;
+    private static ModelFactory instance;
+    CustomerModelInterface model;
 
-    public ModelFactory(Client client){
-        this.client = client;
+    private ModelFactory() {
     }
 
-    // TODO: Kan ikke laves endnu, mangler model
-    public void getClientModel() {
+    public static ModelFactory getInstance() {
+        if (instance == null) {
+            instance = new ModelFactory();
+        }
+        return instance;
     }
 
-
-    // TODO: Kan ikke laves endnu, mangler model
-    public void getGrosserModel(){
+    public CustomerModelInterface getCustomerModel() {
+        if (model == null) {
+            model = new Model(ClientFactory.getInstance().getClient());
+        }
+        return model;
     }
 }
