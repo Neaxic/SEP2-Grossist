@@ -14,7 +14,7 @@ public class GrosserApp extends Application
     ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);
 
     ViewHandler viewHandler = new ProxyViewHandler(viewModelFactory);
-    viewHandler.start(stage, viewModelFactory);
+    viewHandler.start(stage, viewModelFactory, viewHandler);
   }
 
 }

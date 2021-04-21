@@ -16,8 +16,8 @@ public class ProxyViewHandler implements ViewHandler {
 	}
 
 	@Override
-	public void start(Stage primaryStage, ViewModelFactory viewModelFactory) throws IOException {
-		viewHandler.start(primaryStage, viewModelFactory);
+	public void start(Stage primaryStage, ViewModelFactory viewModelFactory, ViewHandler proxyViewHandler) throws IOException {
+		viewHandler.start(primaryStage, viewModelFactory, proxyViewHandler);
 	}
 
 	@Override
