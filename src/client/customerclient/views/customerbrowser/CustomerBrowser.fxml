@@ -149,7 +149,7 @@
                         <Insets left="15.0" right="15.0" />
                     </padding>
                 </VBox>
-                <ScrollPane prefHeight="544.0" prefWidth="658.0">
+                <ScrollPane fx:id="SPane" prefHeight="544.0" prefWidth="658.0">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="635.0">
                             <children>

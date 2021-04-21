@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -18,7 +19,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import shared.wares.Product;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.awt.*;
 import java.io.IOException;
 
 public class CustomerBrowserViewController implements CustomerViewController {
@@ -30,6 +33,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	@FXML private Text categoryMeatAndSeafoods;
 	@FXML private Text categoryDrinks;
 	@FXML private Text categoryAlcohol;
+	@FXML private ScrollPane SPane;
 	// Item List for Product Population
 	@FXML private VBox productItemList;
 
@@ -73,22 +77,49 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	private HBox createEntry(Product product) {
 		// HBox for the Food Item Entry
 		HBox entry = new HBox();
+		VBox vBox = new VBox();
+		HBox btnHBox = new HBox();
+		HBox prisHBox = new HBox();
+		HBox main = new HBox();
 		// Nodes regarding the Item
 		Text title = new Text(product.getName());
+		Text desc = new Text("\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
+		desc.wrappingWidthProperty().bind(SPane.widthProperty());
+
+		Image image = new Image("../../../../shared/images/150placeholder.png");
+		ImageView iv2 = new ImageView();
+		iv2.setImage(image);
+		iv2.setFitWidth(150);
+		iv2.setPreserveRatio(true);
+		iv2.setSmooth(true);
+		iv2.setCache(true);
+
 		Text price = new Text("" + product.getPrice());
 		TextField amount = new TextField();
 		Button addButton = new Button("Tilføj til Kurv");
 		// Design of Nodes
-		title.setFont(Font.font("Segoe UI", FontWeight.BLACK, 32));
-		price.setFont(Font.font("Segoe UI", FontWeight.MEDIUM, 24));
+		title.setFont(Font.font("Segoe UI", FontWeight.BLACK, 21));
+		desc.setFont(Font.font("Segoe UI", FontWeight.BLACK, 15));
+		price.setFont(Font.font("Segoe UI", FontWeight.MEDIUM, 21));
 		amount.setPromptText("Mængde");
 		amount.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 16));
 		addButton.setOnMouseClicked(mouseEvent -> addToBasket(mouseEvent));
 		// Adding nodes to HBox
-		entry.getChildren().add(title);
-		entry.getChildren().add(price);
-		entry.getChildren().add(amount);
-		entry.getChildren().add(addButton);
+
+		prisHBox.getChildren().add(title);
+		prisHBox.getChildren().add(price);
+		vBox.getChildren().add(prisHBox);
+
+		vBox.getChildren().add(desc);
+
+		btnHBox.getChildren().add(amount);
+		btnHBox.getChildren().add(addButton);
+		vBox.getChildren().add(btnHBox);
+
+		main.getChildren().add(iv2);
+		main.getChildren().add(vBox);
+
+		entry.getChildren().add(main);
 		return entry;
 	}
 

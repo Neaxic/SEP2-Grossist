@@ -45,16 +45,16 @@ public class ProxyViewHandler implements ViewHandler {
 		loginDialog.setTitle("Login");
 		loginDialog.setHeaderText("Indtast konto oplysninger.");
 
-		ImageView loginPNG = new ImageView(Objects.requireNonNull(
-				this.getClass().getResource("../../shared/images/login.png")).toString());
-		loginPNG.setFitHeight(64);
-		loginPNG.setFitWidth(64);
-
-		Stage stage = (Stage) loginDialog.getDialogPane().getScene().getWindow();
-		stage.getIcons().add(new Image(Objects.requireNonNull(
-				this.getClass().getResource("../../shared/images/login.png")).toString()));
-
-		loginDialog.setGraphic(loginPNG);
+//		ImageView loginPNG = new ImageView(Objects.requireNonNull(
+//				this.getClass().getResource("../../shared/images/login.png")).toString());
+//		loginPNG.setFitHeight(64);
+//		loginPNG.setFitWidth(64);
+//
+//		Stage stage = (Stage) loginDialog.getDialogPane().getScene().getWindow();
+//		stage.getIcons().add(new Image(Objects.requireNonNull(
+//				this.getClass().getResource("../../shared/images/login.png")).toString()));
+//
+//		loginDialog.setGraphic(loginPNG);
 
 		ButtonType loginButtonType = new ButtonType("Login",
 				ButtonBar.ButtonData.OK_DONE);
