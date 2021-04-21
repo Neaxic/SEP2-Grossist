@@ -41,4 +41,18 @@ public class CustomerBrowserViewModel implements CustomerViewModel
 		// Load products from Database
 		populate("all");
 	}
+
+	public void addToBasket(String item, int amount){
+		if (item == null || item.equals("") )
+		{
+			System.out.println("Item error: " +  item);
+		}
+		else if (amount <= 0)
+		{
+			System.out.println("Invalid amount");
+		}
+
+		//TODO HJÆÆÆLP, jeg kan ikke trække et helt product ud, men jeg kan få et
+		// varenummer eller titel fra viewet
+	}
 }
