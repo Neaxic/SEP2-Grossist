@@ -11,13 +11,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.customerclient.views.customerbasket.BasketViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.customerclient.views.customerbasket.BasketViewController">
    <children>
       <VBox prefHeight="120.0" prefWidth="900.0" style="-fx-background-color: lightblue;">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="900.0" style="-fx-border-color: lightgray;">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="900.0" style="-fx-border-color: #d3d3d3;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="BASKET" wrappingWidth="134.91796112060547" HBox.hgrow="ALWAYS">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Basket" wrappingWidth="390.0">
                      <HBox.margin>
                         <Insets top="4.0" />
                      </HBox.margin>
@@ -25,10 +25,20 @@
                         <Font name="System Bold Italic" size="30.0" />
                      </font>
                   </Text>
-                  <Button mnemonicParsing="false" onAction="#openProductBrowser" prefHeight="30.0" prefWidth="120.0" text="Browser" />
-                  <Button mnemonicParsing="false" onAction="#openSubscriptions" prefHeight="30.0" prefWidth="120.0" text="My Subscriptions" />
-                  <Button mnemonicParsing="false" onAction="#openBasket" prefHeight="30.0" prefWidth="120.0" text="Basket" />
+                  <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="500.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#openProductBrowser" prefHeight="30.0" prefWidth="120.0" text="Produkter" />
+                        <Button mnemonicParsing="false" onAction="#openBasket" prefHeight="30.0" prefWidth="120.0" text="Kurv" />
+                        <Button mnemonicParsing="false" onAction="#openSubscriptions" prefHeight="30.0" prefWidth="120.0" text="Abonnemter" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </HBox>
                </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </HBox>
          </children>
       </VBox>
@@ -46,13 +56,13 @@
                                        <children>
                                           <TableView prefHeight="200.0" prefWidth="845.0">
                                             <columns>
-                                              <TableColumn prefWidth="750.0" text="Item" />
-                                              <TableColumn prefWidth="95.0" text="Amount" />
+                                              <TableColumn prefWidth="750.0" text="Produkt" />
+                                              <TableColumn prefWidth="95.0" text="Antal" />
                                             </columns>
                                           </TableView>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="847.0">
                                              <children>
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Edit Basket" />
+                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Gem kurv" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -65,7 +75,7 @@
                   </ScrollPane>
                   <HBox alignment="TOP_RIGHT" prefHeight="0.0" prefWidth="845.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#openProductBrowser" prefWidth="70.0" text="Cancel">
+                        <Button mnemonicParsing="false" onAction="#openProductBrowser" prefHeight="31.0" prefWidth="86.0" text="Annuller">
                            <HBox.margin>
                               <Insets bottom="15.0" left="15.0" right="5.0" top="15.0" />
                            </HBox.margin>
@@ -73,7 +83,7 @@
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" text="Place Order">
+                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="152.0" text="Gennemfør ordre">
                            <HBox.margin>
                               <Insets bottom="15.0" left="5.0" top="15.0" />
                            </HBox.margin>
