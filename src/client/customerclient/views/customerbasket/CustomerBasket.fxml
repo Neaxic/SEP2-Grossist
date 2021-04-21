@@ -11,13 +11,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.customerclient.views.customerbasket.BasketViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.customerclient.views.customerbasket.BasketViewController">
    <children>
       <VBox prefHeight="120.0" prefWidth="900.0" style="-fx-background-color: lightblue;">
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="900.0" style="-fx-border-color: #d3d3d3;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Basket" wrappingWidth="390.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kurv" wrappingWidth="390.0">
                      <HBox.margin>
                         <Insets top="4.0" />
                      </HBox.margin>
@@ -54,16 +54,20 @@
                                  <children>
                                     <VBox prefWidth="847.0">
                                        <children>
-                                          <TableView prefHeight="200.0" prefWidth="845.0">
+                                          <TableView fx:id="basketTable" prefHeight="200.0" prefWidth="845.0">
                                             <columns>
                                               <TableColumn prefWidth="750.0" text="Produkt" />
                                               <TableColumn prefWidth="95.0" text="Antal" />
                                             </columns>
                                           </TableView>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="847.0">
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="847.0" spacing="10.0">
                                              <children>
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Gem kurv" />
+                                                <Button mnemonicParsing="false" onAction="#removeItemFromBasket" prefHeight="25.0" prefWidth="95.0" text="Fjern Fra Kurv" />
+                                                <Button layoutX="762.0" layoutY="11.0" mnemonicParsing="false" onAction="#saveBasketToBin" prefHeight="25.0" prefWidth="95.0" text="Gem kurv" />
                                              </children>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
                                           </HBox>
                                        </children>
                                     </VBox>
@@ -83,7 +87,7 @@
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="152.0" text="Gennemfør ordre">
+                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="152.0" text="Gennemfør Ordre">
                            <HBox.margin>
                               <Insets bottom="15.0" left="5.0" top="15.0" />
                            </HBox.margin>

@@ -3,10 +3,15 @@ package client.customerclient.views.customerbasket;
 import client.customerclient.views.CustomerViewController;
 import client.customerclient.views.CustomerViewModel;
 import client.core.ViewHandler;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
 
 import java.io.IOException;
 
 public class BasketViewController implements CustomerViewController {
+	@FXML private TableView basketTable;
 	private ViewHandler viewHandler;
 	private BasketViewModel viewModel;
 
@@ -14,6 +19,15 @@ public class BasketViewController implements CustomerViewController {
 	public void init(ViewHandler viewHandler, CustomerViewModel viewModel) {
 		this.viewHandler = viewHandler;
 		this.viewModel = (BasketViewModel) viewModel;
+	}
+
+	public void removeItemFromBasket() {
+		ObservableList<Object> list = basketTable.getSelectionModel().getSelectedItems();
+		viewModel.removeFromBasket(list);
+		basketTable.getSelectionModel().getSelectedCells().removeAll(list);
+	}
+
+	public void saveBasketToBin(ActionEvent actionEvent) {
 	}
 
 	// SCENE MANAGING
@@ -33,4 +47,6 @@ public class BasketViewController implements CustomerViewController {
 	public void openBasket() throws IOException {
 		swapScene("CustomerBasket");
 	}
+
+
 }
