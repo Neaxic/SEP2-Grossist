@@ -9,12 +9,14 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.Proxy;
 
 public class CustomerViewHandler implements ViewHandler{
 
 	private Stage primaryStage;
 	private Scene currentScene;
 	private ViewModelFactory viewModelFactory;
+	private ViewHandler proxyViewHandler;
 
 	private Scene sceneLoader(String view) throws IOException {
 		Scene scene;
@@ -26,16 +28,16 @@ public class CustomerViewHandler implements ViewHandler{
 		root = loader.load();
 
 		CustomerViewController viewController = loader.getController();
-		viewController.init(this, (CustomerViewModel) getViewModelByViewName(view)); //TODO: 'this' giver en customer view handler ikke en proxy. Muligvis Singleton?
+		viewController.init(proxyViewHandler, (CustomerViewModel) getViewModelByViewName(view)); //TODO: 'this' giver en customer view handler ikke en proxy. Muligvis Singleton?
 
 		scene = new Scene(root);
 		return scene;
 	}
 
 	@Override
-	public void start(Stage primaryStage, ViewModelFactory viewModelFactory) throws IOException {
+	public void start(Stage primaryStage, ViewModelFactory viewModelFactory, ViewHandler proxyViewHandler) throws IOException {
 		this.viewModelFactory = viewModelFactory;
-
+		this.proxyViewHandler = proxyViewHandler;
 		this.primaryStage = primaryStage;
 		this.currentScene = new Scene(new Region());
 		openView("CustomerBrowser");

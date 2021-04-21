@@ -14,6 +14,7 @@ public class GrosserViewHandler implements ViewHandler {
 	private Scene currentScene;
 
 	private ViewModelFactory viewModelFactory;
+	private ViewHandler proxyViewHandler;
 
 	private Scene sceneLoader(String view) throws IOException {
 		Scene scene;
@@ -33,9 +34,10 @@ public class GrosserViewHandler implements ViewHandler {
 	}
 
 	@Override
-	public void start(Stage primaryStage, ViewModelFactory viewModelFactory) throws IOException {
+	public void start(Stage primaryStage, ViewModelFactory viewModelFactory, ViewHandler proxyViewHandler) throws IOException {
 		this.viewModelFactory = viewModelFactory;
 		this.primaryStage = primaryStage;
+		this.proxyViewHandler = proxyViewHandler;
 		this.currentScene = new Scene(new Region());
 		openView("GrosserMain");
 	}
