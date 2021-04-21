@@ -28,9 +28,9 @@
                         </Text>
                   <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="500.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                         <Button mnemonicParsing="false" onAction="#openProductBrowser" prefHeight="30.0" prefWidth="120.0" text="Browser" />
-                         <Button mnemonicParsing="false" onAction="#openSubscriptions" prefHeight="30.0" prefWidth="120.0" text="My Subscriptions" />
-                         <Button mnemonicParsing="false" onAction="#openBasket" prefHeight="30.0" prefWidth="120.0" text="Basket" />
+                         <Button mnemonicParsing="false" onAction="#openProductBrowser" prefHeight="30.0" prefWidth="120.0" text="Produkter" />
+                         <Button mnemonicParsing="false" onAction="#openBasket" prefHeight="30.0" prefWidth="120.0" text="Kurv" />
+                         <Button mnemonicParsing="false" onAction="#openSubscriptions" prefHeight="30.0" prefWidth="120.0" text="Abonnemter" />
                      </children>
                      <HBox.margin>
                         <Insets right="5.0" />
@@ -64,22 +64,22 @@
                                              <children>
                                                 <TableView prefHeight="90.0" prefWidth="438.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="350.0" text="Item" />
-                                                    <TableColumn prefWidth="82.0" text="Amount" />
+                                                    <TableColumn prefWidth="350.0" text="Produkt" />
+                                                    <TableColumn prefWidth="82.0" text="Antal" />
                                                   </columns>
                                                 </TableView>
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="77.0" prefWidth="433.0" style="-fx-border-color: lightgray;">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This order will be complete every" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Orderen vil blive gennemført hver " />
                                                 <TextField prefHeight="25.0" prefWidth="40.0" />
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Days" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text=". Dag" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Cancel Subscription">
+                                                <Button mnemonicParsing="false" text="Annuller Ordre">
                                                    <HBox.margin>
                                                       <Insets top="15.0" />
                                                    </HBox.margin>
@@ -112,22 +112,22 @@
                                              <children>
                                                 <TableView prefHeight="90.0" prefWidth="438.0">
                                                    <columns>
-                                                      <TableColumn prefWidth="350.0" text="Item" />
-                                                      <TableColumn prefWidth="82.0" text="Amount" />
+                                                      <TableColumn prefWidth="350.0" text="Produkt" />
+                                                      <TableColumn prefWidth="82.0" text="Antal" />
                                                    </columns>
                                                 </TableView>
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="77.0" prefWidth="433.0" style="-fx-border-color: lightgray;">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This order will be complete every" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Orderen vil blive gennemført hver " />
                                                 <TextField prefHeight="25.0" prefWidth="40.0" />
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Days" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text=". Dag" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Cancel Subscription">
+                                                <Button mnemonicParsing="false" text="Annuller Ordre">
                                                    <HBox.margin>
                                                       <Insets top="15.0" />
                                                    </HBox.margin>

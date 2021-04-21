@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.customerclient.views.customerbrowser.CustomerBrowserViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.customerclient.views.customerbrowser.CustomerBrowserViewController">
     <children>
         <VBox prefHeight="120.0" prefWidth="900.0" style="-fx-background-color: lightblue;">
             <children>
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="900.0" style="-fx-border-color: #d3d3d3;" VBox.vgrow="ALWAYS">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PRODUCT BROWSER" wrappingWidth="390.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gemmense produkter" wrappingWidth="390.0">
                             <HBox.margin>
                                 <Insets top="4.0" />
                             </HBox.margin>
@@ -22,9 +28,9 @@
                         </Text>
                   <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="500.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                              <Button mnemonicParsing="false" onAction="#openProductBrowser" prefHeight="30.0" prefWidth="120.0" text="Browser" />
-                              <Button mnemonicParsing="false" onAction="#openSubscriptions" prefHeight="30.0" prefWidth="120.0" text="My Subscriptions" />
-                              <Button mnemonicParsing="false" onAction="#openBasket" prefHeight="30.0" prefWidth="120.0" text="Basket" />
+                              <Button mnemonicParsing="false" onAction="#openProductBrowser" prefHeight="30.0" prefWidth="120.0" text="Produkter" />
+                              <Button mnemonicParsing="false" onAction="#openBasket" prefHeight="30.0" prefWidth="120.0" text="Kurv" />
+                              <Button mnemonicParsing="false" onAction="#openSubscriptions" prefHeight="30.0" prefWidth="120.0" text="Abonnemter" />
                      </children>
                      <HBox.margin>
                         <Insets right="5.0" />
@@ -44,18 +50,18 @@
                         <HBox prefHeight="32.0" prefWidth="221.0">
                             <children>
                                 <TextField prefHeight="30.0" prefWidth="165.0" style="-fx-background-color: white;" />
-                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" text="Search" />
+                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" text="Søg" />
                             </children>
                             <VBox.margin>
                                 <Insets bottom="5.0" top="15.0" />
                             </VBox.margin>
                         </HBox>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categories" underline="true" wrappingWidth="213.91796112060547">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorier" underline="true" wrappingWidth="213.91796112060547">
                             <font>
                                 <Font name="System Bold" size="22.0" />
                             </font>
                         </Text>
-                        <Text fx:id="categoryColonial" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Colonial" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryColonial" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Kolonial" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -87,7 +93,7 @@
                               <Insets left="25.0" />
                            </VBox.margin>
                         </Text>-->
-                        <Text fx:id="categoryDiaryAndEggs" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Diary and Eggs" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryDiaryAndEggs" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Mejeri og Æg" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -95,7 +101,7 @@
                                 <Insets left="8.0" />
                             </VBox.margin>
                         </Text>
-                        <Text fx:id="categoryFrozenFoods" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Frozen Food" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryFrozenFoods" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Frostvarer" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -103,7 +109,7 @@
                                 <Insets left="8.0" />
                             </VBox.margin>
                         </Text>
-                        <Text fx:id="categoryFruitAndVegetables" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Fruits and Vegetables" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryFruitAndVegetables" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Frugt og grønt" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -111,7 +117,7 @@
                                 <Insets left="8.0" />
                             </VBox.margin>
                         </Text>
-                        <Text fx:id="categoryMeatAndSeafoods" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Meat and Seafood" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryMeatAndSeafoods" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Kød og fisk" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -119,7 +125,7 @@
                                 <Insets left="8.0" />
                             </VBox.margin>
                         </Text>
-                        <Text fx:id="categoryDrinks" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Beverages (Non-alcohol)" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryDrinks" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Drikkevarer (Uden alkohol)" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -127,7 +133,7 @@
                                 <Insets left="8.0" />
                             </VBox.margin>
                         </Text>
-                        <Text fx:id="categoryAlcohol" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Beverages (Alcohol)" wrappingWidth="195.9830722808838">
+                        <Text fx:id="categoryAlcohol" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Drikkevarer (Med alkohol)" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -170,8 +176,8 @@
                                                         </Text>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" onMouseClicked="#addToBasket" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
+                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Antal" />
+                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Tilføj til kurv">
                                                    <HBox.margin>
                                                       <Insets right="8.0" />
                                                    </HBox.margin>
@@ -209,8 +215,8 @@
                                           </Text>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
+                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Antal" />
+                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Tilføj til kurv">
                                                    <HBox.margin>
                                                       <Insets right="8.0" />
                                                    </HBox.margin>
@@ -248,8 +254,8 @@
                                           </Text>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
+                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Antal" />
+                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Tilføj til kurv">
                                                    <HBox.margin>
                                                       <Insets right="8.0" />
                                                    </HBox.margin>
@@ -287,8 +293,8 @@
                                           </Text>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
+                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Antal" />
+                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Tilføj til kurv">
                                                    <HBox.margin>
                                                       <Insets right="8.0" />
                                                    </HBox.margin>
@@ -326,8 +332,8 @@
                                           </Text>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
+                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Antal" />
+                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Tilføj til kurv">
                                                    <HBox.margin>
                                                       <Insets right="8.0" />
                                                    </HBox.margin>
@@ -365,8 +371,8 @@
                                           </Text>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
+                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Antal" />
+                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Tilføj til kurv">
                                                    <HBox.margin>
                                                       <Insets right="8.0" />
                                                    </HBox.margin>
@@ -404,8 +410,8 @@
                                           </Text>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
+                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Antal" />
+                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Tilføj til kurv">
                                                    <HBox.margin>
                                                       <Insets right="8.0" />
                                                    </HBox.margin>
@@ -443,281 +449,8 @@
                                           </Text>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
-                                                   <HBox.margin>
-                                                      <Insets right="8.0" />
-                                                   </HBox.margin>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="15.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="15.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="150.0" prefWidth="610.0" style="-fx-border-color: lightgray;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../shared/images/150placeholder.png" />
-                                       </image>
-                                    </ImageView>
-                                    <VBox prefHeight="150.0" prefWidth="465.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOOD NAME" wrappingWidth="245.9830722808838">
-                                             <font>
-                                                <Font name="System Bold" size="21.0" />
-                                             </font>
-                                          </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" a type specimen  centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s " wrappingWidth="426.9830722808838">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
-                                                   <HBox.margin>
-                                                      <Insets right="8.0" />
-                                                   </HBox.margin>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="15.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="15.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="150.0" prefWidth="610.0" style="-fx-border-color: lightgray;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../shared/images/150placeholder.png" />
-                                       </image>
-                                    </ImageView>
-                                    <VBox prefHeight="150.0" prefWidth="465.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOOD NAME" wrappingWidth="245.9830722808838">
-                                             <font>
-                                                <Font name="System Bold" size="21.0" />
-                                             </font>
-                                          </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" a type specimen  centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s " wrappingWidth="426.9830722808838">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
-                                                   <HBox.margin>
-                                                      <Insets right="8.0" />
-                                                   </HBox.margin>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="15.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="15.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="150.0" prefWidth="610.0" style="-fx-border-color: lightgray;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../shared/images/150placeholder.png" />
-                                       </image>
-                                    </ImageView>
-                                    <VBox prefHeight="150.0" prefWidth="465.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOOD NAME" wrappingWidth="245.9830722808838">
-                                             <font>
-                                                <Font name="System Bold" size="21.0" />
-                                             </font>
-                                          </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" a type specimen  centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s " wrappingWidth="426.9830722808838">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
-                                                   <HBox.margin>
-                                                      <Insets right="8.0" />
-                                                   </HBox.margin>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="15.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="15.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="150.0" prefWidth="610.0" style="-fx-border-color: lightgray;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../shared/images/150placeholder.png" />
-                                       </image>
-                                    </ImageView>
-                                    <VBox prefHeight="150.0" prefWidth="465.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOOD NAME" wrappingWidth="245.9830722808838">
-                                             <font>
-                                                <Font name="System Bold" size="21.0" />
-                                             </font>
-                                          </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" a type specimen  centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s " wrappingWidth="426.9830722808838">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
-                                                   <HBox.margin>
-                                                      <Insets right="8.0" />
-                                                   </HBox.margin>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="15.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="15.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="150.0" prefWidth="610.0" style="-fx-border-color: lightgray;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../shared/images/150placeholder.png" />
-                                       </image>
-                                    </ImageView>
-                                    <VBox prefHeight="150.0" prefWidth="465.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOOD NAME" wrappingWidth="245.9830722808838">
-                                             <font>
-                                                <Font name="System Bold" size="21.0" />
-                                             </font>
-                                          </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" a type specimen  centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s " wrappingWidth="426.9830722808838">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
-                                                   <HBox.margin>
-                                                      <Insets right="8.0" />
-                                                   </HBox.margin>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="15.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="15.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="150.0" prefWidth="610.0" style="-fx-border-color: lightgray;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../shared/images/150placeholder.png" />
-                                       </image>
-                                    </ImageView>
-                                    <VBox prefHeight="150.0" prefWidth="465.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOOD NAME" wrappingWidth="245.9830722808838">
-                                             <font>
-                                                <Font name="System Bold" size="21.0" />
-                                             </font>
-                                          </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" a type specimen  centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s " wrappingWidth="426.9830722808838">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
-                                                   <HBox.margin>
-                                                      <Insets right="8.0" />
-                                                   </HBox.margin>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="15.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="15.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="150.0" prefWidth="610.0" style="-fx-border-color: lightgray;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../shared/images/150placeholder.png" />
-                                       </image>
-                                    </ImageView>
-                                    <VBox prefHeight="150.0" prefWidth="465.0">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOOD NAME" wrappingWidth="245.9830722808838">
-                                             <font>
-                                                <Font name="System Bold" size="21.0" />
-                                             </font>
-                                          </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" a type specimen  centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s " wrappingWidth="426.9830722808838">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Amount" />
-                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add to basket">
+                                                <TextField prefHeight="30.0" prefWidth="130.0" promptText="Antal" />
+                                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Tilføj til kurv">
                                                    <HBox.margin>
                                                       <Insets right="8.0" />
                                                    </HBox.margin>
