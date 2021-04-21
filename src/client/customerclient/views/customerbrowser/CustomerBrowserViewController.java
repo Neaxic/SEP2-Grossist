@@ -30,7 +30,6 @@ public class CustomerBrowserViewController implements CustomerViewController
   // Item List for Product Population
   @FXML private VBox productItemList;
 
-
   private ViewHandler viewHandler;
   private CustomerBrowserViewModel viewModel;
 
@@ -77,21 +76,27 @@ public class CustomerBrowserViewController implements CustomerViewController
   }
 
   // Mega hygger mig med at undgå at bruge deres ID fordi det skal være forskellige fra boks til boks
-  public void addToBasket(MouseEvent evt)
+  public void addToBasket(MouseEvent mouseEvent)
   {
-		Button button = (Button) evt.getTarget();
-  	//Getting which item to put in the basket
-		//Vi kan eventuelt indsætte et skjult felt med varenummer og tage det i stedet for titlen. Gerne med et LABEL
-		VBox box = (VBox) button.getParent().getParent();
-		TextField itemName = (TextField) box.lookup("Textfield");
-		String item = itemName.getText();
+    Node node = (Node) mouseEvent.getTarget();
+    Button button = (Button) node.lookup("Button");
+    if (button != null)
+    {
+       // button = (Button) node;
+      //Getting which item to put in the basket
+      //Vi kan eventuelt indsætte et skjult felt med varenummer og tage det i stedet for titlen. Gerne med et LABEL
+      VBox box = (VBox) button.getParent().getParent();
+      TextField itemName = (TextField) box.lookup("TextField");
+      String item = itemName.getText();
 
-		//Getting the amount to put in basket
-    HBox amountBox = (HBox) button.getParent();
-    TextField amountField = (TextField) amountBox.lookup("Textfield");
-    int amount = Integer.parseInt(amountField.getText());
+      //Getting the amount to put in basket
+      HBox amountBox = (HBox) button.getParent();
+      TextField amountField = (TextField) amountBox.lookup("TextField");
+      int amount = Integer.parseInt(amountField.getText());
 
-    viewModel.addToBasket(item, amount);
+      viewModel.addToBasket(item, amount);
+      System.out.println("blergh");
+    }
   }
 
   // SCENE MANAGING
