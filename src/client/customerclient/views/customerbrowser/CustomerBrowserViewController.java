@@ -8,6 +8,8 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -18,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import shared.wares.Product;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -77,18 +80,22 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	private HBox createEntry(Product product) {
 		// HBox for the Food Item Entry
 		HBox entry = new HBox();
+
 		VBox vBox = new VBox();
 		HBox btnHBox = new HBox();
 		HBox prisHBox = new HBox();
 		HBox main = new HBox();
+		main.styleProperty().setValue("-fx-border-color: lightgray;");
 		// Nodes regarding the Item
 		Text title = new Text(product.getName());
+		main.setMaxWidth(615);
 		Text desc = new Text("\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
-		desc.wrappingWidthProperty().bind(SPane.widthProperty());
-
-		Image image = new Image("../../../../shared/images/150placeholder.png");
+		//desc.wrappingWidthProperty().bind(SPane.widthProperty());
+		TextFlow textFlow = new TextFlow(desc);
+		//main.width
+		//Image image = new Image("../../../../shared/images/150placeholder.png");
 		ImageView iv2 = new ImageView();
-		iv2.setImage(image);
+		//iv2.setImage(image);
 		iv2.setFitWidth(150);
 		iv2.setPreserveRatio(true);
 		iv2.setSmooth(true);
@@ -97,9 +104,10 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		Text price = new Text("" + product.getPrice());
 		TextField amount = new TextField();
 		Button addButton = new Button("Tilføj til Kurv");
+		addButton.setPrefSize(100,50);
 		// Design of Nodes
 		title.setFont(Font.font("Segoe UI", FontWeight.BLACK, 21));
-		desc.setFont(Font.font("Segoe UI", FontWeight.BLACK, 15));
+		desc.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 15));
 		price.setFont(Font.font("Segoe UI", FontWeight.MEDIUM, 21));
 		amount.setPromptText("Mængde");
 		amount.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 16));
@@ -110,16 +118,21 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		prisHBox.getChildren().add(price);
 		vBox.getChildren().add(prisHBox);
 
-		vBox.getChildren().add(desc);
+		textFlow.setPadding(new Insets(5,30,10,0));
+		vBox.getChildren().add(textFlow);
 
 		btnHBox.getChildren().add(amount);
 		btnHBox.getChildren().add(addButton);
+		btnHBox.alignmentProperty().setValue(Pos.CENTER_RIGHT);
+
 		vBox.getChildren().add(btnHBox);
 
 		main.getChildren().add(iv2);
 		main.getChildren().add(vBox);
+		//main.setPrefWidth(150);
 
 		entry.getChildren().add(main);
+		entry.setPadding(new Insets(5,0,5,0));
 		return entry;
 	}
 

@@ -4,6 +4,10 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -45,15 +49,16 @@ public class ProxyViewHandler implements ViewHandler {
 		loginDialog.setTitle("Login");
 		loginDialog.setHeaderText("Indtast konto oplysninger.");
 
-//		ImageView loginPNG = new ImageView(Objects.requireNonNull(
-//				this.getClass().getResource("../../shared/images/login.png")).toString());
+//		ImageView loginPNG = new ImageView();
+//		Image imagelogin = new Image("src/shared/images/login.png");
+//		loginPNG.setImage(imagelogin);
 //		loginPNG.setFitHeight(64);
 //		loginPNG.setFitWidth(64);
-//
+
 //		Stage stage = (Stage) loginDialog.getDialogPane().getScene().getWindow();
 //		stage.getIcons().add(new Image(Objects.requireNonNull(
 //				this.getClass().getResource("../../shared/images/login.png")).toString()));
-//
+
 //		loginDialog.setGraphic(loginPNG);
 
 		ButtonType loginButtonType = new ButtonType("Login",
