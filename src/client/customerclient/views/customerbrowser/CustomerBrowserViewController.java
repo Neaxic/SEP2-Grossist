@@ -45,6 +45,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		itemList = new SimpleListProperty<>();
 		itemList.bind(viewModel.activeItemListProperty());
 		loadAllProducts();
+		populate("all");
 	}
 
 	public void loadAllProducts() {
