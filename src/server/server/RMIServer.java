@@ -26,7 +26,7 @@ public class RMIServer implements RMIServerInterface {
 		wares.add(new String[]{"tenderloin", "35", "1240", "7", "04-09-2021"});
 		wares.add(new String[]{"chicken breasts", "20", "1400", "15", "20-08-2021"});
 		wares.add(new String[]{"frozen peas", "10", "3800", "21", "18-05-2022"});
-		wares.add(new String[]{"dignity", "wut?", "0", "00-00-0000", "10-04-2021"});
+		wares.add(new String[]{"dignity", "wut?", "0", "00-00-0000", "10-04-2021"}); //Feels bad man
 		wares.add(new String[]{"fanta", "15", "2300", "8", "09-06-2021"});
 		wares.add(new String[]{"soplica malinowa", "50", "800", "30", "31-07-2022"});
 		wares.add(new String[]{"canned beans", "14", "10000", "14", "idk man, forever?"});
