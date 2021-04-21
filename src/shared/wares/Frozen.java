@@ -7,9 +7,9 @@ import java.time.LocalDate;
 public class Frozen extends Product implements ProductInterface
 {
   public Frozen(Pair<Integer, String> stock, int soldDaily, int deliveryDays, Pair<Double, String> price,
-      LocalDate bb)
+      String bb)
   {
-    super(stock, soldDaily, deliveryDays, price, bb);
+    super("", stock, soldDaily, deliveryDays, price, bb);
   }
 
   @Override public Pair<Integer, String> getStock()
@@ -32,8 +32,4 @@ public class Frozen extends Product implements ProductInterface
     return null;
   }
 
-  @Override public LocalDate getBb()
-  {
-    return null;
-  }
 }

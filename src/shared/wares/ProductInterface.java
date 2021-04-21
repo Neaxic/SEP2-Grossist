@@ -10,5 +10,4 @@ public interface ProductInterface
   int getDeliveryDays();
   int getSoldDaily();
   Pair<Double, String> getPrice();
-  LocalDate getBb();
 }
