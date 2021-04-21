@@ -2,9 +2,10 @@ package shared.wares;
 
 import javafx.util.Pair;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Product {
+public abstract class Product implements Serializable {
 	private Pair<Integer, String> stock;
 	private Pair<Double, String> price;
 	private int soldDaily, deliveryDays;
@@ -19,8 +20,7 @@ public abstract class Product {
 	 * @param price        Price of product and of what measurement type
 	 * @param bb           Best Before Date of Product
 	 */
-	public Product(Pair<Integer, String> stock, int soldDaily, int deliveryDays, Pair<Double, String> price,
-	               LocalDate bb) {
+	public Product(Pair<Integer, String> stock, int soldDaily, int deliveryDays, Pair<Double, String> price, LocalDate bb) {
 		this.stock = stock;
 		this.soldDaily = soldDaily;
 		this.deliveryDays = deliveryDays;
