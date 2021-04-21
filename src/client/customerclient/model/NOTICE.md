@@ -20,6 +20,7 @@
 ## Spørgsmål
 
 1. Hvornår og hvor ofte vil vi have, at klienten skal spørge efter varelisten fra serveren?
+    * Skal serveren bare sende opdateringen selv? Når grossisten har lavet en opdatering?
 2. Hvor mange forskellige mulige ting skal vi kunne have fra serveren?
 
 ---
