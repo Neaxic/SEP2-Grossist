@@ -29,8 +29,7 @@ public class CustomerBrowserViewController implements CustomerViewController
   @FXML private Text categoryAlcohol;
   // Item List for Product Population
   @FXML private VBox productItemList;
-  @FXML private TextField foodAmount;
-  @FXML private Text foodName;
+
 
   private ViewHandler viewHandler;
   private CustomerBrowserViewModel viewModel;
@@ -78,9 +77,11 @@ public class CustomerBrowserViewController implements CustomerViewController
   }
 
   // Mega hygger mig med at undgå at bruge deres ID fordi det skal være forskellige fra boks til boks
-  public void addToBasket(Button button)
+  public void addToBasket(MouseEvent evt)
   {
+		Button button = (Button) evt.getTarget();
   	//Getting which item to put in the basket
+		//Vi kan eventuelt indsætte et skjult felt med varenummer og tage det i stedet for titlen. Gerne med et LABEL
 		VBox box = (VBox) button.getParent().getParent();
 		TextField itemName = (TextField) box.lookup("Textfield");
 		String item = itemName.getText();
