@@ -12,14 +12,14 @@ kunne bestille fødevarer i større mængder uden besvær.
 
 #### Forbruger
 
-- Simpel Brugergrænseflade
-- Hurtig Bestilling
-- Mulighed for abonnement bestilling
-- Flere abonnementer med forskellige tidsintervaller
+* Simpel Brugergrænseflade
+* Hurtig Bestilling
+* Mulighed for abonnement bestilling
+* Flere abonnementer med forskellige tidsintervaller
 
 #### Grossister
 
-- Intuitivt design
-- Nemt at indsætte flere varer
-- Hurtigt og simpelt at ændre information omkring allerede indskrevne varer
-- Indbygget risiko vurdering af fødevarer
+* Intuitivt design
+* Nemt at indsætte flere varer
+* Hurtigt og simpelt at ændre information omkring allerede indskrevne varer
+* Indbygget risiko vurdering af fødevarer
