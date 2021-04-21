@@ -124,6 +124,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		btnHBox.getChildren().add(amount);
 		btnHBox.getChildren().add(addButton);
 		btnHBox.alignmentProperty().setValue(Pos.CENTER_RIGHT);
+		btnHBox.setPadding(new Insets(0,5,5,0));
 
 		vBox.getChildren().add(btnHBox);
 

@@ -25,7 +25,6 @@ public class RMIServer implements RMIServerInterface {
 
 	private void createDummyData() {
 		wares.add(new Alcohol("Soplica Wisniowa", "Vodka", "30%", "Poland", "Soplica", new Date(), new Date(), 20.0, 100, 10));
-		wares.add(new Alcohol("1234NEJTAK", "Vodka", "30%", "Poland", "Soplica", new Date(), new Date(), 20.0, 100, 10));
 //		wares.add(new Colonial("", "", "", new Date(), new Date(), 20, 20, 20));
 //		wares.add(new CooledAndDairy("", "", "", new Date(), new Date(), 20, 20, 20));
 //		wares.add(new Drink("", "", "", new Date(), new Date(), 20, 209, 20));
