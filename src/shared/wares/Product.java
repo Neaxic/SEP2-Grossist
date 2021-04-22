@@ -4,6 +4,7 @@ import javafx.util.Pair;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public abstract class Product implements Serializable {
 	private String name;
@@ -11,7 +12,7 @@ public abstract class Product implements Serializable {
 	private Pair<Double, String> price;
 	private int soldDaily, deliveryDays;
 	private String bb;
-
+	private ArrayList<String> tags = new ArrayList<>();
 	/**
 	 * Constructor for a generic product item
 	 *
@@ -38,4 +39,27 @@ public abstract class Product implements Serializable {
 		return price;
 	}
 
+	public Pair<Integer, String> getStock() {
+		return stock;
+	}
+
+	public int getSoldDaily() {
+		return soldDaily;
+	}
+
+	public int getDeliveryDays() {
+		return deliveryDays;
+	}
+
+	public String getBb() {
+		return bb;
+	}
+
+	public void addTag(String s) {
+		tags.add(s);
+	}
+
+	public ArrayList<String> getTags() {
+		return tags;
+	}
 }

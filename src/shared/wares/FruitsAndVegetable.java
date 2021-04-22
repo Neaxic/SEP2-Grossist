@@ -5,37 +5,41 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 
 public class FruitsAndVegetable extends Product implements ProductInterface {
-    private ArrayList<String> tags = new ArrayList<>();
+
     public FruitsAndVegetable(Pair<Integer, String> stock, int soldDaily, int deliveryDays, Pair<Double, String> price,
                   String bb)
     {
         super("", stock, soldDaily, deliveryDays, price, bb);
-        tags.add("Øko");
-        tags.add("Nøgle");
-        tags.add("GMO");
+        super.addTag("Øko");
+        super.addTag("Nøgle");
+        super.addTag("GMO");
     }
 
-    @Override public Pair<Integer, String> getStock()
-    {
-        return null;
+    @Override
+    public Pair<Integer, String> getStock() {
+        return super.getStock();
     }
 
-    @Override public int getDeliveryDays()
-    {
-        return 0;
+    @Override
+    public int getSoldDaily() {
+        return super.getSoldDaily();
     }
 
-    @Override public int getSoldDaily()
-    {
-        return 0;
+    @Override
+    public int getDeliveryDays() {
+        return super.getDeliveryDays();
     }
 
-    @Override public Pair<Double, String> getPrice()
-    {
-        return null;
+    @Override
+    public Pair<Double, String> getPrice() {
+        return super.getPrice();
     }
 
+    @Override
+    public String getBb() { return super.getBb(); }
+
+    @Override
     public ArrayList<String> getTags() {
-        return tags;
+        return super.getTags();
     }
 }
