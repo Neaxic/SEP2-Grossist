@@ -20,7 +20,7 @@ public class Alcohol extends Product {
     private ArrayList<String> tags = new ArrayList<>();
 
     public Alcohol(String name, String type, String alkoholProcent, String oprindelsesLand, String producent, Date produktionsDato, Date udlobningsDato, Double Salgspris, int antal, int minKobsMaengde) {
-        super(name, new Pair<>(10, "stk"), 10, 10, new Pair<>(10d,"kg"), "I morgen");
+        super(name, new Pair<>(10, "stk"), 10, 10, new Pair<>(10d,"kg"), null);
         this.type = type;
         this.alkoholProcent = alkoholProcent;
         this.oprindelsesLand = oprindelsesLand;
