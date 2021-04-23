@@ -10,7 +10,7 @@ public class Frozen extends Product implements ProductInterface
 {
 
   public Frozen(Pair<Integer, String> stock, int soldDaily, int deliveryDays, Pair<Double, String> price,
-      String bb)
+      LocalDate bb)
   {
     super("", stock, soldDaily, deliveryDays, price, bb);
     super.addTag("Laktosefri");
@@ -45,7 +45,7 @@ public class Frozen extends Product implements ProductInterface
   }
 
   @Override
-  public String getBb() { return super.getBb(); }
+  public LocalDate getBb() { return super.getBb(); }
 
   @Override
   public ArrayList<String> getTags() {

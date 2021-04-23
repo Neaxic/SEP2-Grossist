@@ -2,12 +2,13 @@ package shared.wares;
 
 import javafx.util.Pair;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Colonial extends Product implements ProductInterface{
 
     public Colonial(Pair<Integer, String> stock, int soldDaily, int deliveryDays, Pair<Double, String> price,
-                          String bb)
+                          LocalDate bb)
     {
         super("", stock, soldDaily, deliveryDays, price, bb);
         super.addTag("Øko");
@@ -44,7 +45,7 @@ public class Colonial extends Product implements ProductInterface{
     }
 
     @Override
-    public String getBb() { return super.getBb(); }
+    public LocalDate getBb() { return super.getBb(); }
 
     @Override
     public ArrayList<String> getTags() {

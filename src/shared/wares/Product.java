@@ -11,7 +11,7 @@ public abstract class Product implements Serializable {
 	private Pair<Integer, String> stock;
 	private Pair<Double, String> price;
 	private int soldDaily, deliveryDays;
-	private String bb;
+	private LocalDate bb;
 	private ArrayList<String> tags = new ArrayList<>();
 	/**
 	 * Constructor for a generic product item
@@ -22,13 +22,13 @@ public abstract class Product implements Serializable {
 	 * @param price        Price of product and of what measurement type
 	 * @param bb           Best Before Date of Product
 	 */
-	public Product(String name, Pair<Integer, String> stock, int soldDaily, int deliveryDays, Pair<Double, String> price, String bb) {
+	public Product(String name, Pair<Integer, String> stock, int soldDaily, int deliveryDays, Pair<Double, String> price, LocalDate bb) {
 		this.name = name;
 		this.stock = stock;
 		this.soldDaily = soldDaily;
 		this.deliveryDays = deliveryDays;
 		this.price = price;
-		this.bb = "" + bb;
+		this.bb = bb;
 	}
 
 	public String getName() {
@@ -51,7 +51,7 @@ public abstract class Product implements Serializable {
 		return deliveryDays;
 	}
 
-	public String getBb() {
+	public LocalDate getBb() {
 		return bb;
 	}
 
