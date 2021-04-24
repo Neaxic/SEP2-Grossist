@@ -43,7 +43,4 @@ public class Model implements CustomerModelInterface {
 		client.getWares();
 	}
 
-//	public Product getWare(String name){
-//		wareList.get(wareList.indexOf())
-//	}
 }
