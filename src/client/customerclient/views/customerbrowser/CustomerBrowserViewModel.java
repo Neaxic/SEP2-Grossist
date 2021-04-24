@@ -33,6 +33,9 @@ activeItemList = new SimpleListProperty<>();
 			System.out.println("Item error: " + item);
 		} else if (amount <= 0) {
 			System.out.println("Invalid amount");
+		} else {
+			System.out.println("added "+amount +" "+ item + " to cart");
+			//Product selected = model.getWare(item);
 		}
 
 		//FIXME HJÆÆÆLP, jeg kan ikke trække et helt product ud, men jeg kan få et

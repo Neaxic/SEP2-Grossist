@@ -150,7 +150,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 			//Getting which item to put in the basket
 			//Vi kan eventuelt indsætte et skjult felt med varenummer og tage det i stedet for titlen. Gerne med et LABEL
 			VBox box = (VBox) button.getParent().getParent();
-			TextField itemName = (TextField) box.lookup("TextField");
+			Text itemName = (Text) box.lookup("Text");
 			String item = itemName.getText();
 
 			//Getting the amount to put in basket
@@ -159,7 +159,6 @@ public class CustomerBrowserViewController implements CustomerViewController {
 			int amount = Integer.parseInt(amountField.getText());
 
 			viewModel.addToBasket(item, amount);
-			System.out.println("blergh");
 		}
 	}
 
