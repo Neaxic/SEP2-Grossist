@@ -96,9 +96,9 @@ interface NewProductInterface {
 // Test version of the Alcohol Class
 class TestAlcohol extends NewProduct implements NewProductInterface {
 	private String originCountry;
-	private double percentage; // Kommer bare til at være et tallet
-	private String beverageType; // Øl, Vin, Spiritus (spiritus er alt over 16.5%)
-	private String tags; // Alle tags forventet på produktet
+	private double percentage;     // Kommer bare til at være et tallet
+	private String beverageType;   // Øl, Vin, Cider, småbarns spiritus(små sure), Spiritus (spiritus er alt over 16.4%)
+	private String tags;           // Alle tags forventet på produktet
 
 	public TestAlcohol(String name, String measurementType, LocalDate bestBefore, int wareNumber, int amount, int deliveryDays, double price, int minimumAmountForPurchase, String originCountry, double percentage, String beverageType) {
 		super(name, measurementType, bestBefore, wareNumber, amount, deliveryDays, price, minimumAmountForPurchase);
