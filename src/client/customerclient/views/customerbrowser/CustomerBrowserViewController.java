@@ -6,7 +6,6 @@ import client.customerclient.views.CustomerViewController;
 import client.customerclient.views.CustomerViewModel;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,9 +22,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import shared.wares.Product;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import java.awt.*;
+
 import java.io.IOException;
 
 public class CustomerBrowserViewController implements CustomerViewController {
@@ -104,7 +102,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		Text price = new Text("" + product.getPrice());
 		TextField amount = new TextField();
 		Button addButton = new Button("Tilføj til Kurv");
-		addButton.setPrefSize(100,50);
+		addButton.setPrefSize(100, 50);
 		// Design of Nodes
 		title.setFont(Font.font("Segoe UI", FontWeight.BLACK, 21));
 		desc.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 15));
@@ -118,13 +116,13 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		prisHBox.getChildren().add(price);
 		vBox.getChildren().add(prisHBox);
 
-		textFlow.setPadding(new Insets(5,30,10,0));
+		textFlow.setPadding(new Insets(5, 30, 10, 0));
 		vBox.getChildren().add(textFlow);
 
 		btnHBox.getChildren().add(amount);
 		btnHBox.getChildren().add(addButton);
 		btnHBox.alignmentProperty().setValue(Pos.CENTER_RIGHT);
-		btnHBox.setPadding(new Insets(0,5,5,0));
+		btnHBox.setPadding(new Insets(0, 5, 5, 0));
 
 		vBox.getChildren().add(btnHBox);
 
@@ -133,7 +131,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		//main.setPrefWidth(150);
 
 		entry.getChildren().add(main);
-		entry.setPadding(new Insets(5,0,5,0));
+		entry.setPadding(new Insets(5, 0, 5, 0));
 		return entry;
 	}
 
@@ -143,23 +141,40 @@ public class CustomerBrowserViewController implements CustomerViewController {
 //			String itemName = ((Text) nodes.get(0)).getText();
 //			int itemAmount = Integer.parseInt(((TextField) nodes.get(2)).getText());
 //			viewModel.addToCart(new Product(itemName, itemAmount, 20, "kg"));
-		Node node = (Node) mouseEvent.getTarget();
-		Button button = (Button) node.lookup("Button");
+		Node node = (Node) mouseEvent.getTarget(); // Giver Tekst feltet på Knappen hvis man klikker hvor teksten er
+		Button button;
+		if (!(node instanceof Button)) {
+			button = (Button) node.getParent();
+		} else {
+			button = (Button) node;
+		}
 		if (button != null) {
 			// button = (Button) node;
-			//Getting which item to put in the basket
-			//Vi kan eventuelt indsætte et skjult felt med varenummer og tage det i stedet for titlen. Gerne med et LABEL
+			// Getting which item to put in the basket
+			// Vi kan eventuelt indsætte et skjult felt med varenummer og tage det i stedet for titlen. Gerne med et LABEL
 			VBox box = (VBox) button.getParent().getParent();
 			Text itemName = (Text) box.lookup("Text");
 			String item = itemName.getText();
 
-			//Getting the amount to put in basket
+			// Getting the amount to put in basket
 			HBox amountBox = (HBox) button.getParent();
 			TextField amountField = (TextField) amountBox.lookup("TextField");
-			int amount = Integer.parseInt(amountField.getText());
-
-			viewModel.addToBasket(item, amount);
+			if (amountField.getText().isEmpty() || containsLetters(amountField.getText())) {
+				System.out.println("Amount field only accepts Integer Numbers");
+			} else {
+				int amount = Integer.parseInt(amountField.getText());
+				viewModel.addToBasket(item, amount);
+			}
 		}
+	}
+	// Ved ikke om denne skal være her? Tænker det giver mest mening da den tjekker på noget der er på vores view
+	private boolean containsLetters(String text) {
+		for (char c : text.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// SCENE MANAGING
