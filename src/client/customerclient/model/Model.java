@@ -25,15 +25,15 @@ public class Model implements CustomerModelInterface {
 		myBasket = new Basket();
 	}
 
-	void addToBasket(NewProduct product, int amount) {
+	public void addToBasket(NewProduct product, int amount) {
 		myBasket.addProduct(product, amount);
 	}
 
-	void removeFromBasket(NewProduct product) {
+	public void removeFromBasket(NewProduct product) {
 		myBasket.removeProduct(product);
 	}
 
-	void changeAmount(NewProduct product, int newAmount) {
+	public void changeAmount(NewProduct product, int newAmount) {
 		myBasket.changeAmount(product, newAmount);
 	}
 
