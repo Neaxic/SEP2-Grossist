@@ -5,7 +5,6 @@ import client.customerclient.model.Model;
 import client.customerclient.views.CustomerViewModel;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
@@ -13,7 +12,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChangeListener {
 	private Model model;
@@ -22,7 +20,7 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 
 	public CustomerBrowserViewModel() {
 		model = (Model) ModelFactory.getInstance().getCustomerModel();
-activeItemList = new SimpleListProperty<>();
+		activeItemList = new SimpleListProperty<>();
 		model.addListener(this);
 	}
 
@@ -37,12 +35,16 @@ activeItemList = new SimpleListProperty<>();
 		} else if (amount <= 0) {
 			System.out.println("Invalid amount");
 		} else {
-			System.out.println("added "+amount +" "+ item + " to cart");
-			//Product selected = model.getWare(item);
-		}
+			System.out.println("added " + amount + " " + item + " to cart");
 
-		//FIXME HJÆÆÆLP, jeg kan ikke trække et helt product ud, men jeg kan få et
-		// varenummer eller titel fra viewet
+			// TODO: Tjek om søgning virker
+			for (Product product : activeItemList) {
+				if (product.getName().equals(item)) {
+					model.addToBasket(null, amount); // Product typer er forskellige
+//					model.addToBasket(product, amount);
+				}
+			}
+		}
 	}
 
 	public void populate(String category) {
