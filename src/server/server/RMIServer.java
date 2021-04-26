@@ -1,6 +1,6 @@
 package server.server;
 
-import TEMP.*;
+import TEMP.Alcohol;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.util.Util;
@@ -11,13 +11,10 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class RMIServer implements RMIServerInterface {
-	int currentID;
 	private HashMap<Integer, CallbackClient> callbackClients = new HashMap<>();
 
 	// Dummy Data:
@@ -46,8 +43,9 @@ public class RMIServer implements RMIServerInterface {
 
 	@Override
 	public int registerClient(CallbackClient callbackClient) throws RemoteException {
+		int currentID;
 		do {
-			currentID = 1 + (int) (Math.random() * 2048);
+			 currentID = 1 + (int) (Math.random() * 2048);
 		} while (callbackClients.get(currentID) != null); // TODO: Rettes til CVR senere
 		callbackClients.put(currentID, callbackClient);
 		return currentID;
