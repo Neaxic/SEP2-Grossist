@@ -4,8 +4,8 @@ import shared.wares.Product;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.List;
+import java.util.HashMap;
 
 public interface CallbackClient extends Remote {
-	void update(List<Product> list) throws RemoteException;
+	void update(HashMap<Product, Integer> list) throws RemoteException;
 }

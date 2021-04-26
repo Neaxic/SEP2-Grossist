@@ -12,7 +12,6 @@ public abstract class NewProduct implements Serializable {
 	private String measurementType;
 	private LocalDate bestBefore;
 	private int wareNumber;
-	private int amount;
 	private int deliveryDays;
 	private double price;
 	private int minimumAmountForPurchase;
@@ -24,17 +23,15 @@ public abstract class NewProduct implements Serializable {
 	 * @param measurementType          The measurement type pr unit
 	 * @param bestBefore               The last date which the ware still should be able to sell on
 	 * @param wareNumber               Internal PLU number
-	 * @param amount                   The amount of the specific Ware / Product
 	 * @param deliveryDays             Expected time for delivery in Days
 	 * @param price                    Price pr unit measurementType in DKK
 	 * @param minimumAmountForPurchase The lowest amount available for purchase at a time
 	 */
-	public NewProduct(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int amount, int deliveryDays, double price, int minimumAmountForPurchase) {
+	public NewProduct(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, int minimumAmountForPurchase) {
 		this.wareName = wareName;
 		this.measurementType = measurementType;
 		this.bestBefore = bestBefore;
 		this.wareNumber = wareNumber;
-		this.amount = amount;
 		this.deliveryDays = deliveryDays;
 		this.price = price;
 		this.minimumAmountForPurchase = minimumAmountForPurchase;
@@ -55,10 +52,6 @@ public abstract class NewProduct implements Serializable {
 
 	public int getWareNumber() {
 		return wareNumber;
-	}
-
-	public int getAmount() {
-		return amount;
 	}
 
 	public int getDeliveryDays() {
@@ -84,8 +77,6 @@ interface NewProductInterface {
 
 	LocalDate getBestBefore();
 
-	int getAmount();
-
 	int getDeliveryDays();
 
 	double getPrice();
@@ -98,10 +89,10 @@ class TestAlcohol extends NewProduct implements NewProductInterface {
 	private String originCountry;
 	private double percentage;     // Kommer bare til at være et tallet
 	private String beverageType;   // Øl, Vin, Cider, småbarns spiritus(små sure), Spiritus (spiritus er alt over 16.4%)
-	private String tags;           // Alle tags forventet på produktet
+	private String tags;           // Flyttes til product
 
-	public TestAlcohol(String name, String measurementType, LocalDate bestBefore, int wareNumber, int amount, int deliveryDays, double price, int minimumAmountForPurchase, String originCountry, double percentage, String beverageType) {
-		super(name, measurementType, bestBefore, wareNumber, amount, deliveryDays, price, minimumAmountForPurchase);
+	public TestAlcohol(String name, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, int minimumAmountForPurchase, String originCountry, double percentage, String beverageType) {
+		super(name, measurementType, bestBefore, wareNumber, deliveryDays, price, minimumAmountForPurchase);
 		this.originCountry = originCountry;
 		this.percentage = percentage;
 		this.beverageType = beverageType;

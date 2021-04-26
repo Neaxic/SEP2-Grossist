@@ -21,16 +21,16 @@ public class RMIServer implements RMIServerInterface {
 	private HashMap<Integer, CallbackClient> callbackClients = new HashMap<>();
 
 	// Dummy Data:
-	private List<Product> wares = new ArrayList<>();
+	private HashMap<Product, Integer> wares = new HashMap<>();
 
 	private void createDummyData() {
-		wares.add(new Alcohol("Soplica Wisniowa", "Vodka", "30%", "Poland", "Soplica", new Date(), new Date(), 20.0, 100, 10));
-//		wares.add(new Colonial("", "", "", new Date(), new Date(), 20, 20, 20));
-//		wares.add(new CooledAndDairy("", "", "", new Date(), new Date(), 20, 20, 20));
-//		wares.add(new Drink("", "", "", new Date(), new Date(), 20, 209, 20));
-//		wares.add(new Frozen("", "", "", new Date(), new Date(), 20, 20, 20));
-//		wares.add(new FruitAndVegetable("", "", "", new Date(), "banana", 20, 20, 20));
-//		wares.add(new MeatAndFish("", "", "", new Date(), new Date(), 20, 20, 20));
+		wares.put(new Alcohol("Soplica Wisniowa", "Vodka", "30%", "Poland", "Soplica", new Date(), new Date(), 20.0, 100, 10), 1000);
+//		wares.put(new Colonial("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
+//		wares.put(new CooledAndDairy("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
+//		wares.put(new Drink("", "", "", new Date(), new Date(), 20, 209, 20), 1000);
+//		wares.put(new Frozen("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
+//		wares.put(new FruitAndVegetable("", "", "", new Date(), "banana", 20, 20, 20), 1000);
+//		wares.put(new MeatAndFish("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
 	}
 
 

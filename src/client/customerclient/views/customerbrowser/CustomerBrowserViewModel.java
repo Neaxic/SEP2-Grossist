@@ -10,7 +10,10 @@ import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChangeListener {
 	private Model model;
@@ -52,6 +55,9 @@ activeItemList = new SimpleListProperty<>();
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		activeItemList.set(FXCollections.observableList((List<Product>) evt.getNewValue()));
+		HashMap<Product, Integer> waresFromServer = (HashMap<Product, Integer>) evt.getNewValue();
+		List<Product> unitWares = new ArrayList<>(waresFromServer.keySet());
+		activeItemList.set(FXCollections.observableList(unitWares));
+//		activeItemList.set(FXCollections.observableList((List<Product>) evt.getNewValue()));
 	}
 }

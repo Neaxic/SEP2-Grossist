@@ -14,7 +14,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
+import java.util.HashMap;
 
 public class RMIClient implements Client, CallbackClient, Subject {
 	private RMIServerInterface server;
@@ -61,7 +61,7 @@ public class RMIClient implements Client, CallbackClient, Subject {
 	}
 
 	@Override
-	public void update(List<Product> list) { // Model.java is a listener
+	public void update(HashMap<Product, Integer> list) { // Model.java is a listener
 		support.firePropertyChange("UpdatedWareList", null, list);
 	}
 
