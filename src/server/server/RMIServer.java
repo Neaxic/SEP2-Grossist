@@ -20,8 +20,8 @@ import java.util.HashMap;
 
 public class RMIServer implements RMIServerInterface {
 	private HashMap<Integer, CallbackClient> callbackClients = new HashMap<>();
-	//private HashMap<Product, Integer> wares = new HashMap<>();
-	private HashMap<NewProduct, Integer> wares = new HashMap<>();
+	private HashMap<OLD_Product, Integer> wares = new HashMap<>();
+	private HashMap<Product, Integer> wares2 = new HashMap<>();
 
 	// Dummy Data:
 	private DataModelImpl dataModel = new DataModelImpl();
@@ -41,13 +41,24 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	private void getAlcohol(){
+		for (Product i : dataModel.getAlcohol())
+		{
+			//wares.put(i, dataModel.getAlcohol().size());
+		}
+		System.out.println("TEST ALCO: " +dataModel.getAlcohol());
+	}
+	private void getAllProdcts(){
+		for (Product i : dataModel.getAlcohol())
+		{
+			//wares.put(i, dataModel.getAlcohol().size());
+		}
 		System.out.println("TEST ALCO: " +dataModel.getAlcohol());
 	}
 
 	public void getAllProducts(){
 		System.out.println("HASHMAP FROM DB: " +dataModel.getAllProducts());
 		for (Object i: dataModel.getAllProducts().get("Alcohol")) {
-			wares2.put((NewProduct) i, dataModel.getAllProducts().get("Alcohol").size());
+			wares2.put((Product) i, dataModel.getAllProducts().get("Alcohol").size());
 		}
 		System.out.println(wares2);
 	}
@@ -59,7 +70,7 @@ public class RMIServer implements RMIServerInterface {
 		registry.bind(Util.SERVERNAME, this);
 		UnicastRemoteObject.exportObject(this, 0);
 		createDummyData();
-		System.out.println("Connectiong to database... (This might take a while)");
+		System.out.println("Connecting to database... (This might take a while)");
 		getAllProducts();
 		System.out.println("Server started");
 	}
@@ -81,6 +92,6 @@ public class RMIServer implements RMIServerInterface {
 
 	@Override
 	public void getWares(int id) throws RemoteException { // TODO: Can overload this, creating a getWares(int id, String category)
-		callbackClients.get(id).update(wares);
+		callbackClients.get(id).update(wares2);
 	}
 }

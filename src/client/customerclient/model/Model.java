@@ -3,8 +3,8 @@ package client.customerclient.model;
 import client.network.Client;
 import client.network.RMIClient;
 import shared.wares.Basket;
-import shared.wares.NewProduct;
 import shared.wares.Product;
+import shared.wares.OLD_Product;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -25,15 +25,15 @@ public class Model implements CustomerModelInterface {
 		myBasket = new Basket();
 	}
 
-	public void addToBasket(NewProduct product, int amount) {
+	public void addToBasket(Product product, int amount) {
 		myBasket.addProduct(product, amount);
 	}
 
-	public void removeFromBasket(NewProduct product) {
+	public void removeFromBasket(Product product) {
 		myBasket.removeProduct(product);
 	}
 
-	public void changeAmount(NewProduct product, int newAmount) {
+	public void changeAmount(Product product, int newAmount) {
 		myBasket.changeAmount(product, newAmount);
 	}
 

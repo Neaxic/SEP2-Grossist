@@ -1,65 +1,88 @@
 package shared.wares;
 
-import javafx.util.Pair;
-
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 public abstract class Product implements Serializable {
-	private String name;
-	private Pair<Integer, String> stock;
-	private Pair<Double, String> price;
-	private int soldDaily, deliveryDays;
-	private LocalDate bb;
-	private ArrayList<String> tags = new ArrayList<>();
+	private String wareName;
+	private String measurementType;
+	private LocalDate bestBefore;
+	private int wareNumber;
+	private int deliveryDays;
+	private double price;
+	private int minimumAmountForPurchase;
+	String tags;
+
 	/**
-	 * Constructor for a generic product item
+	 * Generic Product Constructor
 	 *
-	 * @param stock        Amount and measurement type ex. <500, kg>
-	 * @param soldDaily    Amount of product sold on average each day
-	 * @param deliveryDays Expected time before product will be ready and delivered
-	 * @param price        Price of product and of what measurement type
-	 * @param bb           Best Before Date of Product
+	 * @param wareName                 The name of the Ware / Product
+	 * @param measurementType          The measurement type pr unit
+	 * @param bestBefore               The last date which the ware still should be able to sell on
+	 * @param wareNumber               Internal PLU number
+	 * @param deliveryDays             Expected time for delivery in Days
+	 * @param price                    Price pr unit measurementType in DKK
+	 * @param minimumAmountForPurchase The lowest amount available for purchase at a time
 	 */
-	public Product(String name, Pair<Integer, String> stock, int soldDaily, int deliveryDays, Pair<Double, String> price, LocalDate bb) {
-		this.name = name;
-		this.stock = stock;
-		this.soldDaily = soldDaily;
+	public Product(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, int minimumAmountForPurchase) {
+		this.wareName = wareName;
+		this.measurementType = measurementType;
+		this.bestBefore = bestBefore;
+		this.wareNumber = wareNumber;
 		this.deliveryDays = deliveryDays;
 		this.price = price;
-		this.bb = bb;
+		this.minimumAmountForPurchase = minimumAmountForPurchase;
 	}
 
-	public String getName() {
-		return name;
+	// Getters for all Field Variables
+	public String getWareName() {
+		return wareName;
 	}
 
-	public Pair<Double, String> getPrice() {
-		return price;
+	public String getMeasurementType() {
+		return measurementType;
 	}
 
-	public Pair<Integer, String> getStock() {
-		return stock;
+	public LocalDate getBestBefore() {
+		return bestBefore;
 	}
 
-	public int getSoldDaily() {
-		return soldDaily;
+	public int getWareNumber() {
+		return wareNumber;
 	}
 
 	public int getDeliveryDays() {
 		return deliveryDays;
 	}
 
-	public LocalDate getBb() {
-		return bb;
+	public double getPrice() {
+		return price;
 	}
 
-	public void addTag(String s) {
-		tags.add(s);
+	public int getMinimumAmountForPurchase() {
+		return minimumAmountForPurchase;
 	}
 
-	public ArrayList<String> getTags() {
-		return tags;
+	public void addTags(String tags) { // Kan nemt ændres til at tage en String[] eller ArrayList<String>
+		tags = removeDuplicates(tags.split(","));
+		tags = tags.replaceAll("[\s+\\[\\]]",
+				"");  // Fjerner alle whitespace karakterer (mellemrum og lign) samt firkantede parenteser
+		this.tags = tags;
 	}
+
+	public void addTags(String[] tags) { // Kan nemt ændres til at tage en String[] eller ArrayList<String>
+		String s = removeDuplicates(tags);
+		this.tags = s.replaceAll("[\s+\\[\\]]", "");
+	}
+
+	private String removeDuplicates(String[] newTags) {
+		Set<String> t = new TreeSet<>(Arrays.asList(tags.split(",")));
+		t.addAll(Arrays.asList(newTags));
+		return t.toString();
+	}
+
 }
+

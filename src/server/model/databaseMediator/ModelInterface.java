@@ -1,14 +1,13 @@
 package server.model.databaseMediator;
 
-import shared.wares.NewProduct;
-import shared.wares.TestAlcohol;
+import shared.wares.Alcohol;
+import shared.wares.OLD_TestAlcohol;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface ModelInterface
 {
   HashMap<String, ArrayList> getAllProducts();
-  ArrayList<TestAlcohol> getAlcoholProducts();
+  ArrayList<Alcohol> getAlcoholProducts();
 }
