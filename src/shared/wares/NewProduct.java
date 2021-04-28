@@ -67,23 +67,6 @@ public abstract class NewProduct implements Serializable {
 	}
 }
 
-// Interface matching the newly suggested Product Class
-interface NewProductInterface {
-	int getWareNumber();
-
-	String getWareName();
-
-	String getMeasurementType();
-
-	LocalDate getBestBefore();
-
-	int getDeliveryDays();
-
-	double getPrice();
-
-	int getMinimumAmountForPurchase();
-}
-
 // Test version of the Alcohol Class
 class TestAlcohol extends NewProduct implements NewProductInterface {
 	private String originCountry;
