@@ -46,12 +46,10 @@ public class RMIServer implements RMIServerInterface {
 
 	public void getAllProducts(){
 		System.out.println("HASHMAP FROM DB: " +dataModel.getAllProducts());
-		//Skal vi have for hver at typerne: - Vi laver et nyt hashmap for at undgå at lave alt det gamle om -
-		// (sådan vi får antal i mappet) - Man kunne også ændre det på kient siden tho
 		for (Object i: dataModel.getAllProducts().get("Alcohol")) {
-			wares.put((NewProduct) i, dataModel.getAllProducts().get("Alcohol").size());
+			wares2.put((NewProduct) i, dataModel.getAllProducts().get("Alcohol").size());
 		}
-		System.out.println("ALL PROCUTS HASHMAP: " +wares);
+		System.out.println(wares2);
 	}
 
 	@Override
