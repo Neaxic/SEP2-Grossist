@@ -57,4 +57,7 @@ public class Model implements CustomerModelInterface {
 		client.getWares();
 	}
 
+	public Basket getMyBasket() {
+		return myBasket;
+	}
 }
