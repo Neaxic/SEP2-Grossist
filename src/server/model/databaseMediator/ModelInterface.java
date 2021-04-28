@@ -10,5 +10,5 @@ import java.util.HashMap;
 public interface ModelInterface
 {
   HashMap<String, ArrayList<Product>> getAllProducts();
-  ArrayList<Product> getAlcoholProducts(); //TEMP FIX
+  ArrayList<Product> getProduct(String schemaName, String productClass); //TEMP FIX
 }

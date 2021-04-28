@@ -1,15 +1,12 @@
-import javafx.util.Pair;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import shared.wares.Basket;
-import shared.wares.Drink;
-import shared.wares.Product;
 import shared.wares.Alcohol;
+import shared.wares.Basket;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.*;
 
 public class basketTest
 {

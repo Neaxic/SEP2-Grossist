@@ -1,5 +1,7 @@
 package shared.wares;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Alcohol extends Product implements ProductInterface {
@@ -9,9 +11,9 @@ public class Alcohol extends Product implements ProductInterface {
 
 	// TODO: Opdater med params når database opdateres, eller anden aftale er lavet
 	public Alcohol(Object[] params) {
-		super((String) params[1], (String) params[2], (LocalDate) params[6], (int) params[0], 10, (double) params[5], (int) params[3]);
+		super((String) params[1], (String) params[2], ((Date) params[6]).toLocalDate(), (Integer) params[0], 10, ((BigDecimal)params[5]).doubleValue(), (Integer) params[3]);
 		originCountry = (String) params[10];
-		percentage = (double) params[9];
+		percentage = ((BigDecimal)params[9]).doubleValue();
 		beverageType = (String) params[11];
 	}
 
