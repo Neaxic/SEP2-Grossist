@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -23,6 +24,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import shared.wares.Product;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class CustomerBrowserViewController implements CustomerViewController {
@@ -91,9 +93,9 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		//desc.wrappingWidthProperty().bind(SPane.widthProperty());
 		TextFlow textFlow = new TextFlow(desc);
 		//main.width
-		//Image image = new Image("../../../../shared/images/150placeholder.png");
+		Image image = new Image("shared/images/150placeholder.png");
 		ImageView iv2 = new ImageView();
-		//iv2.setImage(image);
+		iv2.setImage(image);
 		iv2.setFitWidth(150);
 		iv2.setPreserveRatio(true);
 		iv2.setSmooth(true);
@@ -127,6 +129,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		vBox.getChildren().add(btnHBox);
 
 		main.getChildren().add(iv2);
+		vBox.setPadding(new Insets(0, 0, 0, 10));
 		main.getChildren().add(vBox);
 		//main.setPrefWidth(150);
 
