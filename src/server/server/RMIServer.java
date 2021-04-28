@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 public class RMIServer implements RMIServerInterface {
 	private HashMap<Integer, CallbackClient> callbackClients = new HashMap<>();
-	private HashMap<NewProduct, Integer> wares = new HashMap<>();
+	private HashMap<Product, Integer> wares = new HashMap<>();
 	private HashMap<NewProduct, Integer> wares2 = new HashMap<>();
 
 	// Dummy Data:
@@ -41,6 +41,17 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	private void getAlcohol(){
+		for (NewProduct i : dataModel.getAlcohol())
+		{
+			//wares.put(i, dataModel.getAlcohol().size());
+		}
+		System.out.println("TEST ALCO: " +dataModel.getAlcohol());
+	}
+	private void getAllProdcts(){
+		for (NewProduct i : dataModel.getAlcohol())
+		{
+			//wares.put(i, dataModel.getAlcohol().size());
+		}
 		System.out.println("TEST ALCO: " +dataModel.getAlcohol());
 	}
 
