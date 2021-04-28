@@ -28,4 +28,8 @@ public class Basket {
 	public int getAmount(NewProduct product) {
 		return basket.get(product);
 	}
+
+	public HashMap<NewProduct, Integer> getBasket() {
+		return basket;
+	}
 }
