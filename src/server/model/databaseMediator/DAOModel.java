@@ -41,21 +41,16 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 			PreparedStatement statement = connection.prepareStatement("select * from " + schemaName);
 			ResultSet result = statement.executeQuery();
 			// Constructor for dynamic creation of different Product Classes
-			Constructor<?> c = null;
+			Constructor<?> c;
 			ArrayList<Object> params;
 			int columnCount = result.getMetaData().getColumnCount();
 			while (result.next()) {
 				params = new ArrayList<>();
-				System.out.println("Row #" + result.getRow());    // FIXME: REMOVE PRINT
 				for (int i = 0; i < columnCount; i++) {
-					Object paramVar = result.getObject(i + 1);
-					System.out.println("Param #" + i + ": " + paramVar);    // FIXME: REMOVE PRINT
-					params.add(paramVar);
+					params.add(result.getObject(i + 1));
 				}
 				c = Class.forName(productClass).getDeclaredConstructor(Object[].class);
-				Product p = (Product) c.newInstance((Object) params.toArray());
-				System.out.println("Endelige vare: " + p.getWareName());    // FIXME: REMOVE PRINT
-				list.add(p);
+				list.add((Product) c.newInstance((Object) params.toArray()));
 			}
 		} catch (SQLException | ClassNotFoundException throwables) {
 			System.out.println("SQL or Database error");
