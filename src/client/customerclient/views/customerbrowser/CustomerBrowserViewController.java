@@ -64,8 +64,8 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	public void loadSpecificCategory(MouseEvent mouseEvent) {
 		Node selected = mouseEvent.getPickResult().getIntersectedNode();
 		if (selected instanceof Text) {
-			String category = ((Text) selected).getText();
-			System.out.println(category); // Should return text as a string
+			String category = ((Text) selected).getText().substring(2);
+			System.out.println(category);
 			populate(category);
 		}
 	}
