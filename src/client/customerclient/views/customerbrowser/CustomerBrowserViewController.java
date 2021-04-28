@@ -18,14 +18,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.*;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import shared.wares.Product;
 
 import java.awt.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class CustomerBrowserViewController implements CustomerViewController {
 	// Category Labels
@@ -94,6 +95,10 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		TextFlow textFlow = new TextFlow(desc);
 		//main.width
 		Image image = new Image("shared/images/150placeholder.png");
+		Path path = Paths.get("/shared/images/" + product.getClass().toString().substring(19) +".jpg");
+		if(Files.exists(path.getRoot())){
+			image = new Image("shared/images/" + product.getClass().toString().substring(19) +".jpg");
+		}
 		ImageView iv2 = new ImageView();
 		iv2.setImage(image);
 		iv2.setFitWidth(150);
@@ -101,7 +106,8 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		iv2.setSmooth(true);
 		iv2.setCache(true);
 
-		Text price = new Text("" + product.getPrice());
+		Text price = new Text("" + product.getPrice() + "DKK ,-");
+		price.setTextAlignment(TextAlignment.RIGHT);
 		TextField amount = new TextField();
 		Button addButton = new Button("Tilføj til Kurv");
 		addButton.setPrefSize(100, 50);

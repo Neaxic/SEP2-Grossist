@@ -46,7 +46,7 @@
         </VBox>
         <HBox prefHeight="625.0" prefWidth="900.0">
             <children>
-                <VBox prefHeight="600.0" prefWidth="230.0" style="-fx-border-color: gray; -fx-region-border: right; -fx-background-color: #F0F7F4;">
+                <VBox prefHeight="600.0" prefWidth="230.0" style="-fx-border-color: gray; -fx-background-color: #F0F7F4;">
                     <children>
                         <HBox prefHeight="32.0" prefWidth="221.0">
                             <children>
