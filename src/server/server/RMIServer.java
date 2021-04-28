@@ -20,8 +20,8 @@ import java.util.HashMap;
 
 public class RMIServer implements RMIServerInterface {
 	private HashMap<Integer, CallbackClient> callbackClients = new HashMap<>();
+	//private HashMap<Product, Integer> wares = new HashMap<>();
 	private HashMap<NewProduct, Integer> wares = new HashMap<>();
-	private HashMap<NewProduct, Integer> wares2 = new HashMap<>();
 
 	// Dummy Data:
 	private DataModelImpl dataModel = new DataModelImpl();
@@ -31,7 +31,7 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	private void createDummyData() {
-		wares.put(new Alcohol("Soplica Wisniowa", "Vodka", "30%", "Poland", "Soplica", new Date(), new Date(), 20.0, 100, 10), 1000);
+//		wares.put(new Alcohol("Soplica Wisniowa", "Vodka", "30%", "Poland", "Soplica", new Date(), new Date(), 20.0, 100, 10), 1000);
 //		wares.put(new Colonial("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
 //		wares.put(new CooledAndDairy("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
 //		wares.put(new Drink("", "", "", new Date(), new Date(), 20, 209, 20), 1000);
@@ -46,10 +46,12 @@ public class RMIServer implements RMIServerInterface {
 
 	public void getAllProducts(){
 		System.out.println("HASHMAP FROM DB: " +dataModel.getAllProducts());
+		//Skal vi have for hver at typerne: - Vi laver et nyt hashmap for at undgå at lave alt det gamle om -
+		// (sådan vi får antal i mappet) - Man kunne også ændre det på kient siden tho
 		for (Object i: dataModel.getAllProducts().get("Alcohol")) {
-			wares2.put((NewProduct) i, dataModel.getAllProducts().get("Alcohol").size());
+			wares.put((NewProduct) i, dataModel.getAllProducts().get("Alcohol").size());
 		}
-		System.out.println(wares2);
+		System.out.println("ALL PROCUTS HASHMAP: " +wares);
 	}
 
 	@Override

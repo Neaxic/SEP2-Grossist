@@ -4,6 +4,7 @@ import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.network.Subject;
 import shared.util.Util;
+import shared.wares.NewProduct;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
@@ -61,7 +62,7 @@ public class RMIClient implements Client, CallbackClient, Subject {
 	}
 
 	@Override
-	public void update(HashMap<Product, Integer> list) { // Model.java is a listener
+	public void update(HashMap<NewProduct, Integer> list) { // Model.java is a listener
 		support.firePropertyChange("UpdatedWareList", null, list);
 	}
 
