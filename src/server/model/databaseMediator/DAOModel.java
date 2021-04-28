@@ -1,15 +1,14 @@
 package server.model.databaseMediator;
 
 import shared.wares.*;
-import java.sql.Date;
+
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DAOModel extends BaseDAO implements ModelInterface
 {
-  ArrayList<NewProduct> salesProducts;
+  ArrayList<Product> salesProducts;
   HashMap<String, ArrayList> map = new HashMap();
 
   public DAOModel() throws SQLException
@@ -24,9 +23,9 @@ public class DAOModel extends BaseDAO implements ModelInterface
       return map;
   }
 
-  public ArrayList<TestAlcohol> getAlcoholProducts()
+  public ArrayList<Alcohol> getAlcoholProducts()
   {
-   ArrayList<TestAlcohol> alcoholList = new ArrayList();
+   ArrayList<Alcohol> alcoholList = new ArrayList();
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
@@ -35,7 +34,7 @@ public class DAOModel extends BaseDAO implements ModelInterface
       ResultSet result = statement.executeQuery();
       while (result.next())
       {
-        alcoholList.add(new TestAlcohol(result.getString("productName"), result.getString("measurement"),
+        alcoholList.add(new Alcohol(result.getString("productName"), result.getString("measurement"),
             result.getDate("bbDate").toLocalDate(), result.getInt("productId"),0, result.getDouble("salesPrice"),
             result.getInt("minPurchase"), result.getString("productionCountry"), result.getDouble("alcoholPercentage"), result.getString("type")));
       }
@@ -47,6 +46,6 @@ public class DAOModel extends BaseDAO implements ModelInterface
       throwables.printStackTrace();
     }
     System.out.println("Could not connect :( DAOMODEL");
-    return  alcoholList;
+    return alcoholList;
   }
 }

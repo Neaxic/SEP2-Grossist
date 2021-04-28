@@ -5,7 +5,7 @@ import server.model.DataModelImpl;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.util.Util;
-import shared.wares.NewProduct;
+import shared.wares.OLD_Product;
 import shared.wares.Product;
 
 import java.rmi.AlreadyBoundException;
@@ -14,14 +14,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 public class RMIServer implements RMIServerInterface {
 	private HashMap<Integer, CallbackClient> callbackClients = new HashMap<>();
-	private HashMap<Product, Integer> wares = new HashMap<>();
-	private HashMap<NewProduct, Integer> wares2 = new HashMap<>();
+	private HashMap<OLD_Product, Integer> wares = new HashMap<>();
+	private HashMap<Product, Integer> wares2 = new HashMap<>();
 
 	// Dummy Data:
 	private DataModelImpl dataModel = new DataModelImpl();
@@ -41,14 +40,14 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	private void getAlcohol(){
-		for (NewProduct i : dataModel.getAlcohol())
+		for (Product i : dataModel.getAlcohol())
 		{
 			//wares.put(i, dataModel.getAlcohol().size());
 		}
 		System.out.println("TEST ALCO: " +dataModel.getAlcohol());
 	}
 	private void getAllProdcts(){
-		for (NewProduct i : dataModel.getAlcohol())
+		for (Product i : dataModel.getAlcohol())
 		{
 			//wares.put(i, dataModel.getAlcohol().size());
 		}
@@ -58,7 +57,7 @@ public class RMIServer implements RMIServerInterface {
 	public void getAllProducts(){
 		System.out.println("HASHMAP FROM DB: " +dataModel.getAllProducts());
 		for (Object i: dataModel.getAllProducts().get("Alcohol")) {
-			wares2.put((NewProduct) i, dataModel.getAllProducts().get("Alcohol").size());
+			wares2.put((Product) i, dataModel.getAllProducts().get("Alcohol").size());
 		}
 		System.out.println(wares2);
 	}
