@@ -21,7 +21,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import shared.wares.OLD_Product;
 import shared.wares.Product;
 
 import java.io.IOException;
@@ -55,7 +54,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	}
 
 	public void loadAllProducts() {
-		viewModel.loadAllProducts();
+		viewModel.loadAllProductsToModel();
 		// TODO: Load All Products from the Database
 	}
 

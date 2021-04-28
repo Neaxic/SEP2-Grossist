@@ -9,12 +9,12 @@ import java.util.HashMap;
 public class DAOModel extends BaseDAO implements ModelInterface
 {
   ArrayList<Product> salesProducts;
-  HashMap<String, ArrayList<Product>> map = new HashMap();
+  HashMap<String, ArrayList<Product>> map = new HashMap<>();
 
   public DAOModel() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
-    salesProducts = new ArrayList();
+    salesProducts = new ArrayList<>();
   }
 
   public HashMap<String, ArrayList<Product>> getAllProducts()
@@ -23,9 +23,9 @@ public class DAOModel extends BaseDAO implements ModelInterface
       return map;
   }
 
-  public ArrayList<Alcohol> getAlcoholProducts()
+  public ArrayList<Product> getAlcoholProducts()
   {
-   ArrayList<Alcohol> alcoholList = new ArrayList();
+   ArrayList<Product> alcoholList = new ArrayList<>();
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(

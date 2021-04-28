@@ -5,7 +5,6 @@ import client.customerclient.model.Model;
 import client.customerclient.views.CustomerViewModel;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import shared.wares.OLD_Product;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
@@ -25,9 +24,9 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 		model.addListener(this);
 	}
 
-	public void loadAllProducts() {
+	public void loadAllProductsToModel() {
 		// Load products from Database
-		model.getAllWares();
+		model.updateWares();
 	}
 
 	public void addToBasket(String item, int amount) {
@@ -56,11 +55,19 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 		return activeItemList;
 	}
 
+	public void getAllWares()
+	{
+		activeItemList.set(FXCollections.observableList(model.getAllWares()));
+	}
+
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		HashMap<Product, Integer> waresFromServer = (HashMap<Product, Integer>) evt.getNewValue();
-		List<Product> unitWares = new ArrayList<>(waresFromServer.keySet());
-		activeItemList.set(FXCollections.observableList(unitWares));
+		if (evt.getPropertyName().equals("waresUpdated")) getAllWares();
+
+
+//		HashMap<String, ArrayList<Product>> waresFromServer = (HashMap<String, ArrayList<Product>>) evt.getNewValue();
+//		List<Product> unitWares = new ArrayList<>(waresFromServer.keySet());
+//		activeItemList.set(FXCollections.observableList(unitWares));
 //		activeItemList.set(FXCollections.observableList((List<Product>) evt.getNewValue()));
 	}
 }

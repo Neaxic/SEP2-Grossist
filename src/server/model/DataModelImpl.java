@@ -4,6 +4,7 @@ import server.model.databaseMediator.BaseDAO;
 import server.model.databaseMediator.DAOModel;
 import server.model.databaseMediator.ModelInterface;
 import shared.wares.Alcohol;
+import shared.wares.Product;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,11 +18,11 @@ public class DataModelImpl {
 	public DataModelImpl() throws SQLException {
 	}
 
-	public HashMap<String, ArrayList> getAllProducts() {
+	public HashMap<String, ArrayList<Product>> getAllProducts() {
 	  return model.getAllProducts();
 	}
 
-	public ArrayList<Alcohol> getAlcohol() {
+	public ArrayList<Product> getAlcohol() {
 	  return model.getAlcoholProducts();
 	}
 }

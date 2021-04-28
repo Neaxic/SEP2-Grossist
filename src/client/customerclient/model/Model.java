@@ -9,13 +9,14 @@ import shared.wares.OLD_Product;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Model implements CustomerModelInterface {
 	private PropertyChangeSupport support;
 	RMIClient client;
 	Basket myBasket; // Måske fjerne klassen da metodekaldene ikke ændres
-	HashMap<Product, Integer> wareList; // Lave dette til en klasse hvis vi beholder Basket?
+	HashMap<String, ArrayList<Product>> wareList; // Lave dette til en klasse hvis vi beholder Basket?
 
 	public Model(Client client) {
 		support = new PropertyChangeSupport(this);
@@ -49,15 +50,32 @@ public class Model implements CustomerModelInterface {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) { // CustomerBrowserViewModel is a listener
-		wareList = (HashMap<Product, Integer>) evt.getNewValue();
-		support.firePropertyChange(evt);
+		wareList = (HashMap<String, ArrayList<Product>>) evt.getNewValue();
+		support.firePropertyChange(new PropertyChangeEvent(this, "waresUpdated", null, null));
 	}
 
-	public void getAllWares() {
+	public void updateWares() {
 		client.getWares();
 	}
 
 	public Basket getMyBasket() {
 		return myBasket;
+	}
+
+	public ArrayList<Product> getAllWares()
+	{
+		ArrayList<Product> returnList = new ArrayList<>();
+
+		for (ArrayList<Product> list : wareList.values())
+		{
+			returnList.addAll(list);
+		}
+
+		return returnList;
+	}
+
+	public ArrayList<Product> getCategory(String category)
+	{
+		return wareList.get(category);
 	}
 }
