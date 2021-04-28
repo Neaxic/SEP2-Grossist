@@ -5,10 +5,12 @@ import java.sql.Date;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DAOModel extends BaseDAO implements ModelInterface
 {
   ArrayList<NewProduct> salesProducts;
+  HashMap<String, ArrayList> map = new HashMap();
 
   public DAOModel() throws SQLException
   {
@@ -16,12 +18,10 @@ public class DAOModel extends BaseDAO implements ModelInterface
     salesProducts = new ArrayList();
   }
 
-  public ArrayList<ArrayList> getAllProducts()
+  public HashMap<String, ArrayList> getAllProducts()
   {
-    //ARRAYLISTE MED ARRAYLISTER MED SPECIFIKKE PRODUKTER I
-     ArrayList<ArrayList> productList = new ArrayList();
-     productList.add(getAlcoholProducts());
-      return productList;
+      map.put("Alcohol", getAlcoholProducts());
+      return map;
   }
 
   public ArrayList<TestAlcohol> getAlcoholProducts()

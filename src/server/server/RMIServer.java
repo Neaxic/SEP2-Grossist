@@ -41,6 +41,10 @@ public class RMIServer implements RMIServerInterface {
 		System.out.println("TEST ALCO: " +dataModel.getAlcohol());
 	}
 
+	public void getAllProducts(){
+		System.out.println("HASHMAP: " +dataModel.getAllProducts());
+	}
+
 	@Override
 	public void startServer() throws RemoteException, AlreadyBoundException {
 		System.out.println("Server starting...");
@@ -49,7 +53,7 @@ public class RMIServer implements RMIServerInterface {
 		UnicastRemoteObject.exportObject(this, 0);
 		createDummyData();
 		System.out.println("Connectiong to database... (This might take a while)");
-		getAlcohol();
+		getAllProducts();
 		System.out.println("Server started");
 	}
 

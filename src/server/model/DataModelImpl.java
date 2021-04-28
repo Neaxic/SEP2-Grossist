@@ -7,6 +7,7 @@ import shared.wares.TestAlcohol;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DataModelImpl
 {
@@ -16,6 +17,10 @@ public class DataModelImpl
 
   public DataModelImpl() throws SQLException
   {
+  }
+
+  public HashMap<String, ArrayList> getAllProducts(){
+    return model.getAllProducts();
   }
 
   public ArrayList<TestAlcohol> getAlcohol(){
