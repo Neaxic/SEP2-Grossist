@@ -11,9 +11,8 @@ public class GrosserApp extends Application
   @Override public void start(Stage stage) throws Exception
   {
     // TODO: Mangler pil mellem modelFactory og clientFactory på Astah
-    ProxyViewHandler viewHandler = new ProxyViewHandler(stage);
     Client client = ClientFactory.getInstance().getClient();
     client.start();
-    viewHandler.login();
+    ProxyViewHandler proxy = new ProxyViewHandler(stage);
   }
 }
