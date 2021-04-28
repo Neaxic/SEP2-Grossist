@@ -27,10 +27,6 @@ public class RMIServer implements RMIServerInterface {
 	{
 	}
 
-	private void getAlcohol(){
-		System.out.println("TEST ALCO: " +dataModel.getAlcohol());
-	}
-
 	public void getAllProducts(){
  		wares = dataModel.getAllProducts();
 	}

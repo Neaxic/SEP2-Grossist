@@ -21,8 +21,4 @@ public class DataModelImpl {
 	public HashMap<String, ArrayList<Product>> getAllProducts() {
 	  return model.getAllProducts();
 	}
-
-	public ArrayList<Product> getAlcohol() {
-	  return model.getAlcoholProducts();
-	}
 }
