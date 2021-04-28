@@ -5,6 +5,7 @@ import server.model.DataModelImpl;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.util.Util;
+import shared.wares.NewProduct;
 import shared.wares.Product;
 
 import java.rmi.AlreadyBoundException;
@@ -13,14 +14,16 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 public class RMIServer implements RMIServerInterface {
 	private HashMap<Integer, CallbackClient> callbackClients = new HashMap<>();
+	private HashMap<NewProduct, Integer> wares = new HashMap<>();
+	private HashMap<NewProduct, Integer> wares2 = new HashMap<>();
 
 	// Dummy Data:
-	private HashMap<Product, Integer> wares = new HashMap<>();
 	private DataModelImpl dataModel = new DataModelImpl();
 
 	public RMIServer() throws SQLException
@@ -42,7 +45,11 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	public void getAllProducts(){
-		System.out.println("HASHMAP: " +dataModel.getAllProducts());
+		System.out.println("HASHMAP FROM DB: " +dataModel.getAllProducts());
+		for (Object i: dataModel.getAllProducts().get("Alcohol")) {
+			wares2.put((NewProduct) i, dataModel.getAllProducts().get("Alcohol").size());
+		}
+		System.out.println(wares2);
 	}
 
 	@Override
