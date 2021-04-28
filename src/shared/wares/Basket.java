@@ -3,13 +3,13 @@ package shared.wares;
 import java.util.HashMap;
 
 public class Basket {
-	private HashMap<NewProduct, Integer> basket;
+	private HashMap<Product, Integer> basket;
 
 	public Basket() {
 		basket = new HashMap<>();
 	}
 
-	public void addProduct(NewProduct product, int amount) {
+	public void addProduct(Product product, int amount) {
 		basket.put(product, amount);
 	}
 
@@ -17,19 +17,19 @@ public class Basket {
 	 * Removes the Product from the HashMap if possible
 	 * @param product This is the desired product to be removed
 	 */
-	public void removeProduct(NewProduct product) {
+	public void removeProduct(Product product) {
 		basket.remove(product);
 	}
 
-	public void changeAmount(NewProduct product, int newAmount) {
+	public void changeAmount(Product product, int newAmount) {
 		basket.replace(product, newAmount);
 	}
 
-	public int getAmount(NewProduct product) {
+	public int getAmount(Product product) {
 		return basket.get(product);
 	}
 
-	public HashMap<NewProduct, Integer> getBasket() {
+	public HashMap<Product, Integer> getBasket() {
 		return basket;
 	}
 }

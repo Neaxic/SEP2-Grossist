@@ -1,46 +1,31 @@
 package shared.wares;
 
-import javafx.util.Pair;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Alcohol extends Product implements ProductInterface {
+    private String originCountry;
+    private double percentage;     // Kommer bare til at være et tallet
+    private String beverageType;   // Øl, Vin, Cider, småbarns spiritus(små sure), Spiritus (spiritus er alt over 16.4%)
 
 
-    public Alcohol(Pair<Integer, String> stock, int soldDaily, int deliveryDays, Pair<Double, String> price,
-                   LocalDate bb) {
-        super("", stock, soldDaily, deliveryDays, price, bb);
-        super.addTag("Øko");
-        super.addTag("Sukkerfri");
-        super.addTag("Alkoholfri");
+    public Alcohol(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, int minimumAmountForPurchase, String originCountry, double percentage, String beverageType) {
+        super(wareName, measurementType, bestBefore, wareNumber, deliveryDays, price, minimumAmountForPurchase);
+        this.originCountry = originCountry;
+        this.percentage = percentage;
+        this.beverageType = beverageType;
+        tags = "";
     }
 
-    @Override
-    public Pair<Integer, String> getStock() {
-        return super.getStock();
+    public String getOriginCountry() {
+        return originCountry;
     }
 
-    @Override
-    public int getSoldDaily() {
-        return super.getSoldDaily();
+    public double getPercentage() {
+        return percentage;
     }
 
-    @Override
-    public int getDeliveryDays() {
-        return super.getDeliveryDays();
+    public String getBeverageType() {
+        return beverageType;
     }
 
-    @Override
-    public Pair<Double, String> getPrice() {
-        return super.getPrice();
-    }
-
-    @Override
-    public LocalDate getBb() { return super.getBb(); }
-
-    @Override
-    public ArrayList<String> getTags() {
-        return super.getTags();
-    }
 }

@@ -1,13 +1,21 @@
 package shared.wares;
 
-import javafx.util.Pair;
-
 import java.time.LocalDate;
 
+// Interface matching the newly suggested Product Class
 public interface ProductInterface
 {
-  Pair<Integer, String> getStock();
+  int getWareNumber();
+
+  String getWareName();
+
+  String getMeasurementType();
+
+  LocalDate getBestBefore();
+
   int getDeliveryDays();
-  int getSoldDaily();
-  Pair<Double, String> getPrice();
+
+  double getPrice();
+
+  int getMinimumAmountForPurchase();
 }

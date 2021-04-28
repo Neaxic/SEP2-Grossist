@@ -6,17 +6,17 @@ import java.util.Set;
 import java.util.TreeSet;
 
 // Test version of the Alcohol Class
-public class TestAlcohol extends NewProduct implements NewProductInterface
+public class OLD_TestAlcohol extends Product implements ProductInterface
 {
   private String originCountry;
   private double percentage;     // Kommer bare til at være et tallet
   private String beverageType;   // Øl, Vin, Cider, småbarns spiritus(små sure), Spiritus (spiritus er alt over 16.4%)
   private String tags;           // Flyttes til product
 
-  public TestAlcohol(String name, String measurementType, LocalDate bestBefore,
-      int wareNumber, int deliveryDays, double price,
-      int minimumAmountForPurchase, String originCountry, double percentage,
-      String beverageType)
+  public OLD_TestAlcohol(String name, String measurementType, LocalDate bestBefore,
+                         int wareNumber, int deliveryDays, double price,
+                         int minimumAmountForPurchase, String originCountry, double percentage,
+                         String beverageType)
   {
     super(name, measurementType, bestBefore, wareNumber, deliveryDays, price,
         minimumAmountForPurchase);
