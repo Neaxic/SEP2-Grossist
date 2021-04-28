@@ -1,5 +1,6 @@
 package shared.network;
 
+import shared.wares.OLD_Product;
 import shared.wares.Product;
 
 import java.rmi.Remote;

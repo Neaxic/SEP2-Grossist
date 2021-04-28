@@ -21,6 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import shared.wares.OLD_Product;
 import shared.wares.Product;
 
 import java.io.IOException;
@@ -85,7 +86,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		HBox main = new HBox();
 		main.styleProperty().setValue("-fx-border-color: lightgray;");
 		// Nodes regarding the Item
-		Text title = new Text(product.getName());
+		Text title = new Text(product.getWareName());
 		main.setMaxWidth(615);
 		Text desc = new Text("\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
 		//desc.wrappingWidthProperty().bind(SPane.widthProperty());

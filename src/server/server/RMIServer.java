@@ -1,12 +1,11 @@
 package server.server;
 
-import TEMP.Alcohol;
 import server.model.DataModelImpl;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.util.Util;
 import shared.wares.OLD_Product;
-import shared.wares.Product;
+import shared.wares.*;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -14,6 +13,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -30,13 +30,13 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	private void createDummyData() {
-		wares.put(new Alcohol("Soplica Wisniowa", "Vodka", "30%", "Poland", "Soplica", new Date(), new Date(), 20.0, 100, 10), 1000);
-//		wares.put(new Colonial("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
-//		wares.put(new CooledAndDairy("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
-//		wares.put(new Drink("", "", "", new Date(), new Date(), 20, 209, 20), 1000);
-//		wares.put(new Frozen("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
-//		wares.put(new FruitAndVegetable("", "", "", new Date(), "banana", 20, 20, 20), 1000);
-//		wares.put(new MeatAndFish("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
+		wares2.put(new Alcohol("Soplica Wisniowa", "L", LocalDate.now(), 123, 20, 70, 100, "Poland", 30, "Vodka"), 1000);
+//		wares2.put(new Colonial("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
+//		wares2.put(new CooledAndDairy("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
+//		wares2.put(new Drink("", "", "", new Date(), new Date(), 20, 209, 20), 1000);
+//		wares2.put(new Frozen("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
+//		wares2.put(new FruitAndVegetable("", "", "", new Date(), "banana", 20, 20, 20), 1000);
+//		wares2.put(new MeatAndFish("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
 	}
 
 	private void getAlcohol(){
@@ -69,7 +69,7 @@ public class RMIServer implements RMIServerInterface {
 		registry.bind(Util.SERVERNAME, this);
 		UnicastRemoteObject.exportObject(this, 0);
 		createDummyData();
-		System.out.println("Connectiong to database... (This might take a while)");
+		System.out.println("Connecting to database... (This might take a while)");
 		getAllProducts();
 		System.out.println("Server started");
 	}
@@ -91,6 +91,6 @@ public class RMIServer implements RMIServerInterface {
 
 	@Override
 	public void getWares(int id) throws RemoteException { // TODO: Can overload this, creating a getWares(int id, String category)
-		callbackClients.get(id).update(wares);
+		callbackClients.get(id).update(wares2);
 	}
 }

@@ -4,6 +4,7 @@ import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.network.Subject;
 import shared.util.Util;
+import shared.wares.OLD_Product;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;

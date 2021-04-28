@@ -5,6 +5,7 @@ import client.customerclient.model.Model;
 import client.customerclient.views.CustomerViewModel;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import shared.wares.OLD_Product;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
@@ -39,7 +40,7 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 
 			// TODO: Tjek om søgning virker
 			for (Product product : activeItemList) {
-				if (product.getName().equals(item)) {
+				if (product.getWareName().equals(item)) {
 					model.addToBasket(null, amount); // Product typer er forskellige
 //					model.addToBasket(product, amount);
 				}
