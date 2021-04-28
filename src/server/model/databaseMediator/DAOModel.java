@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class DAOModel extends BaseDAO implements ModelInterface
 {
   ArrayList<Product> salesProducts;
-  HashMap<String, ArrayList> map = new HashMap();
+  HashMap<String, ArrayList<Product>> map = new HashMap();
 
   public DAOModel() throws SQLException
   {
@@ -17,7 +17,7 @@ public class DAOModel extends BaseDAO implements ModelInterface
     salesProducts = new ArrayList();
   }
 
-  public HashMap<String, ArrayList> getAllProducts()
+  public HashMap<String, ArrayList<Product>> getAllProducts()
   {
       map.put("Alcohol", getAlcoholProducts());
       return map;
