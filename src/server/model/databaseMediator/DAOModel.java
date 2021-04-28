@@ -21,6 +21,10 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		map.put("Alcohol", getProduct("alcoholicBeverage", Alcohol.class.getName()));
 		map.put("Drink", getProduct("nonAlcoholicBeverage", Drink.class.getName()));
 		map.put("MeatAndSeafood", getProduct("meatAndSeafood", MeatAndFish.class.getName()));
+		map.put("Colonial", getProduct("colonial", Colonial.class.getName()));
+		map.put("CooledAndDairy", getProduct("dairyandeggs", CooledAndDairy.class.getName()));
+		map.put("Frozen", getProduct("frozenfood", Frozen.class.getName()));
+		map.put("FruitsAndVegetable", getProduct("fruitsandvegetables", FruitsAndVegetable.class.getName()));
 		return map;
 	}
 

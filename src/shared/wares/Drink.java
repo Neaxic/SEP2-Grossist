@@ -1,6 +1,5 @@
 package shared.wares;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -9,7 +8,7 @@ import java.time.LocalDate;
 public class Drink extends Product implements ProductInterface {
 	private String beverageType;
 
-	public Drink(Object @NotNull [] params) {
+	public Drink(Object [] params) {
 		super((String) params[1], (String) params[2], ((Date) params[6]).toLocalDate(), (Integer) params[0], 10, ((BigDecimal) params[5]).doubleValue(), (Integer) params[3]);
 		beverageType = (String) params[9];
 	}

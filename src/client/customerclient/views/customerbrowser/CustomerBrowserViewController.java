@@ -94,10 +94,11 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		//desc.wrappingWidthProperty().bind(SPane.widthProperty());
 		TextFlow textFlow = new TextFlow(desc);
 		//main.width
-		Image image = new Image("shared/images/150placeholder.png");
-		Path path = Paths.get("/shared/images/" + product.getClass().toString().substring(19) +".jpg");
-		if(Files.exists(path.getRoot())){
+		Image image;
+		try{
 			image = new Image("shared/images/" + product.getClass().toString().substring(19) +".jpg");
+		} catch (RuntimeException e){
+			image = new Image("shared/images/150placeholder.png");
 		}
 		ImageView iv2 = new ImageView();
 		iv2.setImage(image);
