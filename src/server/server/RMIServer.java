@@ -1,6 +1,7 @@
 package server.server;
 
 import TEMP.Alcohol;
+import server.model.DataModelImpl;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.util.Util;
@@ -20,6 +21,11 @@ public class RMIServer implements RMIServerInterface {
 
 	// Dummy Data:
 	private HashMap<Product, Integer> wares = new HashMap<>();
+	private DataModelImpl dataModel = new DataModelImpl();
+
+	public RMIServer() throws SQLException
+	{
+	}
 
 	private void createDummyData() {
 		wares.put(new Alcohol("Soplica Wisniowa", "Vodka", "30%", "Poland", "Soplica", new Date(), new Date(), 20.0, 100, 10), 1000);
@@ -31,6 +37,9 @@ public class RMIServer implements RMIServerInterface {
 //		wares.put(new MeatAndFish("", "", "", new Date(), new Date(), 20, 20, 20), 1000);
 	}
 
+	private void getAlcohol(){
+		System.out.println("TEST ALCO: " +dataModel.getAlcohol());
+	}
 
 	@Override
 	public void startServer() throws RemoteException, AlreadyBoundException {
@@ -39,6 +48,8 @@ public class RMIServer implements RMIServerInterface {
 		registry.bind(Util.SERVERNAME, this);
 		UnicastRemoteObject.exportObject(this, 0);
 		createDummyData();
+		System.out.println("Connectiong to database... (This might take a while)");
+		getAlcohol();
 		System.out.println("Server started");
 	}
 

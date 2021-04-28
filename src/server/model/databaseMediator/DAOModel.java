@@ -16,7 +16,7 @@ public class DAOModel extends BaseDAO implements ModelInterface
     salesProducts = new ArrayList();
   }
 
-  public ArrayList<NewProduct> getAllProducts()
+  public ArrayList<ArrayList> getAllProducts()
   {
     //ARRAYLISTE MED ARRAYLISTER MED SPECIFIKKE PRODUKTER I
      ArrayList<ArrayList> productList = new ArrayList();
