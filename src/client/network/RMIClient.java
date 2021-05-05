@@ -4,6 +4,7 @@ import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.network.Subject;
 import shared.util.Util;
+import shared.wares.Basket;
 import shared.wares.OLD_Product;
 import shared.wares.Product;
 
@@ -58,6 +59,15 @@ public class RMIClient implements Client, CallbackClient, Subject {
 			server.getWares(clientID);
 		} catch (RemoteException remoteException) {
 			System.out.println("RMIClient [getWares()] > \t");
+			remoteException.printStackTrace();
+		}
+	}
+
+	public void sendOrder(int cvr, Basket basket, double sum){
+		try{
+			server.sendOrder(cvr, basket, sum);
+		} catch (RemoteException remoteException){
+			System.out.println("RMICLIENT [sendOrder()] > \t");
 			remoteException.printStackTrace();
 		}
 	}

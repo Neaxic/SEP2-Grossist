@@ -61,7 +61,7 @@ public class BasketViewController implements CustomerViewController {
     }
 
     public void SendOrder(){
-
+		viewModel.sendOrder();
 	}
 
     // SCENE MANAGING

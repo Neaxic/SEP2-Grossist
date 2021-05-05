@@ -7,6 +7,7 @@ import shared.wares.Alcohol;
 import shared.wares.Product;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,5 +21,9 @@ public class DataModelImpl {
 
 	public HashMap<String, ArrayList<Product>> getAllProducts() {
 	  return model.getAllProducts();
+	}
+
+	public void createOrder(int cvr, double sum, LocalDate date){
+		model.createOrder(cvr,sum,date);
 	}
 }

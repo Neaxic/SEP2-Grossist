@@ -21,6 +21,14 @@ public class BasketViewModel implements CustomerViewModel
 	public void removeFromBasket(ObservableList<Object> list) {
 	}
 
+	public void sendOrder(){
+		double sum = 0;
+		for(Product i : model.getMyBasket().getBasket().keySet()){
+				sum += i.getPrice() * model.getMyBasket().getBasket().get(i);
+		}
+		model.sendOrder(model.getMyBasket(), sum);
+	}
+
 	public HashMap<Product, Integer> loadAllProducts(){
 		return model.getMyBasket().getBasket();
 	}

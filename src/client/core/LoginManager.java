@@ -24,6 +24,9 @@ public class LoginManager
     this.PVH = PVH;
   }
 
+  //For at vi kan få CVR til vores order sending
+  public static int cvr = 0;
+
   public void login()
   {
     Dialog<Pair<Integer, String>> loginDialog = new Dialog<>();
@@ -96,7 +99,6 @@ public class LoginManager
 
   private void checkLogin(Optional<Pair<Integer, String>> loginInfo)
   {
-    int cvr = 0;
     String pw = "";
     ViewHandler viewHandler;
 

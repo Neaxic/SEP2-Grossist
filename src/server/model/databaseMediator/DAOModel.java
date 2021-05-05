@@ -5,6 +5,7 @@ import shared.wares.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -60,6 +61,22 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	public void createOrder(int cvr, double sum, LocalDate date){
+		try(Connection connection = getConnection()){
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO order_(cvr, orderNo, orderDate, totalPrice) VALUES(?,default,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			statement.setInt(1, cvr);
+			statement.setDate(2, Date.valueOf(date));
+			statement.setDouble(3, sum);
+
+			statement.executeUpdate();
+			ResultSet keys = statement.getGeneratedKeys();
+			keys.next();
+		} catch (SQLException throwables) {
+			System.out.println("SQL or Database error");
+			throwables.printStackTrace();
+		}
 	}
 
 //	public ArrayList<Product> getAlcoholProducts() {

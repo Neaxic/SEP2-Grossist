@@ -1,5 +1,7 @@
 package shared.network;
 
+import shared.wares.Basket;
+
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -37,5 +39,7 @@ public interface RMIServerInterface extends Remote {
 	 * @throws RemoteException
 	 */
 	void getWares(int clientID) throws RemoteException;
+
+	void sendOrder(int cvr, Basket basket, double sum) throws RemoteException;
 
 }

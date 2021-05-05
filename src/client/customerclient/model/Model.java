@@ -1,5 +1,6 @@
 package client.customerclient.model;
 
+import client.core.LoginManager;
 import client.network.Client;
 import client.network.RMIClient;
 import shared.wares.Basket;
@@ -60,6 +61,11 @@ public class Model implements CustomerModelInterface {
 
 	public Basket getMyBasket() {
 		return myBasket;
+	}
+
+	//TODO: KOM TILBAGE HER TIL NOT DONE MAKKER
+	public void sendOrder(Basket basket, double sum){
+		client.sendOrder(LoginManager.cvr, basket, sum);
 	}
 
 	public ArrayList<Product> getAllWares()

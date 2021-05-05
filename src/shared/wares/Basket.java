@@ -1,8 +1,9 @@
 package shared.wares;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Basket {
+public class Basket implements Serializable {
 	private HashMap<Product, Integer> basket;
 
 	public Basket() {
