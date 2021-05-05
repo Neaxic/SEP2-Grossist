@@ -56,8 +56,8 @@
                                        <children>
                                           <TableView fx:id="basketTable" prefHeight="200.0" prefWidth="845.0">
                                             <columns>
-                                              <TableColumn prefWidth="750.0" text="Produkt" />
-                                              <TableColumn prefWidth="95.0" text="Antal" />
+                                              <TableColumn fx:id="basketProduct" prefWidth="750.0" text="Produkt" />
+                                              <TableColumn fx:id="basketAntal" prefWidth="95.0" text="Antal" />
                                             </columns>
                                           </TableView>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="847.0" spacing="10.0">
@@ -87,7 +87,7 @@
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="152.0" text="Gennemfør Ordre">
+                        <Button mnemonicParsing="false" onAction="#SendOrder" prefHeight="31.0" prefWidth="152.0" text="Gennemfør Ordre">
                            <HBox.margin>
                               <Insets bottom="15.0" left="5.0" top="15.0" />
                            </HBox.margin>
