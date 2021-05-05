@@ -1,7 +1,5 @@
 package server.model.databaseMediator;
 
-import shared.wares.Alcohol;
-import shared.wares.OLD_TestAlcohol;
 import shared.wares.Product;
 
 import java.util.ArrayList;
