@@ -15,7 +15,7 @@ public class CustomerViewHandler implements ViewHandler{
 	private Stage primaryStage;
 	private Scene currentScene;
 	private ViewModelFactory viewModelFactory;
-	private ViewHandler proxyViewHandler;
+	private final ViewHandler proxyViewHandler;
 
 	public CustomerViewHandler(ViewHandler proxyViewHandler) {
 		this.proxyViewHandler = proxyViewHandler;
@@ -39,7 +39,6 @@ public class CustomerViewHandler implements ViewHandler{
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		this.viewModelFactory = viewModelFactory;
 		this.primaryStage = primaryStage;
 		this.currentScene = new Scene(new Region());
 		openView("CustomerBrowser");

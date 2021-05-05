@@ -6,6 +6,6 @@ import java.io.IOException;
 
 public interface GrosserViewController
 {
-  void init(ViewHandler viewHandler, GrosserViewModel grosserViewModel);
+  void init(ViewHandler viewHandler);
   void swapScene(String sceneName) throws IOException;
 }

@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="731.0" fx:controller="client.grosserclient.views.grossermain.GrosserMainViewController" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="545.0" prefWidth="712.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
