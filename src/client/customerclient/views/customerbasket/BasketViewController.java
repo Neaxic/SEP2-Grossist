@@ -24,6 +24,7 @@ public class BasketViewController implements CustomerViewController {
 	public void removeItemFromBasket() {
 		ObservableList<Object> list = basketTable.getSelectionModel().getSelectedItems();
 		viewModel.removeFromBasket(list);
+		//test
 		basketTable.getSelectionModel().getSelectedCells().removeAll(list);
 	}
 
