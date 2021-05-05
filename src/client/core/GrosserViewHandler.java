@@ -1,5 +1,6 @@
 package client.core;
 
+import client.grosserclient.views.GrosserViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,12 +27,11 @@ public class GrosserViewHandler implements ViewHandler {
 
 		FXMLLoader loader = new FXMLLoader();
 
-		loader.setLocation(getClass().getResource("../CustomerClient.Views/" + view.toLowerCase(Locale.ROOT)+"/" +view + ".fxml"));
+		loader.setLocation(getClass().getResource("../grosserclient/views/" + view + "/" + view + ".fxml"));
 		root = loader.load();
 
-		GrosserViewHandler viewController = loader.getController();
-		// TODO: Der ingen Controller til groist endnu
-		// viewController.init(this, getViewModelByViewName(view));
+		GrosserViewController viewController = loader.getController();
+		viewController.init(this);
 
 		scene = new Scene(root);
 		return scene;

@@ -6,11 +6,11 @@ public class Order
 {
   private final int CVR, orderNo;
   private final LocalDate orderDate;
-  private final Double sum;
+  private final double sum;
 
-  private Basket basket;
+  private final Basket basket;
 
-  public Order(int CVR, int orderNo, LocalDate orderDate, Double sum,
+  public Order(int CVR, int orderNo, LocalDate orderDate, double sum,
       Basket basket)
   {
     this.CVR = CVR;
@@ -35,7 +35,7 @@ public class Order
     return orderDate;
   }
 
-  public Double getSum()
+  public double getSum()
   {
     return sum;
   }
