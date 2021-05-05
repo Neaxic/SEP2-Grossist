@@ -40,8 +40,7 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 			// TODO: Tjek om søgning virker
 			for (Product product : activeItemList) {
 				if (product.getWareName().equals(item)) {
-					model.addToBasket(null, amount); // Product typer er forskellige
-//					model.addToBasket(product, amount);
+					model.addToBasket(product, amount); // Product typer er forskellige
 				}
 			}
 		}
