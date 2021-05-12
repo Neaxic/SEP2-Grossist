@@ -31,17 +31,17 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 		model.updateWares();
 	}
 
-	public void addToBasket(String item, int amount) {
-		if (item == null || item.equals("")) {
-			System.out.println("Item error: " + item);
-		} else if (amount <= 0) {
+	public void addToBasket(int item, int amount) {
+		// produktID kan ikke være null
+//		if (item == null || item.equals("")) {
+//			System.out.println("Item error: " + item);
+//		} else
+		if (amount <= 0) {
 			System.out.println("Invalid amount");
 		} else {
-			System.out.println("added " + amount + " " + item + " to cart");
-
 			// TODO: Tjek om søgning virker
 			for (Product product : activeItemList) {
-				if (product.getWareName().equals(item)) {
+				if (product.getWareNumber() == item) {
 					model.addToBasket(product, amount); // Product typer er forskellige
 				}
 			}
