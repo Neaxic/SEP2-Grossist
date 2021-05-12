@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 
+// Frederik Bergmann, Andreas Østergaard
+
 public class LoginManager
 {
   public final ProxyViewHandler PVH;

@@ -4,6 +4,8 @@ import client.core.ViewHandler;
 
 import java.io.IOException;
 
+// Frederik Bergmann
+
 public interface GrosserViewController
 {
   void init(ViewHandler viewHandler);

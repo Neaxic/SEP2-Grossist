@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
+// Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
+
 public abstract class Product implements Serializable {
 	private String wareName;
 	private String measurementType;

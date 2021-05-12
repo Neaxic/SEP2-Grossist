@@ -1,5 +1,7 @@
 package client.customerclient.views.customerbasket;
 
+// Andreas Østergaard
+
 public class ProductAndInt {
 
     private String Product;

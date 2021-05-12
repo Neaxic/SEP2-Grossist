@@ -13,6 +13,8 @@ import shared.wares.Order;
 import java.io.IOException;
 import java.time.LocalDate;
 
+// Frederik Bergmann
+
 public class GrosserMainViewController implements GrosserViewController
 {
   @FXML private TextField searchBar;

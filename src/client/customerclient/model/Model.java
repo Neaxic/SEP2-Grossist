@@ -13,6 +13,8 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//Andreas Young
+
 public class Model implements CustomerModelInterface {
 	private PropertyChangeSupport support;
 	RMIClient client;

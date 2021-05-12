@@ -8,6 +8,8 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Frederik Bergmann og Kasper Falk
+
 public class basketTest
 {
 

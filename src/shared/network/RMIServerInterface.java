@@ -6,6 +6,8 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+// Andreas Young
+
 public interface RMIServerInterface extends Remote {
 	/**
 	 * Registers RMIServer Implementation on port 1099 and binds it with a namespace

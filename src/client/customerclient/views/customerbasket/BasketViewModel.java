@@ -10,6 +10,8 @@ import shared.wares.Product;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// Andreas Young
+
 public class BasketViewModel implements CustomerViewModel
 {
 	private Model model;
@@ -19,6 +21,7 @@ public class BasketViewModel implements CustomerViewModel
 	}
 
 	public void removeFromBasket(ObservableList<Object> list) {
+		//TODO
 	}
 
 	public void sendOrder(){

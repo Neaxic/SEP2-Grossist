@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// Lavet af hele teamey
+
 public class DataModelImpl {
 	private BaseDAO base = new BaseDAO();
 	private ModelInterface model = new DAOModel();

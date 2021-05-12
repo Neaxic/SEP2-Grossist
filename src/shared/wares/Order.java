@@ -2,6 +2,8 @@ package shared.wares;
 
 import java.time.LocalDate;
 
+// Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
+
 public class Order
 {
   private final int CVR, orderNo;

@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// Lavet af hele teamet
+
 public interface ModelInterface
 {
   HashMap<String, ArrayList<Product>> getAllProducts();

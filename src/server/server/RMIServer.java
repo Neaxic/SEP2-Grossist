@@ -18,6 +18,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// Andreas Østergaard, Andreas Young, Frederik Bergmann
+
 public class RMIServer implements RMIServerInterface {
     private HashMap<Integer, CallbackClient> callbackClients = new HashMap<>();
     private HashMap<String, ArrayList<Product>> wares = new HashMap<>();

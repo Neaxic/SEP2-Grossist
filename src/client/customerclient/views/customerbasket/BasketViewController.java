@@ -17,6 +17,8 @@ import shared.wares.Product;
 
 import java.io.IOException;
 
+// Andreas Østergaard, Andreas Young, Line Guld
+
 public class BasketViewController implements CustomerViewController {
     @FXML
     private TableView basketTable;
@@ -58,6 +60,7 @@ public class BasketViewController implements CustomerViewController {
     }
 
     public void saveBasketToBin(ActionEvent actionEvent) {
+        //TODO
     }
 
     public void SendOrder(){

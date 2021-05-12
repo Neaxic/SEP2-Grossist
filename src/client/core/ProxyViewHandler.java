@@ -4,6 +4,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+// Andreas Østergaard, Frederik Bergmann
+
 public class ProxyViewHandler implements ViewHandler {
 	private ViewHandler viewHandler;
 	private final ViewModelFactory viewModelFactory;
