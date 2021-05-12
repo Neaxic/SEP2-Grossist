@@ -79,6 +79,206 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		}
 	}
 
+	//GETTERS --------------------------------------------------------------------------------------------------------------
+	public ArrayList<String> getCustomerID() throws SQLException {
+		ArrayList<String> str = new ArrayList<>();
+		try (Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement("select cvr from customer");
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) {
+				str.add(result.getString("cvr"));
+			}
+		}
+		return str;
+	}
+
+
+
+	public String getCustomerNameFromCvr(int cvr) throws SQLException {
+		String str = "";
+		try (Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement("select name from customer where cvr = " + cvr);
+			ResultSet result = statement.executeQuery();
+			result.next();
+			str = result.getString(1);
+		}
+		return str;
+	}
+
+	public ArrayList<Integer> getProductIds() throws SQLException {
+		return getProductIds("product");
+	}
+
+	public String getProductNameFromProductId(int id) throws SQLException {
+		return getFrom("select productname from product where productId =", id);
+	}
+
+	public String getProductMeasurementFromProductId(int id) throws SQLException {
+		return getFrom("select measurement from product where productId =", id);
+	}
+
+	public String getProductMinPurchaseFromProductId(int id) throws SQLException {
+		return getFrom("select minPurchase from product where productId =", id);
+	}
+
+	public String getProductProducesByFromProductId(int id) throws SQLException {
+		return getFrom("select producesBy from product where productId =", id);
+	}
+
+	public int getProductsalesPriceFromProductId(int id) throws SQLException {
+		String q = getFrom("select salesPrice from product where productId =", id);
+		int i = Integer. parseInt(q);
+		return i;
+	}
+
+	public String getProductbbDateFromProductId(int id) throws SQLException {
+		return getFrom("select bbDate from product where productId =", id);
+	}
+
+	public String getProductAmountInStockFromProductId(int id) throws SQLException {
+		return getFrom("select amountInStock from product where productId =", id);
+	}
+	public String getProductTagsFromProductId(int id) throws SQLException {
+		return getFrom("select tags from product where productId =", id);
+	}
+
+	public ArrayList<Integer> getAlcoholicBeveragesIds() throws SQLException {
+		return getProductIds("alcoholicbeverage");
+	}
+
+	public double getAlcoholicProcentageFromProductId(int id) throws SQLException {
+		String q = getFrom("select alcoholpercentage from alcoholicbeverage where productId =", id);
+		Double i = Double. parseDouble(q);
+		return i;
+	}
+
+	public String getAlcoholicProductionCountryFromProductId(int id) throws SQLException {
+		String q = getFrom("select productionCountry from alcoholicbeverage where productId =", id);
+		return q;
+	}
+
+	public String getAlcoholicTypeFromProductId(int id) throws SQLException {
+		String q = getFrom("select type from alcoholicbeverage where productId =", id);
+		return q;
+	}
+
+	public ArrayList<Integer> getNonAlcoholicBeveragesIds() throws SQLException {
+		return getProductIds("nonalcoholicbeverage");
+	}
+
+	public String getNonAlcoholicTypeFromProductId(int id) throws SQLException {
+		String q = getFrom("select type from nonalcoholicbeverage where productId =", id);
+		return q;
+	}
+
+
+	public ArrayList<Integer> getMeatAndSeaFoodIds() throws SQLException {
+		return getProductIds("meatandseafood");
+	}
+
+	public String getMeatAndSeaFoodProductionCountryFromProductId(int id) throws SQLException {
+		String q = getFrom("select productioncountry from meatandseafood where productId =", id);
+		return q;
+	}
+
+
+	public ArrayList<Integer> getFruitsAndVegetablesIds() throws SQLException {
+		return getProductIds("fruitsAndVegetables");
+	}
+
+	public String getFruitAndVegetablesProductionCountryFromProductId(int id) throws SQLException {
+		String q = getFrom("select productioncountry from fruitsandvegetables where productId =", id);
+		return q;
+	}
+
+	public ArrayList<Integer> getColonialIds() throws SQLException {
+		return getProductIds("colonial");
+	}
+
+	public String getColonialProductionCountryFromProductId(int id) throws SQLException {
+		String q = getFrom("select productioncountry from colonial where productId =", id);
+		return q;
+	}
+
+	public ArrayList<Integer> getfrozenFoodIds() throws SQLException {
+		return getProductIds("frozenfood");
+	}
+
+	public ArrayList<Integer> getDairyAndEggsIds() throws SQLException {
+		return getProductIds("dairyandeggs");
+	}
+
+	public ArrayList<Integer> getOrderNumbers() {
+		ArrayList<Integer> str = new ArrayList<>();
+		try (Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement("select orderno from order_");
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) {
+				str.add(result.getInt("orderno"));
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return str;
+	}
+
+	public String getCvrFromOrderNumber(int id) throws SQLException {
+		return getFrom("select cvr from order_ where orderno =", id);
+	}
+
+	public String getOrderDateFromOrderNumber(int id) throws SQLException {
+		return getFrom("select orderdate from order_ where orderno =", id);
+	}
+
+	public String getTotalPriceFromOrderNumber(int id) throws SQLException {
+		return getFrom("select totalprice from order_ where orderno =", id);
+	}
+
+
+	public String getFromSQLStatement(String sql, String id) throws SQLException {
+		//IKKE FÆRDIG ENDNU
+		String str = "";
+		try (Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(sql + id);
+			ResultSet result = statement.executeQuery();
+			result.next();
+			str = result.getString(1);
+		}
+		return str;
+	}
+
+
+
+
+
+	//Hjælpe funktioner
+	public String getFrom(String SQLStatement, int i) throws SQLException {
+		String str = "";
+		try (Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(SQLStatement + i);
+			ResultSet result = statement.executeQuery();
+			result.next();
+			str = result.getString(1);
+		}
+		return str;
+	}
+
+	public ArrayList<Integer> getProductIds(String from) throws SQLException {
+		ArrayList<Integer> str = new ArrayList<>();
+		try (Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement("select productid from " + from);
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) {
+				str.add(result.getInt("productid"));
+			}
+		}
+		return str;
+	}
+
+
 //	public ArrayList<Product> getAlcoholProducts() {
 //		ArrayList<Product> alcoholList = new ArrayList<>();
 //		try (Connection connection = getConnection()) {
