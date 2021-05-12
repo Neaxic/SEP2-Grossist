@@ -35,4 +35,5 @@ public class BasketViewModel implements CustomerViewModel
 	public HashMap<Product, Integer> loadAllProducts(){
 		return model.getMyBasket().getBasket();
 	}
+
 }

@@ -46,7 +46,7 @@
          <children>
             <VBox prefHeight="553.0" prefWidth="900.0">
                <children>
-                  <ScrollPane prefHeight="496.0" prefWidth="879.0">
+                  <ScrollPane fx:id="scrollPaneID" prefHeight="496.0" prefWidth="879.0">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="894.0">
                            <children>

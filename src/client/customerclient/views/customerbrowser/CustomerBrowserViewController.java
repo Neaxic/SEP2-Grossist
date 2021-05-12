@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Iterator;
+import java.util.Set;
 
 // Andreas Young, Line Guld
 
@@ -91,6 +93,8 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		main.styleProperty().setValue("-fx-border-color: lightgray;");
 		// Nodes regarding the Item
 		Text title = new Text(product.getWareName());
+		Text productID = new Text("Varnummer: "+product.getWareNumber());
+		productID.setId("ProductID");
 		main.setMaxWidth(615);
 		Text desc = new Text("\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
 		//desc.wrappingWidthProperty().bind(SPane.widthProperty());
@@ -116,6 +120,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		addButton.setPrefSize(100, 50);
 		// Design of Nodes
 		title.setFont(Font.font("Segoe UI", FontWeight.BLACK, 21));
+		productID.setFont(Font.font("Segoe UI", FontWeight.BLACK, 15));
 		desc.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 15));
 		price.setFont(Font.font("Segoe UI", FontWeight.MEDIUM, 21));
 		amount.setPromptText("Mængde");
@@ -128,6 +133,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		vBox.getChildren().add(prisHBox);
 
 		textFlow.setPadding(new Insets(5, 30, 10, 0));
+		vBox.getChildren().add(productID);
 		vBox.getChildren().add(textFlow);
 
 		btnHBox.getChildren().add(amount);
@@ -164,9 +170,14 @@ public class CustomerBrowserViewController implements CustomerViewController {
 			// button = (Button) node;
 			// Getting which item to put in the basket
 			// Vi kan eventuelt indsætte et skjult felt med varenummer og tage det i stedet for titlen. Gerne med et LABEL
-			VBox box = (VBox) button.getParent().getParent();
-			Text itemName = (Text) box.lookup("Text");
-			String item = itemName.getText();
+
+			// var relevant før til at få navn, men vi bruger id nu til at få specifik produkt.
+			//VBox box = (VBox) button.getParent().getParent();
+			//Text itemName = (Text) box.lookup("Text");
+			//String item = itemName.getText();
+
+			Text box2 = (Text) button.getParent().getParent().lookup("#ProductID");
+			int itemID = Integer.parseInt(box2.getText().substring(11));
 
 			// Getting the amount to put in basket
 			HBox amountBox = (HBox) button.getParent();
@@ -175,7 +186,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 				System.out.println("Amount field only accepts Integer Numbers");
 			} else {
 				int amount = Integer.parseInt(amountField.getText());
-				viewModel.addToBasket(item, amount);
+				viewModel.addToBasket(itemID, amount);
 			}
 		}
 	}

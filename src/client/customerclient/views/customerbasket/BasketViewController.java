@@ -8,11 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import shared.wares.Product;
 
 import java.io.IOException;
@@ -26,6 +28,8 @@ public class BasketViewController implements CustomerViewController {
     private TableColumn basketAntal;
     @FXML
     private TableColumn basketProduct;
+    @FXML
+    private Text basketSum;
 
     private ViewHandler viewHandler;
     private BasketViewModel viewModel;
@@ -45,18 +49,26 @@ public class BasketViewController implements CustomerViewController {
         basketProduct.setCellValueFactory(new PropertyValueFactory<>("Product"));
         basketAntal.setCellValueFactory(new PropertyValueFactory<>("Antal"));
 
+        double price = 0;
+
         for (Product i : viewModel.loadAllProducts().keySet()) {
             ProductAndInt productAndInt = new ProductAndInt(i.getWareName(), viewModel.loadAllProducts().get(i));
+            price += i.getPrice() * viewModel.loadAllProducts().get(i);
+            System.out.println(viewModel.loadAllProducts().keySet());
             basketTable.getItems().add(productAndInt);
         }
+
+        basketSum.setText("SUM: "+price +", DDK");
     }
 
     public void removeItemFromBasket() {
-    /*
-        ObservableList<Product> list = basketTable.getSelectionModel().getSelectedItems();
+
+        ObservableList<Object> list = basketTable.getSelectionModel().getSelectedItems();
+        System.out.println(list);
         viewModel.removeFromBasket(list);
+
         basketTable.getSelectionModel().getSelectedCells().removeAll(list);
-        */
+
     }
 
     public void saveBasketToBin(ActionEvent actionEvent) {
@@ -65,6 +77,8 @@ public class BasketViewController implements CustomerViewController {
 
     public void SendOrder(){
 		viewModel.sendOrder();
+		basketTable.getItems().clear();
+		viewModel.loadAllProducts().clear();
 	}
 
     // SCENE MANAGING
