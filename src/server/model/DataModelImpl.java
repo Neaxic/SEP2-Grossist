@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-// Lavet af hele teamey
+// Lavet af hele teamet
 
 public class DataModelImpl {
 	private BaseDAO base = new BaseDAO();
