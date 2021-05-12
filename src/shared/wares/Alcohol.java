@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 
+// Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
+
 public class Alcohol extends Product implements ProductInterface {
 	private String originCountry;
 	private double percentage;     // Kommer bare til at være et tallet

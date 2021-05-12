@@ -7,6 +7,8 @@ import client.network.RMIClient;
 
 import java.rmi.RemoteException;
 
+// Andreas Østergaard, Frederik Bergmann
+
 public class ModelFactory {
     private static ModelFactory instance;
     CustomerModelInterface model;

@@ -3,6 +3,8 @@ package shared.wares;
 import java.io.Serializable;
 import java.util.HashMap;
 
+// Andreas Young, Frederik Bergmann
+
 public class Basket implements Serializable {
 	private HashMap<Product, Integer> basket;
 

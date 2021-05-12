@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+// Andreas Young, Line Guld
+
 public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChangeListener {
 	private Model model;
 	private SimpleListProperty<Product> activeItemList;

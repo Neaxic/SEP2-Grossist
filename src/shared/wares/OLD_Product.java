@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+// Andreas Young, Kasper Falk, Frederik Bergmann
+
 public abstract class OLD_Product implements Serializable {
 	private String name;
 	private Pair<Integer, String> stock;

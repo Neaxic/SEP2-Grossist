@@ -3,9 +3,11 @@ package client.core;
 import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
 import client.customerclient.views.CustomerViewModel;
 import client.customerclient.views.customerbasket.BasketViewModel;
-import client.customerclient.views.placeorder.PlaceOrderViewModel;
+import client.customerclient.views.placeorderEXCLUDED.PlaceOrderViewModel;
 import client.grosserclient.views.GrosserViewModel;
 import client.grosserclient.views.grossermain.GrosserMainViewModel;
+
+// Andreas Østergaard, Frederik Bergmann, Andreas Young
 
 public class ViewModelFactory
 {

@@ -1,4 +1,4 @@
-package client.customerclient.views.placeorder;
+package client.customerclient.views.placeorderEXCLUDED;
 
 import client.customerclient.views.CustomerViewController;
 import client.customerclient.views.CustomerViewModel;

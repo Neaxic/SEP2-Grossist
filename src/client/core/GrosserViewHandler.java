@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Locale;
 
+// Andreas Østergaard, Frederik Bergmann, Andreas Young
+
 public class GrosserViewHandler implements ViewHandler {
 	private Stage primaryStage;
 	private Scene currentScene;

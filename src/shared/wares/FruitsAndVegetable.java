@@ -7,6 +7,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+// Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
+
 public class FruitsAndVegetable extends Product implements ProductInterface {
 private String originCountry;
 

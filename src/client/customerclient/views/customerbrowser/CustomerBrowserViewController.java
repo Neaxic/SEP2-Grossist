@@ -28,6 +28,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+// Andreas Young, Line Guld
+
 public class CustomerBrowserViewController implements CustomerViewController {
 	// Category Labels
 	@FXML private Text categoryColonial;

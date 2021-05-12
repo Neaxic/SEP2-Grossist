@@ -2,15 +2,16 @@ package client.customerclient.views.customersubscriptions;
 
 import client.customerclient.views.CustomerViewController;
 import client.customerclient.views.CustomerViewModel;
-import client.customerclient.views.placeorder.PlaceOrderViewModel;
+import client.customerclient.views.placeorderEXCLUDED.PlaceOrderViewModel;
 import client.core.ViewHandler;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+
+// Andreas Young, Line Guld
 
 public class CustomerSubscriptionsViewController implements CustomerViewController {
 	@FXML private VBox subscriptionList;

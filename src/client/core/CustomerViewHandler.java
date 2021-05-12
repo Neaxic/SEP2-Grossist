@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+// Andreas Østergaard, Frederik Bergmann, Andreas Young
+
 public class CustomerViewHandler implements ViewHandler{
 
 	private Stage primaryStage;

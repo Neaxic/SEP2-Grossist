@@ -19,6 +19,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// Andreas Young og Andreas Østergaard
+
 public class RMIClient implements Client, CallbackClient, Subject {
 	private RMIServerInterface server;
 	private PropertyChangeSupport support;
