@@ -5,7 +5,6 @@ import client.network.Client;
 import client.network.RMIClient;
 import shared.wares.Basket;
 import shared.wares.Product;
-import shared.wares.OLD_Product;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -57,7 +56,7 @@ public class Model implements CustomerModelInterface {
 		support.firePropertyChange(new PropertyChangeEvent(this, "waresUpdated", null, null));
 	}
 
-	public void updateWares() {
+	public void updateClientWares() {
 		client.getWares();
 	}
 
@@ -65,25 +64,22 @@ public class Model implements CustomerModelInterface {
 		return myBasket;
 	}
 
-	//TODO: KOM TILBAGE HER TIL NOT DONE MAKKER
-	public void sendOrder(Basket basket, double sum){
+	// TODO: KOM TILBAGE HER TIL NOT DONE MAKKER
+	public void sendOrder(Basket basket, double sum) {
 		client.sendOrder(LoginManager.cvr, basket, sum);
 	}
 
-	public ArrayList<Product> getAllWares()
-	{
+	public ArrayList<Product> getAllWares() {
 		ArrayList<Product> returnList = new ArrayList<>();
 
-		for (ArrayList<Product> list : wareList.values())
-		{
+		for (ArrayList<Product> list : wareList.values()) {
 			returnList.addAll(list);
 		}
 
 		return returnList;
 	}
 
-	public ArrayList<Product> getCategory(String category)
-	{
+	public ArrayList<Product> getCategory(String category) {
 		return wareList.get(category);
 	}
 }
