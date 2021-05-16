@@ -24,6 +24,14 @@ public class Basket implements Serializable {
 		basket.remove(product);
 	}
 
+	public void removeProductWithSameWareNum(int wareNum){
+		for(Product i: basket.keySet()){
+			if(i.getWareNumber() == wareNum){
+				this.removeProduct(i);
+			}
+		}
+	}
+
 	public void changeAmount(Product product, int newAmount) {
 		basket.replace(product, newAmount);
 	}

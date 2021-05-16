@@ -52,9 +52,8 @@ public class BasketViewController implements CustomerViewController {
         double price = 0;
 
         for (Product i : viewModel.loadAllProducts().keySet()) {
-            ProductAndInt productAndInt = new ProductAndInt(i.getWareName(), viewModel.loadAllProducts().get(i));
+            ProductAndInt productAndInt = new ProductAndInt(i.getWareName(), i.getWareNumber(),viewModel.loadAllProducts().get(i));
             price += i.getPrice() * viewModel.loadAllProducts().get(i);
-            System.out.println(viewModel.loadAllProducts().keySet());
             basketTable.getItems().add(productAndInt);
         }
 
@@ -64,20 +63,24 @@ public class BasketViewController implements CustomerViewController {
     public void removeItemFromBasket() {
 
         ObservableList<Object> list = basketTable.getSelectionModel().getSelectedItems();
-        System.out.println(list);
         viewModel.removeFromBasket(list);
 
-        basketTable.getSelectionModel().getSelectedCells().removeAll(list);
+        //TODO: Viewet refresher ikke, efter fjerelse
+
+        // kunne ikke få det til at virke gliende så tager care af vigtigere ting
+
+        // Men selve det at fjerne virker behind the scenes.
 
     }
 
     public void saveBasketToBin(ActionEvent actionEvent) {
-        //TODO
+        //TODO: (SaveBasket) Ekstra funktionallitet, slet ikke vigtig
     }
 
     public void SendOrder(){
 		viewModel.sendOrder();
 		basketTable.getItems().clear();
+		basketSum.setText("");
 		viewModel.loadAllProducts().clear();
 	}
 

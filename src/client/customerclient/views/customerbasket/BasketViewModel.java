@@ -10,7 +10,7 @@ import shared.wares.Product;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-// Andreas Young
+// Andreas Young, Andreas Østergaard
 
 public class BasketViewModel implements CustomerViewModel
 {
@@ -21,7 +21,12 @@ public class BasketViewModel implements CustomerViewModel
 	}
 
 	public void removeFromBasket(ObservableList<Object> list) {
-		//TODO
+		ProductAndInt selected = null;
+		for(Object i: list){
+			selected = (ProductAndInt) i;
+		}
+
+		model.getMyBasket().removeProductWithSameWareNum(selected.getProductID());
 	}
 
 	public void sendOrder(){
