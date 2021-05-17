@@ -1,7 +1,6 @@
 package client.customerclient.model;
 
 import client.core.LoginManager;
-import client.customerclient.views.customerbasket.ProductAndInt;
 import client.network.Client;
 import client.network.RMIClient;
 import shared.wares.Basket;
@@ -31,8 +30,9 @@ public class Model implements CustomerModelInterface {
 
 	/**
 	 * Adds a product to the Users Basket
+	 *
 	 * @param product The product of which to add to user basket
-	 * @param amount The amount of the product to be added to the basket
+	 * @param amount  The amount of the product to be added to the basket
 	 */
 	public void addToBasket(Product product, int amount) {
 		myBasket.addProduct(product, amount);
@@ -40,6 +40,7 @@ public class Model implements CustomerModelInterface {
 
 	/**
 	 * Removes all of an item from the Users Basket
+	 *
 	 * @param product The product which is wished to be removed from the Users Basket
 	 */
 	public void removeFromBasket(Product product) {
@@ -48,7 +49,8 @@ public class Model implements CustomerModelInterface {
 
 	/**
 	 * Changes the amount of a product in the Users Basket
-	 * @param product The product of which to change the amount
+	 *
+	 * @param product   The product of which to change the amount
 	 * @param newAmount The new desired amount of the specified product
 	 */
 	public void changeAmount(Product product, int newAmount) {
@@ -80,6 +82,7 @@ public class Model implements CustomerModelInterface {
 
 	/**
 	 * Requests the users current basket
+	 *
 	 * @return The active basket
 	 */
 	public Basket getMyBasket() {
@@ -88,8 +91,9 @@ public class Model implements CustomerModelInterface {
 
 	/**
 	 * Requests the client sending an order to the server
+	 *
 	 * @param basket A Basket consisting of the items desired for the order sent
-	 * @param sum The summed price of all the items in the order
+	 * @param sum    The summed price of all the items in the order
 	 */
 	//TODO: KOM TILBAGE HER TIL NOT DONE MAKKER
 	public void sendOrder(Basket basket, double sum) {
@@ -98,6 +102,7 @@ public class Model implements CustomerModelInterface {
 
 	/**
 	 * Creates an ArrayList of products, consisting of the products in the Model's current warelist HashMap
+	 *
 	 * @return Arraylist of products currently stored on the Model
 	 */
 	public ArrayList<Product> getAllWares() {
@@ -112,10 +117,14 @@ public class Model implements CustomerModelInterface {
 
 	/**
 	 * Creates an ArrayList of products, consisting of the products in the Model's current warelist HashMap only in the specified category
+	 *
 	 * @param category Key used in the HashMap for defining ware categories
 	 * @return <b>ArrayList</b> consisting only of the products from the specified Category
 	 */
 	public ArrayList<Product> getCategory(String category) {
-		return wareList.get(category);
+		if (wareList.containsKey(category)) {
+			return wareList.get(category);
+		}
+		return new ArrayList<>();
 	}
 }
