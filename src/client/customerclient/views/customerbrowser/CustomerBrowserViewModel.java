@@ -9,16 +9,12 @@ import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 // Andreas Young, Line Guld
 
 public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChangeListener {
 	private Model model;
 	private SimpleListProperty<Product> activeItemList;
-
 
 	public CustomerBrowserViewModel() {
 		model = (Model) ModelFactory.getInstance().getCustomerModel();
@@ -56,7 +52,7 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 		return activeItemList;
 	}
 
-	public void getAllWares()
+	private void getAllWares()
 	{
 		activeItemList.set(FXCollections.observableList(model.getAllWares()));
 	}
