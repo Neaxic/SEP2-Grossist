@@ -7,6 +7,7 @@ import client.customerclient.views.CustomerViewModel;
 import shared.wares.Product;
 
 import java.util.HashMap;
+import java.util.MissingResourceException;
 
 // Andreas Young, Andreas Østergaard
 
@@ -24,6 +25,9 @@ public class BasketViewModel implements CustomerViewModel {
 
 	public void sendOrder() {
 		double sum = 0;
+		if (model.getMyBasket().getBasket().keySet().isEmpty()) {
+			throw new MissingResourceException("No items in Basket to Order", "BasketViewModel", "BVM");
+		}
 		for (Product i : model.getMyBasket().getBasket().keySet()) {
 			sum += i.getPrice() * model.getMyBasket().getBasket().get(i);
 		}
