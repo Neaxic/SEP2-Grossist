@@ -63,8 +63,8 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		return list;
 	}
 
-	public void createOrder(int cvr, double sum, LocalDate date){
-		try(Connection connection = getConnection()){
+	public void createOrder(int cvr, double sum, LocalDate date) {
+		try (Connection connection = getConnection()) {
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO order_(cvr, orderNo, orderDate, totalPrice) VALUES(?,default,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			statement.setInt(1, cvr);
 			statement.setDate(2, Date.valueOf(date));
@@ -92,8 +92,6 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		}
 		return str;
 	}
-
-
 
 	public String getCustomerNameFromCvr(int cvr) throws SQLException {
 		String str = "";
@@ -128,7 +126,7 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 
 	public int getProductsalesPriceFromProductId(int id) throws SQLException {
 		String q = getFrom("select salesPrice from product where productId =", id);
-		int i = Integer. parseInt(q);
+		int i = Integer.parseInt(q);
 		return i;
 	}
 
@@ -139,6 +137,7 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 	public String getProductAmountInStockFromProductId(int id) throws SQLException {
 		return getFrom("select amountInStock from product where productId =", id);
 	}
+
 	public String getProductTagsFromProductId(int id) throws SQLException {
 		return getFrom("select tags from product where productId =", id);
 	}
@@ -149,7 +148,7 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 
 	public double getAlcoholicProcentageFromProductId(int id) throws SQLException {
 		String q = getFrom("select alcoholpercentage from alcoholicbeverage where productId =", id);
-		Double i = Double. parseDouble(q);
+		Double i = Double.parseDouble(q);
 		return i;
 	}
 
@@ -172,7 +171,6 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		return q;
 	}
 
-
 	public ArrayList<Integer> getMeatAndSeaFoodIds() throws SQLException {
 		return getProductIds("meatandseafood");
 	}
@@ -181,7 +179,6 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		String q = getFrom("select productioncountry from meatandseafood where productId =", id);
 		return q;
 	}
-
 
 	public ArrayList<Integer> getFruitsAndVegetablesIds() throws SQLException {
 		return getProductIds("fruitsAndVegetables");
@@ -236,7 +233,6 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		return getFrom("select totalprice from order_ where orderno =", id);
 	}
 
-
 	public String getFromSQLStatement(String sql, String id) throws SQLException {
 		//IKKE FÆRDIG ENDNU
 		String str = "";
@@ -248,10 +244,6 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		}
 		return str;
 	}
-
-
-
-
 
 	//Hjælpe funktioner
 	public String getFrom(String SQLStatement, int i) throws SQLException {
@@ -277,7 +269,6 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		}
 		return str;
 	}
-
 
 //	public ArrayList<Product> getAlcoholProducts() {
 //		ArrayList<Product> alcoholList = new ArrayList<>();
