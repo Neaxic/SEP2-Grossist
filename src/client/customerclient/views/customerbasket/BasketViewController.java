@@ -61,9 +61,8 @@ public class BasketViewController implements CustomerViewController {
     }
 
     public void removeItemFromBasket() {
-
-        ObservableList<Object> list = basketTable.getSelectionModel().getSelectedItems();
-        viewModel.removeFromBasket(list);
+        Object item = basketTable.getSelectionModel().getSelectedItem(); // Item is an instance of ´ProductAndInt´
+        viewModel.removeFromBasket(item);
 
         //TODO: Viewet refresher ikke, efter fjerelse
 
@@ -77,7 +76,7 @@ public class BasketViewController implements CustomerViewController {
         //TODO: (SaveBasket) Ekstra funktionallitet, slet ikke vigtig
     }
 
-    public void SendOrder(){
+    public void sendOrder(){
 		viewModel.sendOrder();
 		basketTable.getItems().clear();
 		basketSum.setText("");
