@@ -42,6 +42,14 @@ public interface RMIServerInterface extends Remote {
 	 */
 	void getWares(int clientID) throws RemoteException;
 
-	boolean sendOrder(int cvr, Basket basket, double sum) throws RemoteException;
+	/**
+	 * Sends an order to the Server Implementation and waits for a verification
+	 * @param cvr User CVR number, registered through client
+	 * @param orderItems Items desired to be ordered for purchase
+	 * @param sum Total sum of the items ordered
+	 * @return True if the order can be placed, false otherwise
+	 * @throws RemoteException
+	 */
+	boolean sendOrder(int cvr, Basket orderItems, double sum) throws RemoteException;
 
 }
