@@ -1,11 +1,11 @@
 package server.server;
 
+import client.customerclient.views.customerbasket.ProductAndInt;
 import server.model.DataModelImpl;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.util.Util;
 import shared.wares.Basket;
-import shared.wares.OLD_Product;
 import shared.wares.Product;
 
 import java.rmi.AlreadyBoundException;
@@ -21,55 +21,60 @@ import java.util.HashMap;
 // Andreas Østergaard, Andreas Young, Frederik Bergmann
 
 public class RMIServer implements RMIServerInterface {
-    private HashMap<Integer, CallbackClient> callbackClients = new HashMap<>();
-    private HashMap<String, ArrayList<Product>> wares = new HashMap<>();
+	private HashMap<Integer, CallbackClient> callbackClients = new HashMap<>();
+	private HashMap<String, ArrayList<Product>> wares = new HashMap<>();
 
-    // Dummy Data:
-    private DataModelImpl dataModel = new DataModelImpl();
+	// Dummy Data:
+	private DataModelImpl dataModel = new DataModelImpl();
 
-    public RMIServer() throws SQLException {
-    }
+	public RMIServer() throws SQLException {
+	}
 
-    public void getAllProducts() {
-        wares = dataModel.getAllProducts();
-    }
+	public void getAllProducts() {
+		wares = dataModel.getAllProducts();
+	}
 
-    @Override
-    public void startServer() throws RemoteException, AlreadyBoundException {
-        System.out.println("Server starting...");
-        Registry registry = LocateRegistry.createRegistry(1099);
-        registry.bind(Util.SERVERNAME, this);
-        UnicastRemoteObject.exportObject(this, 0);
-        System.out.println("Connecting to database... (This might take a while)");
-        getAllProducts();
-        System.out.println("Server started");
-    }
+	@Override
+	public void startServer() throws RemoteException, AlreadyBoundException {
+		System.out.println("Server starting...");
+		Registry registry = LocateRegistry.createRegistry(1099);
+		registry.bind(Util.SERVERNAME, this);
+		UnicastRemoteObject.exportObject(this, 0);
+		System.out.println("Connecting to database... (This might take a while)");
+		getAllProducts();
+		System.out.println("Server started");
+	}
 
-    @Override
-    public int registerClient(CallbackClient callbackClient) throws RemoteException {
-        int currentID;
-        do {
-            currentID = 1 + (int) (Math.random() * 2048);
-        } while (callbackClients.get(currentID) != null); // TODO: Rettes til CVR senere
-        callbackClients.put(currentID, callbackClient);
-        return currentID;
-    }
+	@Override
+	public int registerClient(CallbackClient callbackClient) throws RemoteException {
+		int currentID;
+		do {
+			currentID = 1 + (int) (Math.random() * 2048);
+		} while (callbackClients.get(currentID) != null); // TODO: Rettes til CVR senere
+		callbackClients.put(currentID, callbackClient);
+		return currentID;
+	}
 
-    @Override
-    public void removeClient(int clientID) throws RemoteException {
-        callbackClients.remove(clientID);
-    }
+	@Override
+	public void removeClient(int clientID) throws RemoteException {
+		callbackClients.remove(clientID);
+	}
 
-    @Override
-    public void getWares(int id) throws RemoteException { // Can overload this, creating a getWares(int id, String category)
-        getAllProducts();
-        callbackClients.get(id).update(wares);
-    }
+	@Override
+	public void getWares(int id) throws RemoteException { // Can overload this, creating a getWares(int id, String category)
+		getAllProducts();
+		callbackClients.get(id).update(wares);
+	}
 
-    @Override
-    public boolean sendOrder(int cvr, Basket basket, double sum) throws RemoteException { // TODO: Hvad skal der ske med Basket her? ~Young
-        System.out.println("SERVER: CVR: " + cvr + "\tORDER SIZE: " + basket.getBasket().size() + "\tSUM: " + sum);
-        dataModel.createOrder(cvr, sum, LocalDate.now());
-        return true;
-    }
+	@Override
+	public boolean sendOrder(int cvr, Basket basket, double sum) throws RemoteException { // TODO: Hvad skal der ske med Basket her? ~Young
+		System.out.println("SERVER: CVR: " + cvr + "\tORDER SIZE: " + basket.getBasket().size() + "\tSUM: " + sum);
+		if (dataModel.verifyOrder(basket)) {
+			dataModel.createOrder(cvr, sum, LocalDate.now());
+			return true;
+		}
+		return false;
+	}
+
+
 }

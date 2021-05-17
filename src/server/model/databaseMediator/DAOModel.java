@@ -135,7 +135,11 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 	}
 
 	public int getProductAmountInStockFromProductId(int id) throws SQLException {
-		return Integer.parseInt(getFrom("select amountInStock from product where productId =", id));
+		String queryResult = getFrom("select amountInStock from product where productId =", id);
+		if (queryResult.isEmpty()) {
+			return 0;
+		}
+		return Integer.parseInt(queryResult);
 	}
 
 	public String getProductTagsFromProductId(int id) throws SQLException {
@@ -251,8 +255,9 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		try (Connection connection = getConnection()) {
 			PreparedStatement statement = connection.prepareStatement(SQLStatement + i);
 			ResultSet result = statement.executeQuery();
-			result.next();
-			str = result.getString(1);
+			if (result.next()) {
+				str = result.getString(1);
+			}
 		}
 		return str;
 	}

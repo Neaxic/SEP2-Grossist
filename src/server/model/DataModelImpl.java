@@ -3,7 +3,7 @@ package server.model;
 import server.model.databaseMediator.BaseDAO;
 import server.model.databaseMediator.DAOModel;
 import server.model.databaseMediator.ModelInterface;
-import shared.wares.Alcohol;
+import shared.wares.Basket;
 import shared.wares.Product;
 
 import java.sql.SQLException;
@@ -22,10 +22,26 @@ public class DataModelImpl {
 	}
 
 	public HashMap<String, ArrayList<Product>> getAllProducts() {
-	  return model.getAllProducts();
+		return model.getAllProducts();
 	}
 
-	public void createOrder(int cvr, double sum, LocalDate date){
-		model.createOrder(cvr,sum,date);
+	public boolean verifyOrder(Basket orderItems) {
+		DAOModel m = (DAOModel) model;
+		int inStock;
+		for (Product p : orderItems.getBasket().keySet()) {
+			try {
+				inStock = m.getProductAmountInStockFromProductId(p.getWareNumber());
+				if (inStock < orderItems.getAmount(p)) {
+					return false;
+				}
+			} catch (SQLException throwable) {
+				throwable.printStackTrace();
+			}
+		}
+		return true;
+	}
+
+	public void createOrder(int cvr, double sum, LocalDate date) {
+		model.createOrder(cvr, sum, date);
 	}
 }
