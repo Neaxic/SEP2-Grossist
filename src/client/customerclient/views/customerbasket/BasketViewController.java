@@ -78,8 +78,8 @@ public class BasketViewController implements CustomerViewController {
 			basketTable.getItems().clear();
 			basketSum.setText("");
 			viewModel.loadAllProducts().clear();
-		} else {
-			System.out.println("Error sending order");
+		} else { //SOUT
+			System.out.println("BasketViewController: Error sending order");
 		}
 	}
 
