@@ -20,9 +20,9 @@ public class ClientFactory {
 	}
 
 	public Client getClient() {
-			if (client == null) {
-				client = new RMIClient();
-			}
-			return client;
+		if (client == null) {
+			client = new RMIClient();
+		}
+		return client;
 	}
 }
