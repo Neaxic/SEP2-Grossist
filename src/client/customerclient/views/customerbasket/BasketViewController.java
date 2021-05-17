@@ -74,10 +74,13 @@ public class BasketViewController implements CustomerViewController {
 	}
 
 	public void sendOrder() {
-		viewModel.sendOrder();
-		basketTable.getItems().clear();
-		basketSum.setText("");
-		viewModel.loadAllProducts().clear();
+		if (viewModel.sendOrder()) {
+			basketTable.getItems().clear();
+			basketSum.setText("");
+			viewModel.loadAllProducts().clear();
+		} else {
+			System.out.println("Error sending order");
+		}
 	}
 
 	// SCENE MANAGING

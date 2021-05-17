@@ -61,14 +61,15 @@ public class RMIServer implements RMIServerInterface {
     }
 
     @Override
-    public void getWares(int id) throws RemoteException { // TODO: Can overload this, creating a getWares(int id, String category)
+    public void getWares(int id) throws RemoteException { // Can overload this, creating a getWares(int id, String category)
         getAllProducts();
         callbackClients.get(id).update(wares);
     }
 
     @Override
-    public void sendOrder(int cvr, Basket basket, double sum) throws RemoteException {
-        System.out.println("SERVER: CVR: " + cvr + " SIZE: " + basket.getBasket().size() + " SUM: " + sum);
+    public boolean sendOrder(int cvr, Basket basket, double sum) throws RemoteException { // TODO: Hvad skal der ske med Basket her? ~Young
+        System.out.println("SERVER: CVR: " + cvr + "\tORDER SIZE: " + basket.getBasket().size() + "\tSUM: " + sum);
         dataModel.createOrder(cvr, sum, LocalDate.now());
+        return true;
     }
 }

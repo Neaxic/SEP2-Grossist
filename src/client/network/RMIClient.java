@@ -65,13 +65,14 @@ public class RMIClient implements Client, CallbackClient, Subject {
 		}
 	}
 
-	public void sendOrder(int cvr, Basket basket, double sum){
+	public boolean sendOrder(int cvr, Basket basket, double sum){
 		try{
-			server.sendOrder(cvr, basket, sum);
+			return server.sendOrder(cvr, basket, sum);
 		} catch (RemoteException remoteException){
 			System.out.println("RMICLIENT [sendOrder()] > \t");
 			remoteException.printStackTrace();
 		}
+		return false;
 	}
 
 	@Override

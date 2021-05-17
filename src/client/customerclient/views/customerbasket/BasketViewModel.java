@@ -23,7 +23,7 @@ public class BasketViewModel implements CustomerViewModel {
 		model.getMyBasket().removeProductWithSameWareNum(selected.getProductID());
 	}
 
-	public void sendOrder() {
+	public boolean sendOrder() {
 		double sum = 0;
 		if (model.getMyBasket().getBasket().keySet().isEmpty()) {
 			throw new MissingResourceException("No items in Basket to Order", "BasketViewModel", "BVM");
@@ -31,7 +31,7 @@ public class BasketViewModel implements CustomerViewModel {
 		for (Product i : model.getMyBasket().getBasket().keySet()) {
 			sum += i.getPrice() * model.getMyBasket().getBasket().get(i);
 		}
-		model.sendOrder(model.getMyBasket(), sum);
+		return model.sendOrder(model.getMyBasket(), sum);
 	}
 
 	public HashMap<Product, Integer> loadAllProducts() {

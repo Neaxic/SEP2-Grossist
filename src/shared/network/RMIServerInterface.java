@@ -42,6 +42,6 @@ public interface RMIServerInterface extends Remote {
 	 */
 	void getWares(int clientID) throws RemoteException;
 
-	void sendOrder(int cvr, Basket basket, double sum) throws RemoteException;
+	boolean sendOrder(int cvr, Basket basket, double sum) throws RemoteException;
 
 }

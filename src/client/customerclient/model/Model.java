@@ -94,10 +94,11 @@ public class Model implements CustomerModelInterface {
 	 *
 	 * @param basket A Basket consisting of the items desired for the order sent
 	 * @param sum    The summed price of all the items in the order
+	 * @return True if order was correctly sent, false if any error occured
 	 */
 	//TODO: KOM TILBAGE HER TIL NOT DONE MAKKER
-	public void sendOrder(Basket basket, double sum) {
-		client.sendOrder(LoginManager.cvr, basket, sum);
+	public boolean sendOrder(Basket basket, double sum) {
+		return client.sendOrder(LoginManager.cvr, basket, sum);
 	}
 
 	/**
