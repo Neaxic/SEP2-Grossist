@@ -1,11 +1,11 @@
 package client.customerclient.model;
 
 import client.core.LoginManager;
+import client.customerclient.views.customerbasket.ProductAndInt;
 import client.network.Client;
 import client.network.RMIClient;
 import shared.wares.Basket;
 import shared.wares.Product;
-import shared.wares.OLD_Product;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -13,7 +13,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//Andreas Young
+// Andreas Young
 
 public class Model implements CustomerModelInterface {
 	private PropertyChangeSupport support;
@@ -29,14 +29,28 @@ public class Model implements CustomerModelInterface {
 		myBasket = new Basket();
 	}
 
+	/**
+	 * Adds a product to the Users Basket
+	 * @param product The product of which to add to user basket
+	 * @param amount The amount of the product to be added to the basket
+	 */
 	public void addToBasket(Product product, int amount) {
 		myBasket.addProduct(product, amount);
 	}
 
+	/**
+	 * Removes all of an item from the Users Basket
+	 * @param product The product which is wished to be removed from the Users Basket
+	 */
 	public void removeFromBasket(Product product) {
 		myBasket.removeProduct(product);
 	}
 
+	/**
+	 * Changes the amount of a product in the Users Basket
+	 * @param product The product of which to change the amount
+	 * @param newAmount The new desired amount of the specified product
+	 */
 	public void changeAmount(Product product, int newAmount) {
 		myBasket.changeAmount(product, newAmount);
 	}
@@ -57,33 +71,51 @@ public class Model implements CustomerModelInterface {
 		support.firePropertyChange(new PropertyChangeEvent(this, "waresUpdated", null, null));
 	}
 
+	/**
+	 * Requests an updated warelist from the Client
+	 */
 	public void updateWares() {
 		client.getWares();
 	}
 
+	/**
+	 * Requests the users current basket
+	 * @return The active basket
+	 */
 	public Basket getMyBasket() {
 		return myBasket;
 	}
 
+	/**
+	 * Requests the client sending an order to the server
+	 * @param basket A Basket consisting of the items desired for the order sent
+	 * @param sum The summed price of all the items in the order
+	 */
 	//TODO: KOM TILBAGE HER TIL NOT DONE MAKKER
-	public void sendOrder(Basket basket, double sum){
+	public void sendOrder(Basket basket, double sum) {
 		client.sendOrder(LoginManager.cvr, basket, sum);
 	}
 
-	public ArrayList<Product> getAllWares()
-	{
+	/**
+	 * Creates an ArrayList of products, consisting of the products in the Model's current warelist HashMap
+	 * @return Arraylist of products currently stored on the Model
+	 */
+	public ArrayList<Product> getAllWares() {
 		ArrayList<Product> returnList = new ArrayList<>();
 
-		for (ArrayList<Product> list : wareList.values())
-		{
+		for (ArrayList<Product> list : wareList.values()) {
 			returnList.addAll(list);
 		}
 
 		return returnList;
 	}
 
-	public ArrayList<Product> getCategory(String category)
-	{
+	/**
+	 * Creates an ArrayList of products, consisting of the products in the Model's current warelist HashMap only in the specified category
+	 * @param category Key used in the HashMap for defining ware categories
+	 * @return <b>ArrayList</b> consisting only of the products from the specified Category
+	 */
+	public ArrayList<Product> getCategory(String category) {
 		return wareList.get(category);
 	}
 }
