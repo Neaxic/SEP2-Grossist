@@ -134,8 +134,8 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		return getFrom("select bbDate from product where productId =", id);
 	}
 
-	public String getProductAmountInStockFromProductId(int id) throws SQLException {
-		return getFrom("select amountInStock from product where productId =", id);
+	public int getProductAmountInStockFromProductId(int id) throws SQLException {
+		return Integer.parseInt(getFrom("select amountInStock from product where productId =", id));
 	}
 
 	public String getProductTagsFromProductId(int id) throws SQLException {
