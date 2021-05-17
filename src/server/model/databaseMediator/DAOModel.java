@@ -124,7 +124,7 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		return getFrom("select producesBy from product where productId =", id);
 	}
 
-	public int getProductsalesPriceFromProductId(int id) throws SQLException {
+	public int getProductSalesPriceFromProductId(int id) throws SQLException {
 		String q = getFrom("select salesPrice from product where productId =", id);
 		int i = Integer.parseInt(q);
 		return i;
@@ -150,7 +150,7 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		return getProductIds("alcoholicbeverage");
 	}
 
-	public double getAlcoholicProcentageFromProductId(int id) throws SQLException {
+	public double getAlcoholicPercentageFromProductId(int id) throws SQLException {
 		String q = getFrom("select alcoholpercentage from alcoholicbeverage where productId =", id);
 		Double i = Double.parseDouble(q);
 		return i;
@@ -202,7 +202,7 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		return q;
 	}
 
-	public ArrayList<Integer> getfrozenFoodIds() throws SQLException {
+	public ArrayList<Integer> getFrozenFoodIds() throws SQLException {
 		return getProductIds("frozenfood");
 	}
 
