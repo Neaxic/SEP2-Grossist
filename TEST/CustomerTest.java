@@ -2,6 +2,7 @@ import client.core.ClientFactory;
 import client.core.LoginManager;
 import client.core.ModelFactory;
 import client.customerclient.model.CustomerModel;
+import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.views.customerbasket.BasketViewModel;
 import client.customerclient.views.customerbasket.ProductAndInt;
 import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
@@ -18,12 +19,12 @@ import java.time.LocalDate;
 import java.util.MissingResourceException;
 
 import static org.junit.jupiter.api.Assertions.*;
-// Young og en overdosis af Anastasia Te. Det her kan umuligt være sundt
+// Andreas Young
 
 public class CustomerTest {
 	static Product p = new Alcohol("Soplica Malinowa", "Liter", LocalDate.now(), 420, 10, 10, 10, "Poland", 30d, "Vodka");
 	static int a = 1;
-	static CustomerModel customerModel;
+	static CustomerModelInterface customerModel;
 
 	@Test
 	void jUnitTest() {
@@ -46,8 +47,8 @@ public class CustomerTest {
 
 		@BeforeEach
 		void setUp() {
-			vm = new CustomerBrowserViewModel();
-			customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
+			vm = new CustomerBrowserViewModel(customerModel);
+			//customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
 		}
 
 		@Test

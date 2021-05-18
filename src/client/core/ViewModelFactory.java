@@ -1,5 +1,6 @@
 package client.core;
 
+import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
 import client.customerclient.views.CustomerViewModel;
 import client.customerclient.views.customerbasket.BasketViewModel;
@@ -17,7 +18,6 @@ public class ViewModelFactory
   private PlaceOrderViewModel placeOrderViewModel;
   private CustomerBrowserViewModel customerBrowseViewModel;
   private BasketViewModel basketViewModel;
-
   private GrosserMainViewModel grosserMainViewModel;
 
   private ViewModelFactory()
@@ -43,11 +43,12 @@ public class ViewModelFactory
     return placeOrderViewModel;
   }
 
-  public CustomerViewModel customerBrowseViewModel()
+  public CustomerViewModel customerBrowseViewModel(CustomerModelInterface customerModelInterface)
   {
     if (customerBrowseViewModel == null)
     {
-      customerBrowseViewModel = new CustomerBrowserViewModel();
+      customerBrowseViewModel = new CustomerBrowserViewModel(
+          customerModelInterface);
     }
     return customerBrowseViewModel;
   }
