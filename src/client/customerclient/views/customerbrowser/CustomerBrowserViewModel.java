@@ -1,5 +1,6 @@
 package client.customerclient.views.customerbrowser;
 
+import client.core.ModelFactory;
 import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.views.CustomerViewModel;
 import javafx.beans.property.SimpleListProperty;
@@ -13,11 +14,10 @@ import java.beans.PropertyChangeListener;
 
 public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChangeListener {
 	private final CustomerModelInterface customerModelInterface;
-	//gennem interface!
 	private SimpleListProperty<Product> activeItemList;
 
-	public CustomerBrowserViewModel(CustomerModelInterface customerModelInterface) {
-		this.customerModelInterface = customerModelInterface;
+	public CustomerBrowserViewModel() {
+		this.customerModelInterface = ModelFactory.getInstance().getCustomerModel();
 		activeItemList = new SimpleListProperty<>();
 		customerModelInterface.addListener(this);
 	}

@@ -60,7 +60,7 @@ public class BasketViewController implements CustomerViewController {
 	public void removeItemFromBasket() {
 		Object item = basketTable.getSelectionModel().getSelectedItem(); // Item is an instance of ´ProductAndInt´
 		viewModel.removeFromBasket(item);
-//basketTable.refresh(); // Denne metode blev tilføjet for 4 år siden til JavaFX og burde opdatere et TableView, men den virker ikke
+		//basketTable.refresh(); // Denne metode blev tilføjet for 4 år siden til JavaFX og burde opdatere et TableView, men den virker ikke
 		//TODO: Viewet refresher ikke, efter fjerelse
 
 		// kunne ikke få det til at virke gliende så tager care af vigtigere ting

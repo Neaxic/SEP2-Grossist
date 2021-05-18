@@ -3,6 +3,7 @@ package client.customerclient.views.customerbasket;
 
 import client.core.ModelFactory;
 import client.customerclient.model.CustomerModel;
+import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.views.CustomerViewModel;
 import shared.wares.Product;
 
@@ -12,10 +13,10 @@ import java.util.MissingResourceException;
 // Andreas Young, Andreas Østergaard
 
 public class BasketViewModel implements CustomerViewModel {
-	private CustomerModel customerModel;
+	private CustomerModelInterface customerModel;
 
 	public BasketViewModel() {
-		customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
+		customerModel = ModelFactory.getInstance().getCustomerModel();
 	}
 
 	public void removeFromBasket(Object item) {

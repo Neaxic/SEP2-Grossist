@@ -254,8 +254,7 @@ public class DAOModel extends BaseDAO implements ModelInterface
 		return getProductIds("dairyandeggs");
 	}
 
-	public ArrayList<Order> getAllOrders()
-	{
+	public ArrayList<Order> getAllOrders()	{
 		ArrayList<Order> orders = new ArrayList<>();
 		try (Connection connection = getConnection())
 		{
