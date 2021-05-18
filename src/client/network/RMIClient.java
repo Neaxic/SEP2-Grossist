@@ -3,10 +3,8 @@ package client.network;
 import javafx.util.Pair;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
-import shared.network.Subject;
 import shared.util.Util;
 import shared.wares.Basket;
-import shared.wares.OLD_Product;
 import shared.wares.Order;
 import shared.wares.Product;
 
@@ -18,7 +16,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,16 +32,16 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 
 	@Override
 	public void start() {
-		System.out.println("Connecting to Server...");
+		System.out.println("Connecting to Server...");//SOUT
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
 			server = (RMIServerInterface) registry.lookup(Util.SERVERNAME);
 			UnicastRemoteObject.exportObject(this, 0);
 		} catch (RemoteException | NotBoundException e) {
-			System.out.println("RMIClient [start()] > \t" + e.getMessage());
+			System.out.println("RMIClient [start()] > \t" + e.getMessage());//SOUT
 		}
 		registerOnServer();
-		System.out.println("Connection Established...");
+		System.out.println("Connection Established...");//SOUT
 	}
 
 	/**
@@ -54,7 +51,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 		try {
 			clientID = server.registerClient(this);
 		} catch (RemoteException remoteException) {
-			System.out.println("RMIClient [registerOnServer()] > \tServer Connection missing");
+			System.out.println("RMIClient [registerOnServer()] > \tServer Connection missing"); //SOUT
 		}
 	}
 
@@ -63,7 +60,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 		try {
 			server.getWares(clientID);
 		} catch (RemoteException remoteException) {
-			System.out.println("RMIClient [getWares()] > \t");
+			System.out.println("RMIClient [getWares()] > \t");//SOUT
 			remoteException.printStackTrace();
 		}
 	}
@@ -72,7 +69,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 		try {
 			return server.sendOrder(cvr, basket, sum);
 		} catch (RemoteException remoteException) {
-			System.out.println("RMICLIENT [sendOrder()] > \t");
+			System.out.println("RMICLIENT [sendOrder()] > \t");//SOUT
 			remoteException.printStackTrace();
 		}
 		return new Pair<>(false, null);
@@ -83,7 +80,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 		try {
 			server.getAllOrders(clientID);
 		} catch (RemoteException e) {
-			System.out.println("RMICLIENT [getAllOrders()] > \t");
+			System.out.println("RMICLIENT [getAllOrders()] > \t");//SOUT
 			e.printStackTrace();
 		}
 	}
@@ -93,7 +90,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 		try {
 			server.createProduct(newProduct);
 		} catch(RemoteException e) {
-			System.out.println("RMICLIENT [createProduct()] > \t");
+			System.out.println("RMICLIENT [createProduct()] > \t");//SOUT
 			e.printStackTrace();
 		}
 	}
