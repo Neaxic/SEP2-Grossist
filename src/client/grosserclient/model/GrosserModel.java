@@ -2,6 +2,7 @@ package client.grosserclient.model;
 
 import client.network.Client;
 import client.network.RMIClient;
+import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -40,5 +41,10 @@ public class GrosserModel implements GrosserModelInterface
   @Override public void getAllOrders()
   {
     client.getAllOrders();
+  }
+
+  @Override
+  public void createNewProduct(Product newProduct) {
+
   }
 }
