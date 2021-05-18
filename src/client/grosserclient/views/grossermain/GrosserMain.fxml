@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -31,7 +32,12 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="searchBar" prefHeight="27.0" prefWidth="241.0" promptText="Ordre#..." />
+            <HBox>
+               <children>
+                  <TextField fx:id="searchBar" prefHeight="27.0" prefWidth="656.0" promptText="Ordre#..." />
+                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Søg" />
+               </children>
+            </HBox>
             <TableView fx:id="orderTable" prefHeight="488.0" prefWidth="541.0">
               <columns>
                 <TableColumn fx:id="tableCVR" prefWidth="155.345397233963" resizable="false" text="CVR" />
