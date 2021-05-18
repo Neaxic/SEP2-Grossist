@@ -7,33 +7,42 @@ import client.grosserclient.model.GrosserModelInterface;
 
 // Andreas Østergaard, Frederik Bergmann
 
-public class ModelFactory {
-    private static ModelFactory instance;
-    private CustomerModelInterface customerModelInterface;
-    private GrosserModelInterface grosserModelInterface;
+public class ModelFactory
+{
+  private static ModelFactory instance;
+  private CustomerModelInterface customerModelInterface;
+  private GrosserModelInterface grosserModelInterface;
 
-    private ModelFactory() {
-    }
+  private ModelFactory()
+  {
+  }
 
-    public static ModelFactory getInstance() {
-        if (instance == null) {
-            instance = new ModelFactory();
-        }
-        return instance;
-    }
-
-    public CustomerModelInterface getCustomerModel() {
-        if (customerModelInterface == null) {
-            customerModelInterface = new CustomerModel(ClientFactory.getInstance().getClient());
-        }
-        return customerModelInterface;
-    }
-
-    public GrosserModelInterface getGrosserModel()
+  public static ModelFactory getInstance()
+  {
+    if (instance == null)
     {
-        if (grosserModelInterface == null)
-        {
-            grosserModelInterface = new GrosserModel()
-        }
+      instance = new ModelFactory();
     }
+    return instance;
+  }
+
+  public CustomerModelInterface getCustomerModel()
+  {
+    if (customerModelInterface == null)
+    {
+      customerModelInterface = new CustomerModel(
+          ClientFactory.getInstance().getClient());
+    }
+    return customerModelInterface;
+  }
+
+  public GrosserModelInterface getGrosserModel()
+  {
+    if (grosserModelInterface == null)
+    {
+      grosserModelInterface = new GrosserModel(
+          ClientFactory.getInstance().getClient());
+    }
+    return grosserModelInterface;
+  }
 }
