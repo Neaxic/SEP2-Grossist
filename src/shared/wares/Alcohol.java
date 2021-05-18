@@ -13,9 +13,9 @@ public class Alcohol extends Product implements ProductInterface {
 
 	// TODO: Opdater med params når database opdateres, eller anden aftale er lavet
 	public Alcohol(Object[] params) {
-		super((String) params[1], (String) params[2], ((Date) params[6]).toLocalDate(), (Integer) params[0], 10, ((BigDecimal)params[5]).doubleValue(), (Integer) params[3]);
+		super((String) params[1], (String) params[2], ((Date) params[6]).toLocalDate(), (Integer) params[0], 10, ((BigDecimal) params[5]).doubleValue(), (Integer) params[3]);
 		originCountry = (String) params[10];
-		percentage = ((BigDecimal)params[9]).doubleValue();
+		percentage = ((BigDecimal) params[9]).doubleValue();
 		beverageType = (String) params[11];
 	}
 
@@ -36,6 +36,16 @@ public class Alcohol extends Product implements ProductInterface {
 
 	public String getBeverageType() {
 		return beverageType;
+	}
+
+	@Override
+	public String sqlTemplate() {
+		return super.sqlTemplate() + ", alcoholPercentage, productionCountry, type";
+	}
+
+	@Override
+	public String sqlInformation() {
+		return super.sqlInformation() + ", " + percentage + ", " + originCountry + ", " + beverageType;
 	}
 
 }

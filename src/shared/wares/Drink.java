@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class Drink extends Product implements ProductInterface {
 	private String beverageType;
 
-	public Drink(Object [] params) {
+	public Drink(Object[] params) {
 		super((String) params[1], (String) params[2], ((Date) params[6]).toLocalDate(), (Integer) params[0], 10, ((BigDecimal) params[5]).doubleValue(), (Integer) params[3]);
 		beverageType = (String) params[9];
 	}
@@ -23,4 +23,15 @@ public class Drink extends Product implements ProductInterface {
 	public String getBeverageType() {
 		return beverageType;
 	}
+
+	@Override
+	public String sqlTemplate() {
+		return super.sqlTemplate() + ", type";
+	}
+
+	@Override
+	public String sqlInformation() {
+		return super.sqlInformation() +", " + beverageType;
+	}
+
 }

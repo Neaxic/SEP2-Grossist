@@ -1,5 +1,7 @@
 package shared.wares;
 
+import shared.util.SchemaMap;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -89,6 +91,22 @@ public abstract class Product implements Serializable {
 	@Override
 	public String toString() {
 		return "(" + wareNumber + ") " + wareName;
+	}
+
+	/**
+	 * Creates an INSERT query into the Class' mapped Table and returns an open ended query for addition information if needed
+	 * @return INSERT INTO query open ended for SQL Column Names
+	 */
+	public String sqlTemplate(){
+		return "INSERT INTO " + SchemaMap.Mapping(this.getClass()) + " (productName, measurement, minPurchase, producedBy, salesprice, bbDate, tags, amountInStock";
+	}
+
+	/**
+	 * Creates the VALUES part of an INSERT query and returns an open ended query for addition information if needed
+	 * @return Information regarding product, open ended for SQL Column Information
+	 */
+	public String sqlInformation(){
+		return "VALUES (" + wareName + "," + measurementType + "," + minimumAmountForPurchase + "," + null + "," + price + "," + bestBefore + tags;
 	}
 }
 
