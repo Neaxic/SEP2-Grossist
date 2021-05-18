@@ -1,17 +1,16 @@
 package client.core;
 
 import client.customerclient.model.CustomerModelInterface;
-import client.customerclient.model.Model;
-import client.network.Client;
-import client.network.RMIClient;
-
-import java.rmi.RemoteException;
+import client.customerclient.model.CustomerModel;
+import client.grosserclient.model.GrosserModel;
+import client.grosserclient.model.GrosserModelInterface;
 
 // Andreas Østergaard, Frederik Bergmann
 
 public class ModelFactory {
     private static ModelFactory instance;
-    CustomerModelInterface model;
+    private CustomerModelInterface customerModelInterface;
+    private GrosserModelInterface grosserModelInterface;
 
     private ModelFactory() {
     }
@@ -24,9 +23,17 @@ public class ModelFactory {
     }
 
     public CustomerModelInterface getCustomerModel() {
-        if (model == null) {
-            model = new Model(ClientFactory.getInstance().getClient());
+        if (customerModelInterface == null) {
+            customerModelInterface = new CustomerModel(ClientFactory.getInstance().getClient());
         }
-        return model;
+        return customerModelInterface;
+    }
+
+    public GrosserModelInterface getGrosserModel()
+    {
+        if (grosserModelInterface == null)
+        {
+            grosserModelInterface = new GrosserModel()
+        }
     }
 }

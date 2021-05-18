@@ -1,7 +1,7 @@
 import client.core.ClientFactory;
 import client.core.LoginManager;
 import client.core.ModelFactory;
-import client.customerclient.model.Model;
+import client.customerclient.model.CustomerModel;
 import client.customerclient.views.customerbasket.BasketViewModel;
 import client.customerclient.views.customerbasket.ProductAndInt;
 import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import server.server.RMIServer;
 import shared.network.RMIServerInterface;
 import shared.wares.Alcohol;
-import shared.wares.Basket;
 import shared.wares.Product;
 
 import java.sql.SQLException;
@@ -24,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CustomerTest {
 	static Product p = new Alcohol("Soplica Malinowa", "Liter", LocalDate.now(), 420, 10, 10, 10, "Poland", 30d, "Vodka");
 	static int a = 1;
-	static Model model;
+	static CustomerModel customerModel;
 
 	@Test
 	void jUnitTest() {
@@ -48,7 +47,7 @@ public class CustomerTest {
 		@BeforeEach
 		void setUp() {
 			vm = new CustomerBrowserViewModel();
-			model = (Model) ModelFactory.getInstance().getCustomerModel();
+			customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
 		}
 
 		@Test
@@ -61,9 +60,9 @@ public class CustomerTest {
 		@Test
 		void addToBasket() {
 			vm.loadAllProductsToModel();
-			assertTrue(model.getMyBasket().getBasket().isEmpty());
+			assertTrue(customerModel.getMyBasket().getBasket().isEmpty());
 			vm.addToBasket(1, 1);
-			assertFalse(model.getMyBasket().getBasket().isEmpty());
+			assertFalse(customerModel.getMyBasket().getBasket().isEmpty());
 		}
 	}
 
@@ -84,32 +83,33 @@ public class CustomerTest {
 		@BeforeEach
 		void setUp() {
 			vm = new BasketViewModel();
-			model = (Model) ModelFactory.getInstance().getCustomerModel();
+			customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
 		}
 
 		@Test
 		void removeFromBasket() {
-			model.addToBasket(p, a);
-			assertFalse(model.getMyBasket().getBasket().isEmpty());
+			customerModel.addToBasket(p, a);
+			assertFalse(customerModel.getMyBasket().getBasket().isEmpty());
 			vm.removeFromBasket(new ProductAndInt(p.getWareName(), p.getWareNumber(), a));
-			assertTrue(model.getMyBasket().getBasket().isEmpty());
+			assertTrue(customerModel.getMyBasket().getBasket().isEmpty());
 		}
 
 		@Test
 		void sendOrder() {
 			LoginManager.cvr = 1;
 			assertThrows(MissingResourceException.class, () -> vm.sendOrder());
-			model.addToBasket(p, a);
+			customerModel.addToBasket(p, a);
 			assertDoesNotThrow(() -> vm.sendOrder());
 		}
 
 		@Test
 		void loadAllProducts() {
-			assertEquals(model.getMyBasket().getBasket(), vm.loadAllProducts());
+			assertEquals(customerModel.getMyBasket().getBasket(), vm.loadAllProducts());
 		}
 	}
 
-	static class CustomerModelTest {
+	static class CustomerCustomerModelTest
+	{
 		@BeforeAll
 		static void init() {
 			try {
@@ -123,66 +123,68 @@ public class CustomerTest {
 
 		@BeforeEach
 		void setUp() {
-			model = (Model) ModelFactory.getInstance().getCustomerModel();
+			customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
 		}
 
 		@Test
 		void addToBasket() {
-			assertTrue(model.getMyBasket().getBasket().isEmpty());
-			assertDoesNotThrow(() -> model.addToBasket(p, a));
-			assertFalse(model.getMyBasket().getBasket().isEmpty());
+			assertTrue(customerModel.getMyBasket().getBasket().isEmpty());
+			assertDoesNotThrow(() -> customerModel.addToBasket(p, a));
+			assertFalse(customerModel.getMyBasket().getBasket().isEmpty());
 		}
 
 		@Test
 		void removeFromBasket() {
-			assertDoesNotThrow(() -> model.removeFromBasket(p)); // Documentation does not state, it shall throw an Error when the basket is empty and you attempt to remove an item from it
-			model.addToBasket(p, a);
-			assertFalse(model.getMyBasket().getBasket().isEmpty());
-			assertDoesNotThrow(() -> model.removeFromBasket(p));
-			assertTrue(model.getMyBasket().getBasket().isEmpty());
+			assertDoesNotThrow(() -> customerModel.removeFromBasket(p)); // Documentation does not state, it shall throw an Error when the basket is empty and you attempt to remove an item from it
+			customerModel.addToBasket(p, a);
+			assertFalse(customerModel.getMyBasket().getBasket().isEmpty());
+			assertDoesNotThrow(() -> customerModel.removeFromBasket(p));
+			assertTrue(customerModel.getMyBasket().getBasket().isEmpty());
 		}
 
 		@Test
 		void changeAmount() {
 			int n = 2;
-			model.addToBasket(p, a);
-			assertDoesNotThrow(() -> model.changeAmount(p, n));
-			assertEquals(n, model.getMyBasket().getAmount(p));
+			customerModel.addToBasket(p, a);
+			assertDoesNotThrow(() -> customerModel.changeAmount(p, n));
+			assertEquals(n, customerModel.getMyBasket().getAmount(p));
 		}
 
 		@Test
 		void updateWares() { // Unsure of how we should go about testing this
-			assertDoesNotThrow(() -> model.updateWares());
-			assertFalse(model.getAllWares().isEmpty());
+			assertDoesNotThrow(() -> customerModel.updateWares());
+			assertFalse(customerModel.getAllWares().isEmpty());
 		}
 
 		@Test
 		void getMyBasket() {
-			assertNotNull(model.getMyBasket());
-			assertTrue(model.getMyBasket().getBasket().isEmpty());
-			model.addToBasket(p, a);
-			assertFalse(model.getMyBasket().getBasket().isEmpty());
+			assertNotNull(customerModel.getMyBasket());
+			assertTrue(customerModel.getMyBasket().getBasket().isEmpty());
+			customerModel.addToBasket(p, a);
+			assertFalse(customerModel.getMyBasket().getBasket().isEmpty());
 		}
 
 		@Test
 		void sendOrder() {
-			assertThrows(MissingResourceException.class, () -> model.sendOrder(model.getMyBasket(), 10));
-			model.addToBasket(p, a);
-			assertDoesNotThrow(() -> model.sendOrder(model.getMyBasket(), 10));
+			assertThrows(MissingResourceException.class, () -> customerModel
+					.sendOrder(customerModel.getMyBasket(), 10));
+			customerModel.addToBasket(p, a);
+			assertDoesNotThrow(() -> customerModel
+					.sendOrder(customerModel.getMyBasket(), 10));
 		}
 
 		@Test
 		void getAllWares() {
-			assertTrue(model.getAllWares().isEmpty());
-			model.updateWares();
-			assertFalse(model.getAllWares().isEmpty());
+			assertTrue(customerModel.getAllWares().isEmpty());
+			customerModel.updateWares();
+			assertFalse(customerModel.getAllWares().isEmpty());
 		}
 
 		@Test
 		void getCategory() {
-			assertTrue(model.getCategory("Drink").isEmpty());
-			model.updateWares();
-			assertTrue(model.getAllWares().containsAll(model.getCategory("Drink")));
+			assertTrue(customerModel.getCategory("Drink").isEmpty());
+			customerModel.updateWares();
+			assertTrue(customerModel.getAllWares().containsAll(customerModel.getCategory("Drink")));
 		}
 	}
 }

@@ -1,7 +1,7 @@
 package client.customerclient.views.customerbrowser;
 
 import client.core.ModelFactory;
-import client.customerclient.model.Model;
+import client.customerclient.model.CustomerModel;
 import client.customerclient.views.CustomerViewModel;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -13,18 +13,18 @@ import java.beans.PropertyChangeListener;
 // Andreas Young, Line Guld
 
 public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChangeListener {
-	private Model model; //TODO: Dette her er MEGET FY, alle metode kald skal gå igennem interface!
+	private CustomerModel customerModel; //TODO: Dette her er MEGET FY, alle metode kald skal gå igennem interface!
 	private SimpleListProperty<Product> activeItemList;
 
 	public CustomerBrowserViewModel() {
-		model = (Model) ModelFactory.getInstance().getCustomerModel();
+		customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
 		activeItemList = new SimpleListProperty<>();
-		model.addListener(this);
+		customerModel.addListener(this);
 	}
 
 	public void loadAllProductsToModel() {
 		// Load products from Database
-		model.updateWares();
+		customerModel.updateWares();
 	}
 
 	public void addToBasket(int item, int amount) {
@@ -38,7 +38,7 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 			// TODO: Tjek om søgning virker
 			for (Product product : activeItemList) {
 				if (product.getWareNumber() == item) {
-					model.addToBasket(product, amount); // Product typer er forskellige
+					customerModel.addToBasket(product, amount); // Product typer er forskellige
 				}
 			}
 		}
@@ -54,7 +54,7 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 
 	private void getAllWares()
 	{
-		activeItemList.set(FXCollections.observableList(model.getAllWares()));
+		activeItemList.set(FXCollections.observableList(customerModel.getAllWares()));
 	}
 
 	@Override

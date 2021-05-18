@@ -14,13 +14,13 @@ import java.util.HashMap;
 
 // Andreas Young
 
-public class Model implements CustomerModelInterface {
+public class CustomerModel implements CustomerModelInterface {
 	private PropertyChangeSupport support;
 	RMIClient client;
 	Basket myBasket; // Måske fjerne klassen da metodekaldene ikke ændres
 	HashMap<String, ArrayList<Product>> wareList; // Lave dette til en klasse hvis vi beholder Basket?
 
-	public Model(Client client) {
+	public CustomerModel(Client client) {
 		support = new PropertyChangeSupport(this);
 		this.client = (RMIClient) client;
 		this.client.addListener(this);
