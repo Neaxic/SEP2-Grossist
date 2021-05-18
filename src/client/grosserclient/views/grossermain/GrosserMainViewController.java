@@ -3,6 +3,7 @@ package client.grosserclient.views.grossermain;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.grosserclient.views.GrosserViewController;
+import javafx.beans.property.ListProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,6 +25,8 @@ public class GrosserMainViewController implements GrosserViewController
   @FXML private TableColumn<Order, LocalDate> tableOrderDate;
   @FXML private TableColumn<Order, Double> tableSum;
 
+  private ListProperty<Order> orderList;
+
   private ViewHandler viewHandler;
   private GrosserMainViewModel viewModel;
 
@@ -31,7 +34,7 @@ public class GrosserMainViewController implements GrosserViewController
   {
     this.viewHandler = viewHandler;
     viewModel = (GrosserMainViewModel) ViewModelFactory.getInstance().grosserMainViewModel();
-
+    orderList.bind(viewModel.getOrderListProperty());
   }
 
   private void populateTable()

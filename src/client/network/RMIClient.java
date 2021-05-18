@@ -91,13 +91,13 @@ public class RMIClient implements Client, CallbackClient, Subject {
 	}
 
 	@Override
-	public void update(HashMap<String, ArrayList<Product>> list) { // Model.java is a listener
+	public void update(HashMap<String, ArrayList<Product>> list) { // CustomerModel.java is a listener
 		support.firePropertyChange("UpdatedWareList", null, list);
 	}
 
 	@Override public void updateAllOrders(ArrayList<Order> orders)
 	{
-
+		support.firePropertyChange("orderList", null, orders);
 	}
 
 	@Override

@@ -12,5 +12,5 @@ import java.util.HashMap;
 
 public interface CallbackClient extends Remote {
 	void update(HashMap<String, ArrayList<Product>> list) throws RemoteException;
-	void updateAllOrders(ArrayList<Order> orders);
+	void updateAllOrders(ArrayList<Order> orders) throws RemoteException;
 }
