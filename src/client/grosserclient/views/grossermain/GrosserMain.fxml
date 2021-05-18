@@ -44,12 +44,12 @@
       </VBox>
    </center>
    <top>
-      <MenuBar prefWidth="731.0" BorderPane.alignment="CENTER">
+      <MenuBar prefWidth="731.0" fx:id="mainNavBar" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Handlinger">
             <items>
               <MenuItem mnemonicParsing="false" text="Se varer" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                  <MenuItem mnemonicParsing="false" onAction="#addNewProductScene" text="Tilføj nyt produkt" />
             </items>
           </Menu>
         </menus>

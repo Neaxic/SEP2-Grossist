@@ -6,6 +6,7 @@ import client.grosserclient.views.GrosserViewController;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -28,6 +29,8 @@ public class GrosserMainViewController implements GrosserViewController
 
   private ListProperty<Order> orderList;
 
+  @FXML private MenuBar mainNavBar;
+
   private ViewHandler viewHandler;
   private GrosserMainViewModel viewModel;
 
@@ -49,6 +52,10 @@ public class GrosserMainViewController implements GrosserViewController
     tableSum.setCellValueFactory(new PropertyValueFactory<>("Sum"));
 
     orderTable.getItems().addAll(orderList);
+  }
+
+  @FXML private void addNewProductScene() throws IOException {
+    this.swapScene("grosseraddproduct");
   }
 
   @Override public void swapScene(String sceneName) throws IOException
