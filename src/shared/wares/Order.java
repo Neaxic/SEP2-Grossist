@@ -1,10 +1,11 @@
 package shared.wares;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 // Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
 
-public class Order
+public class Order implements Serializable
 {
   private final int CVR, orderNo;
   private final LocalDate orderDate;

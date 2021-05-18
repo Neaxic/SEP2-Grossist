@@ -36,4 +36,9 @@ public class GrosserModel implements GrosserModelInterface
       Support.firePropertyChange("orderList", null, evt.getNewValue());
     }
   }
+
+  @Override public void getAllOrders()
+  {
+    client.getAllOrders();
+  }
 }

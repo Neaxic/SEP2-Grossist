@@ -263,10 +263,10 @@ public class DAOModel extends BaseDAO implements ModelInterface
 
 			while (result.next())
 			{
-				int CVR = (int) result.getObject(1);
-				int orderNo = (int) result.getObject(2);
-				LocalDate orderDate = LocalDate.parse((String) result.getObject(3));
-				double sum = (double) result.getObject(4);
+				int CVR = result.getInt(1);
+				int orderNo = result.getInt(2);
+				LocalDate orderDate = result.getDate(3).toLocalDate();
+				double sum = result.getDouble(4);
 
 				Order order = new Order(CVR, orderNo, orderDate, sum, null); //TODO: Basket er null til der er styr på DB.
 

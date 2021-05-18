@@ -6,7 +6,9 @@ import shared.wares.Product;
 
 import java.util.ArrayList;
 
-public interface CustomerModelInterface extends Subject {
+public interface CustomerModelInterface extends Subject
+{
+
   void updateWares();
   void addToBasket(Product product, int amount);
   void removeFromBasket(Product product);

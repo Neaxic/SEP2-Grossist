@@ -50,6 +50,7 @@ public class GrosserViewHandler implements ViewHandler {
 	public void openView(String viewToOpen) throws IOException {
 		Scene scene = sceneLoader(viewToOpen);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 

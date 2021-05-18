@@ -15,6 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 <!-- Frederik Bergmann -->
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.grosserclient.views.grossermain.GrosserMainViewController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="545.0" prefWidth="712.0" BorderPane.alignment="CENTER">
@@ -30,13 +31,13 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <TextField prefHeight="27.0" prefWidth="241.0" promptText="Ordre#..." />
-            <TableView prefHeight="488.0" prefWidth="541.0">
+            <TextField fx:id="searchBar" prefHeight="27.0" prefWidth="241.0" promptText="Ordre#..." />
+            <TableView fx:id="orderTable" prefHeight="488.0" prefWidth="541.0">
               <columns>
-                <TableColumn prefWidth="155.345397233963" resizable="false" text="CVR" />
-                <TableColumn prefWidth="193.7454833984375" resizable="false" text="Ordre#" />
-                  <TableColumn prefWidth="189.3818359375" text="Ordre Dato" />
-                  <TableColumn minWidth="0.0" prefWidth="169.30902099609375" text="Sum" />
+                <TableColumn fx:id="tableCVR" prefWidth="155.345397233963" resizable="false" text="CVR" />
+                <TableColumn fx:id="tableOrderNo" prefWidth="193.7454833984375" resizable="false" text="Ordre#" />
+                  <TableColumn fx:id="tableOrderDate" prefWidth="189.3818359375" text="Ordre Dato" />
+                  <TableColumn fx:id="tableSum" minWidth="0.0" prefWidth="169.30902099609375" text="Sum" />
               </columns>
             </TableView>
          </children>

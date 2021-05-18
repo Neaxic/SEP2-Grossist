@@ -47,7 +47,7 @@ public class CustomerTest {
 
 		@BeforeEach
 		void setUp() {
-			vm = new CustomerBrowserViewModel(customerModel);
+			vm = new CustomerBrowserViewModel();
 			//customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
 		}
 

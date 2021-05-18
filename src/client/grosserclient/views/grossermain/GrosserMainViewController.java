@@ -4,6 +4,7 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.grosserclient.views.GrosserViewController;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -34,7 +35,10 @@ public class GrosserMainViewController implements GrosserViewController
   {
     this.viewHandler = viewHandler;
     viewModel = (GrosserMainViewModel) ViewModelFactory.getInstance().grosserMainViewModel();
+    orderList = new SimpleListProperty<>();
     orderList.bind(viewModel.getOrderListProperty());
+    viewModel.getAllOrders();
+    populateTable();
   }
 
   private void populateTable()
@@ -44,7 +48,7 @@ public class GrosserMainViewController implements GrosserViewController
     tableOrderDate.setCellValueFactory(new PropertyValueFactory<>("OrderDate"));
     tableSum.setCellValueFactory(new PropertyValueFactory<>("Sum"));
 
-    //TODO: Get ArrayList;
+    orderTable.getItems().addAll(orderList);
   }
 
   @Override public void swapScene(String sceneName) throws IOException
