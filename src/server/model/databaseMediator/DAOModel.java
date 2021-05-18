@@ -259,12 +259,26 @@ public class DAOModel extends BaseDAO implements ModelInterface
 		ArrayList<Order> orders = new ArrayList<>();
 		try (Connection connection = getConnection())
 		{
-			PreparedStatement statement
+			PreparedStatement statement = connection.prepareStatement("select * from order_");
+			ResultSet result = statement.executeQuery();
+
+			while (result.next())
+			{
+				int CVR = (int) result.getObject(1);
+				int orderNo = (int) result.getObject(2);
+				LocalDate orderDate = LocalDate.parse((String) result.getObject(3));
+				double sum = (double) result.getObject(4);
+
+				Order order = new Order(CVR, orderNo, orderDate, sum, null); //TODO: Basket er null til der er styr på DB.
+
+				orders.add(order);
+			}
 		}
 		catch (SQLException throwables)
 		{
 			throwables.printStackTrace();
 		}
+		return orders;
 	}
 
 	public ArrayList<Integer> getOrderNumbers() {

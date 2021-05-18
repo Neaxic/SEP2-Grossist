@@ -1,5 +1,6 @@
 package shared.network;
 
+import shared.wares.Order;
 import shared.wares.Product;
 
 import java.rmi.Remote;
@@ -11,4 +12,5 @@ import java.util.HashMap;
 
 public interface CallbackClient extends Remote {
 	void update(HashMap<String, ArrayList<Product>> list) throws RemoteException;
+	void updateAllOrders(ArrayList<Order> orders);
 }

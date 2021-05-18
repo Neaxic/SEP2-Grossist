@@ -1,6 +1,7 @@
 package server.model.databaseMediator;
 
 import shared.wares.Basket;
+import shared.wares.Order;
 import shared.wares.Product;
 
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 public interface ModelInterface
 {
   HashMap<String, ArrayList<Product>> getAllProducts();
+  ArrayList<Order> getAllOrders();
   ArrayList<Product> getProduct(String schemaName, String productClass); //TEMP FIX
   void createOrder(int cvr, double sum, LocalDate date);
   void createOrderSpec(Basket basket, int CVR, LocalDate date, double sum) throws

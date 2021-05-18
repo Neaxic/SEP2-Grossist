@@ -52,4 +52,10 @@ public interface RMIServerInterface extends Remote {
 	 */
 	boolean sendOrder(int cvr, Basket orderItems, double sum) throws RemoteException;
 
+	/**
+	 * Requests all registered orders for the grosser main view.
+	 * @throws RemoteException
+	 */
+	void getAllOrders(int clientId) throws RemoteException;
+
 }

@@ -13,7 +13,7 @@ import java.beans.PropertyChangeListener;
 // Andreas Young, Line Guld
 
 public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChangeListener {
-	private Model model;
+	private Model model; //TODO: Dette her er MEGET FY, alle metode kald skal gå igennem interface!
 	private SimpleListProperty<Product> activeItemList;
 
 	public CustomerBrowserViewModel() {

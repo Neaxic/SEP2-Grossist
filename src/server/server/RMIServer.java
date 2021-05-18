@@ -6,6 +6,7 @@ import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.util.Util;
 import shared.wares.Basket;
+import shared.wares.Order;
 import shared.wares.Product;
 
 import java.rmi.AlreadyBoundException;
@@ -76,5 +77,10 @@ public class RMIServer implements RMIServerInterface {
 		return false;
 	}
 
+	@Override public void getAllOrders(int clientId) throws RemoteException
+	{
+		ArrayList<Order> orders = dataModel.getAllOrders();
+		callbackClients.get(clientId).updateAllOrders(orders);
+	}
 
 }

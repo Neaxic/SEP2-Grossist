@@ -4,6 +4,7 @@ import server.model.databaseMediator.BaseDAO;
 import server.model.databaseMediator.DAOModel;
 import server.model.databaseMediator.ModelInterface;
 import shared.wares.Basket;
+import shared.wares.Order;
 import shared.wares.Product;
 
 import java.sql.SQLException;
@@ -23,6 +24,11 @@ public class DataModelImpl {
 
 	public HashMap<String, ArrayList<Product>> getAllProducts() {
 		return model.getAllProducts();
+	}
+
+	public ArrayList<Order> getAllOrders()
+	{
+		return model.getAllOrders();
 	}
 
 	public boolean verifyOrder(Basket orderItems) {

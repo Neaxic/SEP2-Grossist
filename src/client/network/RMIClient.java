@@ -6,6 +6,7 @@ import shared.network.Subject;
 import shared.util.Util;
 import shared.wares.Basket;
 import shared.wares.OLD_Product;
+import shared.wares.Order;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
@@ -76,9 +77,27 @@ public class RMIClient implements Client, CallbackClient, Subject {
 		return false;
 	}
 
+	public void getAllOrders()
+	{
+		try
+		{
+			server.getAllOrders(clientID);
+		}
+		catch (RemoteException e)
+		{
+			System.out.println("RMICLIENT [getAllOrders()] > \t");
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void update(HashMap<String, ArrayList<Product>> list) { // Model.java is a listener
 		support.firePropertyChange("UpdatedWareList", null, list);
+	}
+
+	@Override public void updateAllOrders(ArrayList<Order> orders)
+	{
+
 	}
 
 	@Override
