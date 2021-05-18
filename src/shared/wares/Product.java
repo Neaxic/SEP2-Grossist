@@ -86,5 +86,9 @@ public abstract class Product implements Serializable {
 		return t.toString();
 	}
 
+	@Override
+	public String toString() {
+		return "(" + wareNumber + ") " + wareName;
+	}
 }
 

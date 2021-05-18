@@ -1,6 +1,6 @@
 package server.server;
 
-import client.customerclient.views.customerbasket.ProductAndInt;
+import javafx.util.Pair;
 import server.model.DataModelImpl;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
@@ -68,14 +68,15 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public boolean sendOrder(int cvr, Basket basket, double sum) throws RemoteException { // TODO: Hvad skal der ske med Basket her? ~Young
+	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket, double sum) throws RemoteException { // TODO: Når Database er fikset, så skal kurven tilføjes til ordren
 		System.out.println("SERVER: CVR: " + cvr + "\tORDER SIZE: " + basket.getBasket().size() + "\tSUM: " + sum);
-		if (dataModel.verifyOrder(basket)) {
+		Pair<Boolean, ArrayList<Product>> verification = dataModel.verifyOrder(basket);
+		if (verification.getKey()) {
 			dataModel.createOrder(cvr, sum, LocalDate.now());
-			return true;
 		}
-		return false;
+		return verification;
 	}
+
 
 	@Override public void getAllOrders(int clientId) throws RemoteException
 	{

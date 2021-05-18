@@ -12,9 +12,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.util.Pair;
 import shared.wares.Product;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 // Andreas Østergaard, Andreas Young, Line Guld
 
@@ -74,12 +76,21 @@ public class BasketViewController implements CustomerViewController {
 	}
 
 	public void sendOrder() {
-		if (viewModel.sendOrder()) {
+		Pair<Boolean, ArrayList<Product>> verification = viewModel.sendOrder();
+		if (verification.getKey()) {
 			basketTable.getItems().clear();
 			basketSum.setText("");
 			viewModel.loadAllProducts().clear();
-		} else { //SOUT
-			System.out.println("BasketViewController: Error sending order");
+		} else {
+			String test = OrderPopUpError.display(verification.getValue());
+			switch (test){
+				case "confirm":
+					viewModel.removeFromBasket(verification.getValue()); // TODO: Skal fjerne de Products der er her
+					break;
+				case "cancel":
+					break;
+			}
+			System.out.println(test);
 		}
 	}
 
@@ -94,7 +105,8 @@ public class BasketViewController implements CustomerViewController {
 	}
 
 	public void openSubscriptions() throws IOException {
-		swapScene("CustomerSubscriptions");
+
+		//swapScene("CustomerSubscriptions");
 	}
 
 	public void openBasket() throws IOException {

@@ -1,10 +1,13 @@
 package shared.network;
 
+import javafx.util.Pair;
 import shared.wares.Basket;
+import shared.wares.Product;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 // Andreas Young
 
@@ -50,7 +53,7 @@ public interface RMIServerInterface extends Remote {
 	 * @return True if the order can be placed, false otherwise
 	 * @throws RemoteException
 	 */
-	boolean sendOrder(int cvr, Basket orderItems, double sum) throws RemoteException;
+	Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket orderItems, double sum) throws RemoteException;
 
 	/**
 	 * Requests all registered orders for the grosser main view.

@@ -1,11 +1,10 @@
 package client.network;
 
+import javafx.util.Pair;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
-import shared.network.Subject;
 import shared.util.Util;
 import shared.wares.Basket;
-import shared.wares.OLD_Product;
 import shared.wares.Order;
 import shared.wares.Product;
 
@@ -17,13 +16,12 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 // Andreas Young og Andreas Østergaard
 
-public class RMIClient implements Client, CallbackClient, Subject {
+public class RMIClient implements Client, CallbackClient {
 	private RMIServerInterface server;
 	private PropertyChangeSupport support;
 	private int clientID;
@@ -67,24 +65,21 @@ public class RMIClient implements Client, CallbackClient, Subject {
 		}
 	}
 
-	public boolean sendOrder(int cvr, Basket basket, double sum){
-		try{
+	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket, double sum) {
+		try {
 			return server.sendOrder(cvr, basket, sum);
-		} catch (RemoteException remoteException){
+		} catch (RemoteException remoteException) {
 			System.out.println("RMICLIENT [sendOrder()] > \t");
 			remoteException.printStackTrace();
 		}
-		return false;
+		return new Pair<>(false, null);
 	}
 
-	public void getAllOrders()
-	{
-		try
-		{
+
+	public void getAllOrders() {
+		try {
 			server.getAllOrders(clientID);
-		}
-		catch (RemoteException e)
-		{
+		} catch (RemoteException e) {
 			System.out.println("RMICLIENT [getAllOrders()] > \t");
 			e.printStackTrace();
 		}
@@ -95,8 +90,8 @@ public class RMIClient implements Client, CallbackClient, Subject {
 		support.firePropertyChange("UpdatedWareList", null, list);
 	}
 
-	@Override public void updateAllOrders(ArrayList<Order> orders)
-	{
+	@Override
+	public void updateAllOrders(ArrayList<Order> orders) {
 		support.firePropertyChange("orderList", null, orders);
 	}
 

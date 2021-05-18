@@ -2,7 +2,7 @@ package client.customerclient.model;
 
 import client.core.LoginManager;
 import client.network.Client;
-import client.network.RMIClient;
+import javafx.util.Pair;
 import shared.wares.Basket;
 import shared.wares.Product;
 
@@ -16,13 +16,13 @@ import java.util.HashMap;
 
 public class CustomerModel implements CustomerModelInterface {
 	private PropertyChangeSupport support;
-	private RMIClient client;
-	private Basket myBasket; // Måske fjerne klassen da metodekaldene ikke ændres
-	private HashMap<String, ArrayList<Product>> wareList; // Lave dette til en klasse hvis vi beholder Basket?
+	private Client client;
+	private Basket myBasket; //question: Måske fjerne klassen da metodekaldene ikke ændres
+	private HashMap<String, ArrayList<Product>> wareList; //question: Lave dette til en klasse hvis vi beholder Basket?
 
 	public CustomerModel(Client client) {
 		support = new PropertyChangeSupport(this);
-		this.client = (RMIClient) client;
+		this.client = client;
 		this.client.addListener(this);
 		wareList = new HashMap<>();
 		myBasket = new Basket();
@@ -57,23 +57,6 @@ public class CustomerModel implements CustomerModelInterface {
 		myBasket.changeAmount(product, newAmount);
 	}
 
-	@Override
-	public void addListener(PropertyChangeListener listener) {
-		support.addPropertyChangeListener(listener);
-	}
-
-	@Override
-	public void removeListener(PropertyChangeListener listener) {
-		support.removePropertyChangeListener(listener);
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) { // CustomerBrowserViewModel is a listener
-		wareList = (HashMap<String, ArrayList<Product>>) evt.getNewValue();
-		support.firePropertyChange(
-				new PropertyChangeEvent(this, "waresUpdated", null, null));
-	}
-
 	/**
 	 * Requests an updated warelist from the Client
 	 */
@@ -98,7 +81,7 @@ public class CustomerModel implements CustomerModelInterface {
 	 * @return True if order was correctly sent, false if any error occured
 	 */
 	//TODO: KOM TILBAGE HER TIL NOT DONE MAKKER
-	public boolean sendOrder(Basket basket, double sum) {
+	public Pair<Boolean, ArrayList<Product>> sendOrder(Basket basket, double sum) {
 		return client.sendOrder(LoginManager.cvr, basket, sum);
 	}
 
@@ -126,5 +109,22 @@ public class CustomerModel implements CustomerModelInterface {
 			return wareList.get(category);
 		}
 		return new ArrayList<>();
+	}
+
+	@Override
+	public void addListener(PropertyChangeListener listener) {
+		support.addPropertyChangeListener(listener);
+	}
+
+	@Override
+	public void removeListener(PropertyChangeListener listener) {
+		support.removePropertyChangeListener(listener);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) { // CustomerBrowserViewModel is a listener
+		wareList = (HashMap<String, ArrayList<Product>>) evt.getNewValue();
+		support.firePropertyChange(
+				new PropertyChangeEvent(this, "waresUpdated", null, null));
 	}
 }

@@ -174,7 +174,7 @@ public class CustomerTest {
 
 		@Test
 		void sendOrder() {
-			assertFalse(() -> customerModel.sendOrder(customerModel.getMyBasket(), 10));
+			assertFalse(() -> customerModel.sendOrder(customerModel.getMyBasket(), 10).getKey());
 			customerModel.addToBasket(p, a);
 			assertDoesNotThrow(() -> customerModel.sendOrder(customerModel.getMyBasket(), 10));
 		}
