@@ -6,6 +6,7 @@ import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.views.customerbasket.BasketViewModel;
 import client.customerclient.views.customerbasket.ProductAndInt;
 import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,7 +49,7 @@ public class CustomerTest {
 		@BeforeEach
 		void setUp() {
 			vm = new CustomerBrowserViewModel();
-			//customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
+			customerModel = ModelFactory.getInstance().getCustomerModel();
 		}
 
 		@Test
@@ -84,7 +85,7 @@ public class CustomerTest {
 		@BeforeEach
 		void setUp() {
 			vm = new BasketViewModel();
-			customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
+			customerModel = ModelFactory.getInstance().getCustomerModel();
 		}
 
 		@Test
@@ -109,8 +110,7 @@ public class CustomerTest {
 		}
 	}
 
-	static class CustomerCustomerModelTest
-	{
+	static class CustomerCustomerModelTest {
 		@BeforeAll
 		static void init() {
 			try {
@@ -119,12 +119,19 @@ public class CustomerTest {
 			} catch (SQLException throwable) {
 				throwable.printStackTrace();
 			}
-			ClientFactory.getInstance().getClient().start();
 		}
 
 		@BeforeEach
 		void setUp() {
-			customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
+			ClientFactory.getInstance().getClient().start();
+			customerModel = ModelFactory.getInstance().getCustomerModel();
+			LoginManager.cvr = 1;
+		}
+
+		@AfterEach
+		void tearDown() {
+			ModelFactory.getInstance().reset();
+			customerModel = null;
 		}
 
 		@Test
@@ -167,11 +174,9 @@ public class CustomerTest {
 
 		@Test
 		void sendOrder() {
-			assertThrows(MissingResourceException.class, () -> customerModel
-					.sendOrder(customerModel.getMyBasket(), 10));
+			assertFalse(() -> customerModel.sendOrder(customerModel.getMyBasket(), 10));
 			customerModel.addToBasket(p, a);
-			assertDoesNotThrow(() -> customerModel
-					.sendOrder(customerModel.getMyBasket(), 10));
+			assertDoesNotThrow(() -> customerModel.sendOrder(customerModel.getMyBasket(), 10));
 		}
 
 		@Test

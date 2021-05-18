@@ -36,14 +36,15 @@ public class DataModelImpl {
 		for (Product p : orderItems.getBasket().keySet()) {
 			try {
 				inStock = model.getProductAmountInStockFromProductId(p.getWareNumber());
-				if (inStock < orderItems.getAmount(p)) {
+				if (inStock < orderItems.getAmount(p)) { //SOUT
+					System.out.println(inStock + " : " + model.getProductAmountInStockFromProductId(p.getWareNumber()));
 					return false;
 				}
 			} catch (SQLException throwable) {
 				throwable.printStackTrace();
 			}
 		}
-		return true;
+		return !orderItems.getBasket().isEmpty(); // Hvis den er tom, så vil hele loopet herover blive sprunget over
 	}
 
 	public void createOrder(int cvr, double sum, LocalDate date) {
