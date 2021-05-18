@@ -19,4 +19,5 @@ public interface ModelInterface
   void createOrder(int cvr, double sum, LocalDate date);
   void createOrderSpec(Basket basket, int CVR, LocalDate date, double sum) throws
       SQLException;
+  int getProductAmountInStockFromProductId(int id) throws SQLException;
 }
