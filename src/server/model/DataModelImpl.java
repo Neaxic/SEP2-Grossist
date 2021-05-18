@@ -32,11 +32,10 @@ public class DataModelImpl {
 	}
 
 	public boolean verifyOrder(Basket orderItems) {
-		DAOModel m = (DAOModel) model; // FIXME: Skal ModelInterface have 'getProductAmountInStockFromProductId()' som en metode?
 		int inStock;
 		for (Product p : orderItems.getBasket().keySet()) {
 			try {
-				inStock = m.getProductAmountInStockFromProductId(p.getWareNumber());
+				inStock = model.getProductAmountInStockFromProductId(p.getWareNumber());
 				if (inStock < orderItems.getAmount(p)) {
 					return false;
 				}
