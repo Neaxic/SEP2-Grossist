@@ -1,7 +1,6 @@
 package client.customerclient.views.customerbrowser;
 
-import client.core.ModelFactory;
-import client.customerclient.model.CustomerModel;
+import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.views.CustomerViewModel;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -13,18 +12,19 @@ import java.beans.PropertyChangeListener;
 // Andreas Young, Line Guld
 
 public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChangeListener {
-	private CustomerModel customerModel; //TODO: Dette her er MEGET FY, alle metode kald skal gå igennem interface!
+	private final CustomerModelInterface customerModelInterface;
+	//gennem interface!
 	private SimpleListProperty<Product> activeItemList;
 
-	public CustomerBrowserViewModel() {
-		customerModel = (CustomerModel) ModelFactory.getInstance().getCustomerModel();
+	public CustomerBrowserViewModel(CustomerModelInterface customerModelInterface) {
+		this.customerModelInterface = customerModelInterface;
 		activeItemList = new SimpleListProperty<>();
-		customerModel.addListener(this);
+		customerModelInterface.addListener(this);
 	}
 
 	public void loadAllProductsToModel() {
 		// Load products from Database
-		customerModel.updateWares();
+		customerModelInterface.updateWares();
 	}
 
 	public void addToBasket(int item, int amount) {
@@ -38,7 +38,7 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 			// TODO: Tjek om søgning virker
 			for (Product product : activeItemList) {
 				if (product.getWareNumber() == item) {
-					customerModel.addToBasket(product, amount); // Product typer er forskellige
+					customerModelInterface.addToBasket(product, amount); // Product typer er forskellige
 				}
 			}
 		}
@@ -54,7 +54,7 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 
 	private void getAllWares()
 	{
-		activeItemList.set(FXCollections.observableList(customerModel.getAllWares()));
+		activeItemList.set(FXCollections.observableList(customerModelInterface.getAllWares()));
 	}
 
 	@Override
