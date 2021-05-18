@@ -1,5 +1,6 @@
 package client.core;
 
+import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.model.CustomerModel;
 import client.customerclient.model.CustomerModelInterface;
 import client.grosserclient.model.GrosserModel;
@@ -34,11 +35,13 @@ public class ModelFactory {
 		return customerModelInterface;
 	}
 
-	public GrosserModelInterface getGrosserModel() {
-		if (grosserModelInterface == null) {
-			grosserModelInterface = new GrosserModel(
-					ClientFactory.getInstance().getClient());
-		}
-		return grosserModelInterface;
-	}
+  public GrosserModelInterface getGrosserModel()
+  {
+    if (grosserModelInterface == null)
+    {
+      grosserModelInterface = new GrosserModel(
+          ClientFactory.getInstance().getGrosserClient());
+    }
+    return grosserModelInterface;
+  }
 }

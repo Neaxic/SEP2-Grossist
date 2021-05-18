@@ -3,8 +3,10 @@ package client.network;
 import javafx.util.Pair;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
+import shared.network.Subject;
 import shared.util.Util;
 import shared.wares.Basket;
+import shared.wares.OLD_Product;
 import shared.wares.Order;
 import shared.wares.Product;
 
@@ -16,12 +18,13 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 // Andreas Young og Andreas Østergaard
 
-public class RMIClient implements Client, CallbackClient {
+public class RMIClient implements Client, GrosserClient, CallbackClient {
 	private RMIServerInterface server;
 	private PropertyChangeSupport support;
 	private int clientID;
@@ -81,6 +84,16 @@ public class RMIClient implements Client, CallbackClient {
 			server.getAllOrders(clientID);
 		} catch (RemoteException e) {
 			System.out.println("RMICLIENT [getAllOrders()] > \t");
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void createProduct(Product newProduct) {
+		try {
+			server.createProduct(newProduct);
+		} catch(RemoteException e) {
+			System.out.println("RMICLIENT [createProduct()] > \t");
 			e.printStackTrace();
 		}
 	}

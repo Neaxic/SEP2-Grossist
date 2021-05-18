@@ -1,6 +1,7 @@
 package client.core;
 
 import client.network.Client;
+import client.network.GrosserClient;
 import client.network.RMIClient;
 
 // Andreas Østergaard, Frederik Bergmann
@@ -24,5 +25,14 @@ public class ClientFactory {
 			client = new RMIClient();
 		}
 		return client;
+	}
+
+	//TODO: custommerClient der ligner grosser. 1 for login, og derefter en for hver type bruger
+
+	public GrosserClient getGrosserClient() {
+		if (client == null) {
+			client = new RMIClient();
+		}
+		return (GrosserClient) client;
 	}
 }

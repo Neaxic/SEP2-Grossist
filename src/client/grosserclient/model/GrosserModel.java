@@ -1,6 +1,7 @@
 package client.grosserclient.model;
 
 import client.network.Client;
+import client.network.GrosserClient;
 import client.network.RMIClient;
 import shared.wares.Product;
 
@@ -11,12 +12,12 @@ import java.beans.PropertyChangeSupport;
 public class GrosserModel implements GrosserModelInterface
 {
   private PropertyChangeSupport Support;
-  private final RMIClient client;
+  private final GrosserClient client;
 
-  public GrosserModel(Client client)
+  public GrosserModel(GrosserClient client)
   {
     Support = new PropertyChangeSupport(this);
-    this.client = (RMIClient) client;
+    this.client = client;
     this.client.addListener(this);
   }
 
@@ -45,6 +46,6 @@ public class GrosserModel implements GrosserModelInterface
 
   @Override
   public void createNewProduct(Product newProduct) {
-
+    client.createProduct(newProduct);
   }
 }

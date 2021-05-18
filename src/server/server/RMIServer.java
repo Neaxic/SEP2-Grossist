@@ -84,4 +84,9 @@ public class RMIServer implements RMIServerInterface {
 		callbackClients.get(clientId).updateAllOrders(orders);
 	}
 
+	@Override
+	public void createProduct(Product newProduct) throws RemoteException {
+		dataModel.createProduct(newProduct);
+	}
+
 }

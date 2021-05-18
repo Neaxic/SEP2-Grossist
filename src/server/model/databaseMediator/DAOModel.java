@@ -345,6 +345,11 @@ public class DAOModel extends BaseDAO implements ModelInterface
 		return str;
 	}
 
+	public void CreateProduct(Product newProduct){
+		//TODO: Young her, vores NewProduct er en masse forskellige typer, med hver deres parametre.
+		System.out.println(newProduct.getWareName());
+	}
+
 //	public ArrayList<Product> getAlcoholProducts() {
 //		ArrayList<Product> alcoholList = new ArrayList<>();
 //		try (Connection connection = getConnection()) {

@@ -55,4 +55,8 @@ public class DataModelImpl {
 		model.createOrderSpec(basket, CVR, date, sum);
 	}
 
+	public void createProduct(Product newProduct){
+		model.CreateProduct(newProduct);
+	}
+
 }

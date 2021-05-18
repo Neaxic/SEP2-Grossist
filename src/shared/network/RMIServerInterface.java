@@ -9,7 +9,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-// Andreas Young
+// Andreas Young, Andreas Østergaard
 
 public interface RMIServerInterface extends Remote {
 	/**
@@ -61,4 +61,10 @@ public interface RMIServerInterface extends Remote {
 	 */
 	void getAllOrders(int clientId) throws RemoteException;
 
+	/**
+	 * Sends a new product to the server
+	 * @param newProduct
+	 * @throws RemoteException
+	 */
+	void createProduct(Product newProduct) throws RemoteException;
 }
