@@ -44,4 +44,9 @@ public class DataModelImpl {
 	public void createOrder(int cvr, double sum, LocalDate date) {
 		model.createOrder(cvr, sum, date);
 	}
+
+	public void createOrderSpec(Basket basket, int CVR, LocalDate date, double sum) throws SQLException
+	{
+		model.createOrderSpec(basket, CVR, date, sum);
+	}
 }

@@ -10,7 +10,7 @@ public class BaseDAO
   {
     Connection result = DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=grosser", //Prøv med IP hvis lokalt netværk
-        "postgres", "Software20");
+        "postgres", "290892");
     //result.setAutoCommit(false);
     return result;
   }

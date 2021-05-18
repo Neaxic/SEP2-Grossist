@@ -9,25 +9,34 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DAOModel extends BaseDAO implements ModelInterface {
-	ArrayList<Product> salesProducts;
-	HashMap<String, ArrayList<Product>> map = new HashMap<>();
+// Lavet af hele teamet
 
-	public DAOModel() throws SQLException {
-		DriverManager.registerDriver(new org.postgresql.Driver());
-		salesProducts = new ArrayList<>();
-	}
+public class DAOModel extends BaseDAO implements ModelInterface
+{
+  ArrayList<Product> salesProducts;
+  HashMap<String, ArrayList<Product>> map = new HashMap<>();
 
-	public HashMap<String, ArrayList<Product>> getAllProducts() {
-		map.put("Alcohol", getProduct("alcoholicBeverage", Alcohol.class.getName()));
-		map.put("Drink", getProduct("nonAlcoholicBeverage", Drink.class.getName()));
-		map.put("MeatAndSeafood", getProduct("meatAndSeafood", MeatAndFish.class.getName()));
-		map.put("Colonial", getProduct("colonial", Colonial.class.getName()));
-		map.put("CooledAndDairy", getProduct("dairyandeggs", CooledAndDairy.class.getName()));
-		map.put("Frozen", getProduct("frozenfood", Frozen.class.getName()));
-		map.put("FruitsAndVegetable", getProduct("fruitsandvegetables", FruitsAndVegetable.class.getName()));
-		return map;
-	}
+  public DAOModel() throws SQLException
+  {
+    DriverManager.registerDriver(new org.postgresql.Driver());
+    salesProducts = new ArrayList<>();
+  }
+
+  public HashMap<String, ArrayList<Product>> getAllProducts()
+  {
+    map.put("Alcohol",
+        getProduct("alcoholicBeverage", Alcohol.class.getName()));
+    map.put("Drink", getProduct("nonAlcoholicBeverage", Drink.class.getName()));
+    map.put("MeatAndSeafood",
+        getProduct("meatAndSeafood", MeatAndFish.class.getName()));
+    map.put("Colonial", getProduct("colonial", Colonial.class.getName()));
+    map.put("CooledAndDairy",
+        getProduct("dairyandeggs", CooledAndDairy.class.getName()));
+    map.put("Frozen", getProduct("frozenfood", Frozen.class.getName()));
+    map.put("FruitsAndVegetable",
+        getProduct("fruitsandvegetables", FruitsAndVegetable.class.getName()));
+    return map;
+  }
 
 	/**
 	 * Creates an ArrayList of Products and returns it with products of the given type. Assumes the BaseDAO is correctly setup to connect to the Grosser Database
@@ -70,14 +79,49 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 			statement.setDate(2, Date.valueOf(date));
 			statement.setDouble(3, sum);
 
-			statement.executeUpdate();
-			ResultSet keys = statement.getGeneratedKeys();
-			keys.next();
-		} catch (SQLException throwables) {
-			System.out.println("SQL or Database error");
-			throwables.printStackTrace();
-		}
-	}
+      statement.executeUpdate();
+      ResultSet keys = statement.getGeneratedKeys();
+      keys.next();
+    }
+    catch (SQLException throwables)
+    {
+      System.out.println("SQL or Database error");
+      throwables.printStackTrace();
+    }
+  }
+
+  public void createOrderSpec(Basket basket, int CVR, LocalDate date,
+      double sum) //TODO: Skal laves når der er styr på DB.
+  {
+//    try (Connection connection = getConnection())
+//    {
+//      PreparedStatement getOrderNo = connection.prepareStatement(
+//          "SELECT orderNo FROM order_ WHERE cvr = " + CVR + " AND totalprice = " + sum +
+//              "AND orderdate = '" + date.toString() + "'");
+//
+//      ResultSet orderNoResult = getOrderNo.executeQuery();
+//      orderNoResult.next();
+//      int orderNo = (int) orderNoResult.getObject(1);
+//
+//      PreparedStatement statement = connection
+//          .prepareStatement("INSERT INTO orderspec(orderno, productid, amount) VALUES(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+//
+//      for (Product product : basket.getBasket().keySet())
+//      {
+//        statement.setInt(1, orderNo);
+//        statement.setInt(2, product.getWareNumber());
+//        statement.setInt(3, basket.getAmount(product));
+//
+//        statement.executeUpdate();
+//      }
+//    }
+//    catch (SQLException e)
+//    {
+//      System.out.println("Create orderSpec error");
+//      e.printStackTrace();
+//    }
+  }
+
 
 	//GETTERS --------------------------------------------------------------------------------------------------------------
 	public ArrayList<String> getCustomerID() throws SQLException {
@@ -208,6 +252,19 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 
 	public ArrayList<Integer> getDairyAndEggsIds() throws SQLException {
 		return getProductIds("dairyandeggs");
+	}
+
+	public ArrayList<Order> getAllOrders()
+	{
+		ArrayList<Order> orders = new ArrayList<>();
+		try (Connection connection = getConnection())
+		{
+			PreparedStatement statement
+		}
+		catch (SQLException throwables)
+		{
+			throwables.printStackTrace();
+		}
 	}
 
 	public ArrayList<Integer> getOrderNumbers() {
