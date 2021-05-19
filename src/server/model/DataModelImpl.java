@@ -55,8 +55,12 @@ public class DataModelImpl {
 		model.createOrderSpec(basket, CVR, date, sum);
 	}
 
-	public void createProduct(Product newProduct){
-		model.CreateProduct(newProduct);
+	public void createProduct(Pair<Product, Integer> newProduct){
+		try{
+			model.CreateProduct(newProduct);
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
 	}
 
 }

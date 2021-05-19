@@ -66,5 +66,5 @@ public interface RMIServerInterface extends Remote {
 	 * @param newProduct
 	 * @throws RemoteException
 	 */
-	void createProduct(Product newProduct) throws RemoteException;
+	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException;
 }
