@@ -94,7 +94,12 @@ public class BasketViewController implements CustomerViewController {
 		}
 	}
 
+	public void emptyBasket() {
+		viewModel.emptyBasket();
+	}
+
 	// SCENE MANAGING
+
 	@Override
 	public void swapScene(String sceneName) throws IOException {
 		viewHandler.openView(sceneName);
@@ -105,7 +110,6 @@ public class BasketViewController implements CustomerViewController {
 	}
 
 	public void openSubscriptions() throws IOException {
-
 		//swapScene("CustomerSubscriptions");
 	}
 
@@ -113,8 +117,4 @@ public class BasketViewController implements CustomerViewController {
 		swapScene("CustomerBasket");
 	}
 
-
-	public void emptyBasket() {
-		viewModel.emptyBasket();
-	}
 }
