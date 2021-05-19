@@ -114,4 +114,7 @@ public class BasketViewController implements CustomerViewController {
 	}
 
 
+	public void emptyBasket() {
+		viewModel.emptyBasket();
+	}
 }

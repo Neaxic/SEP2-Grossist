@@ -43,4 +43,8 @@ public class Basket implements Serializable {
 	public HashMap<Product, Integer> getBasket() {
 		return basket;
 	}
+
+	public void empty() {
+		basket = new HashMap<>();
+	}
 }

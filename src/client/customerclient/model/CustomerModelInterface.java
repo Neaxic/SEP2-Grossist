@@ -24,4 +24,5 @@ public interface CustomerModelInterface extends Subject {
 
 	ArrayList<Product> getCategory(String category);
 
+	void emptyBasket();
 }

@@ -48,4 +48,7 @@ public class BasketViewModel implements CustomerViewModel {
 		return customerModel.getMyBasket().getBasket();
 	}
 
+	public void emptyBasket() {
+		customerModel.emptyBasket();
+	}
 }

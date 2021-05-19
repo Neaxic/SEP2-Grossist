@@ -112,6 +112,11 @@ public class CustomerModel implements CustomerModelInterface {
 	}
 
 	@Override
+	public void emptyBasket() {
+		myBasket.empty();
+	}
+
+	@Override
 	public void addListener(PropertyChangeListener listener) {
 		support.addPropertyChangeListener(listener);
 	}
