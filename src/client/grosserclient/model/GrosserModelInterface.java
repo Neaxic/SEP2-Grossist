@@ -8,4 +8,8 @@ public interface GrosserModelInterface extends Subject {
 	void createNewProduct(Pair<Product, Integer> newProduct);
 
 	void getAllOrders();
+
+	void requestAllWaresAndAmounts();
+
+	void deleteItem(int productID);
 }

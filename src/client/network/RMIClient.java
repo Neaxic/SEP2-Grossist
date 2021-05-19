@@ -38,7 +38,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 			server = (RMIServerInterface) registry.lookup(Util.SERVERNAME);
 			UnicastRemoteObject.exportObject(this, 0);
 		} catch (RemoteException | NotBoundException e) {
-			System.out.println("RMIClient [start()] > \t" + e.getMessage());
+			e.printStackTrace();
 		}
 		registerOnServer();
 		System.out.println("Connection Established...");
@@ -86,14 +86,14 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	public void createProduct(Pair<Product, Integer> newProduct) {
 		try {
 			server.createProduct(newProduct);
-		} catch(RemoteException e) {
+		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void update(HashMap<String, ArrayList<Product>> list) { // CustomerModel.java is a listener
-		support.firePropertyChange("UpdatedWareList", null, list);
+	public void update(String info, HashMap list) { // CustomerModel.java is a listener
+		support.firePropertyChange(info, null, list);
 	}
 
 	@Override
@@ -104,6 +104,24 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	@Override
 	public void addListener(PropertyChangeListener listener) {
 		support.addPropertyChangeListener(listener);
+	}
+
+	@Override
+	public void requestGrosserProducts() {
+		try {
+			server.grosserProductList(clientID);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteWare(int productID) {
+		try {
+			server.deleteWare(productID);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

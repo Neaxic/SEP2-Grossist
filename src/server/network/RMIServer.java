@@ -15,8 +15,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,7 +64,12 @@ public class RMIServer implements RMIServerInterface {
 	@Override
 	public void getWares(int id) throws RemoteException { // Can overload this, creating a getWares(int id, String category)
 		getAllProducts();
-		callbackClients.get(id).update(wares);
+		callbackClients.get(id).update("UpdatedWareList", wares);
+	}
+
+	@Override
+	public void grosserProductList(int id) throws RemoteException {
+		callbackClients.get(id).update("grosserProductList", dataModel.grosserProductList());
 	}
 
 	@Override
@@ -82,8 +85,8 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 
-	@Override public void getAllOrders(int clientId) throws RemoteException
-	{
+	@Override
+	public void getAllOrders(int clientId) throws RemoteException {
 		ArrayList<Order> orders = dataModel.getAllOrders();
 		callbackClients.get(clientId).updateAllOrders(orders);
 	}
@@ -91,6 +94,11 @@ public class RMIServer implements RMIServerInterface {
 	@Override
 	public void createProduct(Pair<Product, Integer> newProduct) throws RemoteException {
 		dataModel.createProduct(newProduct);
+	}
+
+	@Override
+	public void deleteWare(int productID) throws RemoteException{
+		dataModel.delete(productID);
 	}
 
 }

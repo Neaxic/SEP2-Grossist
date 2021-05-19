@@ -3,6 +3,7 @@ package client.grosserclient.views.grosseraddproduct;
 import client.core.ViewHandler;
 import client.core.factories.ViewModelFactory;
 import client.grosserclient.views.GrosserViewController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Pair;
@@ -85,5 +86,9 @@ public class GrosserAddProductViewController implements GrosserViewController {
 	@Override
 	public void swapScene(String sceneName) throws IOException {
 		viewHandler.openView(sceneName);
+	}
+
+	public void waresScene() throws IOException {
+		swapScene("GrosserWares");
 	}
 }

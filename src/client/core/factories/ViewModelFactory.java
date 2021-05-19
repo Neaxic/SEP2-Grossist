@@ -6,6 +6,7 @@ import client.customerclient.views.customerbasket.BasketViewModel;
 import client.grosserclient.views.GrosserViewModel;
 import client.grosserclient.views.grosseraddproduct.GrosserAddProductViewModel;
 import client.grosserclient.views.grossermain.GrosserMainViewModel;
+import client.grosserclient.views.grosserwares.GrosserWaresViewModel;
 
 // Andreas Østergaard, Frederik Bergmann, Andreas Young
 
@@ -19,6 +20,7 @@ public class ViewModelFactory
 
   private GrosserMainViewModel grosserMainViewModel;
   private GrosserAddProductViewModel grosserAddProductViewModel;
+  private GrosserWaresViewModel grosserWaresViewModel;
 
 	private ViewModelFactory() {
 		this.modelFactory = ModelFactory.getInstance();
@@ -68,4 +70,10 @@ public class ViewModelFactory
     }
     return grosserAddProductViewModel;
   }
+
+	public GrosserWaresViewModel grosserWaresViewModel() {
+	  if (grosserWaresViewModel == null){
+	    grosserWaresViewModel = new GrosserWaresViewModel();
+      }return grosserWaresViewModel;
+	}
 }

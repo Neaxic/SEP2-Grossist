@@ -45,6 +45,8 @@ public interface RMIServerInterface extends Remote {
 	 */
 	void getWares(int clientID) throws RemoteException;
 
+	void grosserProductList(int id) throws RemoteException;
+
 	/**
 	 * Sends an order to the Server Implementation and waits for a verification
 	 * @param cvr User CVR number, registered through client
@@ -67,4 +69,6 @@ public interface RMIServerInterface extends Remote {
 	 * @throws RemoteException
 	 */
 	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException;
+
+	void deleteWare(int productID) throws RemoteException;
 }

@@ -8,43 +8,49 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class GrosserModel implements GrosserModelInterface
-{
-  private PropertyChangeSupport Support;
-  private final GrosserClient client;
+public class GrosserModel implements GrosserModelInterface {
+	private PropertyChangeSupport support;
+	private final GrosserClient client;
 
-  public GrosserModel(GrosserClient client)
-  {
-    Support = new PropertyChangeSupport(this);
-    this.client = client;
-    this.client.addListener(this);
-  }
+	public GrosserModel(GrosserClient client) {
+		support = new PropertyChangeSupport(this);
+		this.client = client;
+		this.client.addListener(this);
+	}
 
-  @Override public void addListener(PropertyChangeListener listener)
-  {
-    Support.addPropertyChangeListener(listener);
-  }
+	@Override
+	public void addListener(PropertyChangeListener listener) {
+		support.addPropertyChangeListener(listener);
+	}
 
-  @Override public void removeListener(PropertyChangeListener listener)
-  {
-    Support.removePropertyChangeListener(listener);
-  }
+	@Override
+	public void removeListener(PropertyChangeListener listener) {
+		support.removePropertyChangeListener(listener);
+	}
 
-  @Override public void propertyChange(PropertyChangeEvent evt)
-  {
-    if (evt.getPropertyName().equals("orderList"))
-    {
-      Support.firePropertyChange("orderList", null, evt.getNewValue());
-    }
-  }
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		support.firePropertyChange(evt);
+	}
 
-  @Override public void getAllOrders()
-  {
-    client.getAllOrders();
-  }
+	@Override
+	public void getAllOrders() {
+		client.getAllOrders();
+	}
 
-  @Override
-  public void createNewProduct(Pair<Product, Integer> newProduct) {
-    client.createProduct(newProduct);
-  }
+	@Override
+	public void requestAllWaresAndAmounts() {
+		client.requestGrosserProducts();
+	}
+
+	@Override
+	public void deleteItem(int productID) {
+		client.deleteWare(productID);
+	}
+
+
+	@Override
+	public void createNewProduct(Pair<Product, Integer> newProduct) {
+		client.createProduct(newProduct);
+	}
 }

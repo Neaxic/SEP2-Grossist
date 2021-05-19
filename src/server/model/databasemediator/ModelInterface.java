@@ -13,6 +13,8 @@ import java.util.HashMap;
 // Lavet af hele teamet
 
 public interface ModelInterface {
+	HashMap<Product, Integer> grosserProductList() throws SQLException;
+
 	HashMap<String, ArrayList<Product>> getAllProducts();
 
 	ArrayList<Order> getAllOrders();
@@ -26,4 +28,6 @@ public interface ModelInterface {
 	int getProductAmountInStockFromProductId(int id) throws SQLException;
 
 	void createProduct(Pair<Product, Integer> newProduct) throws SQLException;
+
+	void delete(int productID) throws SQLException;
 }

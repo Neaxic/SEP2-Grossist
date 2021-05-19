@@ -144,7 +144,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Handlinger">
             <items>
-              <MenuItem mnemonicParsing="false" text="Se varer" />
+              <MenuItem mnemonicParsing="false" onAction="#waresScene" text="Se varer" />
                   <MenuItem mnemonicParsing="false" text="Unspecified Action" />
             </items>
           </Menu>

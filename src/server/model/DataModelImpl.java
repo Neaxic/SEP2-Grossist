@@ -55,12 +55,28 @@ public class DataModelImpl {
 		model.createOrderSpec(basket, CVR, date, sum);
 	}
 
-	public void createProduct(Pair<Product, Integer> newProduct){
-		try{
+	public void createProduct(Pair<Product, Integer> newProduct) {
+		try {
 			model.createProduct(newProduct);
-		} catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
+	public HashMap<Product, Integer> grosserProductList() {
+		try {
+			return model.grosserProductList();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return null;
+	}
+
+	public void delete(int productID) {
+		try {
+			model.delete(productID);
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+	}
 }

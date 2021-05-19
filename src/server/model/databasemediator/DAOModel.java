@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 // Lavet af hele teamet
 
@@ -21,6 +22,17 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 	public DAOModel() throws SQLException {
 		DriverManager.registerDriver(new org.postgresql.Driver());
 		salesProducts = new ArrayList<>();
+	}
+
+	@Override
+	public HashMap<Product, Integer> grosserProductList() throws SQLException {
+		HashMap<Product, Integer> grosserMap = new HashMap<>();
+		for (List<Product> l : getAllProducts().values()) {
+			for (Product p : l) {
+				grosserMap.put(p, getProductAmountInStockFromProductId(p.getWareNumber()));
+			}
+		}
+		return grosserMap;
 	}
 
 	public HashMap<String, ArrayList<Product>> getAllProducts() {
@@ -342,6 +354,14 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 
 			String sql = "INSERT INTO " + SchemaMap.Mapping(p.getClass()) + " (productID, " + p.sqlTemplate() + ", amountInStock) VALUES (" + productID + "," + p.sqlInformation() + "," + newProduct.getValue() + ")";
 			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.execute();
+		}
+	}
+
+	@Override
+	public void delete(int productID) throws SQLException {
+		try (Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement("DELETE FROM product WHERE productID = " + productID);
 			statement.execute();
 		}
 	}
