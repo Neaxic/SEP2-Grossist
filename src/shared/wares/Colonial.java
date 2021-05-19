@@ -14,7 +14,7 @@ public class Colonial extends Product implements ProductInterface {
 		originCountry = (String) params[9];
 	}
 
-	public Colonial(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, int minimumAmountForPurchase, String originCountry, String  producedBy) {
+	public Colonial(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, int minimumAmountForPurchase, String  producedBy, String originCountry) {
 		super(wareName, measurementType, bestBefore, wareNumber, deliveryDays, price, minimumAmountForPurchase, producedBy);
 		this.originCountry = originCountry;
 	}
