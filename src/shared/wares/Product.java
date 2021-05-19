@@ -106,7 +106,7 @@ public abstract class Product implements Serializable {
 	 * @return Information regarding product, open ended for SQL Column Information
 	 */
 	public String sqlInformation(){
-		return "VALUES (" + wareName + "," + measurementType + "," + minimumAmountForPurchase + "," + null + "," + price + "," + bestBefore + tags;
+		return ") VALUES (" + wareName + "," + measurementType + "," + minimumAmountForPurchase + "," + null + "," + price + "," + bestBefore + tags;
 	}
 }
 
