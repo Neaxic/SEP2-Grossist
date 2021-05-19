@@ -18,55 +18,58 @@ import java.time.LocalDate;
 
 // Frederik Bergmann
 
-public class GrosserMainViewController implements GrosserViewController
-{
-  @FXML private TextField searchBar;
-  @FXML private TableView<Order> orderTable;
-  @FXML private TableColumn<Order, Integer> tableCVR;
-  @FXML private TableColumn<Order, Integer> tableOrderNo;
-  @FXML private TableColumn<Order, LocalDate> tableOrderDate;
-  @FXML private TableColumn<Order, Double> tableSum;
+public class GrosserMainViewController implements GrosserViewController {
+	@FXML private TextField searchBar;
+	@FXML private TableView<Order> orderTable;
+	@FXML private TableColumn<Order, Integer> tableCVR;
+	@FXML private TableColumn<Order, Integer> tableOrderNo;
+	@FXML private TableColumn<Order, LocalDate> tableOrderDate;
+	@FXML private TableColumn<Order, Double> tableSum;
 
-  private ListProperty<Order> orderList;
+	private ListProperty<Order> orderList;
 
-  @FXML private MenuBar mainNavBar;
+	@FXML private MenuBar mainNavBar;
 
-  private ViewHandler viewHandler;
-  private GrosserMainViewModel viewModel;
+	private ViewHandler viewHandler;
+	private GrosserMainViewModel viewModel;
 
-  @Override public void init(ViewHandler viewHandler)
-  {
-    this.viewHandler = viewHandler;
-    viewModel = (GrosserMainViewModel) ViewModelFactory.getInstance().grosserMainViewModel();
-    orderList = new SimpleListProperty<>();
-    orderList.bind(viewModel.getOrderListProperty());
-    viewModel.getAllOrders();
-    populateTable();
-  }
+	@Override
+	public void init(ViewHandler viewHandler) {
+		this.viewHandler = viewHandler;
+		viewModel = (GrosserMainViewModel) ViewModelFactory.getInstance().grosserMainViewModel();
+		orderList = new SimpleListProperty<>();
+		orderList.bind(viewModel.getOrderListProperty());
+		viewModel.getAllOrders();
+		populateTable();
+	}
 
-  private void populateTable()
-  {
-    tableCVR.setCellValueFactory(new PropertyValueFactory<>("CVR"));
-    tableOrderNo.setCellValueFactory(new PropertyValueFactory<>("OrderNo"));
-    tableOrderDate.setCellValueFactory(new PropertyValueFactory<>("OrderDate"));
-    tableSum.setCellValueFactory(new PropertyValueFactory<>("Sum"));
+	private void populateTable() {
+		tableCVR.setCellValueFactory(new PropertyValueFactory<>("CVR"));
+		tableOrderNo.setCellValueFactory(new PropertyValueFactory<>("OrderNo"));
+		tableOrderDate.setCellValueFactory(new PropertyValueFactory<>("OrderDate"));
+		tableSum.setCellValueFactory(new PropertyValueFactory<>("Sum"));
 
-    orderTable.getItems().addAll(orderList);
-  }
+		orderTable.getItems().addAll(orderList);
+	}
 
-  @FXML private void updateOrders()
-  {
-    orderTable.getItems().clear();
-    viewModel.getAllOrders();
-    populateTable();
-  }
+	@FXML
+	private void updateOrders() {
+		orderTable.getItems().clear();
+		viewModel.getAllOrders();
+		populateTable();
+	}
 
-  @FXML private void addNewProductScene() throws IOException {
-    this.swapScene("grosseraddproduct");
-  }
+	@FXML
+	private void addNewProductScene() throws IOException {
+		this.swapScene("GrosserAddProduct");
+	}
+	@FXML
+	private void waresScene() throws IOException {
+		this.swapScene("GrosserWares");
+	}
 
-  @Override public void swapScene(String sceneName) throws IOException
-  {
-    viewHandler.openView(sceneName);
-  }
+	@Override
+	public void swapScene(String sceneName) throws IOException {
+		viewHandler.openView(sceneName);
+	}
 }
