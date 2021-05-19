@@ -8,8 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
@@ -83,7 +82,7 @@ public class BasketViewController implements CustomerViewController {
 			viewModel.loadAllProducts().clear();
 		} else {
 			String test = OrderPopUpError.display(verification.getValue());
-			switch (test){
+			switch (test) {
 				case "confirm":
 					viewModel.removeFromBasket(verification.getValue()); // TODO: Skal fjerne de Products der er her
 					break;
@@ -95,7 +94,10 @@ public class BasketViewController implements CustomerViewController {
 	}
 
 	public void emptyBasket() {
-		viewModel.emptyBasket();
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Er du sikker på du vil tømme kurven?", ButtonType.YES, ButtonType.NO);
+		if (alert.showAndWait().get().getButtonData() == ButtonBar.ButtonData.YES) {
+			viewModel.emptyBasket();
+		}
 	}
 
 	// SCENE MANAGING
