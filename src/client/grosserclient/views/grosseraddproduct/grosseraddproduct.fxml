@@ -48,6 +48,8 @@
                   <TextField fx:id="productDeliveryDays" layoutX="387.0" layoutY="84.0" prefHeight="25.0" prefWidth="175.0" promptText="I dage" />
                   <Text layoutX="25.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ledig mængde:" />
                   <TextField fx:id="productAmount" layoutX="122.0" layoutY="124.0" prefHeight="25.0" prefWidth="160.0" />
+                  <Text layoutX="297.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produceret af:" />
+                  <TextField fx:id="productBy" layoutX="387.0" layoutY="124.0" prefHeight="25.0" prefWidth="177.0" />
                </children>
             </AnchorPane>
             <TabPane fx:id="tabPane" prefHeight="187.0" prefWidth="580.0" tabClosingPolicy="UNAVAILABLE">

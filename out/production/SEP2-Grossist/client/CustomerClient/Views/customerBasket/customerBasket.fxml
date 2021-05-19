@@ -62,6 +62,7 @@
                                           </TableView>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="847.0" spacing="10.0">
                                              <children>
+                                                <Button layoutX="652.0" layoutY="15.0" mnemonicParsing="false" onAction="#emptyBasket" prefHeight="25.0" prefWidth="95.0" text="Tøm Kurv" />
                                                 <Button mnemonicParsing="false" onAction="#removeItemFromBasket" prefHeight="25.0" prefWidth="95.0" text="Fjern Fra Kurv" />
                                                 <Button layoutX="762.0" layoutY="11.0" mnemonicParsing="false" onAction="#saveBasketToBin" prefHeight="25.0" prefWidth="95.0" text="Gem kurv" />
                                              </children>
