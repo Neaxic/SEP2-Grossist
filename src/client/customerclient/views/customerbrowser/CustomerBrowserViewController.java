@@ -93,7 +93,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		main.styleProperty().setValue("-fx-border-color: lightgray;");
 		// Nodes regarding the Item
 		Text title = new Text(product.getWareName());
-		Text productID = new Text("Varnummer: "+product.getWareNumber());
+		Text productID = new Text("Varenummer: "+product.getWareNumber());
 		productID.setId("ProductID");
 		main.setMaxWidth(615);
 		Text desc = new Text("\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
