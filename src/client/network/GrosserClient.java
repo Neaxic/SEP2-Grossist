@@ -9,9 +9,9 @@ import java.beans.PropertyChangeListener;
 
 public interface GrosserClient
 {
-	public void createProduct(Pair<Product, Integer> newProduct);
-	public void getAllOrders();
-	public void addListener(PropertyChangeListener listener);
+	void createProduct(Pair<Product, Integer> newProduct);
+	void getAllOrders();
+	void addListener(PropertyChangeListener listener);
 }
 
 
