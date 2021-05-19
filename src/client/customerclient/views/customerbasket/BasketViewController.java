@@ -54,7 +54,7 @@ public class BasketViewController implements CustomerViewController {
 			basketTable.getItems().add(productAndInt);
 		}
 
-		basketSum.setText("SUM: " + price + ", DDK");
+		basketSum.setText("SUM: " + price + ", kr");
 	}
 
 	public void removeItemFromBasket() {

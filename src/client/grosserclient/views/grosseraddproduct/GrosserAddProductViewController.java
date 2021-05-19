@@ -4,13 +4,12 @@ import client.core.ViewHandler;
 import client.core.factories.ViewModelFactory;
 import client.grosserclient.views.GrosserViewController;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.Pair;
 import shared.wares.*;
 
 import java.io.IOException;
+import java.util.Optional;
 
 // Frederik Bergmann
 
@@ -80,7 +79,8 @@ public class GrosserAddProductViewController implements GrosserViewController {
 				viewModel.sendOrder(liste);
 			}
 		}
-	} // TODO: Østergaard, her skal du lige lave noget tjek på, om felterne er tomme eller om der er ugyldig data
+		new Alert(Alert.AlertType.INFORMATION, "Produkt er nu tilføjet til Lageret", ButtonType.CLOSE).showAndWait();
+	} // TODO: Østergaard, FÆRDIGGØR NU DE FUCKING CHECKS DIN ABE
 
 	@Override
 	public void swapScene(String sceneName) throws IOException {
