@@ -1,12 +1,11 @@
 package client.customerclient.views.customerbasket;
 
 import client.core.ViewHandler;
-import client.core.ViewModelFactory;
+import client.core.factories.ViewModelFactory;
 import client.customerclient.views.CustomerViewController;
 import client.customerclient.views.CustomerViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;

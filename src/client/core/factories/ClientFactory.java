@@ -1,4 +1,4 @@
-package client.core;
+package client.core.factories;
 
 import client.network.Client;
 import client.network.GrosserClient;

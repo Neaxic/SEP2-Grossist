@@ -1,6 +1,7 @@
 package client;
 
-import client.core.*;
+import client.core.factories.ClientFactory;
+import client.core.viewhandlers.ProxyViewHandler;
 import client.network.Client;
 import javafx.application.Application;
 import javafx.stage.Stage;

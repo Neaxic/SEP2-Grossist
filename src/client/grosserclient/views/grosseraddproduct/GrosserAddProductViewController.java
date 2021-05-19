@@ -1,7 +1,7 @@
 package client.grosserclient.views.grosseraddproduct;
 
 import client.core.ViewHandler;
-import client.core.ViewModelFactory;
+import client.core.factories.ViewModelFactory;
 import client.grosserclient.views.GrosserViewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;

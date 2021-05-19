@@ -1,7 +1,6 @@
-import client.core.ClientFactory;
+import client.core.factories.ClientFactory;
 import client.core.LoginManager;
-import client.core.ModelFactory;
-import client.customerclient.model.CustomerModel;
+import client.core.factories.ModelFactory;
 import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.views.customerbasket.BasketViewModel;
 import client.customerclient.views.customerbasket.ProductAndInt;
@@ -10,7 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import server.server.RMIServer;
+import server.network.RMIServer;
 import shared.network.RMIServerInterface;
 import shared.wares.Alcohol;
 import shared.wares.Product;

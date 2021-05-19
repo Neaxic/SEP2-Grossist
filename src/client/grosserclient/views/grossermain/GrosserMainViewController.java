@@ -1,7 +1,7 @@
 package client.grosserclient.views.grossermain;
 
 import client.core.ViewHandler;
-import client.core.ViewModelFactory;
+import client.core.factories.ViewModelFactory;
 import client.grosserclient.views.GrosserViewController;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;

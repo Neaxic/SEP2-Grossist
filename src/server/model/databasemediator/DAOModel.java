@@ -1,4 +1,4 @@
-package server.model.databaseMediator;
+package server.model.databasemediator;
 
 import javafx.util.Pair;
 import shared.util.SchemaMap;

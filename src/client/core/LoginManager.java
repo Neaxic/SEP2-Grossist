@@ -1,5 +1,6 @@
 package client.core;
 
+import client.core.viewhandlers.ProxyViewHandler;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Node;

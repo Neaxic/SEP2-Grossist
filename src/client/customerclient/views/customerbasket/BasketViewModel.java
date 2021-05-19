@@ -1,7 +1,7 @@
 package client.customerclient.views.customerbasket;
 
 
-import client.core.ModelFactory;
+import client.core.factories.ModelFactory;
 import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.views.CustomerViewModel;
 import javafx.util.Pair;

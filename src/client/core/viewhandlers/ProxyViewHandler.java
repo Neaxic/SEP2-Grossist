@@ -1,5 +1,11 @@
-package client.core;
+package client.core.viewhandlers;
 
+import client.core.LoginManager;
+import client.core.ViewHandler;
+import client.core.ViewModel;
+import client.core.factories.ViewModelFactory;
+import client.core.viewhandlers.CustomerViewHandler;
+import client.core.viewhandlers.GrosserViewHandler;
 import javafx.stage.Stage;
 
 import java.io.IOException;

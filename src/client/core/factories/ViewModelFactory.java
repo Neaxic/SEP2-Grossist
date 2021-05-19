@@ -1,9 +1,8 @@
-package client.core;
+package client.core.factories;
 
 import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
 import client.customerclient.views.CustomerViewModel;
 import client.customerclient.views.customerbasket.BasketViewModel;
-import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
 import client.customerclient.views.placeorderEXCLUDED.PlaceOrderViewModel;
 import client.grosserclient.views.GrosserViewModel;
 import client.grosserclient.views.grosseraddproduct.GrosserAddProductViewModel;

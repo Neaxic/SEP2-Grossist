@@ -1,7 +1,7 @@
 package client.customerclient.views.customerbrowser;
 
 import client.core.ViewHandler;
-import client.core.ViewModelFactory;
+import client.core.factories.ViewModelFactory;
 import client.customerclient.views.CustomerViewController;
 import client.customerclient.views.CustomerViewModel;
 import javafx.beans.property.ListProperty;
@@ -22,13 +22,7 @@ import javafx.scene.text.*;
 import javafx.scene.text.Font;
 import shared.wares.Product;
 
-import java.awt.*;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Iterator;
-import java.util.Set;
 
 // Andreas Young, Line Guld
 

@@ -1,8 +1,7 @@
-package client.core;
+package client.core.factories;
 
 import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.model.CustomerModel;
-import client.customerclient.model.CustomerModelInterface;
 import client.grosserclient.model.GrosserModel;
 import client.grosserclient.model.GrosserModelInterface;
 

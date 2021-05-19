@@ -1,15 +1,14 @@
 package server.model;
 
 import javafx.util.Pair;
-import server.model.databaseMediator.BaseDAO;
-import server.model.databaseMediator.DAOModel;
-import server.model.databaseMediator.ModelInterface;
+import server.model.databasemediator.BaseDAO;
+import server.model.databasemediator.DAOModel;
+import server.model.databasemediator.ModelInterface;
 import shared.wares.Basket;
 import shared.wares.Order;
 import shared.wares.Product;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package client.grosserclient.views.grossermain;
 
-import client.core.ModelFactory;
+import client.core.factories.ModelFactory;
 import client.grosserclient.model.GrosserModelInterface;
 import client.grosserclient.views.GrosserViewModel;
 import javafx.beans.property.SimpleListProperty;

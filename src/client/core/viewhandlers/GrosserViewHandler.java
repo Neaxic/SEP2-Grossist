@@ -1,5 +1,8 @@
-package client.core;
+package client.core.viewhandlers;
 
+import client.core.ViewHandler;
+import client.core.ViewModel;
+import client.core.factories.ViewModelFactory;
 import client.grosserclient.views.GrosserViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +11,6 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Locale;
 
 // Andreas Østergaard, Frederik Bergmann, Andreas Young
 

@@ -1,4 +1,4 @@
-package server.server;
+package server.network;
 
 import javafx.util.Pair;
 import server.model.DataModelImpl;

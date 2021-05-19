@@ -1,5 +1,8 @@
-package client.core;
+package client.core.viewhandlers;
 
+import client.core.ViewHandler;
+import client.core.ViewModel;
+import client.core.factories.ViewModelFactory;
 import client.customerclient.views.CustomerViewController;
 import client.customerclient.views.CustomerViewModel;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +15,7 @@ import java.io.IOException;
 
 // Andreas Østergaard, Frederik Bergmann, Andreas Young
 
-public class CustomerViewHandler implements ViewHandler{
+public class CustomerViewHandler implements ViewHandler {
 
 	private Stage primaryStage;
 	private Scene currentScene;

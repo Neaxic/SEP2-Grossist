@@ -1,4 +1,4 @@
-package server.model.databaseMediator;
+package server.model.databasemediator;
 
 import javafx.util.Pair;
 import shared.wares.Basket;
@@ -6,7 +6,6 @@ import shared.wares.Order;
 import shared.wares.Product;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
