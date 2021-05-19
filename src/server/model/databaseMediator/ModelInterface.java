@@ -25,5 +25,5 @@ public interface ModelInterface {
 
 	int getProductAmountInStockFromProductId(int id) throws SQLException;
 
-	void CreateProduct(Pair<Product, Integer> newProduct) throws SQLException;
+	void createProduct(Pair<Product, Integer> newProduct) throws SQLException;
 }
