@@ -32,7 +32,7 @@ public class CustomerViewHandler implements ViewHandler {
 
 		FXMLLoader loader = new FXMLLoader();
 
-		loader.setLocation(getClass().getResource("../customerclient/views/" + view +"/" +view + ".fxml"));
+		loader.setLocation(getClass().getResource("../../customerclient/views/" + view +"/" +view + ".fxml"));
 		root = loader.load();
 
 		CustomerViewController viewController = loader.getController();

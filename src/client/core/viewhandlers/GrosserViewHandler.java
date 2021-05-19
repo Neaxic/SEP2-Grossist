@@ -31,7 +31,7 @@ public class GrosserViewHandler implements ViewHandler {
 
 		FXMLLoader loader = new FXMLLoader();
 
-		loader.setLocation(getClass().getResource("../grosserclient/views/" + view + "/" + view + ".fxml"));
+		loader.setLocation(getClass().getResource("../../grosserclient/views/" + view + "/" + view + ".fxml"));
 		root = loader.load();
 
 		GrosserViewController viewController = loader.getController();
