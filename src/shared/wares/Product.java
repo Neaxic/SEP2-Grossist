@@ -18,6 +18,7 @@ public abstract class Product implements Serializable {
 	private int deliveryDays;
 	private double price;
 	private int minimumAmountForPurchase;
+	private String producedBy;
 	String tags;
 
 	/**
@@ -30,8 +31,9 @@ public abstract class Product implements Serializable {
 	 * @param deliveryDays             Expected time for delivery in Days
 	 * @param price                    Price pr unit measurementType in DKK
 	 * @param minimumAmountForPurchase The lowest amount available for purchase at a time
+	 * @param producedBy               The company which produced the product
 	 */
-	public Product(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, int minimumAmountForPurchase) {
+	public Product(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, int minimumAmountForPurchase, String producedBy) {
 		this.wareName = wareName;
 		this.measurementType = measurementType;
 		this.bestBefore = bestBefore;
@@ -39,6 +41,7 @@ public abstract class Product implements Serializable {
 		this.deliveryDays = deliveryDays;
 		this.price = price;
 		this.minimumAmountForPurchase = minimumAmountForPurchase;
+		this.producedBy = producedBy;
 	}
 
 	// Getters for all Field Variables
@@ -95,18 +98,20 @@ public abstract class Product implements Serializable {
 
 	/**
 	 * Creates an INSERT query into the Class' mapped Table and returns an open ended query for addition information if needed
+	 *
 	 * @return INSERT INTO query open ended for SQL Column Names
 	 */
-	public String sqlTemplate(){
+	public String sqlTemplate() {
 		return "INSERT INTO " + SchemaMap.Mapping(this.getClass()) + " (productName, measurement, minPurchase, producedBy, salesprice, bbDate, tags, amountInStock";
 	}
 
 	/**
 	 * Creates the VALUES part of an INSERT query and returns an open ended query for addition information if needed
+	 *
 	 * @return Information regarding product, open ended for SQL Column Information
 	 */
-	public String sqlInformation(){
-		return ") VALUES (" + wareName + "," + measurementType + "," + minimumAmountForPurchase + "," + null + "," + price + "," + bestBefore + tags;
+	public String sqlInformation() { // Produced By
+		return ") VALUES (" + wareName + "," + measurementType + "," + minimumAmountForPurchase + "," + producedBy + "," + price + "," + bestBefore + "," + tags;
 	}
 }
 
