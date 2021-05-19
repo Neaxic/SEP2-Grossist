@@ -1,8 +1,6 @@
 package client.grosserclient.model;
 
-import client.network.Client;
 import client.network.GrosserClient;
-import client.network.RMIClient;
 import javafx.util.Pair;
 import shared.wares.Product;
 
