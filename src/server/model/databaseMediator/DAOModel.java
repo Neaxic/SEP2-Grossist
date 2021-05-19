@@ -340,7 +340,8 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 	@Override
 	public void CreateProduct(Pair<Product, Integer> newProduct) throws SQLException {
 		try (Connection connection = getConnection()) {
-			connection.prepareStatement(newProduct.getKey().sqlTemplate() + newProduct.getValue() + ");");
+			PreparedStatement statement = connection.prepareStatement(newProduct.getKey().sqlTemplate() + newProduct.getValue() + ");");
+			statement.executeQuery();
 		}
 		System.out.println(newProduct.getKey().getWareName());
 	}
