@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.util.Pair;
 import shared.wares.*;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class GrosserAddProductViewController implements GrosserViewController
   @FXML private TextField productMeasurement;
   @FXML private DatePicker productBestBefore;
   @FXML private TextField productDeliveryDays;
+  @FXML private TextField productAmount;
 
   @FXML private TextField AlcoholType;
   @FXML private TextField AlcoholPercent;
@@ -48,22 +50,28 @@ public class GrosserAddProductViewController implements GrosserViewController
     String className = tabPane.getSelectionModel().getSelectedItem().getText();
     if(className.equals("Alkohol")){
       Alcohol newProduct = new Alcohol(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0,Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), AlcoholCountry.getText(), Double.parseDouble(AlcoholPercent.getText()), AlcoholType.getText());
-      viewModel.sendOrder(newProduct);
+      Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+      viewModel.sendOrder(liste);
     } else if(className.equals("Drikkevarer")) {
       Drink newProduct = new Drink(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0,Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), DrikType.getText());
-      viewModel.sendOrder(newProduct);
+      Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+      viewModel.sendOrder(liste);
     } else if(className.equals("Kolonial")) {
       Colonial newProduct = new Colonial(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0,Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), ColonialCountry.getText());
-      viewModel.sendOrder(newProduct);
+      Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+      viewModel.sendOrder(liste);
     } else if(className.equals("Mejeri og æg")) {
       CooledAndDairy newProduct = new CooledAndDairy(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0,Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()));
-      viewModel.sendOrder(newProduct);
+      Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+      viewModel.sendOrder(liste);
     } else if(className.equals("Frugt og grønt")) {
       FruitsAndVegetable newProduct = new FruitsAndVegetable(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0,Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), GreenCountry.getText());
-      viewModel.sendOrder(newProduct);
+      Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+      viewModel.sendOrder(liste);
     } else if(className.equals("Kød og fisk")) {
       MeatAndFish newProduct = new MeatAndFish(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0,Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), meatCountry.getText());
-      viewModel.sendOrder(newProduct);
+      Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+      viewModel.sendOrder(liste);
     }
   }
 

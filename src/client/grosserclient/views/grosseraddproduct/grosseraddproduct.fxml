@@ -32,20 +32,22 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane prefHeight="222.0" prefWidth="580.0">
                <children>
-                  <Text layoutX="30.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produkt Navn:" />
-                  <Text layoutX="321.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mål type:" />
-                  <Text layoutX="320.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bedst før:" />
-                  <Text layoutX="81.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris:" />
-                  <Text layoutX="14.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min. antal pr køb:" />
-                  <TextField fx:id="productName" layoutX="123.0" layoutY="21.0" prefHeight="25.0" prefWidth="160.0" />
-                  <TextField fx:id="productMeasurement" layoutX="388.0" layoutY="21.0" prefHeight="25.0" prefWidth="175.0" promptText="Liter/kg" />
-                  <TextField fx:id="productPrice" layoutX="123.0" layoutY="57.0" prefHeight="25.0" prefWidth="160.0" />
-                  <TextField fx:id="ProductMinAmount" layoutX="125.0" layoutY="94.0" prefHeight="25.0" prefWidth="158.0" />
-                  <DatePicker fx:id="productBestBefore" layoutX="389.0" layoutY="57.0" />
-                  <Text layoutX="300.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leverings tid:" />
-                  <TextField fx:id="productDeliveryDays" layoutX="388.0" layoutY="94.0" prefHeight="25.0" prefWidth="175.0" promptText="I dage" />
+                  <Text layoutX="29.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produkt Navn:" />
+                  <Text layoutX="320.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mål type:" />
+                  <Text layoutX="319.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bedst før:" />
+                  <Text layoutX="80.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris:" />
+                  <Text layoutX="13.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min. antal pr køb:" />
+                  <TextField fx:id="productName" layoutX="122.0" layoutY="11.0" prefHeight="25.0" prefWidth="160.0" />
+                  <TextField fx:id="productMeasurement" layoutX="387.0" layoutY="11.0" prefHeight="25.0" prefWidth="175.0" promptText="Liter/kg" />
+                  <TextField fx:id="productPrice" layoutX="122.0" layoutY="47.0" prefHeight="25.0" prefWidth="160.0" />
+                  <TextField fx:id="ProductMinAmount" layoutX="124.0" layoutY="84.0" prefHeight="25.0" prefWidth="158.0" />
+                  <DatePicker fx:id="productBestBefore" layoutX="388.0" layoutY="47.0" />
+                  <Text layoutX="299.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leverings tid:" />
+                  <TextField fx:id="productDeliveryDays" layoutX="387.0" layoutY="84.0" prefHeight="25.0" prefWidth="175.0" promptText="I dage" />
+                  <Text layoutX="25.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ledig mængde:" />
+                  <TextField fx:id="productAmount" layoutX="122.0" layoutY="124.0" prefHeight="25.0" prefWidth="160.0" />
                </children>
             </AnchorPane>
             <TabPane fx:id="tabPane" prefHeight="187.0" prefWidth="580.0" tabClosingPolicy="UNAVAILABLE">

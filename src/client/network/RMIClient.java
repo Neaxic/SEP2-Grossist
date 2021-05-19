@@ -86,7 +86,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	}
 
 	@Override
-	public void createProduct(Product newProduct) {
+	public void createProduct(Pair<Product, Integer> newProduct) {
 		try {
 			server.createProduct(newProduct);
 		} catch(RemoteException e) {
