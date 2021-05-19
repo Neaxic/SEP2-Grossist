@@ -31,7 +31,7 @@ public class Drink extends Product implements ProductInterface {
 
 	@Override
 	public String sqlInformation() {
-		return super.sqlInformation() + ", " + beverageType;
+		return super.sqlInformation() + ", '" + beverageType + "'";
 	}
 
 }

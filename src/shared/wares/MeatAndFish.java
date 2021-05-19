@@ -30,6 +30,6 @@ public class MeatAndFish extends Product implements ProductInterface {
 
 	@Override
 	public String sqlInformation() {
-		return super.sqlInformation() + ", " + originCountry;
+		return super.sqlInformation() + ", '" + originCountry + "'";
 	}
 }

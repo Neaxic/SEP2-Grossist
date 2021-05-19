@@ -45,7 +45,7 @@ public class Alcohol extends Product implements ProductInterface {
 
 	@Override
 	public String sqlInformation() {
-		return super.sqlInformation() + ", " + percentage + ", " + originCountry + ", " + beverageType;
+		return super.sqlInformation() + ", " + percentage + ", '" + originCountry + "', '" + beverageType + "'";
 	}
 
 }

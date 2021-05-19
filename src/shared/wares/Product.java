@@ -3,6 +3,7 @@ package shared.wares;
 import shared.util.SchemaMap;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Set;
@@ -102,7 +103,7 @@ public abstract class Product implements Serializable {
 	 * @return INSERT INTO query open ended for SQL Column Names
 	 */
 	public String sqlTemplate() {
-		return "INSERT INTO " + SchemaMap.Mapping(this.getClass()) + " (productName, measurement, minPurchase, producedBy, salesprice, bbDate, tags, amountInStock";
+		return "INSERT INTO " + SchemaMap.Mapping(this.getClass()) + " (productName, measurement, minPurchase, producedBy, salesprice, bbDate, tags";
 	}
 
 	/**
@@ -111,7 +112,7 @@ public abstract class Product implements Serializable {
 	 * @return Information regarding product, open ended for SQL Column Information
 	 */
 	public String sqlInformation() { // Produced By
-		return ") VALUES (" + wareName + "," + measurementType + "," + minimumAmountForPurchase + "," + producedBy + "," + price + "," + bestBefore + "," + tags;
+		return ") VALUES ('" + wareName + "', '" + measurementType + "', " + minimumAmountForPurchase + ", '" + producedBy + "', " + price + ", '" + bestBefore + "', '" + tags + "'";
 	}
 }
 
