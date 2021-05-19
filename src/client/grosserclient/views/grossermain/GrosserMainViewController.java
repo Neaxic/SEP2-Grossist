@@ -54,6 +54,13 @@ public class GrosserMainViewController implements GrosserViewController
     orderTable.getItems().addAll(orderList);
   }
 
+  @FXML private void updateOrders()
+  {
+    orderTable.getItems().clear();
+    viewModel.getAllOrders();
+    populateTable();
+  }
+
   @FXML private void addNewProductScene() throws IOException {
     this.swapScene("grosseraddproduct");
   }
