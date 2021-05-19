@@ -110,7 +110,7 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 			System.out.println("Create orderSpec error");
 			e.printStackTrace();
 		}
-	} //TODO: Skal laves når der er styr på DB.
+	}
 
 
 	//GETTERS --------------------------------------------------------------------------------------------------------------
