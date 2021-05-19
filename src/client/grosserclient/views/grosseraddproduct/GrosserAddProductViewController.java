@@ -3,7 +3,6 @@ package client.grosserclient.views.grosseraddproduct;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.grosserclient.views.GrosserViewController;
-import client.grosserclient.views.grossermain.GrosserMainViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TabPane;
@@ -15,77 +14,76 @@ import java.io.IOException;
 
 // Frederik Bergmann
 
-public class GrosserAddProductViewController implements GrosserViewController
-{
-  private ViewHandler viewHandler;
-  private GrosserAddProductViewModel viewModel;
+public class GrosserAddProductViewController implements GrosserViewController {
+	private ViewHandler viewHandler;
+	private GrosserAddProductViewModel viewModel;
 
-  @FXML private TextField productName;
-  @FXML private TextField productPrice;
-  @FXML private TextField ProductMinAmount;
-  @FXML private TextField productMeasurement;
-  @FXML private DatePicker productBestBefore;
-  @FXML private TextField productDeliveryDays;
-  @FXML private TextField productAmount;
-  @FXML private TextField productBy;
+	@FXML private TextField productName;
+	@FXML private TextField productPrice;
+	@FXML private TextField ProductMinAmount;
+	@FXML private TextField productMeasurement;
+	@FXML private DatePicker productBestBefore;
+	@FXML private TextField productDeliveryDays;
+	@FXML private TextField productAmount;
+	@FXML private TextField productBy;
 
-  @FXML private TextField AlcoholType;
-  @FXML private TextField AlcoholPercent;
-  @FXML private TextField AlcoholCountry;
+	@FXML private TextField AlcoholType;
+	@FXML private TextField AlcoholPercent;
+	@FXML private TextField AlcoholCountry;
 
-  @FXML private TextField DrikType;
-  @FXML private TextField ColonialCountry;
-  @FXML private TextField GreenCountry;
-  @FXML private TextField meatCountry;
+	@FXML private TextField DrikType;
+	@FXML private TextField ColonialCountry;
+	@FXML private TextField GreenCountry;
+	@FXML private TextField meatCountry;
 
-  @FXML private TabPane tabPane;
+	@FXML private TabPane tabPane;
 
-  @Override public void init(ViewHandler viewHandler)
-  {
-    this.viewHandler = viewHandler;
-    viewModel = ViewModelFactory.getInstance().grosserAddProductViewModel();
+	@Override
+	public void init(ViewHandler viewHandler) {
+		this.viewHandler = viewHandler;
+		viewModel = ViewModelFactory.getInstance().grosserAddProductViewModel();
 
-  }
+	}
 
-  @FXML private void createProduct(){
-    String className = tabPane.getSelectionModel().getSelectedItem().getText();
-    switch (className) {
-      case "Alkohol" -> {
-        Alcohol newProduct = new Alcohol(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), AlcoholCountry.getText(), Double.parseDouble(AlcoholPercent.getText()), AlcoholType.getText());
-        Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-        System.out.println(newProduct); //SOUT
-        viewModel.sendOrder(liste);
-      }
-      case "Drikkevarer" -> {
-        Drink newProduct = new Drink(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), DrikType.getText());
-        Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-        viewModel.sendOrder(liste);
-      }
-      case "Kolonial" -> {
-        Colonial newProduct = new Colonial(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), ColonialCountry.getText());
-        Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-        viewModel.sendOrder(liste);
-      }
-      case "Mejeri og æg" -> {
-        CooledAndDairy newProduct = new CooledAndDairy(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText());
-        Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-        viewModel.sendOrder(liste);
-      }
-      case "Frugt og grønt" -> {
-        FruitsAndVegetable newProduct = new FruitsAndVegetable(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), GreenCountry.getText());
-        Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-        viewModel.sendOrder(liste);
-      }
-      case "Kød og fisk" -> {
-        MeatAndFish newProduct = new MeatAndFish(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), meatCountry.getText());
-        Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-        viewModel.sendOrder(liste);
-      }
-    }
-  }
+	@FXML
+	private void createProduct() {
+		String className = tabPane.getSelectionModel().getSelectedItem().getText();
+		switch (className) {
+			case "Alkohol" -> {
+				Alcohol newProduct = new Alcohol(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), AlcoholCountry.getText(), Double.parseDouble(AlcoholPercent.getText()), AlcoholType.getText());
+				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+				viewModel.sendOrder(liste);
+			}
+			case "Drikkevarer" -> {
+				Drink newProduct = new Drink(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), DrikType.getText());
+				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+				viewModel.sendOrder(liste);
+			}
+			case "Kolonial" -> {
+				Colonial newProduct = new Colonial(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), ColonialCountry.getText());
+				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+				viewModel.sendOrder(liste);
+			}
+			case "Mejeri og æg" -> {
+				CooledAndDairy newProduct = new CooledAndDairy(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText());
+				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+				viewModel.sendOrder(liste);
+			}
+			case "Frugt og grønt" -> {
+				FruitsAndVegetable newProduct = new FruitsAndVegetable(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), GreenCountry.getText());
+				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+				viewModel.sendOrder(liste);
+			}
+			case "Kød og fisk" -> {
+				MeatAndFish newProduct = new MeatAndFish(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), meatCountry.getText());
+				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+				viewModel.sendOrder(liste);
+			}
+		}
+	} // TODO: Østergaard, her skal du lige lave noget tjek på, om felterne er tomme eller om der er ugyldig data
 
-  @Override public void swapScene(String sceneName) throws IOException
-  {
-    viewHandler.openView(sceneName);
-  }
+	@Override
+	public void swapScene(String sceneName) throws IOException {
+		viewHandler.openView(sceneName);
+	}
 }
