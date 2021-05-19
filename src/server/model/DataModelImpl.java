@@ -57,7 +57,7 @@ public class DataModelImpl {
 
 	public void createProduct(Pair<Product, Integer> newProduct){
 		try{
-			model.CreateProduct(newProduct);
+			model.createProduct(newProduct);
 		} catch(SQLException e){
 			e.printStackTrace();
 		}

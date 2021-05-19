@@ -43,7 +43,7 @@ public class GrosserAddProductViewController implements GrosserViewController
   @Override public void init(ViewHandler viewHandler)
   {
     this.viewHandler = viewHandler;
-    viewModel = (GrosserAddProductViewModel) ViewModelFactory.getInstance().grosserAddProductViewModel();
+    viewModel = ViewModelFactory.getInstance().grosserAddProductViewModel();
 
   }
 
@@ -53,6 +53,7 @@ public class GrosserAddProductViewController implements GrosserViewController
       case "Alkohol" -> {
         Alcohol newProduct = new Alcohol(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), AlcoholCountry.getText(), Double.parseDouble(AlcoholPercent.getText()), AlcoholType.getText());
         Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+        System.out.println(newProduct); //SOUT
         viewModel.sendOrder(liste);
       }
       case "Drikkevarer" -> {
