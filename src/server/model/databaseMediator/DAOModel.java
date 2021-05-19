@@ -1,12 +1,14 @@
 package server.model.databaseMediator;
 
 import javafx.util.Pair;
+import shared.util.SchemaMap;
 import shared.wares.*;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -70,11 +72,11 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		return list;
 	}
 
-	public void createOrder(int cvr, double sum, LocalDate date) {
+	public void createOrder(int cvr, double sum, LocalDateTime dateTime) {
 		try (Connection connection = getConnection()) {
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO order_(cvr, orderNo, orderDate, totalPrice) VALUES(?,default,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO order_(cvr, orderNo, orderTime, totalPrice) VALUES(?,default,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			statement.setInt(1, cvr);
-			statement.setDate(2, Date.valueOf(date));
+			statement.setTimestamp(2, Timestamp.valueOf(dateTime));
 			statement.setDouble(3, sum);
 
 			statement.executeUpdate();
@@ -86,40 +88,34 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		}
 	}
 
-	public void createOrderSpec(Basket basket, int CVR, LocalDate date,
-	                            double sum) //TODO: Skal laves når der er styr på DB.
-	{
-//    try (Connection connection = getConnection())
-//    {
-//      PreparedStatement getOrderNo = connection.prepareStatement(
-//          "SELECT orderNo FROM order_ WHERE cvr = " + CVR + " AND totalprice = " + sum +
-//              "AND orderdate = '" + date.toString() + "'");
-//
-//      ResultSet orderNoResult = getOrderNo.executeQuery();
-//      orderNoResult.next();
-//      int orderNo = (int) orderNoResult.getObject(1);
-//
-//      PreparedStatement statement = connection
-//          .prepareStatement("INSERT INTO orderspec(orderno, productid, amount) VALUES(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
-//
-//      for (Product product : basket.getBasket().keySet())
-//      {
-//        statement.setInt(1, orderNo);
-//        statement.setInt(2, product.getWareNumber());
-//        statement.setInt(3, basket.getAmount(product));
-//
-//        statement.executeUpdate();
-//      }
-//    }
-//    catch (SQLException e)
-//    {
-//      System.out.println("Create orderSpec error");
-//      e.printStackTrace();
-//    }
-	}
+	public void createOrderSpec(Basket basket, int CVR, LocalDateTime date, double sum) {
+		try (Connection connection = getConnection()) {
+			PreparedStatement getOrderNo = connection.prepareStatement("SELECT orderNo FROM order_ WHERE cvr = " + CVR + " AND totalPrice = " + sum + "AND orderTime = '" + date.toString() + "'");
+
+			ResultSet orderNoResult = getOrderNo.executeQuery();
+			orderNoResult.next();
+			long orderNo = (long) orderNoResult.getObject(1);
+
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO orderspec(orderno, productid, amount) VALUES(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+
+			for (Product product : basket.getBasket().keySet()) {
+				statement.setLong(1, orderNo);
+				statement.setInt(2, product.getWareNumber());
+				statement.setInt(3, basket.getAmount(product));
+
+				statement.executeUpdate();
+				connection.prepareStatement("UPDATE " + SchemaMap.Mapping(product.getClass()) + " SET amountInStock = amountInStock -" + basket.getAmount(product) + " WHERE productID = " + product.getWareNumber()).executeUpdate();
+			}
+		} catch (SQLException e) {
+			System.out.println("Create orderSpec error");
+			e.printStackTrace();
+		}
+	} //TODO: Skal laves når der er styr på DB.
 
 
 	//GETTERS --------------------------------------------------------------------------------------------------------------
+
+	// Customer
 	public ArrayList<String> getCustomerID() throws SQLException {
 		ArrayList<String> str = new ArrayList<>();
 		try (Connection connection = getConnection()) {
@@ -144,6 +140,7 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 		return str;
 	}
 
+	// Products
 	public ArrayList<Integer> getProductIds() throws SQLException {
 		return getProductIds("product");
 	}
@@ -341,11 +338,28 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 	public void createProduct(Pair<Product, Integer> newProduct) throws SQLException {
 		try (Connection connection = getConnection()) {
 			Product p = newProduct.getKey();
-			String sql = p.sqlTemplate() + ", amountInStock" + p.sqlInformation() + ","+ newProduct.getValue() + ")";
+			int productID = hackSolutionForStupidDatabaseProblemsWithInheritance(connection, newProduct);
+
+			String sql = "INSERT INTO " + SchemaMap.Mapping(p.getClass()) + " (productID, " + p.sqlTemplate() + ", amountInStock) VALUES (" + productID + "," + p.sqlInformation() + "," + newProduct.getValue() + ")";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.execute();
 		}
-		System.out.println(newProduct.getKey().getWareName());
+	}
+
+	/**
+	 * Databases really don't like Inheritance so this is a bit of a hack to get stuff working :D Good thing to do when the teachers can't help us. Mvh Young
+	 *
+	 * @param c Database Connection
+	 * @param p Pair consisting of the Product and the Amount of the product
+	 * @return The Product ID given in the Product table
+	 * @throws SQLException
+	 */
+	private int hackSolutionForStupidDatabaseProblemsWithInheritance(Connection c, Pair<Product, Integer> p) throws SQLException {
+		String s = "INSERT INTO product(productname, measurement, minpurchase, producedby, salesprice, bbdate, amountinstock, tags) VALUES ('" + p.getKey().getWareName() + "', '" + p.getKey().getMeasurementType() + "', " + p.getKey().getMinimumAmountForPurchase() + ", '" + p.getKey().getProducedBy() + "', " + p.getKey().getPrice() + ", '" + p.getKey().getBestBefore() + "', " + p.getValue() + ", '" + p.getKey().getTags() + "')";
+		c.prepareStatement(s).executeUpdate();
+		ResultSet idSet = c.prepareStatement("SELECT productID FROM product WHERE productName = '" + p.getKey().getWareName() + "' AND producedBy = '" + p.getKey().getProducedBy() + "' AND bbDate = '" + p.getKey().getBestBefore() + "'").executeQuery();
+		idSet.next();
+		return idSet.getInt("productID");
 	}
 
 //	public ArrayList<Product> getAlcoholProducts() {
@@ -420,5 +434,5 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 //		}
 //		System.out.println("Could not connect :( DAOMODEL");
 //		return fruitAndVegetable;
-//	}
+//	}2
 }

@@ -62,15 +62,9 @@ public class BasketViewController implements CustomerViewController {
 		Object item = basketTable.getSelectionModel().getSelectedItem(); // Item is an instance of ´ProductAndInt´
 		viewModel.removeFromBasket(item);
 		//basketTable.refresh(); // Denne metode blev tilføjet for 4 år siden til JavaFX og burde opdatere et TableView, men den virker ikke
-		//TODO: Viewet refresher ikke, efter fjerelse
-
-		// kunne ikke få det til at virke gliende så tager care af vigtigere ting
-
-		// Men selve det at fjerne virker behind the scenes.
-
 	}
 
-	public void saveBasketToBin(ActionEvent actionEvent) {
+	public void saveBasketToBin() {
 		//TODO: (SaveBasket) Ekstra funktionallitet, slet ikke vigtig
 	}
 
@@ -80,6 +74,7 @@ public class BasketViewController implements CustomerViewController {
 			basketTable.getItems().clear();
 			basketSum.setText("");
 			viewModel.loadAllProducts().clear();
+			new Alert(Alert.AlertType.CONFIRMATION,"Din bestilling er nu sendt ind.", ButtonType.OK).showAndWait();
 		} else {
 			String test = OrderPopUpError.display(verification.getValue());
 			switch (test) {

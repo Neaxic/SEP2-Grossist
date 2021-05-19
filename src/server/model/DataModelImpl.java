@@ -10,6 +10,7 @@ import shared.wares.Product;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,11 +48,11 @@ public class DataModelImpl {
 		return new Pair<>(!orderItems.getBasket().isEmpty() && products.isEmpty(), products);
 	}
 
-	public void createOrder(int cvr, double sum, LocalDate date) {
-		model.createOrder(cvr, sum, date);
+	public void createOrder(int cvr, double sum, LocalDateTime dateTime) {
+		model.createOrder(cvr, sum, dateTime);
 	}
 
-	public void createOrderSpec(Basket basket, int CVR, LocalDate date, double sum) throws SQLException {
+	public void createOrderSpec(Basket basket, int CVR, LocalDateTime date, double sum) {
 		model.createOrderSpec(basket, CVR, date, sum);
 	}
 

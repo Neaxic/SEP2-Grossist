@@ -5,19 +5,22 @@ import java.time.LocalDate;
 // Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
 
 // Interface matching the newly suggested Product Class
-public interface ProductInterface
-{
-  int getWareNumber();
+public interface ProductInterface {
+	int getWareNumber();
 
-  String getWareName();
+	String getWareName();
 
-  String getMeasurementType();
+	String getMeasurementType();
 
-  LocalDate getBestBefore();
+	LocalDate getBestBefore();
 
-  int getDeliveryDays();
+	int getDeliveryDays();
 
-  double getPrice();
+	double getPrice();
 
-  int getMinimumAmountForPurchase();
+	int getMinimumAmountForPurchase();
+
+	String getProducedBy();
+
+	String getTags();
 }

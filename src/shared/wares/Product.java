@@ -74,6 +74,14 @@ public abstract class Product implements Serializable {
 		return minimumAmountForPurchase;
 	}
 
+	public String getProducedBy() {
+		return producedBy;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
 	public void addTags(String tags) { // Kan nemt ændres til at tage en String[] eller ArrayList<String>
 		tags = removeDuplicates(tags.split(","));
 		tags = tags.replaceAll("[\s+\\[\\]]",
@@ -103,7 +111,7 @@ public abstract class Product implements Serializable {
 	 * @return INSERT INTO query open ended for SQL Column Names
 	 */
 	public String sqlTemplate() {
-		return "INSERT INTO " + SchemaMap.Mapping(this.getClass()) + " (productName, measurement, minPurchase, producedBy, salesprice, bbDate, tags";
+		return "productName, measurement, minPurchase, producedBy, salesprice, bbDate, tags";
 	}
 
 	/**
@@ -112,7 +120,7 @@ public abstract class Product implements Serializable {
 	 * @return Information regarding product, open ended for SQL Column Information
 	 */
 	public String sqlInformation() { // Produced By
-		return ") VALUES ('" + wareName + "', '" + measurementType + "', " + minimumAmountForPurchase + ", '" + producedBy + "', " + price + ", '" + bestBefore + "', '" + tags + "'";
+		return " '" + wareName + "', '" + measurementType + "', " + minimumAmountForPurchase + ", '" + producedBy + "', " + price + ", '" + bestBefore + "', '" + tags + "'";
 	}
 }
 

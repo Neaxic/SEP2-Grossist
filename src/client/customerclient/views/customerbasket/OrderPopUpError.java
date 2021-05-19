@@ -25,7 +25,7 @@ public class OrderPopUpError {
 		popupWindow.setTitle("Ordre Fejl");
 
 		Label infoLabel1 = new Label("Der er en fejl med din ordre");
-		Label infoLabel2 = new Label("Skal vi fjerne den udsolgte vare fra din kurv?");
+		Label infoLabel2 = new Label("Vi har ikke nok af en af dine ønskede varer på lager.\nSkal vi fjerne den fra din kurv?");
 		Label errorProduct = new Label(listFormat(productCausingError) + " fjernes fra hvis du Godkender");
 
 		Button confirm = new Button("Godkend");

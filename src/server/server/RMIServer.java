@@ -15,7 +15,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -72,7 +74,9 @@ public class RMIServer implements RMIServerInterface {
 		System.out.println("SERVER: CVR: " + cvr + "\tORDER SIZE: " + basket.getBasket().size() + "\tSUM: " + sum);
 		Pair<Boolean, ArrayList<Product>> verification = dataModel.verifyOrder(basket);
 		if (verification.getKey()) {
-			dataModel.createOrder(cvr, sum, LocalDate.now());
+			LocalDateTime orderTime = LocalDateTime.now();
+			dataModel.createOrder(cvr, sum, orderTime);
+			dataModel.createOrderSpec(basket, cvr, orderTime, sum);
 		}
 		return verification;
 	}
