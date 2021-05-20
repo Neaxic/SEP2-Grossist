@@ -12,7 +12,7 @@ I dette dokument, kan du læse om hvad de forskellige interfaces skal kunde, pri
 
 <h3>DAOGrosserInterface</h3>
 
-* En liste af alle varer samt antallet på lager [Pair<<i>Product</i>, <i>Integer</i>>]
+* En liste af alle varer samt antallet på lager [list<<i>Pair<<u>Product</u>, <u>Integer</u>></i>>]
   
 * En liste af alle ordre [list<<i>Order</i>>]
 
