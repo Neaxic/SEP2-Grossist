@@ -2,19 +2,20 @@ package shared.objects;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 // Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
 
 public class Order implements Serializable
 {
   private final int CVR, orderNo;
-  private final LocalDate orderDate;
+  private final LocalDateTime orderDate;
   private final double sum;
 
   private final Basket basket;
 
-  public Order(int CVR, int orderNo, LocalDate orderDate, double sum,
-      Basket basket)
+  public Order(int CVR, int orderNo, LocalDateTime orderDate, double sum,
+               Basket basket)
   {
     this.CVR = CVR;
     this.orderNo = orderNo;
@@ -33,7 +34,7 @@ public class Order implements Serializable
     return orderNo;
   }
 
-  public LocalDate getOrderDate()
+  public LocalDateTime getOrderDate()
   {
     return orderDate;
   }
