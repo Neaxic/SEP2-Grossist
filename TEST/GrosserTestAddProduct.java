@@ -1,5 +1,7 @@
 import client.core.factories.ClientFactory;
+import client.core.factories.ModelFactory;
 import client.grosserclient.model.GrosserModel;
+import client.grosserclient.model.GrosserModelInterface;
 import client.grosserclient.views.grosseraddproduct.GrosserAddProductViewModel;
 import client.network.GrosserClient;
 import javafx.util.Pair;
@@ -21,6 +23,7 @@ class GrosserTestAddProduct
 {
   private static GrosserAddProductViewModel viewModel;
   private static GrosserClient grosserClient;
+  static GrosserModelInterface grosserModel;
   static Integer validAmount = 500;
   static Integer invalidAmount = -1;
   static Integer invalidAmountZero = 0;
@@ -46,8 +49,8 @@ class GrosserTestAddProduct
 
   @BeforeEach public void setup()
   {
-    GrosserModel model = new GrosserModel(grosserClient);
     viewModel = new GrosserAddProductViewModel();
+    grosserModel = ModelFactory.getInstance().getGrosserModel();
   }
 
   static class AlcoholTest
@@ -69,8 +72,8 @@ class GrosserTestAddProduct
 
     @BeforeEach public void setup()
     {
-      GrosserModel model = new GrosserModel(grosserClient);
       viewModel = new GrosserAddProductViewModel();
+      grosserModel = ModelFactory.getInstance().getGrosserModel();
     }
 
   @Test void invalidAlcoholAmountInput()
@@ -414,8 +417,8 @@ class GrosserTestAddProduct
 
     @BeforeEach public void setup()
     {
-      GrosserModel model = new GrosserModel(grosserClient);
       viewModel = new GrosserAddProductViewModel();
+      grosserModel = ModelFactory.getInstance().getGrosserModel();
     }
     // Test af at oprette ikke-alkoholiske drikkevarer
     @Test void invalidDrinkAmountInput()
@@ -659,8 +662,8 @@ class GrosserTestAddProduct
 
     @BeforeEach public void setup()
     {
-      GrosserModel model = new GrosserModel(grosserClient);
       viewModel = new GrosserAddProductViewModel();
+      grosserModel = ModelFactory.getInstance().getGrosserModel();
     }
     @Test void invalidColonialAmountInput()
     {
@@ -901,8 +904,8 @@ class GrosserTestAddProduct
 
     @BeforeEach public void setup()
     {
-      GrosserModel model = new GrosserModel(grosserClient);
       viewModel = new GrosserAddProductViewModel();
+      grosserModel = ModelFactory.getInstance().getGrosserModel();
     }
   //Test mejeri og æg
   @Test void invalidDairyAmountInput(){
@@ -1115,8 +1118,8 @@ class GrosserTestAddProduct
 
     @BeforeEach public void setup()
     {
-      GrosserModel model = new GrosserModel(grosserClient);
       viewModel = new GrosserAddProductViewModel();
+      grosserModel = ModelFactory.getInstance().getGrosserModel();
     }
   // Test frugt og grønt
   @Test void invalidGreensAmount(){
@@ -1358,8 +1361,8 @@ class GrosserTestAddProduct
 
     @BeforeEach public void setup()
     {
-      GrosserModel model = new GrosserModel(grosserClient);
       viewModel = new GrosserAddProductViewModel();
+      grosserModel = ModelFactory.getInstance().getGrosserModel();
     }
 
 // Test af Kød og Fisk
