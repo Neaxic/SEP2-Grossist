@@ -8,13 +8,13 @@ I dette dokument, kan du læse om hvad de forskellige interfaces skal kunde, pri
 <h2>Anmodning om Information fra Databasen (GETTING)</h2>
 <h3>DAOCustomerInterface</h3>
 
-* En list af alle varer (List<<i>Product</i>>)
+* En list af alle varer [List<<i>Product</i>>]
 
 <h3>DAOGrosserInterface</h3>
 
-* En liste af alle varer samt antallet på lager (Pair<<i>Product</i>, <i>Integer</i>>)
+* En liste af alle varer samt antallet på lager [Pair<<i>Product</i>, <i>Integer</i>>]
   
-* En liste af alle ordre (list<<i>Order</i>>)
+* En liste af alle ordre [list<<i>Order</i>>]
 
 <br>
 
@@ -23,16 +23,16 @@ I dette dokument, kan du læse om hvad de forskellige interfaces skal kunde, pri
 
 <h3>DAOCustomerInterface</h3>
 
-* Oprette en order (int, LocalDateTime, Basket)
+* Oprette en order (int, LocalDateTime, Basket) [bool]
 	* Laver både order (cvr, orderTime, orderSum) og orderSpec (orderNo, productID, antal)
 
 <h3>DAOGrosserInterface</h3>
 
-* Oprette en varer samt antallet af varen (Pair<<i>Product</i>, <i>Integer</i>>)
+* Oprette en vare samt antallet af varen (Pair<<i>Product</i>, <i>Integer</i>>) [bool]
 
-* Ændre antal af en vare (Pair<<i>Product</i>, <i>Integer</i>>)
+* Ændre antal af en vare (Pair<<i>Product</i>, <i>Integer</i>>) [bool]
 
-* Fjerne en vare helt (Product)
+* Fjerne en vare helt (Product) [bool]
 
-* Oprette kunder (int, String, String, String)
+* Oprette kunder (int, String, String, String) [bool]
 	* (cvr, navn, kodeord, adresse)
