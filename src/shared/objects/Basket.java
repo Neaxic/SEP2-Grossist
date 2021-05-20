@@ -49,4 +49,12 @@ public class Basket implements Serializable {
 	public void empty() {
 		basket = new HashMap<>();
 	}
+
+	public double getSum() {
+		int sum = 0;
+		for (Product p : basket.keySet()) {
+			sum += p.getPrice() * basket.get(p);
+		}
+		return sum;
+	}
 }
