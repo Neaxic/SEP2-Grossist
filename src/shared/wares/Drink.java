@@ -15,7 +15,16 @@ public class Drink extends Product implements ProductInterface {
 		beverageType = (String) params[9];
 	}
 
-	public Drink(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, int minimumAmountForPurchase, String beverageType, String producedBy) {
+	public Drink(String wareName,
+			String measurementType,
+			LocalDate bestBefore,
+			int wareNumber,
+			int deliveryDays,
+			double price,
+			int minimumAmountForPurchase,
+			String beverageType,
+			String producedBy) {
+
 		super(wareName, measurementType, bestBefore, wareNumber, deliveryDays, price, minimumAmountForPurchase, producedBy);
 		this.beverageType = beverageType;
 	}
