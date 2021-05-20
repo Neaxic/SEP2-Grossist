@@ -1,7 +1,7 @@
 package server.model.databasemediator;
 
 import javafx.util.Pair;
-import shared.wares.Order;
+import shared.objects.Order;
 import shared.wares.Product;
 
 import java.sql.SQLException;
@@ -50,7 +50,7 @@ public interface DAOGrosserInterface extends CollectionDAOInterface{
 	 * @throws SQLException Thrown when Database access is not possible <br>
 	 *                      Often caused by Database not being online
 	 */
-	boolean changeAmountInStockOfProject(Pair<Product, Integer> productAndNewAmount) throws SQLException;
+	boolean changeAmountInStockOfProduct(Pair<Product, Integer> productAndNewAmount) throws SQLException;
 
 	/**
 	 * Accesses the Database and creates an SQL statement, using postgresql, to delete a product from the system. <br>

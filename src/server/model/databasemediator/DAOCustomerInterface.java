@@ -1,6 +1,6 @@
 package server.model.databasemediator;
 
-import shared.wares.Basket;
+import shared.objects.Basket;
 import shared.wares.Product;
 
 import java.sql.SQLException;
