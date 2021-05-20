@@ -42,7 +42,7 @@
                   <TextField fx:id="productName" layoutX="122.0" layoutY="11.0" prefHeight="25.0" prefWidth="160.0" />
                   <TextField fx:id="productMeasurement" layoutX="387.0" layoutY="11.0" prefHeight="25.0" prefWidth="175.0" promptText="Liter/kg" />
                   <TextField fx:id="productPrice" layoutX="122.0" layoutY="47.0" prefHeight="25.0" prefWidth="160.0" />
-                  <TextField fx:id="ProductMinAmount" layoutX="124.0" layoutY="84.0" prefHeight="25.0" prefWidth="158.0" />
+                  <TextField fx:id="productMinAmount" layoutX="124.0" layoutY="84.0" prefHeight="25.0" prefWidth="158.0" />
                   <DatePicker fx:id="productBestBefore" layoutX="388.0" layoutY="47.0" />
                   <Text layoutX="299.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leverings tid:" />
                   <TextField fx:id="productDeliveryDays" layoutX="387.0" layoutY="84.0" prefHeight="25.0" prefWidth="175.0" promptText="I dage" />
@@ -59,11 +59,11 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <Label layoutX="126.0" layoutY="71.0" prefHeight="23.0" prefWidth="110.0" text="Oprindelses land:" />
-                              <TextField fx:id="AlcoholCountry" layoutX="231.0" layoutY="71.0" />
+                              <TextField fx:id="alcoholCountry" layoutX="231.0" layoutY="71.0" />
                               <Label layoutX="40.0" layoutY="27.0" prefHeight="23.0" prefWidth="110.0" text="Type:" />
-                              <TextField fx:id="AlcoholType" layoutX="82.0" layoutY="27.0" promptText="Vin/Øl/Spiritus" />
+                              <TextField fx:id="alcoholType" layoutX="82.0" layoutY="27.0" promptText="Vin/Øl/Spiritus" />
                               <Label layoutX="281.0" layoutY="28.0" prefHeight="23.0" prefWidth="110.0" text="Alcohol procent:" />
-                              <TextField fx:id="AlcoholPercent" layoutX="380.0" layoutY="27.0" promptText="\%" />
+                              <TextField fx:id="alcoholPercent" layoutX="380.0" layoutY="27.0" promptText="\%" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -73,7 +73,7 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <Label layoutX="195.0" layoutY="34.0" prefHeight="23.0" prefWidth="110.0" text="Type:" />
-                              <TextField fx:id="DrikType" layoutX="237.0" layoutY="34.0" promptText="Sodavand/juice" />
+                              <TextField fx:id="drikType" layoutX="237.0" layoutY="34.0" promptText="Sodavand/juice" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -83,7 +83,7 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <Label layoutX="167.0" layoutY="35.0" prefHeight="23.0" prefWidth="110.0" text="Oprindelses land:" />
-                              <TextField fx:id="ColonialCountry" layoutX="265.0" layoutY="34.0" />
+                              <TextField fx:id="colonialCountry" layoutX="265.0" layoutY="34.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -93,7 +93,7 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <Label layoutX="167.0" layoutY="35.0" prefHeight="23.0" prefWidth="110.0" text="Oprindelses land:" />
-                              <TextField fx:id="GreenCountry" layoutX="265.0" layoutY="34.0" />
+                              <TextField fx:id="greenCountry" layoutX="265.0" layoutY="34.0" />
                            </children>
                         </AnchorPane>
                      </content>
