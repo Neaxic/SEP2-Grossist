@@ -1,33 +1,51 @@
 package shared.objects;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-public class Order {
-	private final long cvr;
-	private final int orderNumber;
-	private final LocalDateTime orderTime;
-	private final double priceSum;
+// Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
 
-	public Order(long cvr, int orderNumber, LocalDateTime orderTime, double priceSum) {
-		this.cvr = cvr;
-		this.orderNumber = orderNumber;
-		this.orderTime = orderTime;
-		this.priceSum = priceSum;
-	}
+public class Order implements Serializable
+{
+  private final int CVR, orderNo;
+  private final LocalDate orderDate;
+  private final double sum;
 
-	public long getCVR() {
-		return cvr;
-	}
+  private final Basket basket;
 
-	public int getOrderNumber() {
-		return orderNumber;
-	}
+  public Order(int CVR, int orderNo, LocalDate orderDate, double sum,
+      Basket basket)
+  {
+    this.CVR = CVR;
+    this.orderNo = orderNo;
+    this.orderDate = orderDate;
+    this.sum = sum;
+    this.basket = basket;
+  }
 
-	public LocalDateTime getOrderTime() {
-		return orderTime;
-	}
+  public int getCVR()
+  {
+    return CVR;
+  }
 
-	public double getPriceSum() {
-		return priceSum;
-	}
+  public int getOrderNo()
+  {
+    return orderNo;
+  }
+
+  public LocalDate getOrderDate()
+  {
+    return orderDate;
+  }
+
+  public double getSum()
+  {
+    return sum;
+  }
+
+  public Basket getBasket()
+  {
+    return basket;
+  }
+
 }

@@ -1,4 +1,6 @@
-package shared.wares;
+package shared.objects;
+
+import shared.wares.Product;
 
 import java.io.Serializable;
 import java.util.HashMap;
