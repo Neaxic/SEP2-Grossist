@@ -32,7 +32,10 @@ public class GrosserWaresViewController implements GrosserViewController, Proper
 		this.viewHandler = viewHandler;
 		viewModel = ViewModelFactory.getInstance().grosserWaresViewModel();
 		viewModel.addListener(this);
-		viewModel.updateWareList();
+		// Mangler lige indikation af, at der er varer på vej fra Databasen
+		Thread t = new Thread(() -> viewModel.updateWareList());
+		t.setDaemon(true);
+		t.start();
 
 		wares.setCellValueFactory(new PropertyValueFactory<>("product"));
 		amounts.setCellValueFactory(new PropertyValueFactory<>("amount"));
