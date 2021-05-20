@@ -20,20 +20,20 @@ public class GrosserAddProductViewController implements GrosserViewController {
 
 	@FXML private TextField productName;
 	@FXML private TextField productPrice;
-	@FXML private TextField ProductMinAmount;
+	@FXML private TextField productMinAmount;
 	@FXML private TextField productMeasurement;
 	@FXML private DatePicker productBestBefore;
 	@FXML private TextField productDeliveryDays;
 	@FXML private TextField productAmount;
 	@FXML private TextField productBy;
 
-	@FXML private TextField AlcoholType;
-	@FXML private TextField AlcoholPercent;
-	@FXML private TextField AlcoholCountry;
+	@FXML private TextField alcoholType;
+	@FXML private TextField alcoholPercent;
+	@FXML private TextField alcoholCountry;
 
-	@FXML private TextField DrikType;
-	@FXML private TextField ColonialCountry;
-	@FXML private TextField GreenCountry;
+	@FXML private TextField drikType;
+	@FXML private TextField colonialCountry;
+	@FXML private TextField greenCountry;
 	@FXML private TextField meatCountry;
 
 	@FXML private TabPane tabPane;
@@ -74,7 +74,10 @@ public class GrosserAddProductViewController implements GrosserViewController {
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
 				viewModel.sendOrder(liste);
 			}
-			case "Kød og fisk" -> {
+			case "Kød og fisk" -> { // TODO: Line, se den her
+				Object[] params = {productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, productDeliveryDays.getText(), productPrice.getText(),productMinAmount.getText(), productBy.getText() };
+				viewModel.createProduct(params);
+
 				MeatAndFish newProduct = new MeatAndFish(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), meatCountry.getText());
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
 				viewModel.sendOrder(liste);
