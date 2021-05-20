@@ -1,7 +1,7 @@
 package server.network;
 
 import javafx.util.Pair;
-import server.model.DataModelImpl;
+import server.model.ServerModel;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.util.Util;
@@ -26,7 +26,7 @@ public class RMIServer implements RMIServerInterface {
 	private HashMap<String, ArrayList<Product>> wares = new HashMap<>();
 
 	// Dummy Data:
-	private DataModelImpl dataModel = new DataModelImpl();
+	private ServerModel dataModel = new ServerModel();
 
 	public RMIServer() throws SQLException {
 	}

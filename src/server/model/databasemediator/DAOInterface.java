@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 // Lavet af hele teamet
 
-public interface ModelInterface {
+public interface DAOInterface {
 	HashMap<Product, Integer> grosserProductList() throws SQLException;
 
 	HashMap<String, ArrayList<Product>> getAllProducts();
@@ -32,4 +32,8 @@ public interface ModelInterface {
 	void delete(int productID) throws SQLException;
 
 	void changeAmount(Pair<Product, Integer> productWithNewAmount) throws SQLException;
+
+	// Young laver lige noget "klogt" hernede
+
+
 }

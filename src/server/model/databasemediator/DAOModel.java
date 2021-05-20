@@ -15,7 +15,7 @@ import java.util.List;
 
 // Lavet af hele teamet
 
-public class DAOModel extends BaseDAO implements ModelInterface {
+public class DAOModel extends BaseDAO implements DAOInterface {
 	ArrayList<Product> salesProducts;
 	HashMap<String, ArrayList<Product>> map = new HashMap<>();
 

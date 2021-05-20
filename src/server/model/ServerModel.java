@@ -2,8 +2,8 @@ package server.model;
 
 import javafx.util.Pair;
 import server.model.databasemediator.BaseDAO;
+import server.model.databasemediator.DAOInterface;
 import server.model.databasemediator.DAOModel;
-import server.model.databasemediator.ModelInterface;
 import shared.wares.Basket;
 import shared.wares.Order;
 import shared.wares.Product;
@@ -15,12 +15,12 @@ import java.util.HashMap;
 
 // Lavet af hele teamet
 
-public class DataModelImpl {
-	private BaseDAO base = new BaseDAO();
-	private ModelInterface model = new DAOModel();
+public class ServerModel {
+	private BaseDAO base = new BaseDAO(); // question: Den her er til for?
+	private DAOInterface model = new DAOModel();
 
 
-	public DataModelImpl() throws SQLException {
+	public ServerModel() throws SQLException {
 	}
 
 	public HashMap<String, ArrayList<Product>> getAllProducts() {
