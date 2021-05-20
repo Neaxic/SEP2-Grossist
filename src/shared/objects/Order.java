@@ -14,8 +14,11 @@ public class Order implements Serializable
 
   private final Basket basket;
 
-  public Order(int CVR, int orderNo, LocalDateTime orderDate, double sum,
-               Basket basket)
+  public Order(int CVR, int orderNo, LocalDateTime orderDate, double sum) {
+    this(CVR, orderNo, orderDate, sum, null);
+  }
+
+  public Order(int CVR, int orderNo, LocalDateTime orderDate, double sum, Basket basket)
   {
     this.CVR = CVR;
     this.orderNo = orderNo;
