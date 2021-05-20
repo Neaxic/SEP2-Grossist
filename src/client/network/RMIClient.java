@@ -4,8 +4,8 @@ import javafx.util.Pair;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.util.Util;
-import shared.wares.Basket;
-import shared.wares.Order;
+import shared.objects.Basket;
+import shared.objects.Order;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
@@ -18,6 +18,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 // Andreas Young og Andreas Østergaard
 
@@ -64,9 +65,9 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 		}
 	}
 
-	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket, double sum) {
+	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) {
 		try {
-			return server.sendOrder(cvr, basket, sum);
+			return server.sendOrder(cvr, basket);
 		} catch (RemoteException remoteException) {
 			remoteException.printStackTrace();
 		}
@@ -92,12 +93,12 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	}
 
 	@Override
-	public void update(String info, HashMap list) { // CustomerModel.java is a listener
+	public void update(String info, List list) { // CustomerModel.java is a listener
 		support.firePropertyChange(info, null, list);
 	}
 
 	@Override
-	public void updateAllOrders(ArrayList<Order> orders) {
+	public void updateAllOrders(List<Order> orders) {
 		support.firePropertyChange("orderList", null, orders);
 	}
 
@@ -116,9 +117,9 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	}
 
 	@Override
-	public void deleteWare(int productID) {
+	public void deleteWare(Product product) {
 		try {
-			server.deleteWare(productID);
+			server.deleteWare(product);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

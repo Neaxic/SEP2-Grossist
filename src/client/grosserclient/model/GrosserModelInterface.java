@@ -11,7 +11,7 @@ public interface GrosserModelInterface extends Subject {
 
 	void requestAllWaresAndAmounts();
 
-	void deleteItem(int productID);
+	void deleteItem(Product productID);
 
 	void changeAmount(Pair<Product, Integer> newPair);
 }

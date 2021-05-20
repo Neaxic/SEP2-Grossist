@@ -42,7 +42,7 @@ public class GrosserWaresViewController implements GrosserViewController, Proper
 	}
 
 	private void setTable() {
-		wareList.setItems(FXCollections.observableList(viewModel.getThisIsGettingRatherAnnoying()));
+		wareList.setItems(FXCollections.observableList(viewModel.getListForView()));
 	}
 
 	@FXML

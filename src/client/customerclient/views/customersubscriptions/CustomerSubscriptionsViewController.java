@@ -1,7 +1,6 @@
 package client.customerclient.views.customersubscriptions;
 
 import client.customerclient.views.CustomerViewController;
-import client.customerclient.views.CustomerViewModel;
 import client.core.ViewHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
@@ -17,7 +16,7 @@ public class CustomerSubscriptionsViewController implements CustomerViewControll
 	private ViewHandler viewHandler;
 
 	@Override
-	public void init(ViewHandler viewHandler, CustomerViewModel customerViewModel) {
+	public void init(ViewHandler viewHandler) {
 		this.viewHandler = viewHandler;
 	}
 

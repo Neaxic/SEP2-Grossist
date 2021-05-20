@@ -3,14 +3,14 @@ package client.customerclient.model;
 import client.core.LoginManager;
 import client.network.Client;
 import javafx.util.Pair;
-import shared.wares.Basket;
+import shared.objects.Basket;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 // Andreas Young
 
@@ -18,13 +18,13 @@ public class CustomerModel implements CustomerModelInterface {
 	private PropertyChangeSupport support;
 	private Client client;
 	private Basket myBasket; //question: Måske fjerne klassen da metodekaldene ikke ændres
-	private HashMap<String, ArrayList<Product>> wareList; //question: Lave dette til en klasse hvis vi beholder Basket?
+	private List<Product> wareList; //question: Lave dette til en klasse hvis vi beholder Basket?
 
 	public CustomerModel(Client client) {
 		support = new PropertyChangeSupport(this);
 		this.client = client;
 		this.client.addListener(this);
-		wareList = new HashMap<>();
+		wareList = new ArrayList<>();
 		myBasket = new Basket();
 	}
 
@@ -82,34 +82,18 @@ public class CustomerModel implements CustomerModelInterface {
 	 */
 	//TODO: KOM TILBAGE HER TIL NOT DONE MAKKER
 	public Pair<Boolean, ArrayList<Product>> sendOrder(Basket basket, double sum) {
-		return client.sendOrder(LoginManager.cvr, basket, sum);
+		return client.sendOrder(LoginManager.cvr, basket);
 	}
 
 	/**
-	 * Creates an ArrayList of products, consisting of the products in the Model's current warelist HashMap
+	 * Creates a List of products, consisting of the products in the Model's current warelist HashMap
 	 *
 	 * @return Arraylist of products currently stored on the Model
 	 */
-	public ArrayList<Product> getAllWares() {
-		ArrayList<Product> returnList = new ArrayList<>();
-		for (ArrayList<Product> list : wareList.values()) {
-			returnList.addAll(list);
-		}
-		return returnList;
+	public List<Product> getAllWares() {
+		return wareList;
 	}
 
-	/**
-	 * Creates an ArrayList of products, consisting of the products in the Model's current warelist HashMap only in the specified category
-	 *
-	 * @param category Key used in the HashMap for defining ware categories
-	 * @return <b>ArrayList</b> consisting only of the products from the specified Category
-	 */
-	public ArrayList<Product> getCategory(String category) {
-		if (wareList.containsKey(category)) {
-			return wareList.get(category);
-		}
-		return new ArrayList<>();
-	}
 
 	@Override
 	public void emptyBasket() {
@@ -128,7 +112,7 @@ public class CustomerModel implements CustomerModelInterface {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) { // CustomerBrowserViewModel is a listener
-		wareList = (HashMap<String, ArrayList<Product>>) evt.getNewValue();
+		wareList = (List<Product>) evt.getNewValue();
 		support.firePropertyChange(
 				new PropertyChangeEvent(this, "waresUpdated", null, null));
 	}

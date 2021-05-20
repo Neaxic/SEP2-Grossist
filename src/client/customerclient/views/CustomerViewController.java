@@ -7,6 +7,6 @@ import java.io.IOException;
 // Andreas Young, Line Guld
 
 public interface CustomerViewController {
-  void init(ViewHandler viewHandler, CustomerViewModel customerViewModel);
+  void init(ViewHandler viewHandler);
   void swapScene(String sceneName) throws IOException;
 }

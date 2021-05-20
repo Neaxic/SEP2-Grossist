@@ -4,7 +4,6 @@ import client.core.ViewHandler;
 import client.core.ViewModel;
 import client.core.factories.ViewModelFactory;
 import client.customerclient.views.CustomerViewController;
-import client.customerclient.views.CustomerViewModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,7 +35,7 @@ public class CustomerViewHandler implements ViewHandler {
 		root = loader.load();
 
 		CustomerViewController viewController = loader.getController();
-		viewController.init(proxyViewHandler, (CustomerViewModel) getViewModelByViewName(view)); //TODO: 'this' giver en customer view handler ikke en proxy. Muligvis Singleton?
+		viewController.init(proxyViewHandler); //TODO: 'this' giver en customer view handler ikke en proxy. Muligvis Singleton?
 
 		scene = new Scene(root);
 		return scene;

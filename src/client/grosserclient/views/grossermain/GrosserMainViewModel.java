@@ -5,7 +5,7 @@ import client.grosserclient.model.GrosserModelInterface;
 import client.grosserclient.views.GrosserViewModel;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import shared.wares.Order;
+import shared.objects.Order;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

@@ -44,8 +44,8 @@ public class GrosserModel implements GrosserModelInterface {
 	}
 
 	@Override
-	public void deleteItem(int productID) {
-		client.deleteWare(productID);
+	public void deleteItem(Product product) {
+		client.deleteWare(product);
 	}
 
 	@Override

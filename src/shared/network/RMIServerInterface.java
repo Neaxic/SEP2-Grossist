@@ -1,7 +1,7 @@
 package shared.network;
 
 import javafx.util.Pair;
-import shared.wares.Basket;
+import shared.objects.Basket;
 import shared.wares.Product;
 
 import java.rmi.AlreadyBoundException;
@@ -56,7 +56,7 @@ public interface RMIServerInterface extends Remote {
 	 * @return True if the order can be placed, false otherwise
 	 * @throws RemoteException
 	 */
-	Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket orderItems, double sum) throws RemoteException;
+	Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket orderItems) throws RemoteException;
 
 	/**
 	 * Requests all registered orders for the grosser main view.
@@ -76,10 +76,10 @@ public interface RMIServerInterface extends Remote {
 	/**
 	 * Removes a ware entirely from the Database
 	 *
-	 * @param productID ID of the ware which is to be removed
+	 * @param product Ware which is to be removed
 	 * @throws RemoteException
 	 */
-	void deleteWare(int productID) throws RemoteException;
+	void deleteWare(Product product) throws RemoteException;
 
 	/**
 	 * Changes the amount of a ware on the Database

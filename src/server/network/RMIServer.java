@@ -5,8 +5,8 @@ import server.model.ServerModel;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.util.Util;
-import shared.wares.Basket;
-import shared.wares.Order;
+import shared.objects.Basket;
+import shared.objects.Order;
 import shared.wares.Product;
 
 import java.rmi.AlreadyBoundException;
@@ -18,21 +18,19 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 // Andreas Østergaard, Andreas Young, Frederik Bergmann
 
 public class RMIServer implements RMIServerInterface {
-	private HashMap<Integer, CallbackClient> callbackClients = new HashMap<>();
-	private HashMap<String, ArrayList<Product>> wares = new HashMap<>();
+	private HashMap<Integer, CallbackClient> callbackClients;
+	private List<Product> wares;
 
 	// Dummy Data:
-	private ServerModel dataModel = new ServerModel();
+	private final ServerModel serverModel = new ServerModel();
 
 	public RMIServer() throws SQLException {
-	}
-
-	public void getAllProducts() {
-		wares = dataModel.getAllProducts();
+		callbackClients = new HashMap<>();
 	}
 
 	@Override
@@ -69,41 +67,44 @@ public class RMIServer implements RMIServerInterface {
 
 	@Override
 	public void grosserProductList(int id) throws RemoteException {
-		callbackClients.get(id).update("grosserProductList", dataModel.grosserProductList());
+		callbackClients.get(id).update("grosserProductList", serverModel.grosserProductList());
 	}
 
 	@Override
-	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket, double sum) throws RemoteException { // TODO: Når Database er fikset, så skal kurven tilføjes til ordren
-		System.out.println("SERVER: CVR: " + cvr + "\tORDER SIZE: " + basket.getBasket().size() + "\tSUM: " + sum);
-		Pair<Boolean, ArrayList<Product>> verification = dataModel.verifyOrder(basket);
+	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) throws RemoteException {
+		//System.out.println("SERVER: CVR: " + cvr + "\tORDER SIZE: " + basket.getBasket().size() + "\tSUM: " + basket.getSum()); //SOUT
+		Pair<Boolean, ArrayList<Product>> verification = serverModel.verifyOrder(basket);
 		if (verification.getKey()) {
-			LocalDateTime orderTime = LocalDateTime.now();
-			dataModel.createOrder(cvr, sum, orderTime);
-			dataModel.createOrderSpec(basket, cvr, orderTime, sum);
+			serverModel.createOrder(cvr, LocalDateTime.now(), basket);
 		}
+		System.out.println(verification.getKey()); //SOUT
+		System.out.println(verification.getValue()); //SOUT
 		return verification;
 	}
 
 
 	@Override
 	public void getAllOrders(int clientId) throws RemoteException {
-		ArrayList<Order> orders = dataModel.getAllOrders();
-		callbackClients.get(clientId).updateAllOrders(orders);
+		callbackClients.get(clientId).updateAllOrders(serverModel.getAllOrders());
 	}
 
 	@Override
 	public void createProduct(Pair<Product, Integer> newProduct) throws RemoteException {
-		dataModel.createProduct(newProduct);
+		serverModel.createProduct(newProduct);
 	}
 
 	@Override
-	public void deleteWare(int productID) throws RemoteException{
-		dataModel.delete(productID);
+	public void deleteWare(Product product) throws RemoteException{
+		serverModel.delete(product);
 	}
 
 	@Override
 	public void changeAmount(Pair<Product, Integer> productWithNewAmount) throws RemoteException{
-		dataModel.changeAmount(productWithNewAmount);
+		serverModel.changeAmount(productWithNewAmount);
 	}
 
+
+	private void getAllProducts() {
+		wares = serverModel.getAllProducts();
+	}
 }

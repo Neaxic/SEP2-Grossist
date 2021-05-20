@@ -2,10 +2,11 @@ package client.customerclient.model;
 
 import javafx.util.Pair;
 import shared.network.Subject;
-import shared.wares.Basket;
+import shared.objects.Basket;
 import shared.wares.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface CustomerModelInterface extends Subject {
 	void updateWares();
@@ -20,9 +21,7 @@ public interface CustomerModelInterface extends Subject {
 
 	Pair<Boolean, ArrayList<Product>> sendOrder(Basket basket, double sum);
 
-	ArrayList<Product> getAllWares();
-
-	ArrayList<Product> getCategory(String category);
+	List<Product> getAllWares();
 
 	void emptyBasket();
 }

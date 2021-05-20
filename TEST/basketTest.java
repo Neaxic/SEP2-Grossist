@@ -2,7 +2,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import shared.wares.Alcohol;
-import shared.wares.Basket;
+import shared.objects.Basket;
 
 import java.time.LocalDate;
 

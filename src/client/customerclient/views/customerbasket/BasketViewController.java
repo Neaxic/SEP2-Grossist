@@ -3,7 +3,6 @@ package client.customerclient.views.customerbasket;
 import client.core.ViewHandler;
 import client.core.factories.ViewModelFactory;
 import client.customerclient.views.CustomerViewController;
-import client.customerclient.views.CustomerViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -37,15 +36,15 @@ public class BasketViewController implements CustomerViewController {
 			FXCollections.observableArrayList();
 
 	@Override
-	public void init(ViewHandler viewHandler, CustomerViewModel viewModel) {
+	public void init(ViewHandler viewHandler) {
 		this.viewHandler = viewHandler;
 		this.viewModel = (BasketViewModel) ViewModelFactory.getInstance().basketViewModel();
 		loadAllProducts();
 	}
 
 	public void loadAllProducts() {
-		basketProduct.setCellValueFactory(new PropertyValueFactory<>("Product"));
-		basketAntal.setCellValueFactory(new PropertyValueFactory<>("Antal"));
+		basketProduct.setCellValueFactory(new PropertyValueFactory<>("product"));
+		basketAntal.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
 		double price = 0;
 

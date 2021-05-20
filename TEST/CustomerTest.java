@@ -185,11 +185,5 @@ public class CustomerTest {
 			assertFalse(customerModel.getAllWares().isEmpty());
 		}
 
-		@Test
-		void getCategory() {
-			assertTrue(customerModel.getCategory("Drink").isEmpty());
-			customerModel.updateWares();
-			assertTrue(customerModel.getAllWares().containsAll(customerModel.getCategory("Drink")));
-		}
 	}
 }

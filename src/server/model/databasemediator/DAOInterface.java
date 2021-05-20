@@ -1,8 +1,8 @@
 package server.model.databasemediator;
 
 import javafx.util.Pair;
-import shared.wares.Basket;
-import shared.wares.Order;
+import shared.objects.Basket;
+import shared.objects.Order;
 import shared.wares.Product;
 
 import java.sql.SQLException;

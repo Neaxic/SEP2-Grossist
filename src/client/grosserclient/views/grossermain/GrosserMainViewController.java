@@ -11,7 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import shared.wares.Order;
+import shared.objects.Order;
 
 import java.io.IOException;
 import java.time.LocalDate;

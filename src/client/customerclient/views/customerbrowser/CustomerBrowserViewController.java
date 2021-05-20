@@ -3,7 +3,6 @@ package client.customerclient.views.customerbrowser;
 import client.core.ViewHandler;
 import client.core.factories.ViewModelFactory;
 import client.customerclient.views.CustomerViewController;
-import client.customerclient.views.CustomerViewModel;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.fxml.FXML;
@@ -45,7 +44,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	private ListProperty<Product> itemList;
 
 	@Override
-	public void init(ViewHandler viewHandler, CustomerViewModel removeMe) {
+	public void init(ViewHandler viewHandler) {
 		this.viewHandler = viewHandler;
 		viewModel = (CustomerBrowserViewModel) ViewModelFactory.getInstance().customerBrowseViewModel();
 		itemList = new SimpleListProperty<>();
@@ -171,7 +170,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 			//String item = itemName.getText();
 
 			Text box2 = (Text) button.getParent().getParent().lookup("#ProductID");
-			int itemID = Integer.parseInt(box2.getText().substring(11));
+			int itemID = Integer.parseInt(box2.getText().substring(11).stripLeading());
 
 			// Getting the amount to put in basket
 			HBox amountBox = (HBox) button.getParent();
