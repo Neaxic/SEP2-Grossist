@@ -13,23 +13,26 @@ I dette dokument, kan du læse om hvad de forskellige interfaces skal kunde, pri
 <h3>DAOGrosserInterface</h3>
 
 * En liste af alle varer samt antallet på lager (Pair<<i>Product</i>, <i>Integer</i>>)
-
+  
 * En liste af alle ordre (list<<i>Order</i>>)
 
 <br>
 
 <h2>Ændring af Information på Databasen (SETTING)</h2>
 <em>Her skal der overvejes, om det er nødvendigt at sætte en lås på metoder.</em>
+
 <h3>DAOCustomerInterface</h3>
 
 * Oprette en order (int, LocalDateTime, Basket)
-	* Laver både order (cvr, orderTime, orderSum) og orderSpec
+	* Laver både order (cvr, orderTime, orderSum) og orderSpec (orderNo, productID, antal)
 
 <h3>DAOGrosserInterface</h3>
 
 * Oprette en varer samt antallet af varen (Pair<<i>Product</i>, <i>Integer</i>>)
 
 * Ændre antal af en vare (Pair<<i>Product</i>, <i>Integer</i>>)
+
+* Fjerne en vare helt (Product)
 
 * Oprette kunder (int, String, String, String)
 	* (cvr, navn, kodeord, adresse)
