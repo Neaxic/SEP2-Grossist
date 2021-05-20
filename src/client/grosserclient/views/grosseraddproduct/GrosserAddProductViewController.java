@@ -10,7 +10,7 @@ import shared.wares.*;
 
 import java.io.IOException;
 
-// Frederik Bergmann
+// Frederik Bergmann, Andreas Østergaard, Andreas Young
 
 public class GrosserAddProductViewController implements GrosserViewController {
 	private ViewHandler viewHandler;
@@ -35,6 +35,8 @@ public class GrosserAddProductViewController implements GrosserViewController {
 	@FXML private TextField meatCountry;
 
 	@FXML private TabPane tabPane;
+
+
 
 	@Override
 	public void init(ViewHandler viewHandler) {
@@ -90,35 +92,35 @@ public class GrosserAddProductViewController implements GrosserViewController {
 				}
 
 
-				Alcohol newProduct = new Alcohol(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), AlcoholCountry.getText(), Double.parseDouble(AlcoholPercent.getText()), AlcoholType.getText());
+				Alcohol newProduct = new Alcohol(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(productMinAmount.getText()), productBy.getText(), alcoholCountry.getText(), Double.parseDouble(alcoholPercent.getText()), alcoholType.getText());
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
 				viewModel.sendOrder(liste);
 			}
 			case "Drikkevarer" -> {
-				Drink newProduct = new Drink(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), DrikType.getText());
+				Drink newProduct = new Drink(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(productMinAmount.getText()), productBy.getText(), drikType.getText());
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
 				viewModel.sendOrder(liste);
 			}
 			case "Kolonial" -> {
-				Colonial newProduct = new Colonial(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), ColonialCountry.getText());
+				Colonial newProduct = new Colonial(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(productMinAmount.getText()), productBy.getText(), colonialCountry.getText());
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
 				viewModel.sendOrder(liste);
 			}
 			case "Mejeri og æg" -> {
-				CooledAndDairy newProduct = new CooledAndDairy(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText());
+				CooledAndDairy newProduct = new CooledAndDairy(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(productMinAmount.getText()), productBy.getText());
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
 				viewModel.sendOrder(liste);
 			}
 			case "Frugt og grønt" -> {
-				FruitsAndVegetable newProduct = new FruitsAndVegetable(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), GreenCountry.getText());
+				FruitsAndVegetable newProduct = new FruitsAndVegetable(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(productMinAmount.getText()), productBy.getText(), greenCountry.getText());
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
 				viewModel.sendOrder(liste);
 			}
 			case "Kød og fisk" -> { // TODO: Line, se den her
-				Object[] params = {productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, productDeliveryDays.getText(), productPrice.getText(), productMinAmount.getText(), productBy.getText()};
-				viewModel.createProduct(params);
+				//Object[] params = {productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, productDeliveryDays.getText(), productPrice.getText(), productMinAmount.getText(), productBy.getText()};
+				//viewModel.createProduct(params);
 
-				MeatAndFish newProduct = new MeatAndFish(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), meatCountry.getText());
+				MeatAndFish newProduct = new MeatAndFish(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(productMinAmount.getText()), productBy.getText(), meatCountry.getText());
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
 				viewModel.sendOrder(liste);
 			}

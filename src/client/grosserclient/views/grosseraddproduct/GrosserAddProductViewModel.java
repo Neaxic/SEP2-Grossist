@@ -6,6 +6,7 @@ import client.grosserclient.views.GrosserViewModel;
 import javafx.util.Pair;
 import shared.wares.Product;
 
+
 public class GrosserAddProductViewModel implements GrosserViewModel {
 	private GrosserModelInterface grosserModel;
 

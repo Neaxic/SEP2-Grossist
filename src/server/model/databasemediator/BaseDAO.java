@@ -11,7 +11,7 @@ public class BaseDAO
   {
     Connection result = DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=grosser", //Prøv med IP hvis lokalt netværk
-        "postgres", "REEEEEEEEEEEE"); //TODO: HUSK AT SÆTTE JERES PASSWORD IND HER
+        "postgres", "Software20"); //TODO: HUSK AT SÆTTE JERES PASSWORD IND HER
     //result.setAutoCommit(false);
     return result;
   }
