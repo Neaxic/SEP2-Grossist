@@ -5,31 +5,34 @@ Pointen bag de interfaces er, at vi kan dele funktionaliteten som Kunderne og Gr
 I dette dokument, kan du læse om hvad de forskellige interfaces skal kunde, primært delt op mellem om der er ændring på databasen eller bare at bede om information fra databasen.
 <hr>
 
-<h2>Andmodning om Information fra Databasen (GETTING)</h2>
+<h2>Anmodning om Information fra Databasen (GETTING)</h2>
 <h3>DAOCustomerInterface</h3>
 
-* En list af alle varer (List<<i>Product</i>>)
+* En list af alle varer [List<<i>Product</i>>]
 
 <h3>DAOGrosserInterface</h3>
 
-* En liste af alle varer samt antallet på lager (Pair<<i>Product</i>, <i>Integer</i>>)
-
-* En liste af alle ordre (list<<i></i>)
+* En liste af alle varer samt antallet på lager [list<<i>Pair<<u>Product</u>, <u>Integer</u>></i>>]
+  
+* En liste af alle ordre [list<<i>Order</i>>]
 
 <br>
 
 <h2>Ændring af Information på Databasen (SETTING)</h2>
 <em>Her skal der overvejes, om det er nødvendigt at sætte en lås på metoder.</em>
+
 <h3>DAOCustomerInterface</h3>
 
-* En order (int, LocalDateTime, Basket)
-    * Laver både order og orderSpec
-  
+* Oprette en order (int, LocalDateTime, Basket) [bool]
+	* Laver både order (cvr, orderTime, orderSum) og orderSpec (orderNo, productID, antal)
+
 <h3>DAOGrosserInterface</h3>
 
-* En varer samt antallet af varen (Pair<<i>Product</i>, <i>Integer</i>>)
-  
-* Ændre antal af en vare (Pair<<i>Product</i>, <i>Integer</i>>)
+* Oprette en vare samt antallet af varen (Pair<<i>Product</i>, <i>Integer</i>>) [bool]
 
-* Oprette kunder (int, String, String, String)
-  * (cvr, navn, kodeord, adresse)
+* Ændre antal af en vare (Pair<<i>Product</i>, <i>Integer</i>>) [bool]
+
+* Fjerne en vare helt (Product) [bool]
+
+* Oprette kunder (int, String, String, String) [bool]
+	* (cvr, navn, kodeord, adresse)
