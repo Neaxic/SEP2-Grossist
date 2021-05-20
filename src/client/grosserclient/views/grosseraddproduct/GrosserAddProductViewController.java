@@ -9,7 +9,6 @@ import javafx.util.Pair;
 import shared.wares.*;
 
 import java.io.IOException;
-import java.util.Locale;
 
 // Frederik Bergmann
 
@@ -43,51 +42,52 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		viewModel = ViewModelFactory.getInstance().grosserAddProductViewModel();
 	}
 
-  private boolean numCheckAndNotNull(String text) {
-	  if(!(text.isBlank())){
-        for (char c : text.toCharArray()) {
-          if (Character.isDigit(c)) {
-            if(c >= 0)
-              return true;
-          }
-        }
-      }
-    return false;
-  }
+	private boolean numCheckAndNotNull(String text) {
+		if (!(text.isBlank())) {
+			for (char c : text.toCharArray()) {
+				if (Character.isDigit(c)) {
+					if (c >= 0) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
-  private void createAtleart(String msg){
-    Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);
-    alert.showAndWait();
-  }
+	private void createWarning(String msg) {
+		Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);
+		alert.showAndWait();
+	}
 
 	@FXML
 	private void createProduct() {
 
-	    //Check for tal i tal felter
-	    if(numCheckAndNotNull(productPrice.getText()) || numCheckAndNotNull(productAmount.getText()) || numCheckAndNotNull(productDeliveryDays.getText())){
-          createAtleart("Et af felterne 'Pris', 'Ledig mængde' eller 'Leverings dage' indeholder bogstaver");
-          return;
-        }
+		//Check for tal i tal felter
+		if (numCheckAndNotNull(productPrice.getText()) || numCheckAndNotNull(productAmount.getText()) || numCheckAndNotNull(productDeliveryDays.getText())) {
+			createWarning("Et af felterne 'Pris', 'Ledig mængde' eller 'Leverings dage' indeholder bogstaver");
+			return;
+		}
 
-      if (productName.getText().isBlank() || productBy.getText().isBlank() || productMeasurement.getText().isBlank()) {
-        createAtleart("En af felterne er ikke udfyldte");
-        return;
-      }
+		if (productName.getText().isBlank() || productBy.getText().isBlank() || productMeasurement.getText().isBlank()) {
+			createWarning("En af felterne er ikke udfyldte");
+			return;
+		}
 
 		String className = tabPane.getSelectionModel().getSelectedItem().getText();
 		switch (className) {
 			case "Alkohol" -> {
-              //procent
-              if(!numCheckAndNotNull(AlcoholPercent.getText())){
-                System.out.println("fejl");
-                return;
-              }
+				// procent
+				if (!numCheckAndNotNull(alcoholPercent.getText())) {
+					System.out.println("fejl");
+					return;
+				}
 
-              //check om type er øl/vin/spiritus
-              if(!AlcoholType.getText().toLowerCase(Locale.ROOT).contains("øl")){
-                createAtleart("Alkohol typen kan kun være enten; 'Øl', 'Vin' eller 'Spiritus'");
-                return;
-              }
+				// check om type er øl/vin/spiritus
+				if (!alcoholType.getText().toLowerCase().contains("øl")) {
+					createWarning("Alkohol typen kan kun være enten; 'Øl', 'Vin' eller 'Spiritus'");
+					return;
+				}
 
 
 				Alcohol newProduct = new Alcohol(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), AlcoholCountry.getText(), Double.parseDouble(AlcoholPercent.getText()), AlcoholType.getText());
@@ -115,7 +115,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 				viewModel.sendOrder(liste);
 			}
 			case "Kød og fisk" -> { // TODO: Line, se den her
-				Object[] params = {productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, productDeliveryDays.getText(), productPrice.getText(),productMinAmount.getText(), productBy.getText() };
+				Object[] params = {productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, productDeliveryDays.getText(), productPrice.getText(), productMinAmount.getText(), productBy.getText()};
 				viewModel.createProduct(params);
 
 				MeatAndFish newProduct = new MeatAndFish(productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, Integer.parseInt(productDeliveryDays.getText()), Double.parseDouble(productPrice.getText()), Integer.parseInt(ProductMinAmount.getText()), productBy.getText(), meatCountry.getText());
