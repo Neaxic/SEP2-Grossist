@@ -3,6 +3,7 @@ package client.network;
 // Andreas Østergaard
 
 import javafx.util.Pair;
+import shared.objects.ProductAndInt;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeListener;
@@ -17,6 +18,8 @@ public interface GrosserClient {
 	void requestGrosserProducts();
 
 	void deleteWare(int productID);
+
+	void changeAmount(Pair<Product, Integer> productWithNewAmount);
 }
 
 

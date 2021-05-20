@@ -101,4 +101,9 @@ public class RMIServer implements RMIServerInterface {
 		dataModel.delete(productID);
 	}
 
+	@Override
+	public void changeAmount(Pair<Product, Integer> productWithNewAmount) throws RemoteException{
+		dataModel.changeAmount(productWithNewAmount);
+	}
+
 }

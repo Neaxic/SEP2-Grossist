@@ -125,6 +125,15 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	}
 
 	@Override
+	public void changeAmount(Pair<Product, Integer> productWithNewAmount) {
+		try {
+			server.changeAmount(productWithNewAmount);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	public void removeListener(PropertyChangeListener listener) {
 		support.removePropertyChangeListener(listener);
 	}

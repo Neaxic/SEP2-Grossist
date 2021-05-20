@@ -79,4 +79,13 @@ public class DataModelImpl {
 			throwables.printStackTrace();
 		}
 	}
+
+
+	public void changeAmount(Pair<Product, Integer> productWithNewAmount) {
+		try {
+			model.changeAmount(productWithNewAmount);
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+	}
 }

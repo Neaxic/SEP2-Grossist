@@ -48,6 +48,11 @@ public class GrosserModel implements GrosserModelInterface {
 		client.deleteWare(productID);
 	}
 
+	@Override
+	public void changeAmount(Pair<Product, Integer> productWithNewAmount) {
+		client.changeAmount(productWithNewAmount);
+	}
+
 
 	@Override
 	public void createNewProduct(Pair<Product, Integer> newProduct) {

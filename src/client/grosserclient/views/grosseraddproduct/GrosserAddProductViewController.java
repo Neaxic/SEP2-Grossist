@@ -37,7 +37,6 @@ public class GrosserAddProductViewController implements GrosserViewController {
 	@FXML private TabPane tabPane;
 
 
-
 	@Override
 	public void init(ViewHandler viewHandler) {
 		this.viewHandler = viewHandler;
@@ -45,16 +44,15 @@ public class GrosserAddProductViewController implements GrosserViewController {
 	}
 
 	private boolean numCheckAndNotNull(String text) {
-		if (!(text.isBlank())) {
-			for (char c : text.toCharArray()) {
-				if (Character.isDigit(c)) {
-					if (c >= 0) {
-						return true;
-					}
-				}
+		if (text.isBlank()) {
+			return false;
+		}
+		for (char c : text.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return false;
 			}
 		}
-		return false;
+		return Double.parseDouble(text) > 0f;
 	}
 
 	private void createWarning(String msg) {
@@ -66,15 +64,15 @@ public class GrosserAddProductViewController implements GrosserViewController {
 	private void createProduct() {
 
 		//Check for tal i tal felter
-		if (numCheckAndNotNull(productPrice.getText()) || numCheckAndNotNull(productAmount.getText()) || numCheckAndNotNull(productDeliveryDays.getText())) {
-			createWarning("Et af felterne 'Pris', 'Ledig mængde' eller 'Leverings dage' indeholder bogstaver");
-			return;
-		}
-
-		if (productName.getText().isBlank() || productBy.getText().isBlank() || productMeasurement.getText().isBlank()) {
-			createWarning("En af felterne er ikke udfyldte");
-			return;
-		}
+//		if (numCheckAndNotNull(productPrice.getText()) || numCheckAndNotNull(productAmount.getText()) || numCheckAndNotNull(productDeliveryDays.getText())) {
+//			createWarning("Et af felterne 'Pris', 'Ledig mængde' eller 'Leverings dage' indeholder bogstaver");
+//			return;
+//		}
+//
+//		if (productName.getText().isBlank() || productBy.getText().isBlank() || productMeasurement.getText().isBlank()) {
+//			createWarning("En af felterne er ikke udfyldte");
+//			return;
+//		}
 
 		String className = tabPane.getSelectionModel().getSelectedItem().getText();
 		switch (className) {
@@ -85,11 +83,11 @@ public class GrosserAddProductViewController implements GrosserViewController {
 					return;
 				}
 
-				// check om type er øl/vin/spiritus
-				if (!alcoholType.getText().toLowerCase().contains("øl")) {
-					createWarning("Alkohol typen kan kun være enten; 'Øl', 'Vin' eller 'Spiritus'");
-					return;
-				}
+				//    DATABASE check ( type in ('Rødvin', 'Hvidvin', 'Rose', 'Spiritus', 'Øl', 'Cider') )
+		//		if (!alcoholType.getText().toLowerCase().contains("øl")) {
+		//			createWarning("Alkohol typen kan kun være enten; 'Øl', 'Vin' eller 'Spiritus'");
+		//			return;
+		//		}
 
 
 				Alcohol newProduct = new Alcohol(

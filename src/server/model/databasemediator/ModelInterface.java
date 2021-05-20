@@ -30,4 +30,6 @@ public interface ModelInterface {
 	void createProduct(Pair<Product, Integer> newProduct) throws SQLException;
 
 	void delete(int productID) throws SQLException;
+
+	void changeAmount(Pair<Product, Integer> productWithNewAmount) throws SQLException;
 }

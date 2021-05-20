@@ -367,6 +367,21 @@ public class DAOModel extends BaseDAO implements ModelInterface {
 	}
 
 	/**
+	 * Changes the amount of a product in the Database, both for the Super table and the Sub table specified using the SchemaMap class
+	 * @param productWithNewAmount Pair consisting of the Product as well as the updated Amount of the product
+	 * @throws SQLException
+	 */
+	@Override
+	public void changeAmount(Pair<Product, Integer> productWithNewAmount) throws SQLException {
+		try (Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement("UPDATE product SET amountInStock = " + productWithNewAmount.getValue() + " WHERE productID = " + productWithNewAmount.getKey().getWareNumber() );
+			statement.execute();
+			statement = connection.prepareStatement("UPDATE " + SchemaMap.Mapping(productWithNewAmount.getKey().getClass()) + " SET amountInStock = " + productWithNewAmount.getValue() + " WHERE productID = " + productWithNewAmount.getKey().getWareNumber() );
+			statement.execute();
+		}
+	}
+
+	/**
 	 * Databases really don't like Inheritance so this is a bit of a hack to get stuff working :D Good thing to do when the teachers can't help us. Mvh Young
 	 *
 	 * @param c Database Connection

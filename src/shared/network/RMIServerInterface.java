@@ -49,9 +49,10 @@ public interface RMIServerInterface extends Remote {
 
 	/**
 	 * Sends an order to the Server Implementation and waits for a verification
-	 * @param cvr User CVR number, registered through client
+	 *
+	 * @param cvr        User CVR number, registered through client
 	 * @param orderItems Items desired to be ordered for purchase
-	 * @param sum Total sum of the items ordered
+	 * @param sum        Total sum of the items ordered
 	 * @return True if the order can be placed, false otherwise
 	 * @throws RemoteException
 	 */
@@ -59,16 +60,31 @@ public interface RMIServerInterface extends Remote {
 
 	/**
 	 * Requests all registered orders for the grosser main view.
+	 *
 	 * @throws RemoteException
 	 */
 	void getAllOrders(int clientId) throws RemoteException;
 
 	/**
 	 * Sends a new product to the server
+	 *
 	 * @param newProduct
 	 * @throws RemoteException
 	 */
 	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException;
 
+	/**
+	 * Removes a ware entirely from the Database
+	 *
+	 * @param productID ID of the ware which is to be removed
+	 * @throws RemoteException
+	 */
 	void deleteWare(int productID) throws RemoteException;
+
+	/**
+	 * Changes the amount of a ware on the Database
+	 *
+	 * @param productWithNewAmount Contains the ProductName, Product ID and the new Amount
+	 */
+	void changeAmount(Pair<Product, Integer> productWithNewAmount) throws RemoteException;
 }
