@@ -7,7 +7,7 @@ import shared.wares.Product;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface DAOGrosserInterface extends CollectionDAOInterface{
+public interface DAOGrosserInterface extends CollectionDAOInterface {
 	// GETTING
 
 	/**
@@ -57,12 +57,12 @@ public interface DAOGrosserInterface extends CollectionDAOInterface{
 	 * <p>
 	 * Firstly removes the product from the super-table then from the designated sub-table
 	 *
-	 * @param IdOfProductToRemove ID of the product which is to be removed from the Database
+	 * @param productToRemove Product which is to be removed from the Database
 	 * @return True if SQL execution was successful, false otherwise
 	 * @throws SQLException Thrown when Database access is not possible <br>
 	 *                      Often caused by Database not being online
 	 */
-	boolean removeProductFromSystem(int IdOfProductToRemove) throws SQLException;
+	boolean removeProductFromSystem(Product productToRemove) throws SQLException;
 
 	/**
 	 * Accesses the Database and creates a new Customer entry using the information given
