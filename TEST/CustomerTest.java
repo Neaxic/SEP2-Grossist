@@ -3,7 +3,7 @@ import client.core.LoginManager;
 import client.core.factories.ModelFactory;
 import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.views.customerbasket.BasketViewModel;
-import client.customerclient.views.customerbasket.ProductAndInt;
+import shared.objects.ProductAndInt;
 import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;

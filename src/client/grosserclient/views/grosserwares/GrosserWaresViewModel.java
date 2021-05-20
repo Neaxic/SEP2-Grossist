@@ -1,11 +1,9 @@
 package client.grosserclient.views.grosserwares;
 
 import client.core.factories.ModelFactory;
-import client.customerclient.views.customerbasket.ProductAndInt;
+import shared.objects.ProductAndInt;
 import client.grosserclient.model.GrosserModelInterface;
 import client.grosserclient.views.GrosserViewModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import shared.network.Subject;
 import shared.wares.Product;
 

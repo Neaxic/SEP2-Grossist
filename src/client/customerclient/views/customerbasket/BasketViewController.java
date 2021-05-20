@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
+import shared.objects.ProductAndInt;
 import shared.wares.Product;
 
 import java.io.IOException;

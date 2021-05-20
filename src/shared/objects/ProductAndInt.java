@@ -1,4 +1,4 @@
-package client.customerclient.views.customerbasket;
+package shared.objects;
 
 // Andreas Østergaard
 

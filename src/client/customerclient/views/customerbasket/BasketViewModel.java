@@ -5,6 +5,7 @@ import client.core.factories.ModelFactory;
 import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.views.CustomerViewModel;
 import javafx.util.Pair;
+import shared.objects.ProductAndInt;
 import shared.wares.Product;
 
 import java.util.ArrayList;
