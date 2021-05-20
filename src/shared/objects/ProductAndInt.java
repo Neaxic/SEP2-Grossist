@@ -4,23 +4,23 @@ package shared.objects;
 
 public class ProductAndInt {
 
-    private String Product;
-    private int Antal;
-    private int ProductID;
+    private String product;
+    private int amount;
+    private int productID;
 
-    public ProductAndInt(String Product, int ID, int v){
-        this.Product = Product;
-        ProductID = ID;
-        Antal = v;
+    public ProductAndInt(String product, int ID, int v){
+        this.product = product;
+        productID = ID;
+        amount = v;
     }
 
-    public int getProductID(){ return ProductID; }
+    public int getProductID(){ return productID; }
 
     public String getProduct() {
-        return Product;
+        return product;
     }
 
-    public int getAntal() {
-        return Antal;
+    public int getAmount() {
+        return amount;
     }
 }
