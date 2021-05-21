@@ -1,7 +1,9 @@
 package server.model;
 
 import javafx.util.Pair;
-import server.model.databasemediator.*;
+import server.model.databasemediator.DAOCustomerInterface;
+import server.model.databasemediator.DAOGrosserInterface;
+import server.model.databasemediator.DAOModel;
 import shared.objects.Basket;
 import shared.objects.CustomerContainer;
 import shared.objects.Order;
@@ -59,7 +61,7 @@ public class ServerModel {
 			i++;
 			System.out.println(i); //SOUT
 			for (Pair<Product, Integer> wareAndAmount : wareAndAmountList) {
-				if (wareAndAmount.getKey().getWareNumber() == p.getWareNumber() &&  wareAndAmount.getValue() < orderItems.getAmount(p)) {
+				if (wareAndAmount.getKey().getWareNumber() == p.getWareNumber() && wareAndAmount.getValue() < orderItems.getAmount(p)) {
 					products.add(p);
 				}
 			}
@@ -72,6 +74,9 @@ public class ServerModel {
 	public void createOrder(int cvr, LocalDateTime dateTime, Basket basket) {
 		try {
 			DAOCustomer.createOrder(cvr, dateTime, basket);
+			for (Product p : basket.getBasket().keySet()) {
+				reduceAmount(new Pair<>(p, basket.getAmount(p)));
+			}
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
@@ -112,10 +117,10 @@ public class ServerModel {
 		return true;
 	}
 
-	public boolean reduceAmount(Pair<Product, Integer> productAndAmountToRemove){
+	public boolean reduceAmount(Pair<Product, Integer> productAndAmountToRemove) {
 		try {
 			DAOGrosser.reduceAmountInStock(productAndAmountToRemove);
-		} catch (SQLException throwables){
+		} catch (SQLException throwables) {
 			return false;
 		}
 		return true;
