@@ -3,6 +3,7 @@ package server.model;
 import javafx.util.Pair;
 import server.model.databasemediator.*;
 import shared.objects.Basket;
+import shared.objects.CustomerContainer;
 import shared.objects.Order;
 import shared.wares.Product;
 
@@ -108,6 +109,18 @@ public class ServerModel {
 			DAOGrosser.changeAmountInStockOfProduct(productWithNewAmount);
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
+		}
+	}
+
+	public boolean addCustomer(CustomerContainer customer) {
+		int cvr = customer.getCVR();
+		String name = customer.getName();
+		String password = customer.getPw();
+		String address = customer.getAddress();
+		try {
+			return DAOGrosser.addNewCustomer(cvr, name, password, address);
+		} catch (SQLException throwables) {
+			return false;
 		}
 	}
 }
