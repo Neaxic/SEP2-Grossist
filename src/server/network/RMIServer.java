@@ -104,7 +104,8 @@ public class RMIServer implements RMIServerInterface {
 		boolean b = serverModel.increaseAmount(productAndAmountToAdd);
 	}
 
-	@Override public void reduceAmountInSystem(Pair<Product,Integer> productAndAmountToRemove) throws RemoteException {
+	@Override
+	public void reduceAmountInSystem(Pair<Product, Integer> productAndAmountToRemove) throws RemoteException {
 		boolean b = serverModel.reduceAmount(productAndAmountToRemove);
 	}
 
