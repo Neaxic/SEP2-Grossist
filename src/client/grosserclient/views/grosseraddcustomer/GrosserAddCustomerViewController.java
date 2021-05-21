@@ -3,12 +3,19 @@ package client.grosserclient.views.grosseraddcustomer;
 import client.core.ViewHandler;
 import client.core.factories.ViewModelFactory;
 import client.grosserclient.views.GrosserViewController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import shared.objects.CustomerContainer;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class GrosserAddCustomerViewController implements GrosserViewController
 {
@@ -35,8 +42,10 @@ public class GrosserAddCustomerViewController implements GrosserViewController
       return;
     }
 
-    if (!(passwordField.getText().matches("[a-z]")) || !(passwordField.getText().matches("[A-Z]"))
-      || !(passwordField.getText().matches("[0-9]")))
+    String pw = passwordField.getText();
+
+    if (!pw.matches("\\w+") || !pw.matches("(?s).*[A-Z].*") || !pw
+        .matches("(?s).*[a-z].*") || !pw.matches("(?s).*[0-9].*"))
     {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Kodeord Fejl");
@@ -68,6 +77,34 @@ public class GrosserAddCustomerViewController implements GrosserViewController
     CustomerContainer customer = new CustomerContainer(CVR, address, passwordField.getText(), nameField.getText());
 
 
+  }
+
+  @FXML
+  private void abort(ActionEvent event)
+  {
+    Node node = (Node) event.getSource();
+    Stage thisStage = (Stage) node.getScene().getWindow();
+
+    thisStage.close();
+  }
+
+  private boolean passwordCheck(String input)
+  {
+    char ch;
+    boolean upperFlag = false;
+    boolean lowerFlag = false;
+    boolean numberFlag = false;
+    boolean spaceFlag = false;
+
+    for (int i = 0; i < input.length(); i++)
+    {
+      ch = input.charAt(i);
+      if (Character.isUpperCase(ch)) upperFlag = true;
+      else if (Character.isLowerCase(ch)) lowerFlag = true;
+      else if (Character.isDigit(ch)) numberFlag = true;
+      else if (Character.isWhitespace(ch)) spaceFlag = true;
+    }
+    return upperFlag && lowerFlag && numberFlag && !spaceFlag;
   }
 
   @Override public void init(ViewHandler viewHandler)
