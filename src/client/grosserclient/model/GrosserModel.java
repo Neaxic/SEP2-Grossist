@@ -19,21 +19,6 @@ public class GrosserModel implements GrosserModelInterface {
 	}
 
 	@Override
-	public void addListener(PropertyChangeListener listener) {
-		support.addPropertyChangeListener(listener);
-	}
-
-	@Override
-	public void removeListener(PropertyChangeListener listener) {
-		support.removePropertyChangeListener(listener);
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		support.firePropertyChange(evt);
-	}
-
-	@Override
 	public void getAllOrders() {
 		client.getAllOrders();
 	}
@@ -53,9 +38,23 @@ public class GrosserModel implements GrosserModelInterface {
 		client.changeAmount(productWithNewAmount);
 	}
 
-
 	@Override
 	public void createNewProduct(Pair<Product, Integer> newProduct) {
 		client.createProduct(newProduct);
+	}
+
+	@Override
+	public void addListener(PropertyChangeListener listener) {
+		support.addPropertyChangeListener(listener);
+	}
+
+	@Override
+	public void removeListener(PropertyChangeListener listener) {
+		support.removePropertyChangeListener(listener);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		support.firePropertyChange(evt);
 	}
 }

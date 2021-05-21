@@ -20,7 +20,14 @@ public class Alcohol extends Product implements ProductInterface {
 	}
 
 	public Alcohol(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, String producedBy, String tags, String originCountry, double percentage, String beverageType) {
-		super(wareName, measurementType, bestBefore, wareNumber, deliveryDays, price, producedBy, tags);
+		super(wareName,
+				measurementType,
+				bestBefore,
+				wareNumber,
+				deliveryDays,
+				price,
+				producedBy,
+				tags);
 		this.originCountry = originCountry;
 		this.percentage = percentage;
 		this.beverageType = beverageType;

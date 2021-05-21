@@ -1,6 +1,5 @@
 import client.core.factories.ClientFactory;
 import client.core.factories.ModelFactory;
-import client.grosserclient.model.GrosserModel;
 import client.grosserclient.model.GrosserModelInterface;
 import client.grosserclient.views.grosseraddproduct.GrosserAddProductViewModel;
 import client.network.GrosserClient;
@@ -15,8 +14,7 @@ import shared.wares.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 //Line Guld
 class GrosserTestAddProduct
@@ -24,8 +22,10 @@ class GrosserTestAddProduct
   private static GrosserAddProductViewModel viewModel;
   private static GrosserClient grosserClient;
   static GrosserModelInterface grosserModel;
+
+  //Nedenstående felter er en masse konstanter som bruges i testen, IKKE ÆNDRE DEM!
   static Integer validAmount = 500;
-  static Integer invalidAmount = -1;
+  static Integer invalidAmountNegative = -1;
   static Integer invalidAmountZero = 0;
   static LocalDate validBestBefore = LocalDate.now().plusMonths(3);
   static LocalDate invalidBestBeforeYesterday = LocalDate.now().minusDays(1);
@@ -53,8 +53,15 @@ class GrosserTestAddProduct
     grosserModel = ModelFactory.getInstance().getGrosserModel();
   }
 
-  static class AlcoholTest
-  {
+  @Test //Hapset fra Young
+  void jUnitTest() {
+    assertTrue(false != true, "JUnit does not seem to work at the current time, please try again later...");
+  }
+
+
+  /// Hver af de nedenstående underklasser tester sendOrder() metoden for de
+  // de forskellige produktklasser, inklusive boundrytest hvor relevant.
+  static class AlcoholTest {
     @BeforeAll //Hapset fra Young
     static void init()
     {
@@ -85,16 +92,16 @@ class GrosserTestAddProduct
         0,
         30,
         7170,
-        1,
         "Moët & Chandon",
+        "",
         "Frankrig",
         12.50,
         "Champagne");
 
-    Pair<Product, Integer> validPair = new Pair<>(validInputAlcohol,
-        invalidAmount);
+    Pair<Product, Integer> invalidPair = new Pair<>(validInputAlcohol,
+        invalidAmountNegative);
 
-    assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+    assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
   }
 
     @Test void invalidAlcoholAmountZero()
@@ -106,16 +113,16 @@ class GrosserTestAddProduct
           0,
           30,
           7170,
-          1,
           "Moët & Chandon",
+          "",
           "Frankrig",
           12.50,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(validInputAlcohol,
+      Pair<Product, Integer> invalidPair = new Pair<>(validInputAlcohol,
           invalidAmountZero);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
   @Test void validAlcoholProductInput()
   {
@@ -126,8 +133,8 @@ class GrosserTestAddProduct
         0,
         30,
         7170,
-        1,
         "Moët & Chandon",
+        "",
         "Frankrig",
         12.50,
         "Champagne");
@@ -146,15 +153,15 @@ class GrosserTestAddProduct
         0,
         30,
         7170,
-        1,
         "Moët & Chandon",
+        "",
         "Frankrig",
         12.50,
         "Champagne");
 
-    Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+    Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-    assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+    assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
   }
 
     @Test void invalidAlcoholProductInputMeasurement()
@@ -166,15 +173,15 @@ class GrosserTestAddProduct
           0,
           30,
           7170,
-          1,
           "Moët & Chandon",
+          "",
           "Frankrig",
           12.50,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
 
     @Test void invalidAlcoholProductBestBeforeYesterday()
@@ -186,15 +193,15 @@ class GrosserTestAddProduct
           0,
           30,
           7170,
-          1,
           "Moët & Chandon",
+          "",
           "Frankrig",
           12.50,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
 
     @Test void invalidAlcoholProductBestBeforeToday()
@@ -206,15 +213,15 @@ class GrosserTestAddProduct
           0,
           30,
           7170,
-          1,
           "Moët & Chandon",
+          "",
           "Frankrig",
           12.50,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
 
     @Test void invalidAlcoholDeliveryZero()
@@ -226,15 +233,15 @@ class GrosserTestAddProduct
           0,
           0,
           7170,
-          1,
           "Moët & Chandon",
+          "",
           "Frankrig",
           12.50,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
 
     @Test void invalidAlcoholDeliveryNegative()
@@ -246,15 +253,15 @@ class GrosserTestAddProduct
           0,
           -1,
           7170,
-          1,
           "Moët & Chandon",
+          "",
           "Frankrig",
           12.50,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
 
     @Test void invalidAlcoholPriceZero()
@@ -266,15 +273,15 @@ class GrosserTestAddProduct
           0,
           30,
           0,
-          1,
           "Moët & Chandon",
+          "",
           "Frankrig",
           12.50,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
 
     @Test void invalidAlcoholPriceNegative()
@@ -286,15 +293,15 @@ class GrosserTestAddProduct
           0,
           30,
           -1,
-          1,
           "Moët & Chandon",
+          "",
           "Frankrig",
           12.50,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
 
     @Test void invalidAlcoholInputProducedBy()
@@ -306,15 +313,15 @@ class GrosserTestAddProduct
           0,
           30,
           7170,
-          1,
+          "",
           "",
           "Frankrig",
           12.50,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
 
     @Test void invalidAlcoholInputOrigin()
@@ -326,15 +333,15 @@ class GrosserTestAddProduct
           0,
           30,
           7170,
-          1,
           "Moët & Chandon",
+          "",
           "",
           12.50,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
 
     @Test void invalidAlcoholInputPercentageZero()
@@ -346,15 +353,15 @@ class GrosserTestAddProduct
           0,
           30,
           7170,
-          1,
           "Moët & Chandon",
+          "",
           "Frankrig",
           0,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
 
     @Test void invalidAlcoholInputPercentageNegative()
@@ -366,15 +373,15 @@ class GrosserTestAddProduct
           0,
           30,
           7170,
-          1,
           "Moët & Chandon",
+          "",
           "Frankrig",
           -0.05,
           "Champagne");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
     @Test void invalidAlcoholInputType()
     {
@@ -385,21 +392,19 @@ class GrosserTestAddProduct
           0,
           30,
           7170,
-          1,
           "Moët & Chandon",
+          "",
           "Frankrig",
           12.50,
           "");
 
-      Pair<Product, Integer> validPair = new Pair<>(invalidInputAlcohol, validAmount);
+      Pair<Product, Integer> invalidPair = new Pair<>(invalidInputAlcohol, validAmount);
 
-      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(validPair));
+      assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(invalidPair));
     }
-
 }
 
-  static class DrinksTest
-  {
+  static class DrinksTest {
     @BeforeAll //Hapset fra Young
     static void init()
     {
@@ -430,11 +435,12 @@ class GrosserTestAddProduct
           0,
           7,
           360,
-          1,
-          "Energidrik",
-          "Monster Beverage");
+          "Monster Beverage",
+          "",
+          "Energidrik");
 
-      Pair<Product, Integer> pair = new Pair<>(validDrink, invalidAmount);
+      Pair<Product, Integer> pair = new Pair<>(validDrink,
+          invalidAmountNegative);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
     }
 
@@ -447,9 +453,9 @@ class GrosserTestAddProduct
           0,
           7,
           360,
-          1,
-          "Energidrik",
-          "Monster Beverage");
+          "Monster Beverage",
+          "",
+          "Energidrik");
 
       Pair<Product, Integer> pair = new Pair<>(validDrink, invalidAmountZero);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
@@ -464,9 +470,9 @@ class GrosserTestAddProduct
           0,
           7,
           360,
-          10,
-          "Energidrik",
-          "Monster Beverage");
+          "Monster Beverage" ,
+          "",
+          "Energidrik");
 
       Pair<Product, Integer> validPair = new Pair<>(validDrink, validAmount);
       assertDoesNotThrow(() -> viewModel.sendOrder(validPair));
@@ -481,11 +487,13 @@ class GrosserTestAddProduct
           0,
           7,
           360,
-          10,
-          "Energidrik",
-          "Monster Beverage");
+          "Monster Beverage",
+          "",
+          "Energidrik"
+          );
 
-      Pair<Product, Integer> pair = new Pair<>(invalidDrink, validAmount);
+
+          Pair<Product, Integer> pair = new Pair<>(invalidDrink, validAmount);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
     }
 
@@ -498,9 +506,10 @@ class GrosserTestAddProduct
           0,
           7,
           360,
-          10,
-          "Energidrik",
-          "Monster Beverage");
+          "Monster Beverage",
+          "",
+          "Energidrik");
+
 
       Pair<Product, Integer> pair = new Pair<>(invalidDrink, validAmount);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
@@ -515,9 +524,9 @@ class GrosserTestAddProduct
           0,
           7,
           360,
-          10,
-          "Energidrik",
-          "Monster Beverage");
+          "Monster Beverage",
+          "",
+          "Energidrik");
 
       Pair<Product, Integer> pair = new Pair<>(invalidDrink, validAmount);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
@@ -532,9 +541,9 @@ class GrosserTestAddProduct
           0,
           7,
           360,
-          10,
-          "Energidrik",
-          "Monster Beverage");
+          "Monster Beverage",
+          "",
+          "Energidrik");
 
       Pair<Product, Integer> pair = new Pair<>(invalidDrink, validAmount);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
@@ -549,9 +558,10 @@ class GrosserTestAddProduct
           0,
           0,
           360,
-          10,
-          "Energidrik",
-          "Monster Beverage");
+          "Monster Beverage",
+          "",
+          "Energidrik"
+          );
 
       Pair<Product, Integer> pair = new Pair<>(invalidDrink, validAmount);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
@@ -566,9 +576,10 @@ class GrosserTestAddProduct
           0,
           -1,
           360,
-          10,
-          "Energidrik",
-          "Monster Beverage");
+          "Monster Beverage",
+          "",
+          "Energidrik"
+          );
 
       Pair<Product, Integer> pair = new Pair<>(invalidDrink, validAmount);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
@@ -583,9 +594,10 @@ class GrosserTestAddProduct
           0,
           7,
           0,
-          10,
-          "Energidrik",
-          "Monster Beverage");
+          "Monster Beverage",
+          "",
+          "Energidrik"
+          );
 
       Pair<Product, Integer> pair = new Pair<>(invalidDrink, validAmount);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
@@ -600,9 +612,10 @@ class GrosserTestAddProduct
           0,
           7,
           -1,
-          10,
-          "Energidrik",
-          "Monster Beverage");
+          "Monster Beverage",
+          "",
+          "Energidrik"
+          );
 
       Pair<Product, Integer> pair = new Pair<>(invalidDrink, validAmount);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
@@ -617,9 +630,10 @@ class GrosserTestAddProduct
           0,
           7,
           360,
-          10,
+          "Monster Beverage",
           "",
-          "Monster Beverage");
+          ""
+          );
 
       Pair<Product, Integer> pair = new Pair<>(invalidDrink, validAmount);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
@@ -634,17 +648,16 @@ class GrosserTestAddProduct
           0,
           7,
           360,
-          10,
-          "Energidrik",
-          "");
+          "",
+          "",
+          "Energidrik");
 
       Pair<Product, Integer> pair = new Pair<>(invalidDrink, validAmount);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
     }
   }
 
-  static class ColonialTest
-  {
+  static class ColonialTest {
     @BeforeAll //Hapset fra Young
     static void init()
     {
@@ -674,11 +687,12 @@ class GrosserTestAddProduct
           0,
           1,
           1,
-          10,
           "Den gamle fabrik",
+          "",
           "Danmark");
 
-      Pair<Product, Integer> pair = new Pair<>(validColonial, invalidAmount);
+      Pair<Product, Integer> pair = new Pair<>(validColonial,
+          invalidAmountNegative);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
     }
 
@@ -691,8 +705,8 @@ class GrosserTestAddProduct
           0,
           1,
           1,
-          10,
           "Den gamle fabrik",
+          "",
           "Danmark");
 
       Pair<Product, Integer> pair = new Pair<>(validColonial, invalidAmountZero);
@@ -708,8 +722,8 @@ class GrosserTestAddProduct
           0,
           1,
           150,
-          10,
           "Den gamle fabrik",
+          "",
           "Danmark");
 
       Pair<Product, Integer> validPair = new Pair<>(validColonial, validAmount);
@@ -725,8 +739,8 @@ class GrosserTestAddProduct
           0,
           1,
           150,
-          10,
           "Den gamle fabrik",
+          "",
           "Danmark");
 
       Pair<Product, Integer> pair = new Pair<>(invalidColonial, validAmount);
@@ -742,8 +756,8 @@ class GrosserTestAddProduct
           0,
           1,
           150,
-          10,
           "Den gamle fabrik",
+          "",
           "Danmark");
 
       Pair<Product, Integer> pair = new Pair<>(invalidColonial, validAmount);
@@ -759,8 +773,8 @@ class GrosserTestAddProduct
           0,
           1,
           150,
-          10,
           "Den gamle fabrik",
+          "",
           "Danmark");
 
       Pair<Product, Integer> pair = new Pair<>(invalidColonial, validAmount);
@@ -776,8 +790,8 @@ class GrosserTestAddProduct
           0,
           1,
           150,
-          10,
           "Den gamle fabrik",
+          "",
           "Danmark");
 
       Pair<Product, Integer> pair = new Pair<>(invalidColonial, validAmount);
@@ -793,8 +807,8 @@ class GrosserTestAddProduct
           0,
           -1,
           150,
-          10,
           "Den gamle fabrik",
+          "",
           "Danmark");
 
       Pair<Product, Integer> pair = new Pair<>(invalidColonial, validAmount);
@@ -810,8 +824,8 @@ class GrosserTestAddProduct
           0,
           0,
           150,
-          10,
           "Den gamle fabrik",
+          "",
           "Danmark");
 
       Pair<Product, Integer> pair = new Pair<>(invalidColonial, validAmount);
@@ -827,8 +841,8 @@ class GrosserTestAddProduct
           0,
           1,
           -1,
-          10,
           "Den gamle fabrik",
+          "",
           "Danmark");
 
       Pair<Product, Integer> pair = new Pair<>(invalidColonial, validAmount);
@@ -844,8 +858,8 @@ class GrosserTestAddProduct
           0,
           1,
           0,
-          10,
           "Den gamle fabrik",
+          "",
           "Danmark");
 
       Pair<Product, Integer> pair = new Pair<>(invalidColonial, validAmount);
@@ -861,7 +875,7 @@ class GrosserTestAddProduct
           0,
           1,
           50,
-          10,
+          "",
           "",
           "Danmark");
 
@@ -878,15 +892,16 @@ class GrosserTestAddProduct
           0,
           1,
           60,
-          10,
           "Den gamle fabrik",
+          "",
           "");
 
       Pair<Product, Integer> pair = new Pair<>(invalidColonial, validAmount);
       assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
     }
   }
-  static class DairyTest{
+
+  static class DairyTest {
     @BeforeAll //Hapset fra Young
     static void init()
     {
@@ -916,11 +931,11 @@ class GrosserTestAddProduct
         0,
         1,
         50.95,
-        20,
-        "Arla"
+        "Arla",
+        ""
     );
 
-    pair = new Pair<>(validDairy, invalidAmount);
+    pair = new Pair<>(validDairy, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }
 
@@ -932,8 +947,8 @@ class GrosserTestAddProduct
           0,
           1,
           50.95,
-          20,
-          "Arla"
+          "Arla",
+          ""
       );
 
       pair = new Pair<>(validDairy, invalidAmountZero);
@@ -948,8 +963,8 @@ class GrosserTestAddProduct
         0,
         1,
         50.95,
-        20,
-        "Arla"
+       "Arla",
+       ""
     );
      pair = new Pair<>(validDairy, validAmount);
     assertDoesNotThrow(() -> viewModel.sendOrder(pair));
@@ -963,8 +978,8 @@ class GrosserTestAddProduct
         0,
         1,
         50.95,
-        20,
-        "Arla"
+        "Arla",
+        ""
     );
 
     pair = new Pair<>(invalidDairy, validAmount);
@@ -979,8 +994,8 @@ class GrosserTestAddProduct
           0,
           1,
           50.95,
-          20,
-          "Arla"
+          "Arla",
+          ""
       );
 
       pair = new Pair<>(invalidDairy, validAmount);
@@ -995,8 +1010,8 @@ class GrosserTestAddProduct
           0,
           1,
           50.95,
-          20,
-          "Arla"
+          "Arla",
+          ""
       );
 
       pair = new Pair<>(invalidDairy, validAmount);
@@ -1011,8 +1026,8 @@ class GrosserTestAddProduct
           0,
           1,
           50.95,
-          20,
-          "Arla"
+          "Arla",
+          ""
       );
 
       pair = new Pair<>(invalidDairy, validAmount);
@@ -1027,8 +1042,8 @@ class GrosserTestAddProduct
           0,
           0,
           50.95,
-          20,
-          "Arla"
+          "Arla",
+          ""
       );
 
       pair = new Pair<>(invalidDairy, validAmount);
@@ -1043,8 +1058,8 @@ class GrosserTestAddProduct
           0,
           -1,
           50.95,
-          20,
-          "Arla"
+          "Arla",
+          ""
       );
 
       pair = new Pair<>(invalidDairy, validAmount);
@@ -1059,8 +1074,8 @@ class GrosserTestAddProduct
           0,
           1,
           0,
-          20,
-          "Arla"
+          "Arla",
+          ""
       );
 
       pair = new Pair<>(invalidDairy, validAmount);
@@ -1075,8 +1090,8 @@ class GrosserTestAddProduct
           0,
           1,
           -1,
-          20,
-          "Arla"
+          "Arla",
+          ""
       );
 
       pair = new Pair<>(invalidDairy, validAmount);
@@ -1091,7 +1106,7 @@ class GrosserTestAddProduct
           0,
           1,
           50.14,
-          20,
+          "",
           ""
       );
 
@@ -1100,7 +1115,7 @@ class GrosserTestAddProduct
     }
   }
 
-  static class GreensTest{
+  static class GreensTest {
     @BeforeAll //Hapset fra Young
     static void init()
     {
@@ -1130,12 +1145,12 @@ class GrosserTestAddProduct
         0,
         7,
         50.05,
-        20,
         "Itagu",
+        "",
         "Costa Rica"
     );
 
-    pair = new Pair<>(validFruit, invalidAmount);
+    pair = new Pair<>(validFruit, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
   }
 
@@ -1147,8 +1162,8 @@ class GrosserTestAddProduct
         0,
         7,
         50.05,
-        20,
         "Itagu",
+        "",
         "Costa Rica"
     );
 
@@ -1164,8 +1179,8 @@ class GrosserTestAddProduct
         0,
         7,
         50.05,
-        20,
         "Itagu",
+        "",
         "Costa Rica"
     );
 
@@ -1181,8 +1196,8 @@ class GrosserTestAddProduct
       0,
       7,
       50.05,
-      20,
       "Itagu",
+      "",
       "Costa Rica"
   );
 
@@ -1198,8 +1213,8 @@ class GrosserTestAddProduct
       0,
       7,
       50.05,
-      20,
       "Itagu",
+      "",
       "Costa Rica"
   );
 
@@ -1215,8 +1230,8 @@ class GrosserTestAddProduct
         0,
         7,
         50.05,
-        20,
         "Itagu",
+        "",
         "Costa Rica"
     );
 
@@ -1232,8 +1247,8 @@ class GrosserTestAddProduct
         0,
         7,
         50.05,
-        20,
         "Itagu",
+        "",
         "Costa Rica"
     );
 
@@ -1249,8 +1264,8 @@ class GrosserTestAddProduct
         0,
         -1,
         50.05,
-        20,
         "Itagu",
+        "",
         "Costa Rica"
     );
 
@@ -1266,8 +1281,8 @@ class GrosserTestAddProduct
         0,
         0,
         50.05,
-        20,
         "Itagu",
+        "",
         "Costa Rica"
     );
 
@@ -1283,8 +1298,8 @@ class GrosserTestAddProduct
         0,
         7,
         -1,
-        20,
         "Itagu",
+        "",
         "Costa Rica"
     );
 
@@ -1300,8 +1315,8 @@ class GrosserTestAddProduct
         0,
         7,
         0,
-        20,
         "Itagu",
+        "",
         "Costa Rica"
     );
 
@@ -1317,7 +1332,7 @@ class GrosserTestAddProduct
         0,
         7,
         50.05,
-        20,
+        "",
         "",
         "Costa Rica"
     );
@@ -1334,8 +1349,8 @@ class GrosserTestAddProduct
         0,
         7,
         50.05,
-        20,
         "Itagu",
+        "",
         ""
     );
 
@@ -1343,7 +1358,7 @@ class GrosserTestAddProduct
     assertThrows(IllegalArgumentException.class, () -> viewModel.sendOrder(pair));
   }}
 
-  static  class MeatAndFishTests{
+  static  class MeatAndFishTests {
     @BeforeAll //Hapset fra Young
     static void init()
     {
@@ -1374,12 +1389,12 @@ class GrosserTestAddProduct
         0,
         70,
         10000,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         "Japan"
     );
 
-    pair = new Pair<>(validMeat, invalidAmount);
+    pair = new Pair<>(validMeat, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }
 
@@ -1391,8 +1406,8 @@ class GrosserTestAddProduct
         0,
         70,
         10000,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         "Japan"
     );
 
@@ -1408,8 +1423,8 @@ class GrosserTestAddProduct
         0,
         70,
         10000,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         "Japan"
     );
 
@@ -1425,12 +1440,12 @@ class GrosserTestAddProduct
         0,
         70,
         10000,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         "Japan"
     );
 
-    pair = new Pair<>(validMeat, invalidAmount);
+    pair = new Pair<>(validMeat, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }
 
@@ -1442,12 +1457,12 @@ class GrosserTestAddProduct
         0,
         70,
         10000,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         "Japan"
     );
 
-    pair = new Pair<>(validMeat, invalidAmount);
+    pair = new Pair<>(validMeat, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }
 
@@ -1458,12 +1473,12 @@ class GrosserTestAddProduct
         0,
         70,
         10000,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         "Japan"
     );
 
-    pair = new Pair<>(validMeat, invalidAmount);
+    pair = new Pair<>(validMeat, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }
 
@@ -1475,12 +1490,12 @@ class GrosserTestAddProduct
         0,
         70,
         10000,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         "Japan"
     );
 
-    pair = new Pair<>(validMeat, invalidAmount);
+    pair = new Pair<>(validMeat, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }
 
@@ -1492,12 +1507,12 @@ class GrosserTestAddProduct
         0,
         -1,
         10000,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         "Japan"
     );
 
-    pair = new Pair<>(validMeat, invalidAmount);
+    pair = new Pair<>(validMeat, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }
 
@@ -1509,12 +1524,12 @@ class GrosserTestAddProduct
         0,
         0,
         10000,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         "Japan"
     );
 
-    pair = new Pair<>(validMeat, invalidAmount);
+    pair = new Pair<>(validMeat, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }
 
@@ -1526,12 +1541,12 @@ class GrosserTestAddProduct
         0,
         70,
         0,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         "Japan"
     );
 
-    pair = new Pair<>(validMeat, invalidAmount);
+    pair = new Pair<>(validMeat, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }
 
@@ -1543,12 +1558,12 @@ class GrosserTestAddProduct
         0,
         70,
         -1,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         "Japan"
     );
 
-    pair = new Pair<>(validMeat, invalidAmount);
+    pair = new Pair<>(validMeat, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }
 
@@ -1560,12 +1575,12 @@ class GrosserTestAddProduct
         0,
         70,
         10000,
-        1,
+        "",
         "",
         "Japan"
     );
 
-    pair = new Pair<>(validMeat, invalidAmount);
+    pair = new Pair<>(validMeat, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }
 
@@ -1577,12 +1592,12 @@ class GrosserTestAddProduct
         0,
         70,
         10000,
-        1,
-        "Hiroshima",
+        "Matsusaka Beef",
+        "",
         ""
     );
 
-    pair = new Pair<>(validMeat, invalidAmount);
+    pair = new Pair<>(validMeat, invalidAmountNegative);
     assertThrows(IllegalArgumentException.class, ()-> viewModel.sendOrder(pair));
   }}
 }
