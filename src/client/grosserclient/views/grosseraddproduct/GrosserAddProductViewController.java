@@ -232,6 +232,20 @@ public class GrosserAddProductViewController implements GrosserViewController {
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
 				viewModel.createProduct(liste);
 			}
+			case "Frost" -> {
+				Frozen newProduct = new Frozen(
+						productName.getText(),
+						productMeasurement.getText(),
+						productBestBefore.getValue(),
+						0,
+						Integer.parseInt(productDeliveryDays.getText()),
+						Double.parseDouble(productPrice.getText()),
+						productBy.getText(),
+						getAllTags()
+				);
+				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+				viewModel.createProduct(liste);
+			}
 		}
 		new Alert(Alert.AlertType.INFORMATION, "Produkt er nu tilføjet til Lageret", ButtonType.CLOSE).showAndWait();
 	}
