@@ -19,77 +19,85 @@ import java.io.IOException;
 // Young
 
 public class GrosserWaresViewController implements GrosserViewController, PropertyChangeListener {
-	private ViewHandler viewHandler;
-	private GrosserWaresViewModel viewModel;
+    private ViewHandler viewHandler;
+    private GrosserWaresViewModel viewModel;
 
-	@FXML private TableView wareList;
-	@FXML private TableColumn wares;
-	@FXML private TableColumn amounts;
-	@FXML private TextField newWareAmountField;
+    @FXML
+    private TableView wareList;
+    @FXML
+    private TableColumn wares;
+    @FXML
+    private TableColumn amounts;
+    @FXML
+    private TextField newWareAmountField;
 
-	@Override
-	public void init(ViewHandler viewHandler) {
-		this.viewHandler = viewHandler;
-		viewModel = ViewModelFactory.getInstance().grosserWaresViewModel();
-		viewModel.addListener(this);
-		// Mangler lige indikation af, at der er varer på vej fra Databasen
-		Thread t = new Thread(() -> viewModel.updateWareList());
-		t.setDaemon(true);
-		t.start();
+    @Override
+    public void init(ViewHandler viewHandler) {
+        this.viewHandler = viewHandler;
+        viewModel = ViewModelFactory.getInstance().grosserWaresViewModel();
+        viewModel.addListener(this);
+        // Mangler lige indikation af, at der er varer på vej fra Databasen
+        Thread t = new Thread(() -> viewModel.updateWareList());
+        t.setDaemon(true);
+        t.start();
 
-		wares.setCellValueFactory(new PropertyValueFactory<>("product"));
-		amounts.setCellValueFactory(new PropertyValueFactory<>("amount"));
-	}
+        wares.setCellValueFactory(new PropertyValueFactory<>("product"));
+        amounts.setCellValueFactory(new PropertyValueFactory<>("amount"));
+    }
 
-	private void setTable() {
-		wareList.setItems(FXCollections.observableList(viewModel.getListForView()));
-	}
+    private void setTable() {
+        wareList.setItems(FXCollections.observableList(viewModel.getListForView()));
+    }
 
-	@FXML
-	private void changeAmount() {
-		Object o = wareList.getSelectionModel().getSelectedItem();
-		if (o != null && ((ProductAndInt) o).getAmount() >= 0) {
-			try {
-				viewModel.changeAmount(o, Integer.parseInt(newWareAmountField.getText()));
-			} catch (NumberFormatException e) {
-				new Alert(Alert.AlertType.WARNING, "Nyt Antal skal være en heltals værdi");
-			} finally {
-				newWareAmountField.clear();
-				refresh();
-			}
-		}
-	}
+    @FXML
+    private void changeAmount() {
+        Object o = wareList.getSelectionModel().getSelectedItem();
+        System.out.println(o); //SOUT
+        try {
+            if (o != null && ((ProductAndInt) o).getAmount() >= 0 && Integer.parseInt(newWareAmountField.getText()) >= 0) {
+                viewModel.changeAmount(o, Integer.parseInt(newWareAmountField.getText()));
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Nyt antal skal være et positivt tal");
+            }
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.WARNING, "Nyt Antal skal være en heltals værdi");
+        } finally {
+            newWareAmountField.clear();
+            refresh();
+        }
 
-	@FXML
-	private void deleteItem() {
-		Object o = wareList.getSelectionModel().getSelectedItem();
-		System.out.println(o);
-		viewModel.deleteItem(o);
-		refresh();
-	}
+    }
 
-	@FXML
-	private void homeScreen() throws IOException {
-		swapScene("GrosserMain");
-	}
+    @FXML
+    private void deleteItem() {
+        Object o = wareList.getSelectionModel().getSelectedItem();
+        System.out.println(o);
+        viewModel.deleteItem(o);
+        refresh();
+    }
 
-	@FXML
-	private void addNewProductScene() throws IOException {
-		swapScene("GrosserAddProduct");
-	}
+    @FXML
+    private void homeScreen() throws IOException {
+        swapScene("GrosserMain");
+    }
 
-	@FXML
-	private void refresh() {
-		init(viewHandler);
-	} // Hiver fat i databasen hver gang, ikke det smarteste men klart det sikreste
+    @FXML
+    private void addNewProductScene() throws IOException {
+        swapScene("GrosserAddProduct");
+    }
 
-	@Override
-	public void swapScene(String sceneName) throws IOException {
-		viewHandler.openView(sceneName);
-	}
+    @FXML
+    private void refresh() {
+        init(viewHandler);
+    } // Hiver fat i databasen hver gang, ikke det smarteste men klart det sikreste
 
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		setTable();
-	}
+    @Override
+    public void swapScene(String sceneName) throws IOException {
+        viewHandler.openView(sceneName);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        setTable();
+    }
 }
