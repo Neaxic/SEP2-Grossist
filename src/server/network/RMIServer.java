@@ -4,6 +4,7 @@ import javafx.util.Pair;
 import server.model.ServerModel;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
+import shared.objects.CustomerContainer;
 import shared.util.Util;
 import shared.objects.Basket;
 import shared.objects.Order;
@@ -101,6 +102,11 @@ public class RMIServer implements RMIServerInterface {
 	@Override
 	public void changeAmount(Pair<Product, Integer> productWithNewAmount) throws RemoteException{
 		serverModel.changeAmount(productWithNewAmount);
+	}
+
+	@Override
+	public void addCustomer(CustomerContainer customer) throws RemoteException {
+		boolean customerAdded = serverModel.addCustomer(customer);
 	}
 
 
