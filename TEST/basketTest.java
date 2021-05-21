@@ -20,11 +20,11 @@ public class basketTest
   @BeforeEach void setUp()
   {
     b = new Basket();
-    n = new Alcohol("romOgCola", "Liter", date, 30409801, 301, 15, 25,"Rexam",
+    n = new Alcohol("romOgCola", "Liter", date, 30409801, 301, 25,"Rexam","",
         "USA", 40.4, "Cider");
-    n1 = new Alcohol("Bailey", "Liter", date, 30409801, 301, 15, 25,"Rexam",
+    n1 = new Alcohol("Bailey", "Liter", date, 30409801, 301,  25,"Rexam","",
         "USA", 40.4, "Cider");
-    n2 = new Alcohol("Bajer", "Liter", date, 30409801, 301, 15, 25,"Rexam",
+    n2 = new Alcohol("Bajer", "Liter", date, 30409801, 301,25,"Rexam","",
         "USA", 40.4, "Cider");
 
   }

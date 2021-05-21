@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // Andreas Young
 
 public class CustomerTest {
-	static Product p = new Alcohol("Soplica Wisniowa", "Liter", LocalDate.now(), 420, 10, 10, 10, "CEDC International", "Poland", 30d, "Vodka");
+	static Product p = new Alcohol("Soplica Wisniowa", "Liter", LocalDate.now(), 420, 10, 10, "CEDC International","", "Poland", 30d, "Vodka");
 	static int a = 1;
 	static CustomerModelInterface customerModel;
 
