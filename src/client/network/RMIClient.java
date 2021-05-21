@@ -17,7 +17,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 // Andreas Young og Andreas Østergaard
@@ -126,9 +125,17 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	}
 
 	@Override
-	public void changeAmount(Pair<Product, Integer> productWithNewAmount) {
+	public void increaseStock(Pair<Product, Integer> productAndAmountToIncrease) {
 		try {
-			server.changeAmount(productWithNewAmount);
+			server.increaseAmountInSystem(productAndAmountToIncrease);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override public void reduceStock(Pair<Product, Integer> productAndAmountToReduce){
+		try{
+			server.reduceAmountInSystem(productAndAmountToReduce);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

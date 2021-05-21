@@ -18,7 +18,9 @@ public interface GrosserClient {
 
 	void deleteWare(Product productID);
 
-	void changeAmount(Pair<Product, Integer> productWithNewAmount);
+	void increaseStock(Pair<Product, Integer> productWithNewAmount);
+
+	void reduceStock(Pair<Product, Integer> productAndAmountToReduce);
 }
 
 

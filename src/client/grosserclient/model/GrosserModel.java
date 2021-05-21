@@ -34,8 +34,13 @@ public class GrosserModel implements GrosserModelInterface {
 	}
 
 	@Override
-	public void changeAmount(Pair<Product, Integer> productWithNewAmount) {
-		client.changeAmount(productWithNewAmount);
+	public void increaseStock(Pair<Product, Integer> productAndAmountToIncrease) {
+		client.increaseStock(productAndAmountToIncrease);
+	}
+
+	@Override
+	public void reduceStock(Pair<Product, Integer> productAndAmountToReduce) {
+		client.reduceStock(productAndAmountToReduce);
 	}
 
 	@Override

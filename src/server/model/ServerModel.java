@@ -103,13 +103,22 @@ public class ServerModel {
 		}
 	}
 
-
-	public void changeAmount(Pair<Product, Integer> productWithNewAmount) {
+	public boolean increaseAmount(Pair<Product, Integer> productAndAmountToAdd) {
 		try {
-			DAOGrosser.changeAmountInStockOfProduct(productWithNewAmount);
+			DAOGrosser.increaseAmountInStock(productAndAmountToAdd);
 		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+			return false;
 		}
+		return true;
+	}
+
+	public boolean reduceAmount(Pair<Product, Integer> productAndAmountToRemove){
+		try {
+			DAOGrosser.reduceAmountInStock(productAndAmountToRemove);
+		} catch (SQLException throwables){
+			return false;
+		}
+		return true;
 	}
 
 	public boolean addCustomer(CustomerContainer customer) {

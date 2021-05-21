@@ -66,8 +66,13 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 	}
 
 	@Override
-	public boolean changeAmountInStockOfProduct(Pair<Product, Integer> productAndNewAmount) throws SQLException {
-		return changeAmountInStock(productAndNewAmount.getKey(), productAndNewAmount.getValue());
+	public boolean increaseAmountInStock(Pair<Product, Integer> productAndAmountToAdd) throws SQLException {
+		return changeAmountInStock(productAndAmountToAdd.getKey(), productAndAmountToAdd.getValue());
+	}
+
+	@Override
+	public boolean reduceAmountInStock(Pair<Product, Integer> productAndAmountToRemove) throws SQLException {
+		return changeAmountInStock(productAndAmountToRemove.getKey(), -productAndAmountToRemove.getValue());
 	}
 
 	@Override
@@ -123,9 +128,7 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 
 	private int createOrderInDatabase(int cvr, Timestamp orderTime, double sum) throws SQLException {
 		try (Connection conn = getConnection()) {
-			String s = "INSERT INTO order_(cvr, orderTime, totalPrice) VALUES (" + cvr + ", '" + orderTime + "', " + sum + ")";
-			System.out.println(s); //SOUT
-			conn.prepareStatement(s).execute();
+			conn.prepareStatement("INSERT INTO order_(cvr, orderTime, totalPrice) VALUES (" + cvr + ", '" + orderTime + "', " + sum + ")").execute();
 			ResultSet r = conn.prepareStatement("SELECT orderNo FROM order_ WHERE orderTime = '" + orderTime + "' AND totalPrice = " + sum).executeQuery();
 			if (r.next()) {
 				return r.getInt("orderNo");
@@ -195,9 +198,14 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 	}
 
 	private boolean changeAmountInStock(Product p, Integer v) {
+		int newAmount = v;
 		try (Connection conn = getConnection()) {
-			conn.prepareStatement("UPDATE product SET amountInStock = " + v + " WHERE productID = " + p.getWareNumber()).execute();
-			conn.prepareStatement("UPDATE " + SchemaMap.Mapping(p.getClass()) + " SET amountInStock = " + v + " WHERE productID = " + p.getWareNumber()).execute();
+			ResultSet r = conn.prepareStatement("SELECT amountInStock FROM product WHERE productID = " + p.getWareNumber()).executeQuery();
+			if (r.next()) {
+				newAmount = r.getInt("amountInStock") + v;
+			}
+			conn.prepareStatement("UPDATE product SET amountInStock = " + newAmount + " WHERE productID = " + p.getWareNumber()).execute();
+			conn.prepareStatement("UPDATE " + SchemaMap.Mapping(p.getClass()) + " SET amountInStock = " + newAmount + " WHERE productID = " + p.getWareNumber()).execute();
 		} catch (SQLException throwables) {
 			return false;
 		}
