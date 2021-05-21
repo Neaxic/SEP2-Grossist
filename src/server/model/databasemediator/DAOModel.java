@@ -39,7 +39,7 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 
 	@Override
 	public boolean createOrder(int cvr, LocalDateTime orderTime, Basket basket) throws SQLException {
-		int orderNo = createOrderInDatabase(cvr, orderTime, basket.getSum());
+		int orderNo = createOrderInDatabase(cvr, Timestamp.valueOf(orderTime), basket.getSum());
 		return createOrderSpecInDatabase(orderNo, basket);
 	}
 
@@ -121,10 +121,12 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 		return l;
 	}
 
-	private int createOrderInDatabase(int cvr, LocalDateTime orderTime, double sum) throws SQLException {
+	private int createOrderInDatabase(int cvr, Timestamp orderTime, double sum) throws SQLException {
 		try (Connection conn = getConnection()) {
-			conn.prepareStatement("INSERT INTO order_(cvr, orderTime, totalPrice) VALUES (" + cvr + ", " + orderTime + ", " + sum + ")").execute();
-			ResultSet r = conn.prepareStatement("SELECT orderNo FROM order_ WHERE orderTime = " + orderTime + " AND totalPrice = " + sum).executeQuery();
+			String s = "INSERT INTO order_(cvr, orderTime, totalPrice) VALUES (" + cvr + ", '" + orderTime + "', " + sum + ")";
+			System.out.println(s); //SOUT
+			conn.prepareStatement(s).execute();
+			ResultSet r = conn.prepareStatement("SELECT orderNo FROM order_ WHERE orderTime = '" + orderTime + "' AND totalPrice = " + sum).executeQuery();
 			if (r.next()) {
 				return r.getInt("orderNo");
 			}
