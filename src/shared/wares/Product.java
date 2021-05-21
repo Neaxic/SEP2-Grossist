@@ -1,9 +1,6 @@
 package shared.wares;
 
-import shared.util.SchemaMap;
-
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Set;
@@ -18,31 +15,30 @@ public abstract class Product implements Serializable {
 	private int wareNumber;
 	private int deliveryDays;
 	private double price;
-	private int minimumAmountForPurchase;
 	private String producedBy;
 	String tags;
 
 	/**
 	 * Generic Product Constructor
 	 *
-	 * @param wareName                 The name of the Ware / Product
-	 * @param measurementType          The measurement type pr unit
-	 * @param bestBefore               The last date which the ware still should be able to sell on
-	 * @param wareNumber               Internal PLU number
-	 * @param deliveryDays             Expected time for delivery in Days
-	 * @param price                    Price pr unit measurementType in DKK
-	 * @param minimumAmountForPurchase The lowest amount available for purchase at a time
-	 * @param producedBy               The company which produced the product
+	 * @param wareName        The name of the Ware / Product
+	 * @param measurementType The measurement type pr unit
+	 * @param bestBefore      The last date which the ware still should be able to sell on
+	 * @param wareNumber      Internal PLU number
+	 * @param deliveryDays    Expected time for delivery in Days
+	 * @param price           Price pr unit measurementType in DKK
+	 * @param producedBy      The company which produced the product
+	 * @param tags            Tags concerning the product. Should be a String with each tag seperated by a comma
 	 */
-	public Product(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, int minimumAmountForPurchase, String producedBy) {
+	public Product(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, String producedBy, String tags) {
 		this.wareName = wareName;
 		this.measurementType = measurementType;
 		this.bestBefore = bestBefore;
 		this.wareNumber = wareNumber;
 		this.deliveryDays = deliveryDays;
 		this.price = price;
-		this.minimumAmountForPurchase = minimumAmountForPurchase;
 		this.producedBy = producedBy;
+		addTags(tags);
 	}
 
 	// Getters for all Field Variables
@@ -68,10 +64,6 @@ public abstract class Product implements Serializable {
 
 	public double getPrice() {
 		return price;
-	}
-
-	public int getMinimumAmountForPurchase() {
-		return minimumAmountForPurchase;
 	}
 
 	public String getProducedBy() {
@@ -111,7 +103,7 @@ public abstract class Product implements Serializable {
 	 * @return INSERT INTO query open ended for SQL Column Names
 	 */
 	public String sqlTemplate() {
-		return "productName, measurement, minPurchase, producedBy, salesprice, bbDate, tags";
+		return "productName, measurement, producedBy, salesprice, bbDate, tags";
 	}
 
 	/**
@@ -120,7 +112,7 @@ public abstract class Product implements Serializable {
 	 * @return Information regarding product, open ended for SQL Column Information
 	 */
 	public String sqlInformation() { // Produced By
-		return " '" + wareName + "', '" + measurementType + "', " + minimumAmountForPurchase + ", '" + producedBy + "', " + price + ", '" + bestBefore + "', '" + tags + "'";
+		return " '" + wareName + "', '" + measurementType + "', '" + producedBy + "', " + price + ", '" + bestBefore + "', '" + tags + "'";
 	}
 }
 
