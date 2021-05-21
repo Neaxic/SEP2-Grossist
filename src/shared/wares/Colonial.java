@@ -11,7 +11,7 @@ public class Colonial extends Product implements ProductInterface {
 
 	public Colonial(Object[] params) {
 		super((String) params[1], (String) params[2], ((Date) params[5]).toLocalDate(), (Integer) params[0], 10, ((BigDecimal) params[4]).doubleValue(), (String) params[3], (String) params[7]);
-		originCountry = (String) params[9];
+		originCountry = (String) params[8];
 	}
 
 	public Colonial(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, String producedBy, String tags, String originCountry) {
