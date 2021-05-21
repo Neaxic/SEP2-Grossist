@@ -55,28 +55,24 @@ public class GrosserWaresViewController
     Platform.runLater(() -> header.setText("Dine varer"));
   }
 
-  @FXML private void changeAmount()
-  {
-    Object o = wareList.getSelectionModel().getSelectedItem();
-    if (o != null && ((ProductAndInt) o).getAmount() >= 0)
-    {
-      try
-      {
-        viewModel
-            .changeAmount(o, Integer.parseInt(newWareAmountField.getText()));
-      }
-      catch (NumberFormatException e)
-      {
-        new Alert(Alert.AlertType.WARNING,
-            "Nyt Antal skal være en heltals værdi");
-      }
-      finally
-      {
-        newWareAmountField.clear();
-        refresh();
-      }
+    @FXML
+    private void changeAmount() {
+        Object o = wareList.getSelectionModel().getSelectedItem();
+        System.out.println(o); //SOUT
+        try {
+            if (o != null && ((ProductAndInt) o).getAmount() >= 0 && Integer.parseInt(newWareAmountField.getText()) >= 0) {
+                viewModel.changeAmount(o, Integer.parseInt(newWareAmountField.getText()));
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Nyt antal skal være et positivt tal");
+            }
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.WARNING, "Nyt Antal skal være en heltals værdi");
+        } finally {
+            newWareAmountField.clear();
+            refresh();
+        }
+
     }
-  }
 
   @FXML private void deleteItem()
   {

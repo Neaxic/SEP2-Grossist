@@ -19,7 +19,6 @@ public class GrosserAddProductViewController implements GrosserViewController {
 
 	@FXML private TextField productName;
 	@FXML private TextField productPrice;
-	@FXML private TextField productMinAmount;
 	@FXML private TextField productMeasurement;
 	@FXML private DatePicker productBestBefore;
 	@FXML private TextField productDeliveryDays;
@@ -61,6 +60,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		this.viewHandler = viewHandler;
 		viewModel = ViewModelFactory.getInstance().grosserAddProductViewModel();
 		checkValues = new ArrayList<CheckBox>();
+		activeTags = "";
 	}
 
 	private boolean numCheckAndNotNull(String text) {
@@ -140,7 +140,6 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		//			return;
 		//		}
 
-
 				Alcohol newProduct = new Alcohol(
 						productName.getText(),
 						productMeasurement.getText(),
@@ -155,7 +154,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						alcoholType.getText());
 
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.sendOrder(liste);
+				viewModel.createProduct(liste);
 			}
 			case "Drikkevarer" -> {
 				Drink newProduct = new Drink(
@@ -170,7 +169,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						drikType.getText());
 
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.sendOrder(liste);
+				viewModel.createProduct(liste);
 			}
 			case "Kolonial" -> {
 				Colonial newProduct = new Colonial(
@@ -185,7 +184,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						colonialCountry.getText());
 
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.sendOrder(liste);
+				viewModel.createProduct(liste);
 			}
 			case "Mejeri og æg" -> {
 				CooledAndDairy newProduct = new CooledAndDairy(
@@ -201,7 +200,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 
 
 						Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.sendOrder(liste);
+				viewModel.createProduct(liste);
 			}
 			case "Frugt og grønt" -> {
 				FruitsAndVegetable newProduct = new FruitsAndVegetable(
@@ -216,12 +215,9 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						greenCountry.getText());
 
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.sendOrder(liste);
+				viewModel.createProduct(liste);
 			}
-			case "Kød og fisk" -> { // TODO: Line, se den her
-				//Object[] params = {productName.getText(), productMeasurement.getText(), productBestBefore.getValue(), 0, productDeliveryDays.getText(), productPrice.getText(), productMinAmount.getText(), productBy.getText()};
-				//viewModel.createProduct(params);
-
+			case "Kød og fisk" -> {
 				MeatAndFish newProduct = new MeatAndFish(
 						productName.getText(),
 						productMeasurement.getText(),
@@ -234,7 +230,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						meatCountry.getText());
 
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.sendOrder(liste);
+				viewModel.createProduct(liste);
 			}
 		}
 		new Alert(Alert.AlertType.INFORMATION, "Produkt er nu tilføjet til Lageret", ButtonType.CLOSE).showAndWait();

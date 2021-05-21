@@ -113,12 +113,12 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab fx:id="MeatCountry" text="Kød og fisk">
+                  <Tab text="Kød og fisk">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="66.0" prefWidth="580.0">
                            <children>
                               <Label layoutX="167.0" layoutY="35.0" prefHeight="23.0" prefWidth="110.0" text="Oprindelses land:" />
-                              <TextField layoutX="265.0" layoutY="34.0" />
+                              <TextField fx:id="meatCountry" layoutX="265.0" layoutY="34.0" />
                            </children>
                         </AnchorPane>
                      </content>

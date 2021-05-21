@@ -14,7 +14,7 @@ public class GrosserAddProductViewModel implements GrosserViewModel {
 		grosserModel = ModelFactory.getInstance().getGrosserModel();
 	}
 
-	public void sendOrder(Pair<Product, Integer> newProduct) {
+	public void createProduct(Pair<Product, Integer> newProduct) {
 		grosserModel.createNewProduct(newProduct);
 	}
 }
