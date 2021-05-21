@@ -61,6 +61,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		this.viewHandler = viewHandler;
 		viewModel = ViewModelFactory.getInstance().grosserAddProductViewModel();
 		checkValues = new ArrayList<CheckBox>();
+		activeTags = "";
 	}
 
 	private boolean numCheckAndNotNull(String text) {

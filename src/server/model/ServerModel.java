@@ -14,8 +14,8 @@ import java.util.List;
 // Lavet af hele teamet
 
 public class ServerModel {
-	private BaseDAO base = new BaseDAO(); // question: Den her er til for?
-	private CollectionDAOInterface daoModel = new DAOModel();
+	private final DAOGrosserInterface DAOGrosser = new DAOModel();
+	private final DAOCustomerInterface DAOCustomer = new DAOModel();
 	private List<Pair<Product, Integer>> wareAndAmountList;
 	private List<Product> wares;
 
@@ -24,7 +24,7 @@ public class ServerModel {
 
 	public List<Product> getAllProducts() {
 		try {
-			wares = ((DAOCustomerInterface) daoModel).requestAllProducts();
+			wares = DAOCustomer.requestAllProducts();
 			return wares;
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
@@ -34,7 +34,7 @@ public class ServerModel {
 
 	public List<Order> getAllOrders() {
 		try {
-			return ((DAOGrosserInterface) daoModel).getAllOrders();
+			return DAOGrosser.getAllOrders();
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
@@ -43,8 +43,8 @@ public class ServerModel {
 
 	public Pair<Boolean, ArrayList<Product>> verifyOrder(Basket orderItems) {
 		try {
-			wares = ((DAOCustomerInterface) daoModel).requestAllProducts();
-			wareAndAmountList = ((DAOGrosserInterface) daoModel).getAllWaresAndAmounts();
+			wares = DAOCustomer.requestAllProducts();
+			wareAndAmountList = DAOGrosser.getAllWaresAndAmounts();
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
@@ -70,7 +70,7 @@ public class ServerModel {
 
 	public void createOrder(int cvr, LocalDateTime dateTime, Basket basket) {
 		try {
-			((DAOCustomerInterface) daoModel).createOrder(cvr, dateTime, basket);
+			DAOCustomer.createOrder(cvr, dateTime, basket);
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
@@ -78,7 +78,7 @@ public class ServerModel {
 
 	public void createProduct(Pair<Product, Integer> newProduct) {
 		try {
-			((DAOGrosserInterface) daoModel).addNewProduct(newProduct);
+			DAOGrosser.addNewProduct(newProduct);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -86,7 +86,7 @@ public class ServerModel {
 
 	public List<Pair<Product, Integer>> grosserProductList() {
 		try {
-			wareAndAmountList = ((DAOGrosserInterface) daoModel).getAllWaresAndAmounts();
+			wareAndAmountList = DAOGrosser.getAllWaresAndAmounts();
 			return wareAndAmountList;
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
@@ -96,7 +96,7 @@ public class ServerModel {
 
 	public void delete(Product productToRemove) {
 		try {
-			((DAOGrosserInterface) daoModel).removeProductFromSystem(productToRemove);
+			DAOGrosser.removeProductFromSystem(productToRemove);
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
@@ -105,7 +105,7 @@ public class ServerModel {
 
 	public void changeAmount(Pair<Product, Integer> productWithNewAmount) {
 		try {
-			((DAOGrosserInterface) daoModel).changeAmountInStockOfProduct(productWithNewAmount);
+			DAOGrosser.changeAmountInStockOfProduct(productWithNewAmount);
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}

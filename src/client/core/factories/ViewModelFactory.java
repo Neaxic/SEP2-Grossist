@@ -4,6 +4,7 @@ import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
 import client.customerclient.views.CustomerViewModel;
 import client.customerclient.views.customerbasket.BasketViewModel;
 import client.grosserclient.views.GrosserViewModel;
+import client.grosserclient.views.grosseraddcustomer.GrosserAddCustomerViewModel;
 import client.grosserclient.views.grosseraddproduct.GrosserAddProductViewModel;
 import client.grosserclient.views.grossermain.GrosserMainViewModel;
 import client.grosserclient.views.grosserwares.GrosserWaresViewModel;
@@ -21,6 +22,7 @@ public class ViewModelFactory
   private GrosserMainViewModel grosserMainViewModel;
   private GrosserAddProductViewModel grosserAddProductViewModel;
   private GrosserWaresViewModel grosserWaresViewModel;
+  private GrosserAddCustomerViewModel grosserAddCustomerViewModel;
 
 	private ViewModelFactory() {
 		this.modelFactory = ModelFactory.getInstance();
@@ -76,4 +78,11 @@ public class ViewModelFactory
 	    grosserWaresViewModel = new GrosserWaresViewModel();
       }return grosserWaresViewModel;
 	}
+
+	public GrosserAddCustomerViewModel grosserAddCustomerViewModel()
+  {
+    if (grosserAddCustomerViewModel == null)
+      grosserAddCustomerViewModel = new GrosserAddCustomerViewModel();
+    return grosserAddCustomerViewModel;
+  }
 }

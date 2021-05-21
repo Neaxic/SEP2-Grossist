@@ -14,14 +14,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="352.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.grosserclient.views.grosserwares.GrosserWaresViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="352.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.grosserclient.views.grosserwares.GrosserWaresViewController">
     <center>
         <VBox alignment="TOP_CENTER" prefHeight="545.0" prefWidth="712.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="3.0" left="10.0" right="10.0" top="10.0" />
             </BorderPane.margin>
             <children>
-                <Label text="Dine Varer">
+                <Label fx:id="header" text="Henter varer...">
                     <font>
                         <Font name="Segoe UI" size="24.0" />
                     </font>
