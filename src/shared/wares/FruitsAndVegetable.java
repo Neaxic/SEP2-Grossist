@@ -10,12 +10,12 @@ public class FruitsAndVegetable extends Product implements ProductInterface {
 	private String originCountry;
 
 	public FruitsAndVegetable(Object[] params) {
-		super((String) params[1], (String) params[2], ((Date) params[6]).toLocalDate(), (Integer) params[0], 10, ((BigDecimal) params[5]).doubleValue(), (Integer) params[3], (String) params[4]);
+		super((String) params[1], (String) params[2], ((Date) params[5]).toLocalDate(), (Integer) params[0], 10, ((BigDecimal) params[4]).doubleValue(), (String) params[3], (String) params[7]);
 		originCountry = (String) params[9];
 	}
 
-	public FruitsAndVegetable(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, int minimumAmountForPurchase, String producedBy, String originCountry) {
-		super(wareName, measurementType, bestBefore, wareNumber, deliveryDays, price, minimumAmountForPurchase, producedBy);
+	public FruitsAndVegetable(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, String producedBy, String tags, String originCountry) {
+		super(wareName, measurementType, bestBefore, wareNumber, deliveryDays, price, producedBy, tags);
 		this.originCountry = originCountry;
 	}
 

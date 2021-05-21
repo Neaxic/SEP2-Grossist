@@ -9,6 +9,7 @@ import javafx.util.Pair;
 import shared.wares.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 // Frederik Bergmann, Andreas Østergaard, Andreas Young
 
@@ -37,10 +38,29 @@ public class GrosserAddProductViewController implements GrosserViewController {
 	@FXML private TabPane tabPane;
 
 
+	@FXML private CheckBox checkØko;
+	@FXML private CheckBox checkNøgle;
+	@FXML private CheckBox checkGMO;
+	@FXML private CheckBox checkLaktosefri;
+	@FXML private CheckBox checkVegetar;
+	@FXML private CheckBox checkFedtfattig;
+	@FXML private CheckBox checkMSE;
+	@FXML private CheckBox checkSukkerfri;
+	@FXML private CheckBox checkVegansk;
+	@FXML private CheckBox checkHalal;
+	@FXML private CheckBox checkGlutenfri;
+	@FXML private CheckBox checkStråforkortere;
+	@FXML private CheckBox checkAlkoholfri;
+
+
+	private ArrayList<CheckBox> checkValues;
+	private String activeTags;
+
 	@Override
 	public void init(ViewHandler viewHandler) {
 		this.viewHandler = viewHandler;
 		viewModel = ViewModelFactory.getInstance().grosserAddProductViewModel();
+		checkValues = new ArrayList<CheckBox>();
 	}
 
 	private boolean numCheckAndNotNull(String text) {
@@ -55,6 +75,35 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		return Double.parseDouble(text) > 0f;
 	}
 
+	private void fillTagsArr(){
+		//man kunne kigge på noden og tage alle checkboxe childs, men magtede ikke bøvle med det.
+		checkValues.add(checkØko);
+		checkValues.add(checkNøgle);
+		checkValues.add(checkGMO);
+		checkValues.add(checkLaktosefri);
+		checkValues.add(checkVegetar);
+		checkValues.add(checkVegansk);
+		checkValues.add(checkFedtfattig);
+		checkValues.add(checkMSE);
+		checkValues.add(checkSukkerfri);
+		checkValues.add(checkStråforkortere);
+		checkValues.add(checkHalal);
+		checkValues.add(checkGlutenfri);
+		checkValues.add(checkAlkoholfri);
+		System.out.println(checkValues);
+	}
+
+	private String getAllTags(){
+		for(CheckBox i: checkValues ){
+			if(i.isSelected()){
+				activeTags += i.getText() + ", ";
+			}
+		}
+		System.out.println(activeTags);
+		return activeTags;
+	}
+
+
 	private void createWarning(String msg) {
 		Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);
 		alert.showAndWait();
@@ -62,6 +111,8 @@ public class GrosserAddProductViewController implements GrosserViewController {
 
 	@FXML
 	private void createProduct() {
+
+		fillTagsArr();
 
 		//Check for tal i tal felter
 //		if (numCheckAndNotNull(productPrice.getText()) || numCheckAndNotNull(productAmount.getText()) || numCheckAndNotNull(productDeliveryDays.getText())) {
@@ -97,8 +148,8 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						0,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
-						Integer.parseInt(productMinAmount.getText()),
 						productBy.getText(),
+						getAllTags(),
 						alcoholCountry.getText(),
 						Double.parseDouble(alcoholPercent.getText()),
 						alcoholType.getText());
@@ -114,8 +165,8 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						0,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
-						Integer.parseInt(productMinAmount.getText()),
 						productBy.getText(),
+						getAllTags(),
 						drikType.getText());
 
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
@@ -129,8 +180,8 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						0,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
-						Integer.parseInt(productMinAmount.getText()),
 						productBy.getText(),
+						getAllTags(),
 						colonialCountry.getText());
 
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
@@ -144,11 +195,12 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						0,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
-						Integer.parseInt(productMinAmount.getText()),
-						productBy.getText());
+						productBy.getText(),
+						getAllTags());
 
 
-				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+
+						Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
 				viewModel.sendOrder(liste);
 			}
 			case "Frugt og grønt" -> {
@@ -159,8 +211,8 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						0,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
-						Integer.parseInt(productMinAmount.getText()),
 						productBy.getText(),
+						getAllTags(),
 						greenCountry.getText());
 
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
@@ -177,8 +229,8 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						0,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
-						Integer.parseInt(productMinAmount.getText()),
 						productBy.getText(),
+						getAllTags(),
 						meatCountry.getText());
 
 				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));

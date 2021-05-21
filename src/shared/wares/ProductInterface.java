@@ -18,8 +18,6 @@ public interface ProductInterface {
 
 	double getPrice();
 
-	int getMinimumAmountForPurchase();
-
 	String getProducedBy();
 
 	String getTags();
