@@ -12,7 +12,7 @@ public class Drink extends Product implements ProductInterface {
 
 	public Drink(Object[] params) {
 		super((String) params[1], (String) params[2], ((Date) params[5]).toLocalDate(), (Integer) params[0], 10, ((BigDecimal) params[4]).doubleValue(), (String) params[3], (String) params[7]);
-		beverageType = (String) params[9];
+		beverageType = (String) params[8];
 	}
 
 	public Drink(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, String producedBy, String tags, String beverageType) {
