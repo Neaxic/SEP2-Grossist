@@ -1,8 +1,11 @@
 package server.model;
 
 import javafx.util.Pair;
-import server.model.databasemediator.*;
+import server.model.databasemediator.DAOCustomerInterface;
+import server.model.databasemediator.DAOGrosserInterface;
+import server.model.databasemediator.DAOModel;
 import shared.objects.Basket;
+import shared.objects.CustomerContainer;
 import shared.objects.Order;
 import shared.wares.Product;
 
@@ -58,7 +61,7 @@ public class ServerModel {
 			i++;
 			System.out.println(i); //SOUT
 			for (Pair<Product, Integer> wareAndAmount : wareAndAmountList) {
-				if (wareAndAmount.getKey().getWareNumber() == p.getWareNumber() &&  wareAndAmount.getValue() < orderItems.getAmount(p)) {
+				if (wareAndAmount.getKey().getWareNumber() == p.getWareNumber() && wareAndAmount.getValue() < orderItems.getAmount(p)) {
 					products.add(p);
 				}
 			}
@@ -71,6 +74,9 @@ public class ServerModel {
 	public void createOrder(int cvr, LocalDateTime dateTime, Basket basket) {
 		try {
 			DAOCustomer.createOrder(cvr, dateTime, basket);
+			for (Product p : basket.getBasket().keySet()) {
+				reduceAmount(new Pair<>(p, basket.getAmount(p)));
+			}
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
@@ -102,12 +108,33 @@ public class ServerModel {
 		}
 	}
 
-
-	public void changeAmount(Pair<Product, Integer> productWithNewAmount) {
+	public boolean increaseAmount(Pair<Product, Integer> productAndAmountToAdd) {
 		try {
-			DAOGrosser.changeAmountInStockOfProduct(productWithNewAmount);
+			DAOGrosser.increaseAmountInStock(productAndAmountToAdd);
 		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	public boolean reduceAmount(Pair<Product, Integer> productAndAmountToRemove) {
+		try {
+			DAOGrosser.reduceAmountInStock(productAndAmountToRemove);
+		} catch (SQLException throwables) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean addCustomer(CustomerContainer customer) {
+		int cvr = customer.getCVR();
+		String name = customer.getName();
+		String password = customer.getPw();
+		String address = customer.getAddress();
+		try {
+			return DAOGrosser.addNewCustomer(cvr, name, password, address);
+		} catch (SQLException throwables) {
+			return false;
 		}
 	}
 }

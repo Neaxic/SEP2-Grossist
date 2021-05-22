@@ -41,16 +41,6 @@ public class GrosserWaresViewModel implements GrosserViewModel, Subject {
 		return listForView;
 	}
 
-	@Override
-	public void addListener(PropertyChangeListener listener) {
-		support.addPropertyChangeListener(listener);
-	}
-
-	@Override
-	public void removeListener(PropertyChangeListener listener) {
-		support.removePropertyChangeListener(listener);
-	}
-
 	private void updateViewList() {
 		for (Pair<Product, Integer> p : detailedProductMap) {
 			listForView.add(new ProductAndInt(p.getKey().getWareName(), p.getKey().getWareNumber(), p.getValue()));
@@ -65,16 +55,36 @@ public class GrosserWaresViewModel implements GrosserViewModel, Subject {
 		}
 	}
 
-	public void changeAmount(Object o, int newValue) {
+	public void increaseStock(Object o, int amountChange) {
 		for (Pair<Product, Integer> p : detailedProductMap) {
-			if (p.getKey().getWareNumber() == ((ProductAndInt)o).getProductID()) {
-				Pair<Product, Integer> newPair = new Pair<>(p.getKey(), newValue);
+			if (p.getKey().getWareNumber() == ((ProductAndInt) o).getProductID()) {
+				Pair<Product, Integer> newPair = new Pair<>(p.getKey(), amountChange);
 				detailedProductMap.set(detailedProductMap.indexOf(p), newPair);
-				grosserModel.changeAmount(newPair);
+				grosserModel.increaseStock(newPair);
 				break;
 			}
 		}
-		updateViewList();
+	}
+
+	public void reduceStock(Object o, int amountChange) {
+		for (Pair<Product, Integer> p : detailedProductMap) {
+			if (p.getKey().getWareNumber() == ((ProductAndInt) o).getProductID()) {
+				Pair<Product, Integer> newPair = new Pair<>(p.getKey(), amountChange);
+				detailedProductMap.set(detailedProductMap.indexOf(p), newPair);
+				grosserModel.reduceStock(newPair);
+				break;
+			}
+		}
+	}
+
+	@Override
+	public void addListener(PropertyChangeListener listener) {
+		support.addPropertyChangeListener(listener);
+	}
+
+	@Override
+	public void removeListener(PropertyChangeListener listener) {
+		support.removePropertyChangeListener(listener);
 	}
 
 	@Override

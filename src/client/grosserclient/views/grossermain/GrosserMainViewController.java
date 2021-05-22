@@ -60,12 +60,18 @@ public class GrosserMainViewController implements GrosserViewController {
 	}
 
 	@FXML
+	private void addCustomerScene() throws IOException
+	{
+		swapScene("GrosserAddCustomer");
+	}
+
+	@FXML
 	private void addNewProductScene() throws IOException {
-		this.swapScene("GrosserAddProduct");
+		swapScene("GrosserAddProduct");
 	}
 	@FXML
 	private void waresScene() throws IOException {
-		this.swapScene("GrosserWares");
+		swapScene("GrosserWares");
 	}
 
 	@Override

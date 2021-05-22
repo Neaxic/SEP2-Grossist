@@ -15,7 +15,7 @@ import javafx.util.converter.IntegerStringConverter;
 import java.util.Objects;
 import java.util.Optional;
 
-// Frederik Bergmann, Andreas Østergaard
+// Frederik Bergmann, Andreas Østergaard, Young (Young er på her, fordi jeg fik Systemet til at stoppe når man lukker Login vinduet :D)
 
 public class LoginManager {
 	public final ProxyViewHandler PVH;
@@ -96,7 +96,8 @@ public class LoginManager {
 		}
 
 		if (cvr == -1) {
-			System.out.println("Terminated");
+			System.out.println("Terminating...");
+			System.exit(0); // Det er specifikt denne linje kode som jeg har lavet ~Young
 		} else if (cvr == 1 && pw.equals("1234")) {
 			PVH.customerLogin();
 		} else if (cvr == 2 && pw.equals("1234")) {

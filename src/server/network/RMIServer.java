@@ -4,9 +4,9 @@ import javafx.util.Pair;
 import server.model.ServerModel;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
-import shared.util.Util;
 import shared.objects.Basket;
-import shared.objects.Order;
+import shared.objects.CustomerContainer;
+import shared.util.Util;
 import shared.wares.Product;
 
 import java.rmi.AlreadyBoundException;
@@ -75,6 +75,7 @@ public class RMIServer implements RMIServerInterface {
 		//System.out.println("SERVER: CVR: " + cvr + "\tORDER SIZE: " + basket.getBasket().size() + "\tSUM: " + basket.getSum()); //SOUT
 		Pair<Boolean, ArrayList<Product>> verification = serverModel.verifyOrder(basket);
 		if (verification.getKey()) {
+			System.out.println("LocalDateTime.now() print in RMIServer:\t" + LocalDateTime.now()); //SOUT
 			serverModel.createOrder(cvr, LocalDateTime.now(), basket);
 		}
 		System.out.println(verification.getKey()); //SOUT
@@ -94,13 +95,23 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public void deleteWare(Product product) throws RemoteException{
+	public void deleteWare(Product product) throws RemoteException {
 		serverModel.delete(product);
 	}
 
 	@Override
-	public void changeAmount(Pair<Product, Integer> productWithNewAmount) throws RemoteException{
-		serverModel.changeAmount(productWithNewAmount);
+	public void increaseAmountInSystem(Pair<Product, Integer> productAndAmountToAdd) throws RemoteException {
+		boolean b = serverModel.increaseAmount(productAndAmountToAdd);
+	}
+
+	@Override
+	public void reduceAmountInSystem(Pair<Product, Integer> productAndAmountToRemove) throws RemoteException {
+		boolean b = serverModel.reduceAmount(productAndAmountToRemove);
+	}
+
+	@Override
+	public void addCustomer(CustomerContainer customer) throws RemoteException {
+		boolean customerAdded = serverModel.addCustomer(customer);
 	}
 
 
