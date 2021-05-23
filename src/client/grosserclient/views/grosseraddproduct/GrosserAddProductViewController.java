@@ -65,18 +65,20 @@ public class GrosserAddProductViewController implements GrosserViewController {
 
 	private boolean numCheckAndNotNull(String text) {
 		if (text.isBlank()) {
-			return false;
+			return true;
 		}
 		for (char c : text.toCharArray()) {
-			if (!Character.isDigit(c)) {
-				return false;
+			if (!Character.isDigit(c) && !(c == '.')) {
+				return true;
 			}
 		}
-		return Double.parseDouble(text) > 0f;
+		return false;
+		// Ved ikke præcist hvad 0f var, og det fuckede op Har et punktum check over^
+		// return Double.parseDouble(text) > 0f;
 	}
 
 	private void fillTagsArr(){
-		//man kunne kigge på noden og tage alle checkboxe childs, men magtede ikke bøvle med det.
+		//man kunne kigge på noden og tage alle checkboxe childs.
 		checkValues.add(checkØko);
 		checkValues.add(checkNøgle);
 		checkValues.add(checkGMO);
@@ -90,16 +92,20 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		checkValues.add(checkHalal);
 		checkValues.add(checkGlutenfri);
 		checkValues.add(checkAlkoholfri);
-		System.out.println(checkValues);
 	}
 
 	private String getAllTags(){
-		for(CheckBox i: checkValues ){
+		String tempTags = "";
+		for(CheckBox i: checkValues){
 			if(i.isSelected()){
-				activeTags += i.getText() + ", ";
+				tempTags += i.getText() + ", ";
 			}
 		}
-		System.out.println(activeTags);
+
+		// cut det sidste komma fra
+		if(tempTags.length() > 0){
+			activeTags = tempTags.substring(0,tempTags.length()-2);
+		}
 		return activeTags;
 	}
 
@@ -115,15 +121,15 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		fillTagsArr();
 
 		//Check for tal i tal felter
-//		if (numCheckAndNotNull(productPrice.getText()) || numCheckAndNotNull(productAmount.getText()) || numCheckAndNotNull(productDeliveryDays.getText())) {
-//			createWarning("Et af felterne 'Pris', 'Ledig mængde' eller 'Leverings dage' indeholder bogstaver");
-//			return;
-//		}
-//
-//		if (productName.getText().isBlank() || productBy.getText().isBlank() || productMeasurement.getText().isBlank()) {
-//			createWarning("En af felterne er ikke udfyldte");
-//			return;
-//		}
+		if (numCheckAndNotNull(productPrice.getText()) || numCheckAndNotNull(productAmount.getText()) || numCheckAndNotNull(productDeliveryDays.getText())) {
+			createWarning("Et af felterne 'Pris', 'Ledig mængde' eller 'Leverings dage' indeholder bogstaver, eller tomme.");
+			return;
+		}
+
+		if (productName.getText().isBlank() || productBy.getText().isBlank() || productMeasurement.getText().isBlank()) {
+			createWarning("En af felterne er ikke udfyldte");
+			return;
+		}
 
 		String className = tabPane.getSelectionModel().getSelectedItem().getText();
 		switch (className) {
