@@ -9,7 +9,9 @@ import javafx.util.Pair;
 import shared.wares.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Locale;
 
 // Frederik Bergmann, Andreas Østergaard, Andreas Young
 
@@ -109,10 +111,33 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		return activeTags;
 	}
 
-
 	private void createWarning(String msg) {
 		Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);
 		alert.showAndWait();
+	}
+
+	private boolean checkAllDefaults(){
+		//Check for tal i tal felter
+		if (numCheckAndNotNull(productPrice.getText()) || numCheckAndNotNull(productAmount.getText()) || numCheckAndNotNull(productDeliveryDays.getText())) {
+			createWarning("Et af felterne 'Pris', 'Ledig mængde' eller 'Leverings dage' indeholder bogstaver, eller tomme.");
+			return false;
+		}
+
+		if (productName.getText().isBlank() || productBy.getText().isBlank() || productMeasurement.getText().isBlank()) {
+			createWarning("En af felterne er ikke udfyldte");
+			return false;
+		}
+
+		if(productBestBefore.getValue() == null){
+			createWarning("Udløbsdatoen er ikke sat");
+			return false;
+		} //minus 1 så vi kan tilføje et produkt med samme udløbsdato som idag
+		else if(!(productBestBefore.getValue().isAfter(LocalDate.now().minusDays(1)))){
+			createWarning("Daoten sat er før idag og er derfor ugyldig");
+			return false;
+		}
+
+		return true;
 	}
 
 	@FXML
@@ -120,31 +145,29 @@ public class GrosserAddProductViewController implements GrosserViewController {
 
 		fillTagsArr();
 
-		//Check for tal i tal felter
-		if (numCheckAndNotNull(productPrice.getText()) || numCheckAndNotNull(productAmount.getText()) || numCheckAndNotNull(productDeliveryDays.getText())) {
-			createWarning("Et af felterne 'Pris', 'Ledig mængde' eller 'Leverings dage' indeholder bogstaver, eller tomme.");
-			return;
-		}
-
-		if (productName.getText().isBlank() || productBy.getText().isBlank() || productMeasurement.getText().isBlank()) {
-			createWarning("En af felterne er ikke udfyldte");
-			return;
-		}
-
+		if(checkAllDefaults()){
 		String className = tabPane.getSelectionModel().getSelectedItem().getText();
 		switch (className) {
 			case "Alkohol" -> {
-				// procent
-				if (!numCheckAndNotNull(alcoholPercent.getText())) {
-					System.out.println("fejl");
+				if (numCheckAndNotNull(alcoholPercent.getText())) {
+					createWarning("Procenten ikke angivet");
 					return;
 				}
 
 				//    DATABASE check ( type in ('Rødvin', 'Hvidvin', 'Rose', 'Spiritus', 'Øl', 'Cider') )
-		//		if (!alcoholType.getText().toLowerCase().contains("øl")) {
-		//			createWarning("Alkohol typen kan kun være enten; 'Øl', 'Vin' eller 'Spiritus'");
-		//			return;
-		//		}
+				//if (!alcoholType.getText().equalsIgnoreCase("Spiritus") || !(alcoholType.getText().equalsIgnoreCase("øl")) || !alcoholType.getText().equalsIgnoreCase("Rødvin") || !alcoholType.getText().equalsIgnoreCase("Hvidvin") || !alcoholType.getText().equalsIgnoreCase("Rose") || !alcoholType.getText().equalsIgnoreCase("Cider"))  {
+				if(alcoholType.getText().isBlank()){
+					createWarning("Feltet 'Type' er tomt");
+					return;
+				} else if(!(alcoholType.getText().toLowerCase().matches("øl") || alcoholType.getText().toLowerCase().matches("hvidvin") || alcoholType.getText().toLowerCase().matches("rødvin") || alcoholType.getText().toLowerCase().matches("rose") || alcoholType.getText().toLowerCase().matches("cider") || alcoholType.getText().toLowerCase().matches("spiritus"))){
+					createWarning("Alkohol typen kan kun være enten; 'Øl', 'Hvidvin', 'Rødvin, 'Rose', 'Cider' eller 'Spiritus'");
+					return;
+				}
+
+				if(alcoholCountry.getText().isBlank()){
+					createWarning("Feltet 'Oprindelses land' er tomt");
+					return;
+				}
 
 				Alcohol newProduct = new Alcohol(
 						productName.getText(),
@@ -163,6 +186,12 @@ public class GrosserAddProductViewController implements GrosserViewController {
 				viewModel.createProduct(liste);
 			}
 			case "Drikkevarer" -> {
+
+				if(drikType.getText().isBlank()){
+					createWarning("Feltet 'Type' er tomt");
+					return;
+				}
+
 				Drink newProduct = new Drink(
 						productName.getText(),
 						productMeasurement.getText(),
@@ -178,6 +207,12 @@ public class GrosserAddProductViewController implements GrosserViewController {
 				viewModel.createProduct(liste);
 			}
 			case "Kolonial" -> {
+
+				if(colonialCountry.getText().isBlank()){
+					createWarning("Feltet 'Oprindelses land' er tomt");
+					return;
+				}
+
 				Colonial newProduct = new Colonial(
 						productName.getText(),
 						productMeasurement.getText(),
@@ -209,6 +244,12 @@ public class GrosserAddProductViewController implements GrosserViewController {
 				viewModel.createProduct(liste);
 			}
 			case "Frugt og grønt" -> {
+
+				if(greenCountry.getText().isBlank()){
+					createWarning("Feltet 'Oprindelses land' er tomt");
+					return;
+				}
+
 				FruitsAndVegetable newProduct = new FruitsAndVegetable(
 						productName.getText(),
 						productMeasurement.getText(),
@@ -224,6 +265,12 @@ public class GrosserAddProductViewController implements GrosserViewController {
 				viewModel.createProduct(liste);
 			}
 			case "Kød og fisk" -> {
+
+				if(meatCountry.getText().isBlank()){
+					createWarning("Feltet 'Oprindelses land' er tomt");
+					return;
+				}
+
 				MeatAndFish newProduct = new MeatAndFish(
 						productName.getText(),
 						productMeasurement.getText(),
@@ -254,6 +301,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 			}
 		}
 		new Alert(Alert.AlertType.INFORMATION, "Produkt er nu tilføjet til Lageret", ButtonType.CLOSE).showAndWait();
+		}
 	}
 
 	@Override
