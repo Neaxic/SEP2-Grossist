@@ -89,9 +89,9 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		Text productID = new Text("Varenummer: "+product.getWareNumber());
 		productID.setId("ProductID");
 		main.setMaxWidth(615);
-		Text desc = new Text("\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
+		//Text desc = new Text("\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
 		//desc.wrappingWidthProperty().bind(SPane.widthProperty());
-		TextFlow textFlow = new TextFlow(desc);
+		//TextFlow textFlow = new TextFlow(desc);
 		//main.width
 		Image image;
 		try{
@@ -114,7 +114,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		// Design of Nodes
 		title.setFont(Font.font("Segoe UI", FontWeight.BLACK, 21));
 		productID.setFont(Font.font("Segoe UI", FontWeight.BLACK, 15));
-		desc.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 15));
+		//desc.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 15));
 		price.setFont(Font.font("Segoe UI", FontWeight.MEDIUM, 21));
 		amount.setPromptText("Mængde");
 		amount.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 16));
@@ -125,9 +125,9 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		prisHBox.getChildren().add(price);
 		vBox.getChildren().add(prisHBox);
 
-		textFlow.setPadding(new Insets(5, 30, 10, 0));
+		//textFlow.setPadding(new Insets(5, 30, 10, 0));
 		vBox.getChildren().add(productID);
-		vBox.getChildren().add(textFlow);
+		//vBox.getChildren().add(textFlow);
 
 		btnHBox.getChildren().add(amount);
 		btnHBox.getChildren().add(addButton);

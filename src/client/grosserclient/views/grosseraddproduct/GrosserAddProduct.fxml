@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -18,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.grosserclient.views.grosseraddproduct.GrosserAddProductViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.grosserclient.views.grosseraddproduct.GrosserAddProductViewController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="545.0" prefWidth="712.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -37,37 +38,35 @@
                <children>
                   <Text layoutX="29.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produkt Navn:" />
                   <Text layoutX="320.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mål type:" />
-                  <Text layoutX="319.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bedst før:" />
+                  <Text layoutX="161.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bedst før:" />
                   <Text layoutX="80.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris:" />
-                  <Text layoutX="13.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min. antal pr køb:" />
                   <TextField fx:id="productName" layoutX="122.0" layoutY="11.0" prefHeight="25.0" prefWidth="160.0" />
                   <TextField fx:id="productMeasurement" layoutX="387.0" layoutY="11.0" prefHeight="25.0" prefWidth="175.0" promptText="Liter/kg" />
                   <TextField fx:id="productPrice" layoutX="122.0" layoutY="47.0" prefHeight="25.0" prefWidth="160.0" />
-                  <TextField fx:id="productMinAmount" layoutX="124.0" layoutY="84.0" prefHeight="25.0" prefWidth="158.0" />
-                  <DatePicker fx:id="productBestBefore" layoutX="388.0" layoutY="47.0" />
+                  <DatePicker fx:id="productBestBefore" layoutX="230.0" layoutY="124.0" prefHeight="27.0" prefWidth="175.0" />
                   <Text layoutX="299.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leverings tid:" />
                   <TextField fx:id="productDeliveryDays" layoutX="387.0" layoutY="84.0" prefHeight="25.0" prefWidth="175.0" promptText="I dage" />
-                  <Text layoutX="25.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ledig mængde:" />
-                  <TextField fx:id="productAmount" layoutX="122.0" layoutY="124.0" prefHeight="25.0" prefWidth="160.0" />
-                  <Text layoutX="297.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produceret af:" />
-                  <TextField fx:id="productBy" layoutX="387.0" layoutY="124.0" prefHeight="25.0" prefWidth="177.0" />
+                  <Text layoutX="26.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ledig mængde:" />
+                  <TextField fx:id="productAmount" layoutX="123.0" layoutY="84.0" prefHeight="25.0" prefWidth="160.0" />
+                  <Text layoutX="296.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produceret af:" />
+                  <TextField fx:id="productBy" layoutX="386.0" layoutY="47.0" prefHeight="25.0" prefWidth="177.0" />
                   <Text layoutX="18.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" />
                   <CheckBox fx:id="checkØko" layoutX="72.0" layoutY="171.0" mnemonicParsing="false" text="Øko" />
-                  <CheckBox fx:id="checkNøgle" layoutX="72.0" layoutY="198.0" mnemonicParsing="false" text="Nøgle" />
-                  <CheckBox fx:id="checkGMO" layoutX="165.0" layoutY="171.0" mnemonicParsing="false" text="GMO" />
-                  <CheckBox fx:id="checkLaktosefri" layoutX="154.0" layoutY="207.0" mnemonicParsing="false" text="Laktosefri" />
-                  <CheckBox fx:id="checkVegetar" layoutX="283.0" layoutY="173.0" mnemonicParsing="false" text="Vegetar" />
-                  <CheckBox fx:id="checkFedtfattig" layoutX="278.0" layoutY="208.0" mnemonicParsing="false" text="Fedtfattig" />
+                  <CheckBox fx:id="checkNøgle" layoutX="71.0" layoutY="208.0" mnemonicParsing="false" text="Nøgle" />
+                  <CheckBox fx:id="checkGMO" layoutX="157.0" layoutY="173.0" mnemonicParsing="false" text="GMO" />
+                  <CheckBox fx:id="checkLaktosefri" layoutX="157.0" layoutY="208.0" mnemonicParsing="false" text="Laktosefri" />
+                  <CheckBox fx:id="checkVegetar" layoutX="273.0" layoutY="173.0" mnemonicParsing="false" text="Vegetar" />
+                  <CheckBox fx:id="checkFedtfattig" layoutX="272.0" layoutY="208.0" mnemonicParsing="false" text="Fedtfattig" />
                   <CheckBox fx:id="checkMSE" layoutX="384.0" layoutY="173.0" mnemonicParsing="false" text="MSE" />
                   <CheckBox fx:id="checkSukkerfri" layoutX="384.0" layoutY="208.0" mnemonicParsing="false" text="Sukkerfri" />
                   <CheckBox fx:id="checkVegansk" layoutX="157.0" layoutY="239.0" mnemonicParsing="false" text="Vegansk" />
-                  <CheckBox fx:id="checkHalal" layoutX="283.0" layoutY="239.0" mnemonicParsing="false" text="Halal" />
+                  <CheckBox fx:id="checkHalal" layoutX="273.0" layoutY="239.0" mnemonicParsing="false" text="Halal" />
                   <CheckBox fx:id="checkGlutenfri" layoutX="384.0" layoutY="239.0" mnemonicParsing="false" text="Glutenfri" />
                   <CheckBox fx:id="checkStråforkortere" layoutX="473.0" layoutY="172.0" mnemonicParsing="false" text="Stråforkortere" />
                   <CheckBox fx:id="checkAlkoholfri" layoutX="473.0" layoutY="207.0" mnemonicParsing="false" text="Alkoholfri" />
                </children>
             </AnchorPane>
-            <TabPane fx:id="tabPane" prefHeight="187.0" prefWidth="580.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" prefHeight="139.0" prefWidth="580.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Alkohol">
                   <content>
@@ -159,8 +158,10 @@
         <menus>
           <Menu mnemonicParsing="false" text="Handlinger">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#waresScene" text="Se varer" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                <MenuItem mnemonicParsing="false" onAction="#homeScreen" text="Hjem" />
+                <SeparatorMenuItem mnemonicParsing="false" />
+                <MenuItem mnemonicParsing="false" onAction="#waresScene" text="Se varer" />
+                <MenuItem mnemonicParsing="false" onAction="#addCustomerScene" text="Opret kunde" />
             </items>
           </Menu>
         </menus>

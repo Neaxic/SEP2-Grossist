@@ -312,4 +312,12 @@ public class GrosserAddProductViewController implements GrosserViewController {
 	public void waresScene() throws IOException {
 		swapScene("GrosserWares");
 	}
+
+	public void homeScreen() throws IOException {
+		swapScene("GrosserAddProduct");
+	}
+
+	public void addCustomerScene() throws IOException {
+		swapScene("GrosserAddCustomer");
+	}
 }
