@@ -94,6 +94,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		checkValues.add(checkHalal);
 		checkValues.add(checkGlutenfri);
 		checkValues.add(checkAlkoholfri);
+		System.out.println(checkValues); //SOUT
 	}
 
 	private String getAllTags(){
@@ -103,6 +104,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 				tempTags += i.getText() + ", ";
 			}
 		}
+		System.out.println(activeTags); //SOUT
 
 		// cut det sidste komma fra
 		if(tempTags.length() > 0){
@@ -110,6 +112,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		}
 		return activeTags;
 	}
+
 
 	private void createWarning(String msg) {
 		Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);

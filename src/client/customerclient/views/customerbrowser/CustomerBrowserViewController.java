@@ -9,9 +9,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -62,7 +60,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		Node selected = mouseEvent.getPickResult().getIntersectedNode();
 		if (selected instanceof Text) {
 			String category = ((Text) selected).getText().substring(2);
-			System.out.println(category);
+			System.out.println("Attempting to load this category:" + category); //SOUT
 			populate(category);
 		}
 	}
@@ -176,8 +174,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 			HBox amountBox = (HBox) button.getParent();
 			TextField amountField = (TextField) amountBox.lookup("TextField");
 			if (amountField.getText().isEmpty() || containsLetters(amountField.getText())) {
-				System.out.println("Amount field only accepts Integer Numbers");
-			} else {
+new Alert(Alert.AlertType.INFORMATION, "Antal skal være et Positivt Heltat", ButtonType.OK)			} else {
 				int amount = Integer.parseInt(amountField.getText());
 				viewModel.addToBasket(itemID, amount);
 			}

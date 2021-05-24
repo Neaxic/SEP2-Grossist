@@ -72,14 +72,10 @@ public class RMIServer implements RMIServerInterface {
 
 	@Override
 	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) throws RemoteException {
-		//System.out.println("SERVER: CVR: " + cvr + "\tORDER SIZE: " + basket.getBasket().size() + "\tSUM: " + basket.getSum()); //SOUT
 		Pair<Boolean, ArrayList<Product>> verification = serverModel.verifyOrder(basket);
 		if (verification.getKey()) {
-			System.out.println("LocalDateTime.now() print in RMIServer:\t" + LocalDateTime.now()); //SOUT
 			serverModel.createOrder(cvr, LocalDateTime.now(), basket);
 		}
-		System.out.println(verification.getKey()); //SOUT
-		System.out.println(verification.getValue()); //SOUT
 		return verification;
 	}
 

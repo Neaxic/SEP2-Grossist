@@ -70,7 +70,7 @@ public interface RMIServerInterface extends Remote {
 	/**
 	 * Sends a new product to the server
 	 *
-	 * @param newProduct
+	 * @param newProduct Pair consisting of the Product and the amount of that product there is
 	 * @throws RemoteException
 	 */
 	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException;
@@ -100,6 +100,8 @@ public interface RMIServerInterface extends Remote {
 	void reduceAmountInSystem(Pair<Product, Integer> productAndAmountToRemove) throws RemoteException;
 
 	/**
+	 * Adds a customer to the system, which can be used for identification on Orders
+	 *
 	 * @param customer Container with info about customer.
 	 * @throws RemoteException
 	 */

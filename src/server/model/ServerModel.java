@@ -59,7 +59,6 @@ public class ServerModel {
 		int i = 0;
 		for (Product p : orderItems.getBasket().keySet()) {
 			i++;
-			System.out.println(i); //SOUT
 			for (Pair<Product, Integer> wareAndAmount : wareAndAmountList) {
 				if (wareAndAmount.getKey().getWareNumber() == p.getWareNumber() && wareAndAmount.getValue() < orderItems.getAmount(p)) {
 					products.add(p);
@@ -67,7 +66,6 @@ public class ServerModel {
 			}
 		}
 		Pair<Boolean, ArrayList<Product>> returnPair = new Pair<>(!orderItems.getBasket().isEmpty() && products.isEmpty(), products);
-		System.out.println(returnPair); //SOUT
 		return returnPair;
 	}
 

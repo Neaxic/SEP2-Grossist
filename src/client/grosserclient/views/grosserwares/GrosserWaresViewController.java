@@ -88,7 +88,6 @@ public class GrosserWaresViewController
 	@FXML
 	private void deleteItem() {
 		Object o = wareList.getSelectionModel().getSelectedItem();
-		System.out.println(o);
 		viewModel.deleteItem(o);
 		refresh();
 	}
