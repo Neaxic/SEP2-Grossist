@@ -29,7 +29,7 @@ public class ReceivingAndOrderTest {
 	static GrosserClient grosser;
 
 	@BeforeAll
-	static void init() {
+	static void init() throws SQLException {
 		try {
 			RMIServerInterface server = new RMIServer();
 			assertDoesNotThrow(server::startServer);
@@ -65,7 +65,7 @@ public class ReceivingAndOrderTest {
 	}
 
 	@Test
-	void clientSendOrder() {
+	void clientSendOrder() throws SQLException {
 		assertEquals(true, customer.sendOrder(LoginManager.cvr, testBasket).getKey());
 	}
 
@@ -75,7 +75,7 @@ public class ReceivingAndOrderTest {
 	}
 
 	@Test
-	void clientNoBasket() {
+	void clientNoBasket() throws SQLException {
 		assertEquals(false, customer.sendOrder(LoginManager.cvr, null));
 	}
 }
