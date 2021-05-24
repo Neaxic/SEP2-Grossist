@@ -16,7 +16,7 @@ public interface GrosserClient {
 
 	void requestGrosserProducts();
 
-	void deleteWare(Product productID);
+	void deleteWare(Product ware);
 
 	void increaseStock(Pair<Product, Integer> productWithNewAmount);
 

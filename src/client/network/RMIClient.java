@@ -116,9 +116,9 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	}
 
 	@Override
-	public void deleteWare(Product product) {
+	public void deleteWare(Product ware) {
 		try {
-			server.deleteWare(product);
+			server.deleteWare(ware);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
