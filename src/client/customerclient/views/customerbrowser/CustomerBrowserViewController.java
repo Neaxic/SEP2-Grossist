@@ -15,8 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import shared.wares.Product;
 
 import java.io.IOException;
@@ -84,7 +86,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		main.styleProperty().setValue("-fx-border-color: lightgray;");
 		// Nodes regarding the Item
 		Text title = new Text(product.getWareName());
-		Text productID = new Text("Varenummer: "+product.getWareNumber());
+		Text productID = new Text("Varenummer: " + product.getWareNumber());
 		productID.setId("ProductID");
 		main.setMaxWidth(615);
 		//Text desc = new Text("\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
@@ -92,9 +94,9 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		//TextFlow textFlow = new TextFlow(desc);
 		//main.width
 		Image image;
-		try{
-			image = new Image("shared/images/" + product.getClass().toString().substring(19) +".jpg");
-		} catch (RuntimeException e){
+		try {
+			image = new Image("shared/images/" + product.getClass().toString().substring(19) + ".jpg");
+		} catch (RuntimeException e) {
 			image = new Image("shared/images/150placeholder.png");
 		}
 		ImageView iv2 = new ImageView();
@@ -174,12 +176,14 @@ public class CustomerBrowserViewController implements CustomerViewController {
 			HBox amountBox = (HBox) button.getParent();
 			TextField amountField = (TextField) amountBox.lookup("TextField");
 			if (amountField.getText().isEmpty() || containsLetters(amountField.getText())) {
-new Alert(Alert.AlertType.INFORMATION, "Antal skal være et Positivt Heltat", ButtonType.OK)			} else {
+				new Alert(Alert.AlertType.INFORMATION, "Antal skal være et Positivt Heltat", ButtonType.OK);
+			} else {
 				int amount = Integer.parseInt(amountField.getText());
 				viewModel.addToBasket(itemID, amount);
 			}
 		}
 	}
+
 	// Ved ikke om denne skal være her? Tænker det giver mest mening da den tjekker på noget der er på vores view
 	private boolean containsLetters(String text) {
 		for (char c : text.toCharArray()) {
