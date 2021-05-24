@@ -58,7 +58,7 @@ public interface RMIServerInterface extends Remote {
 	 * @throws RemoteException
 	 */
 	Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket orderItems)
-			throws RemoteException;
+			throws RemoteException, SQLException;
 
 	/**
 	 * Requests all registered orders for the grosser main view.

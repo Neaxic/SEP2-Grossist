@@ -6,9 +6,10 @@ import javafx.util.Pair;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeListener;
+import java.sql.SQLException;
 
 public interface GrosserClient {
-	void createProduct(Pair<Product, Integer> newProduct);
+	void createProduct(Pair<Product, Integer> newProduct) throws SQLException;
 
 	void getAllOrders();
 

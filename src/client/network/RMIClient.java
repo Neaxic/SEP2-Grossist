@@ -65,10 +65,10 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 		}
 	}
 
-	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) {
+	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) throws SQLException {
 		try {
 			return server.sendOrder(cvr, basket);
-		} catch (RemoteException remoteException) {
+		} catch (RemoteException  remoteException) {
 			remoteException.printStackTrace();
 		}
 		return new Pair<>(false, null);
@@ -84,10 +84,10 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	}
 
 	@Override
-	public void createProduct(Pair<Product, Integer> newProduct) {
+	public void createProduct(Pair<Product, Integer> newProduct) throws SQLException{
 		try {
 			server.createProduct(newProduct);
-		} catch (RemoteException | SQLException e) {
+		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}

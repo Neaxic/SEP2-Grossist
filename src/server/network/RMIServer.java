@@ -71,7 +71,7 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) throws RemoteException {
+	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) throws RemoteException, SQLException {
 		Pair<Boolean, ArrayList<Product>> verification = serverModel.verifyOrder(basket);
 		if (verification.getKey()) {
 			serverModel.createOrder(cvr, LocalDateTime.now(), basket);

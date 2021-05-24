@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 // Young
-public class ReceivingAndOrderTest {
+public class ReceivingAnOrderTest {
 	Basket testBasket;
 	static Product testProduct1, testProduct2, testProduct3;
 	static Client customer;
@@ -76,6 +76,6 @@ public class ReceivingAndOrderTest {
 
 	@Test
 	void clientNoBasket() throws SQLException {
-		assertEquals(false, customer.sendOrder(LoginManager.cvr, null));
+		assertEquals(false, customer.sendOrder(LoginManager.cvr, null).getKey());
 	}
 }
