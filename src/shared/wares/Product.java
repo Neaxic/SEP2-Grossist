@@ -38,6 +38,7 @@ public abstract class Product implements Serializable {
 		this.deliveryDays = deliveryDays;
 		this.price = price;
 		this.producedBy = producedBy;
+		this.tags = "";
 		addTags(tags);
 	}
 
@@ -75,15 +76,19 @@ public abstract class Product implements Serializable {
 	}
 
 	public void addTags(String tags) { // Kan nemt ændres til at tage en String[] eller ArrayList<String>
-		tags = removeDuplicates(tags.split(","));
-		tags = tags.replaceAll("[\s+\\[\\]]",
-				"");  // Fjerner alle whitespace karakterer (mellemrum og lign) samt firkantede parenteser
-		this.tags = tags;
+		if (!tags.isBlank()) {
+			tags = removeDuplicates(tags.split(","));
+			tags = tags.replaceAll("[\s+\\[\\]]",
+					"");  // Fjerner alle whitespace karakterer (mellemrum og lign) samt firkantede parenteser
+			this.tags = tags;
+		}
 	}
 
 	public void addTags(String[] tags) { // Kan nemt ændres til at tage en String[] eller ArrayList<String>
-		String s = removeDuplicates(tags);
-		this.tags = s.replaceAll("[\s+\\[\\]]", "");
+		if (!(tags.length == 0)) {
+			String s = removeDuplicates(tags);
+			this.tags = s.replaceAll("[\s+\\[\\]]", "");
+		}
 	}
 
 	private String removeDuplicates(String[] newTags) {

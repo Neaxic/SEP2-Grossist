@@ -32,8 +32,8 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <Label text="Vejnavn &amp; nr:" />
-                  <TextField fx:id="streetField">
+                  <Label text="Postnr:" />
+                  <TextField fx:id="zipField">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -47,8 +47,8 @@
             </VBox>
             <VBox>
                <children>
-                  <Label text="Postnr:" />
-                  <TextField fx:id="zipField">
+                  <Label text="Vejnavn &amp; nr:" />
+                  <TextField fx:id="streetField">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -69,8 +69,8 @@
    <bottom>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <buttons>
-          <Button mnemonicParsing="false" text="Afbryd" />
-            <Button mnemonicParsing="false" text="Opret" />
+          <Button mnemonicParsing="false" onAction="#abort" text="Afbryd" />
+            <Button mnemonicParsing="false" onAction="#create" text="Opret" />
         </buttons>
          <BorderPane.margin>
             <Insets right="10.0" />

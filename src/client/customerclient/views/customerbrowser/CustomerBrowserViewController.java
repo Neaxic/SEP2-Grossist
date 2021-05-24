@@ -9,16 +9,16 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import shared.wares.Product;
 
 import java.io.IOException;
@@ -62,7 +62,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		Node selected = mouseEvent.getPickResult().getIntersectedNode();
 		if (selected instanceof Text) {
 			String category = ((Text) selected).getText().substring(2);
-			System.out.println(category);
+			System.out.println("Attempting to load this category:" + category); //SOUT
 			populate(category);
 		}
 	}
@@ -86,17 +86,17 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		main.styleProperty().setValue("-fx-border-color: lightgray;");
 		// Nodes regarding the Item
 		Text title = new Text(product.getWareName());
-		Text productID = new Text("Varenummer: "+product.getWareNumber());
+		Text productID = new Text("Varenummer: " + product.getWareNumber());
 		productID.setId("ProductID");
 		main.setMaxWidth(615);
-		Text desc = new Text("\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
+		//Text desc = new Text("\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
 		//desc.wrappingWidthProperty().bind(SPane.widthProperty());
-		TextFlow textFlow = new TextFlow(desc);
+		//TextFlow textFlow = new TextFlow(desc);
 		//main.width
 		Image image;
-		try{
-			image = new Image("shared/images/" + product.getClass().toString().substring(19) +".jpg");
-		} catch (RuntimeException e){
+		try {
+			image = new Image("shared/images/" + product.getClass().toString().substring(19) + ".jpg");
+		} catch (RuntimeException e) {
 			image = new Image("shared/images/150placeholder.png");
 		}
 		ImageView iv2 = new ImageView();
@@ -114,7 +114,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		// Design of Nodes
 		title.setFont(Font.font("Segoe UI", FontWeight.BLACK, 21));
 		productID.setFont(Font.font("Segoe UI", FontWeight.BLACK, 15));
-		desc.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 15));
+		//desc.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 15));
 		price.setFont(Font.font("Segoe UI", FontWeight.MEDIUM, 21));
 		amount.setPromptText("Mængde");
 		amount.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 16));
@@ -125,9 +125,9 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		prisHBox.getChildren().add(price);
 		vBox.getChildren().add(prisHBox);
 
-		textFlow.setPadding(new Insets(5, 30, 10, 0));
+		//textFlow.setPadding(new Insets(5, 30, 10, 0));
 		vBox.getChildren().add(productID);
-		vBox.getChildren().add(textFlow);
+		//vBox.getChildren().add(textFlow);
 
 		btnHBox.getChildren().add(amount);
 		btnHBox.getChildren().add(addButton);
@@ -176,13 +176,14 @@ public class CustomerBrowserViewController implements CustomerViewController {
 			HBox amountBox = (HBox) button.getParent();
 			TextField amountField = (TextField) amountBox.lookup("TextField");
 			if (amountField.getText().isEmpty() || containsLetters(amountField.getText())) {
-				System.out.println("Amount field only accepts Integer Numbers");
+				new Alert(Alert.AlertType.INFORMATION, "Antal skal være et Positivt Heltat", ButtonType.OK);
 			} else {
 				int amount = Integer.parseInt(amountField.getText());
 				viewModel.addToBasket(itemID, amount);
 			}
 		}
 	}
+
 	// Ved ikke om denne skal være her? Tænker det giver mest mening da den tjekker på noget der er på vores view
 	private boolean containsLetters(String text) {
 		for (char c : text.toCharArray()) {

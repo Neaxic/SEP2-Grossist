@@ -83,7 +83,6 @@ public class BasketViewController implements CustomerViewController {
 				case "cancel":
 					break;
 			}
-			System.out.println(test);
 		}
 	}
 

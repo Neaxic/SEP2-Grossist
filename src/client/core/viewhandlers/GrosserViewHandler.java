@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -41,6 +42,15 @@ public class GrosserViewHandler implements ViewHandler {
 		return scene;
 	}
 
+	private void openCustomer(String viewToOpen) throws IOException
+	{
+		Stage secondStage = new Stage();
+		secondStage.initModality(Modality.APPLICATION_MODAL);
+		currentScene = sceneLoader(viewToOpen);
+		secondStage.setScene(currentScene);
+		secondStage.show();
+	}
+
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
@@ -50,6 +60,12 @@ public class GrosserViewHandler implements ViewHandler {
 
 	@Override
 	public void openView(String viewToOpen) throws IOException {
+		if (viewToOpen.equals("GrosserAddCustomer"))
+		{
+			openCustomer(viewToOpen);
+			return;
+		}
+
 		Scene scene = sceneLoader(viewToOpen);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);

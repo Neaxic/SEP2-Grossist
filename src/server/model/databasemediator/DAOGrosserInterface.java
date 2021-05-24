@@ -42,19 +42,30 @@ public interface DAOGrosserInterface extends CollectionDAOInterface {
 
 	/**
 	 * Accesses the Database and creates an SQL statement, using postgresql, to change the amount in stock of a product in the system. <br>
-	 * <p>
+	 * <br>
 	 * Firstly changes the amount in the super-table then in the designated sub-table
 	 *
-	 * @param productAndNewAmount Pair consisting of the Product as well as the new updated Amount to be changed
+	 * @param productAndAmountToAdd Pair consisting of the Product as well as the Amount added to the system
 	 * @return True if SQL execution was successful, false otherwise
 	 * @throws SQLException Thrown when Database access is not possible <br>
 	 *                      Often caused by Database not being online
 	 */
-	boolean changeAmountInStockOfProduct(Pair<Product, Integer> productAndNewAmount) throws SQLException;
+	boolean increaseAmountInStock(Pair<Product, Integer> productAndAmountToAdd) throws SQLException;
+
+	/**
+	 * Acceses the Database and creates an SQL statement, using postgresql, to change the amount in stock of a product in the system.
+	 * <br>
+	 * Firstly changes the amount in the super-table then in the designated sub-table
+	 *
+	 * @param productAndAmountToRemove
+	 * @return
+	 * @throws SQLException
+	 */
+	boolean reduceAmountInStock(Pair<Product, Integer> productAndAmountToRemove) throws SQLException;
 
 	/**
 	 * Accesses the Database and creates an SQL statement, using postgresql, to delete a product from the system. <br>
-	 * <p>
+	 * <br>
 	 * Firstly removes the product from the super-table then from the designated sub-table
 	 *
 	 * @param productToRemove Product which is to be removed from the Database

@@ -2,11 +2,13 @@ package shared.network;
 
 import javafx.util.Pair;
 import shared.objects.Basket;
+import shared.objects.CustomerContainer;
 import shared.wares.Product;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 // Andreas Young, Andreas Østergaard
@@ -52,15 +54,16 @@ public interface RMIServerInterface extends Remote {
 	 *
 	 * @param cvr        User CVR number, registered through client
 	 * @param orderItems Items desired to be ordered for purchase
-	 * @param sum        Total sum of the items ordered
 	 * @return True if the order can be placed, false otherwise
 	 * @throws RemoteException
 	 */
-	Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket orderItems) throws RemoteException;
+	Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket orderItems)
+			throws RemoteException;
 
 	/**
 	 * Requests all registered orders for the grosser main view.
 	 *
+	 * @param clientId User CVR number, registered through client
 	 * @throws RemoteException
 	 */
 	void getAllOrders(int clientId) throws RemoteException;
@@ -68,10 +71,10 @@ public interface RMIServerInterface extends Remote {
 	/**
 	 * Sends a new product to the server
 	 *
-	 * @param newProduct
+	 * @param newProduct Pair consisting of the Product and the amount of that product there is
 	 * @throws RemoteException
 	 */
-	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException;
+	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException, SQLException;
 
 	/**
 	 * Removes a ware entirely from the Database
@@ -84,7 +87,24 @@ public interface RMIServerInterface extends Remote {
 	/**
 	 * Changes the amount of a ware on the Database
 	 *
-	 * @param productWithNewAmount Contains the ProductName, Product ID and the new Amount
+	 * @param productWithNewAmount Contains the Product and the Amount to increase by
 	 */
-	void changeAmount(Pair<Product, Integer> productWithNewAmount) throws RemoteException;
+	void increaseAmountInSystem(Pair<Product, Integer> productWithNewAmount)
+			throws RemoteException;
+
+	/**
+	 * Changes the amount of a ware on the Database
+	 *
+	 * @param productAndAmountToRemove Contains the Product and the Amount to reduce by
+	 * @throws RemoteException
+	 */
+	void reduceAmountInSystem(Pair<Product, Integer> productAndAmountToRemove) throws RemoteException;
+
+	/**
+	 * Adds a customer to the system, which can be used for identification on Orders
+	 *
+	 * @param customer Container with info about customer.
+	 * @throws RemoteException
+	 */
+	void addCustomer(CustomerContainer customer) throws RemoteException;
 }
