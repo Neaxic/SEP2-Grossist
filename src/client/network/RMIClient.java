@@ -3,9 +3,9 @@ package client.network;
 import javafx.util.Pair;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
-import shared.util.Util;
 import shared.objects.Basket;
 import shared.objects.Order;
+import shared.util.Util;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
@@ -68,7 +68,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) throws SQLException {
 		try {
 			return server.sendOrder(cvr, basket);
-		} catch (RemoteException  remoteException) {
+		} catch (RemoteException remoteException) {
 			remoteException.printStackTrace();
 		}
 		return new Pair<>(false, null);
@@ -84,7 +84,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	}
 
 	@Override
-	public void createProduct(Pair<Product, Integer> newProduct) throws SQLException{
+	public void createProduct(Pair<Product, Integer> newProduct) throws SQLException {
 		try {
 			server.createProduct(newProduct);
 		} catch (RemoteException e) {
@@ -134,9 +134,19 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 		}
 	}
 
-	@Override public void reduceStock(Pair<Product, Integer> productAndAmountToReduce){
-		try{
+	@Override
+	public void reduceStock(Pair<Product, Integer> productAndAmountToReduce) {
+		try {
 			server.reduceAmountInSystem(productAndAmountToReduce);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteLatestOrder() {
+		try {
+			server.deleteLatestOrder();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

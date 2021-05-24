@@ -22,6 +22,8 @@ public interface GrosserClient {
 	void increaseStock(Pair<Product, Integer> productWithNewAmount);
 
 	void reduceStock(Pair<Product, Integer> productAndAmountToReduce);
+
+	void deleteLatestOrder();
 }
 
 

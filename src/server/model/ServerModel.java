@@ -136,4 +136,12 @@ public class ServerModel {
 			return false;
 		}
 	}
+
+	public void deleteLatestOrder() {
+		try {
+			DAOGrosser.deleteLatestOrder();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

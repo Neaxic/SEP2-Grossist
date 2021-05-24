@@ -110,6 +110,11 @@ public class RMIServer implements RMIServerInterface {
 		boolean customerAdded = serverModel.addCustomer(customer);
 	}
 
+	@Override
+	public void deleteLatestOrder() {
+		serverModel.deleteLatestOrder();
+	}
+
 
 	private void getAllProducts() {
 		wares = serverModel.getAllProducts();
