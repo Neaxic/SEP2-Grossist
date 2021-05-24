@@ -31,6 +31,7 @@ class GrosserTestAddProduct
   static LocalDate invalidBestBeforeYesterday = LocalDate.now().minusDays(1);
   static LocalDate invalidBestBeforeIsToday = LocalDate.now();
   static Pair<Product, Integer> pair;
+  static GrosserClient grosser;
 
   @BeforeAll //Hapset fra Young
   static void init()
@@ -51,6 +52,7 @@ class GrosserTestAddProduct
   {
     viewModel = new GrosserAddProductViewModel();
     grosserModel = ModelFactory.getInstance().getGrosserModel();
+
   }
 
   @Test //Hapset fra Young

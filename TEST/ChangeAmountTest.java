@@ -6,13 +6,15 @@ import client.grosserclient.model.GrosserModelInterface;
 import client.grosserclient.views.grosseraddproduct.GrosserAddProductViewModel;
 import client.grosserclient.views.grosserwares.GrosserWaresViewModel;
 import client.network.GrosserClient;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import javafx.util.Pair;
+import org.junit.jupiter.api.*;
 import server.network.RMIServer;
 import shared.network.RMIServerInterface;
 import shared.wares.Alcohol;
+import shared.wares.Drink;
+import shared.wares.FruitsAndVegetable;
+import shared.wares.Product;
+
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -28,7 +30,8 @@ public class ChangeAmountTest {
     private static GrosserWaresViewModel viewModel;
     private static GrosserClient grosserClient;
     static GrosserModelInterface grosserModel;
-
+    static GrosserClient grosser;
+    static Product testProduct1, testProduct2, testProduct3;
 
     @BeforeAll //Hapset fra Young
     static void init()
@@ -43,6 +46,13 @@ public class ChangeAmountTest {
             throwable.printStackTrace();
         }
         ClientFactory.getInstance().getClient().start();
+        grosser = ClientFactory.getInstance().getGrosserClient();
+        testProduct1 = new Alcohol("Royal Export", "Liter", LocalDate.now().plusMonths(10), 2001, 10, 4.5, "Royal Unibrew", "", "Danmark", 4.6, "Øl");
+        testProduct2 = new Drink("Jolly Cola Sukkerfri", "Liter", LocalDate.now().plusMonths(3), 2002, 20, 5.95, "Jolly", "Sukkerfri", "Sodavand");
+        testProduct3 = new FruitsAndVegetable("Banan", "Kg", LocalDate.now().plusDays(7), 2003, 1, 2.3, "Palmer", "GMO", "Spanien");
+        grosser.createProduct(new Pair<>(testProduct1, 100));
+        grosser.createProduct(new Pair<>(testProduct2, 100));
+        grosser.createProduct(new Pair<>(testProduct3, 100));
     }
 
 
@@ -54,21 +64,30 @@ public class ChangeAmountTest {
 
     }
 
+    @AfterAll
+    static void adminCleanUp() {
+        GrosserClient admin = ClientFactory.getInstance().getGrosserClient();
+        admin.deleteWare(testProduct1);
+        admin.deleteWare(testProduct2);
+        admin.deleteWare(testProduct3);
+    }
+
 
     @Test
-    void changeAmount()  { //Når nedenstående køres, virker det ikke første gang det køres... Køres det så 2 gange virker det fint
+    void changeAmount() { //Når nedenstående køres, virker det ikke første gang det køres... Køres det så 2 gange virker det fint
         //Upper boundry
-        viewModel.changeAmount(viewModel.getListForView().get(0),1);
+        viewModel.reduceStock(viewModel.getListForView().get(0),99);
+        System.out.println(viewModel.getListForView());
         viewModel.updateWareList();
         assertEquals(1,viewModel.getListForView().get(0).getAmount());
 
         //Center boundry
-        viewModel.changeAmount(viewModel.getListForView().get(0),0);
+        viewModel.reduceStock(viewModel.getListForView().get(0),1);
         viewModel.updateWareList();
         assertEquals(0,viewModel.getListForView().get(0).getAmount());
 
         //Lower boundry
-        viewModel.changeAmount(viewModel.getListForView().get(0),-1);
+        viewModel.reduceStock(viewModel.getListForView().get(0),1);
         viewModel.updateWareList();
         assertEquals(0,viewModel.getListForView().get(0).getAmount()); //This should just ignore the change
     }

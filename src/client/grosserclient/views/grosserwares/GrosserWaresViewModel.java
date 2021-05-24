@@ -68,7 +68,7 @@ public class GrosserWaresViewModel implements GrosserViewModel, Subject {
 
 	public void reduceStock(Object o, int amountChange) {
 		for (Pair<Product, Integer> p : detailedProductMap) {
-			if (p.getKey().getWareNumber() == ((ProductAndInt) o).getProductID()) {
+			if (p.getKey().getWareNumber() == ((ProductAndInt) o).getProductID() && ((ProductAndInt) o).getAmount()-amountChange < 0) {
 				Pair<Product, Integer> newPair = new Pair<>(p.getKey(), amountChange);
 				detailedProductMap.set(detailedProductMap.indexOf(p), newPair);
 				grosserModel.reduceStock(newPair);
