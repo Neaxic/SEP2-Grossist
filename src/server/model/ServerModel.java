@@ -80,12 +80,8 @@ public class ServerModel {
 		}
 	}
 
-	public void createProduct(Pair<Product, Integer> newProduct) {
-		try {
-			DAOGrosser.addNewProduct(newProduct);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void createProduct(Pair<Product, Integer> newProduct) throws SQLException {
+		DAOGrosser.addNewProduct(newProduct);
 	}
 
 	public List<Pair<Product, Integer>> grosserProductList() {

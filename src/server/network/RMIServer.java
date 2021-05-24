@@ -86,7 +86,7 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public void createProduct(Pair<Product, Integer> newProduct) throws RemoteException {
+	public void createProduct(Pair<Product, Integer> newProduct) throws RemoteException, SQLException {
 		serverModel.createProduct(newProduct);
 	}
 

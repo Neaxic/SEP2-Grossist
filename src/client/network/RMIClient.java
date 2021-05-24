@@ -16,6 +16,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	public void createProduct(Pair<Product, Integer> newProduct) {
 		try {
 			server.createProduct(newProduct);
-		} catch (RemoteException e) {
+		} catch (RemoteException | SQLException e) {
 			e.printStackTrace();
 		}
 	}

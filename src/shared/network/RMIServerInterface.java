@@ -8,6 +8,7 @@ import shared.wares.Product;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 // Andreas Young, Andreas Østergaard
@@ -73,7 +74,7 @@ public interface RMIServerInterface extends Remote {
 	 * @param newProduct Pair consisting of the Product and the amount of that product there is
 	 * @throws RemoteException
 	 */
-	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException;
+	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException, SQLException;
 
 	/**
 	 * Removes a ware entirely from the Database
