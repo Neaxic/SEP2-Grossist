@@ -36,3 +36,5 @@ I dette dokument, kan du læse om hvad de forskellige interfaces skal kunde, pri
 
 * Oprette kunder (int, String, String, String) [bool]
 	* (cvr, navn, kodeord, adresse)
+	
+* Fjerne en ordre (int) [bool]

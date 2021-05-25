@@ -9,9 +9,9 @@ import javafx.util.Pair;
 import shared.wares.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
 
 // Frederik Bergmann, Andreas Østergaard, Andreas Young
 
@@ -79,7 +79,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		// return Double.parseDouble(text) > 0f;
 	}
 
-	private void fillTagsArr(){
+	private void fillTagsArr() {
 		//man kunne kigge på noden og tage alle checkboxe childs.
 		checkValues.add(checkØko);
 		checkValues.add(checkNøgle);
@@ -94,29 +94,32 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		checkValues.add(checkHalal);
 		checkValues.add(checkGlutenfri);
 		checkValues.add(checkAlkoholfri);
+		System.out.println(checkValues); //SOUT
 	}
 
-	private String getAllTags(){
+	private String getAllTags() {
 		String tempTags = "";
-		for(CheckBox i: checkValues){
-			if(i.isSelected()){
+		for (CheckBox i : checkValues) {
+			if (i.isSelected()) {
 				tempTags += i.getText() + ", ";
 			}
 		}
+		System.out.println(activeTags); //SOUT
 
 		// cut det sidste komma fra
-		if(tempTags.length() > 0){
-			activeTags = tempTags.substring(0,tempTags.length()-2);
+		if (tempTags.length() > 0) {
+			activeTags = tempTags.substring(0, tempTags.length() - 2);
 		}
 		return activeTags;
 	}
+
 
 	private void createWarning(String msg) {
 		Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);
 		alert.showAndWait();
 	}
 
-	private boolean checkAllDefaults(){
+	private boolean checkAllDefaults() {
 		//Check for tal i tal felter
 		if (numCheckAndNotNull(productPrice.getText()) || numCheckAndNotNull(productAmount.getText()) || numCheckAndNotNull(productDeliveryDays.getText())) {
 			createWarning("Et af felterne 'Pris', 'Ledig mængde' eller 'Leverings dage' indeholder bogstaver, eller tomme.");
@@ -128,11 +131,11 @@ public class GrosserAddProductViewController implements GrosserViewController {
 			return false;
 		}
 
-		if(productBestBefore.getValue() == null){
+		if (productBestBefore.getValue() == null) {
 			createWarning("Udløbsdatoen er ikke sat");
 			return false;
 		} //minus 1 så vi kan tilføje et produkt med samme udløbsdato som idag
-		else if(!(productBestBefore.getValue().isAfter(LocalDate.now().minusDays(1)))){
+		else if (!(productBestBefore.getValue().isAfter(LocalDate.now().minusDays(1)))) {
 			createWarning("Daoten sat er før idag og er derfor ugyldig");
 			return false;
 		}
@@ -145,162 +148,195 @@ public class GrosserAddProductViewController implements GrosserViewController {
 
 		fillTagsArr();
 
-		if(checkAllDefaults()){
-		String className = tabPane.getSelectionModel().getSelectedItem().getText();
-		switch (className) {
-			case "Alkohol" -> {
-				if (numCheckAndNotNull(alcoholPercent.getText())) {
-					createWarning("Alkohol procenten ikke angivet");
-					return;
+		if (checkAllDefaults()) {
+			String className = tabPane.getSelectionModel().getSelectedItem().getText();
+			switch (className) {
+				case "Alkohol" -> {
+					if (numCheckAndNotNull(alcoholPercent.getText())) {
+						createWarning("Procenten ikke angivet");
+						return;
+					}
+
+					//    DATABASE check ( type in ('Rødvin', 'Hvidvin', 'Rose', 'Spiritus', 'Øl', 'Cider') )
+					//if (!alcoholType.getText().equalsIgnoreCase("Spiritus") || !(alcoholType.getText().equalsIgnoreCase("øl")) || !alcoholType.getText().equalsIgnoreCase("Rødvin") || !alcoholType.getText().equalsIgnoreCase("Hvidvin") || !alcoholType.getText().equalsIgnoreCase("Rose") || !alcoholType.getText().equalsIgnoreCase("Cider"))  {
+					if (alcoholType.getText().isBlank()) {
+						createWarning("Feltet 'Type' er tomt");
+						return;
+					} else if (!(alcoholType.getText().toLowerCase().matches("øl") || alcoholType.getText().toLowerCase().matches("hvidvin") || alcoholType.getText().toLowerCase().matches("rødvin") || alcoholType.getText().toLowerCase().matches("rose") || alcoholType.getText().toLowerCase().matches("cider") || alcoholType.getText().toLowerCase().matches("spiritus"))) {
+						createWarning("Alkohol typen kan kun være enten; 'Øl', 'Hvidvin', 'Rødvin, 'Rose', 'Cider' eller 'Spiritus'");
+						return;
+					}
+
+					if (alcoholCountry.getText().isBlank()) {
+						createWarning("Feltet 'Oprindelses land' er tomt");
+						return;
+					}
+
+					Alcohol newProduct = new Alcohol(
+							productName.getText(),
+							productMeasurement.getText(),
+							productBestBefore.getValue(),
+							-1,
+							Integer.parseInt(productDeliveryDays.getText()),
+							Double.parseDouble(productPrice.getText()),
+							productBy.getText(),
+							getAllTags(),
+							alcoholCountry.getText(),
+							Double.parseDouble(alcoholPercent.getText()),
+							alcoholType.getText());
+
+					Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+					try {
+						viewModel.createProduct(liste);
+					} catch (SQLException throwables) {
+						throwables.printStackTrace();
+					}
 				}
+				case "Drikkevarer" -> {
 
-				//    DATABASE check ( type in ('Rødvin', 'Hvidvin', 'Rose', 'Spiritus', 'Øl', 'Cider') )
-				//if (!alcoholType.getText().equalsIgnoreCase("Spiritus") || !(alcoholType.getText().equalsIgnoreCase("øl")) || !alcoholType.getText().equalsIgnoreCase("Rødvin") || !alcoholType.getText().equalsIgnoreCase("Hvidvin") || !alcoholType.getText().equalsIgnoreCase("Rose") || !alcoholType.getText().equalsIgnoreCase("Cider"))  {
-				if(alcoholType.getText().isBlank()){
-					createWarning("Feltet 'Type' er tomt");
-					return;
-				} else if(!(alcoholType.getText().toLowerCase().matches("øl") || alcoholType.getText().toLowerCase().matches("hvidvin") || alcoholType.getText().toLowerCase().matches("rødvin") || alcoholType.getText().toLowerCase().matches("rose") || alcoholType.getText().toLowerCase().matches("cider") || alcoholType.getText().toLowerCase().matches("spiritus"))){
-					createWarning("Alkohol typen kan kun være enten; 'Øl', 'Hvidvin', 'Rødvin, 'Rose', 'Cider' eller 'Spiritus'");
-					return;
+					if (drikType.getText().isBlank()) {
+						createWarning("Feltet 'Type' er tomt");
+						return;
+					}
+
+					Drink newProduct = new Drink(
+							productName.getText(),
+							productMeasurement.getText(),
+							productBestBefore.getValue(),
+							-1,
+							Integer.parseInt(productDeliveryDays.getText()),
+							Double.parseDouble(productPrice.getText()),
+							productBy.getText(),
+							getAllTags(),
+							drikType.getText());
+
+					Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+					try {
+						viewModel.createProduct(liste);
+					} catch (SQLException throwables) {
+						throwables.printStackTrace();
+					}
+
 				}
+				case "Kolonial" -> {
 
-				if(alcoholCountry.getText().isBlank()){
-					createWarning("Feltet 'Oprindelses land' er tomt");
-					return;
+					if (colonialCountry.getText().isBlank()) {
+						createWarning("Feltet 'Oprindelses land' er tomt");
+						return;
+					}
+
+					Colonial newProduct = new Colonial(
+							productName.getText(),
+							productMeasurement.getText(),
+							productBestBefore.getValue(),
+							-1,
+							Integer.parseInt(productDeliveryDays.getText()),
+							Double.parseDouble(productPrice.getText()),
+							productBy.getText(),
+							getAllTags(),
+							colonialCountry.getText());
+
+					Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+					try {
+						viewModel.createProduct(liste);
+					} catch (SQLException throwables) {
+						throwables.printStackTrace();
+					}
+
 				}
+				case "Mejeri og æg" -> {
+					CooledAndDairy newProduct = new CooledAndDairy(
+							productName.getText(),
+							productMeasurement.getText(),
+							productBestBefore.getValue(),
+							-1,
+							Integer.parseInt(productDeliveryDays.getText()),
+							Double.parseDouble(productPrice.getText()),
+							productBy.getText(),
+							getAllTags());
 
-				Alcohol newProduct = new Alcohol(
-						productName.getText(),
-						productMeasurement.getText(),
-						productBestBefore.getValue(),
-						0,
-						Integer.parseInt(productDeliveryDays.getText()),
-						Double.parseDouble(productPrice.getText()),
-						productBy.getText(),
-						getAllTags(),
-						alcoholCountry.getText(),
-						Double.parseDouble(alcoholPercent.getText()),
-						alcoholType.getText());
 
-				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.createProduct(liste);
-			}
-			case "Drikkevarer" -> {
+					Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+					try {
+						viewModel.createProduct(liste);
+					} catch (SQLException throwables) {
+						throwables.printStackTrace();
+					}
 
-				if(drikType.getText().isBlank()){
-					createWarning("Feltet 'Type' er tomt");
-					return;
 				}
+				case "Frugt og grønt" -> {
 
-				Drink newProduct = new Drink(
-						productName.getText(),
-						productMeasurement.getText(),
-						productBestBefore.getValue(),
-						0,
-						Integer.parseInt(productDeliveryDays.getText()),
-						Double.parseDouble(productPrice.getText()),
-						productBy.getText(),
-						getAllTags(),
-						drikType.getText());
+					if (greenCountry.getText().isBlank()) {
+						createWarning("Feltet 'Oprindelses land' er tomt");
+						return;
+					}
 
-				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.createProduct(liste);
-			}
-			case "Kolonial" -> {
+					FruitsAndVegetable newProduct = new FruitsAndVegetable(
+							productName.getText(),
+							productMeasurement.getText(),
+							productBestBefore.getValue(),
+							-1,
+							Integer.parseInt(productDeliveryDays.getText()),
+							Double.parseDouble(productPrice.getText()),
+							productBy.getText(),
+							getAllTags(),
+							greenCountry.getText());
 
-				if(colonialCountry.getText().isBlank()){
-					createWarning("Feltet 'Oprindelses land' er tomt");
-					return;
+					Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+					try {
+						viewModel.createProduct(liste);
+					} catch (SQLException throwables) {
+						throwables.printStackTrace();
+					}
+
 				}
+				case "Kød og fisk" -> {
 
-				Colonial newProduct = new Colonial(
-						productName.getText(),
-						productMeasurement.getText(),
-						productBestBefore.getValue(),
-						0,
-						Integer.parseInt(productDeliveryDays.getText()),
-						Double.parseDouble(productPrice.getText()),
-						productBy.getText(),
-						getAllTags(),
-						colonialCountry.getText());
+					if (meatCountry.getText().isBlank()) {
+						createWarning("Feltet 'Oprindelses land' er tomt");
+						return;
+					}
 
-				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.createProduct(liste);
-			}
-			case "Mejeri og æg" -> {
-				CooledAndDairy newProduct = new CooledAndDairy(
-						productName.getText(),
-						productMeasurement.getText(),
-						productBestBefore.getValue(),
-						0,
-						Integer.parseInt(productDeliveryDays.getText()),
-						Double.parseDouble(productPrice.getText()),
-						productBy.getText(),
-						getAllTags());
+					MeatAndFish newProduct = new MeatAndFish(
+							productName.getText(),
+							productMeasurement.getText(),
+							productBestBefore.getValue(),
+							-1,
+							Integer.parseInt(productDeliveryDays.getText()),
+							Double.parseDouble(productPrice.getText()),
+							productBy.getText(),
+							getAllTags(),
+							meatCountry.getText());
 
+					Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+					try {
+						viewModel.createProduct(liste);
+					} catch (SQLException throwables) {
+						throwables.printStackTrace();
+					}
 
-
-						Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.createProduct(liste);
-			}
-			case "Frugt og grønt" -> {
-
-				if(greenCountry.getText().isBlank()){
-					createWarning("Feltet 'Oprindelses land' er tomt");
-					return;
 				}
+				case "Frost" -> {
+					Frozen newProduct = new Frozen(
+							productName.getText(),
+							productMeasurement.getText(),
+							productBestBefore.getValue(),
+							-1,
+							Integer.parseInt(productDeliveryDays.getText()),
+							Double.parseDouble(productPrice.getText()),
+							productBy.getText(),
+							getAllTags()
+					);
+					Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
+					try {
+						viewModel.createProduct(liste);
+					} catch (SQLException throwables) {
+						throwables.printStackTrace();
+					}
 
-				FruitsAndVegetable newProduct = new FruitsAndVegetable(
-						productName.getText(),
-						productMeasurement.getText(),
-						productBestBefore.getValue(),
-						0,
-						Integer.parseInt(productDeliveryDays.getText()),
-						Double.parseDouble(productPrice.getText()),
-						productBy.getText(),
-						getAllTags(),
-						greenCountry.getText());
-
-				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.createProduct(liste);
-			}
-			case "Kød og fisk" -> {
-
-				if(meatCountry.getText().isBlank()){
-					createWarning("Feltet 'Oprindelses land' er tomt");
-					return;
 				}
-
-				MeatAndFish newProduct = new MeatAndFish(
-						productName.getText(),
-						productMeasurement.getText(),
-						productBestBefore.getValue(),
-						0,
-						Integer.parseInt(productDeliveryDays.getText()),
-						Double.parseDouble(productPrice.getText()),
-						productBy.getText(),
-						getAllTags(),
-						meatCountry.getText());
-
-				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.createProduct(liste);
 			}
-			case "Frost" -> {
-				Frozen newProduct = new Frozen(
-						productName.getText(),
-						productMeasurement.getText(),
-						productBestBefore.getValue(),
-						0,
-						Integer.parseInt(productDeliveryDays.getText()),
-						Double.parseDouble(productPrice.getText()),
-						productBy.getText(),
-						getAllTags()
-				);
-				Pair<Product, Integer> liste = new Pair<>(newProduct, Integer.parseInt(productAmount.getText()));
-				viewModel.createProduct(liste);
-			}
-		}
-		new Alert(Alert.AlertType.INFORMATION, "Produkt er nu tilføjet til Lageret", ButtonType.CLOSE).showAndWait();
+			new Alert(Alert.AlertType.INFORMATION, "Produkt er nu tilføjet til Lageret", ButtonType.CLOSE).showAndWait();
 		}
 	}
 

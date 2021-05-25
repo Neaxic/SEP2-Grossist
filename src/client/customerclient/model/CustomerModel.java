@@ -9,6 +9,7 @@ import shared.wares.Product;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +83,12 @@ public class CustomerModel implements CustomerModelInterface {
 	 */
 	//TODO: KOM TILBAGE HER TIL NOT DONE MAKKER
 	public Pair<Boolean, ArrayList<Product>> sendOrder(Basket basket, double sum) {
-		return client.sendOrder(LoginManager.cvr, basket);
+		try {
+			return client.sendOrder(LoginManager.cvr, basket);
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return new Pair<>(false, null);
 	}
 
 	/**

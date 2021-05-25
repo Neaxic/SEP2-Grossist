@@ -6,6 +6,8 @@ import client.grosserclient.views.GrosserViewModel;
 import javafx.util.Pair;
 import shared.wares.Product;
 
+import java.sql.SQLException;
+
 
 public class GrosserAddProductViewModel implements GrosserViewModel {
 	private GrosserModelInterface grosserModel;
@@ -14,7 +16,7 @@ public class GrosserAddProductViewModel implements GrosserViewModel {
 		grosserModel = ModelFactory.getInstance().getGrosserModel();
 	}
 
-	public void createProduct(Pair<Product, Integer> newProduct) {
+	public void createProduct(Pair<Product, Integer> newProduct) throws IllegalArgumentException, SQLException {
 		grosserModel.createNewProduct(newProduct);
 	}
 }

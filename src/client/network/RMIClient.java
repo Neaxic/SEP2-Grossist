@@ -3,6 +3,7 @@ package client.network;
 import javafx.util.Pair;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
+import shared.objects.CustomerContainer;
 import shared.util.Util;
 import shared.objects.Basket;
 import shared.objects.Order;
@@ -16,12 +17,14 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 // Andreas Young og Andreas Østergaard
 
-public class RMIClient implements Client, GrosserClient, CallbackClient {
+public class RMIClient implements Client, GrosserClient, CallbackClient, LoginInfoInterface {
 	private RMIServerInterface server;
 	private PropertyChangeSupport support;
 	private int clientID;
@@ -64,7 +67,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 		}
 	}
 
-	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) {
+	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) throws SQLException {
 		try {
 			return server.sendOrder(cvr, basket);
 		} catch (RemoteException remoteException) {
@@ -83,7 +86,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	}
 
 	@Override
-	public void createProduct(Pair<Product, Integer> newProduct) {
+	public void createProduct(Pair<Product, Integer> newProduct) throws SQLException, IllegalArgumentException {
 		try {
 			server.createProduct(newProduct);
 		} catch (RemoteException e) {
@@ -116,9 +119,9 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 	}
 
 	@Override
-	public void deleteWare(Product product) {
+	public void deleteWare(Product ware) {
 		try {
-			server.deleteWare(product);
+			server.deleteWare(ware);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -133,12 +136,49 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 		}
 	}
 
-	@Override public void reduceStock(Pair<Product, Integer> productAndAmountToReduce){
-		try{
+	@Override
+	public void reduceStock(Pair<Product, Integer> productAndAmountToReduce) {
+		try {
 			server.reduceAmountInSystem(productAndAmountToReduce);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void deleteLatestOrder() {
+		try {
+			server.deleteLatestOrder();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override public boolean addCustomer(CustomerContainer customer)
+	{
+		try
+		{
+			return server.addCustomer(customer);
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public Map<Integer, String> getLoginInfo()
+	{
+		try
+		{
+			return server.getLoginInfo();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

@@ -9,10 +9,12 @@ import shared.wares.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // Lavet af hele teamet
 
@@ -38,6 +40,11 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 	}
 
 	@Override
+	public Map<Integer, String> getLoginInfo() {
+		return getCustomerLoginMap();
+	}
+
+	@Override
 	public boolean createOrder(int cvr, LocalDateTime orderTime, Basket basket) throws SQLException {
 		int orderNo = createOrderInDatabase(cvr, Timestamp.valueOf(orderTime), basket.getSum());
 		return createOrderSpecInDatabase(orderNo, basket);
@@ -60,7 +67,10 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 	}
 
 	@Override
-	public boolean addNewProduct(Pair<Product, Integer> newProductAndAmount) throws SQLException {
+	public boolean addNewProduct(Pair<Product, Integer> newProductAndAmount) throws SQLException, IllegalArgumentException {
+		if (newProductAndAmount.getValue() <= 0 || newProductAndAmount.getKey().getWareName().isBlank() || newProductAndAmount.getKey().getMeasurementType().isBlank() || newProductAndAmount.getKey().getBestBefore().isBefore(LocalDate.now().plusDays(1)) || newProductAndAmount.getKey().getDeliveryDays() <= 0 || newProductAndAmount.getKey().getPrice() <= 0 || newProductAndAmount.getKey().getProducedBy().isBlank()) {
+			throw new IllegalArgumentException();
+		}
 		int productID = addProductToSuperTable(newProductAndAmount.getKey(), newProductAndAmount.getValue());
 		return addProductToDesignatedTable(productID, newProductAndAmount.getKey(), newProductAndAmount.getValue());
 	}
@@ -85,8 +95,14 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 		return addCustomerToDatabase(cvr, name, password, address);
 	}
 
-	// Private Methods for accessing the Database
+	@Override
+	public void deleteLatestOrder() throws SQLException {
+		int orderNo = getLatestOrderNo();
+		deleteOrder(orderNo);
+	}
 
+
+	// Private Methods for accessing the Database
 	private void updateInternalStorage() throws SQLException {
 		map.clear();
 		map.put("Alcohol", getProductsFromTable(SchemaMap.Mapping(Alcohol.class), Alcohol.class));
@@ -180,7 +196,11 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 
 	private int addProductToSuperTable(Product p, Integer v) throws SQLException {
 		try (Connection conn = getConnection()) {
-			conn.prepareStatement("INSERT INTO product(productname, measurement, producedby, salesprice, bbdate, amountinstock, tags) VALUES ('" + p.getWareName() + "', '" + p.getMeasurementType() + "', '" + p.getProducedBy() + "', " + p.getPrice() + ", '" + p.getBestBefore() + "', " + v + ", '" + p.getTags() + "')").execute();
+			if (p.getWareNumber() < 0) {
+				conn.prepareStatement("INSERT INTO product(productname, measurement, producedby, salesprice, bbdate, amountinstock, tags) VALUES ('" + p.getWareName() + "', '" + p.getMeasurementType() + "', '" + p.getProducedBy() + "', " + p.getPrice() + ", '" + p.getBestBefore() + "', " + v + ", '" + p.getTags() + "')").execute();
+			} else {
+				conn.prepareStatement("INSERT INTO product(productID, productName, measurement, producedBy, salesPrice, bbDate, amountInStock, tags) VALUES (" + p.getWareNumber() + ", '" + p.getWareName() + "', '" + p.getMeasurementType() + "', '" + p.getProducedBy() + "', " + p.getPrice() + ", '" + p.getBestBefore() + "', " + v + ", '" + p.getTags() + "')").execute();
+			}
 			ResultSet r = conn.prepareStatement("SELECT productID FROM product WHERE productName = '" + p.getWareName() + "' AND producedBy = '" + p.getProducedBy() + "' AND bbDate = '" + p.getBestBefore() + "'").executeQuery();
 			r.next();
 			return r.getInt("productID");
@@ -220,10 +240,45 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 		return true;
 	}
 
+	private Map<Integer, String> getCustomerLoginMap() {
+		Map<Integer, String> customerLoginMap = new HashMap<>();
+
+		try (Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement("SELECT CVR, password FROM customer");
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) {
+				customerLoginMap.put(result.getInt(1), result.getString(2));
+			}
+
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		return customerLoginMap;
+	}
+
 	private boolean addCustomerToDatabase(int cvr, String name, String password, String address) throws SQLException {
 		try (Connection conn = getConnection()) {
 			conn.prepareStatement("INSERT INTO customer VALUES (" + cvr + ",  '" + name + "', '" + password + "', '" + address + "')").execute();
 			return true;
 		}
+	}
+
+	private int getLatestOrderNo() throws SQLException {
+		try (Connection conn = getConnection()) {
+			ResultSet r = conn.prepareStatement("SELECT orderNo FROM order_ ORDER BY orderTime DESC").executeQuery();
+			System.out.println(r.getFetchSize());
+			r.next();
+			return r.getInt("orderNo");
+		}
+	}
+
+	private boolean deleteOrder(int orderNo) throws SQLException {
+		try (Connection conn = getConnection()) {
+			conn.prepareStatement("DELETE FROM orderSpec WHERE orderNo = " + orderNo).execute();
+			conn.prepareStatement("DELETE FROM order_ WHERE orderNo = " + orderNo).execute();
+		}
+		return true;
 	}
 }

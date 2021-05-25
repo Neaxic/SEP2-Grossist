@@ -42,6 +42,7 @@ public abstract class Product implements Serializable {
 		addTags(tags);
 	}
 
+
 	// Getters for all Field Variables
 	public String getWareName() {
 		return wareName;
@@ -85,7 +86,6 @@ public abstract class Product implements Serializable {
 	}
 
 	public void addTags(String[] tags) { // Kan nemt ændres til at tage en String[] eller ArrayList<String>
-		System.out.println("Tags array:\t" + Arrays.toString(tags));
 		if (!(tags.length == 0)) {
 			String s = removeDuplicates(tags);
 			this.tags = s.replaceAll("[\s+\\[\\]]", "");

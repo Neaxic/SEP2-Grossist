@@ -35,13 +35,13 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 		customerModelInterface.updateWares();
 	}
 
-	public void addToBasket(int item, int amount) {
+	public void addToBasket(int productWareNumber, int amount) {
 		if (amount <= 0) {
 			new Alert(Alert.AlertType.ERROR, "Mængde skal være et Positivt Heltal", ButtonType.OK).showAndWait();
 		} else {
 			// TODO: Tjek om søgning virker
 			for (Product product : activeItemList) {
-				if (product.getWareNumber() == item) {
+				if (product.getWareNumber() == productWareNumber) {
 					customerModelInterface.addToBasket(product, amount);
 				}
 			}

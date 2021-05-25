@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // Andreas Østergaard, Andreas Young, Frederik Bergmann
 
@@ -71,15 +72,11 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) throws RemoteException {
-		//System.out.println("SERVER: CVR: " + cvr + "\tORDER SIZE: " + basket.getBasket().size() + "\tSUM: " + basket.getSum()); //SOUT
+	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) throws RemoteException, SQLException {
 		Pair<Boolean, ArrayList<Product>> verification = serverModel.verifyOrder(basket);
 		if (verification.getKey()) {
-			System.out.println("LocalDateTime.now() print in RMIServer:\t" + LocalDateTime.now()); //SOUT
 			serverModel.createOrder(cvr, LocalDateTime.now(), basket);
 		}
-		System.out.println(verification.getKey()); //SOUT
-		System.out.println(verification.getValue()); //SOUT
 		return verification;
 	}
 
@@ -90,7 +87,7 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public void createProduct(Pair<Product, Integer> newProduct) throws RemoteException {
+	public void createProduct(Pair<Product, Integer> newProduct) throws RemoteException, SQLException, IllegalArgumentException {
 		serverModel.createProduct(newProduct);
 	}
 
@@ -110,8 +107,19 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public void addCustomer(CustomerContainer customer) throws RemoteException {
-		boolean customerAdded = serverModel.addCustomer(customer);
+	public boolean addCustomer(CustomerContainer customer) throws RemoteException {
+		return serverModel.addCustomer(customer);
+	}
+
+	@Override
+	public Map<Integer, String> getLoginInfo()
+	{
+		return serverModel.getLoginInfo();
+	}
+
+	@Override
+	public void deleteLatestOrder() {
+		serverModel.deleteLatestOrder();
 	}
 
 

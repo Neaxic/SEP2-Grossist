@@ -1,6 +1,8 @@
 package shared.objects;
 
-public class CustomerContainer
+import java.io.Serializable;
+
+public class CustomerContainer implements Serializable
 {
   private final int CVR;
   private final String address, pw, name;

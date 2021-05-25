@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 // Lavet af hele teamet
 
@@ -44,22 +45,32 @@ public class ServerModel {
 		return null;
 	}
 
-	public Pair<Boolean, ArrayList<Product>> verifyOrder(Basket orderItems) {
-		try {
-			wares = DAOCustomer.requestAllProducts();
-			wareAndAmountList = DAOGrosser.getAllWaresAndAmounts();
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+	/**
+	 * Verifies the Order by comparing the items in stock to the requested items in the basket, as well as the amount wished to be purchased
+	 *
+	 * @param orderItems Basket containing Wares and Amounts of each ware
+	 * @return Pair [true, Empty Arraylist] if the verification was completed <br>
+	 * Pair [false, Arraylist] where the arraylist contains all products that either are not in stock, or not enough are in stock <br>
+	 * Pair [false, null] if the <b>orderItems</b> was empty or null
+	 * @throws SQLException
+	 */
+
+	public Pair<Boolean, ArrayList<Product>> verifyOrder(Basket orderItems)
+			throws SQLException
+	{
+		if (orderItems == null || orderItems.getBasket().size() < 1)
+		{
+			return new Pair<>(false, null);
 		}
+		wares = DAOCustomer.requestAllProducts();
+		wareAndAmountList = DAOGrosser.getAllWaresAndAmounts();
 
 		// CHECK IF ALL WARES IN THE BASKET ALSO EXISTS IN THE DATABASE
-
 
 		ArrayList<Product> products = new ArrayList<>();
 		int i = 0;
 		for (Product p : orderItems.getBasket().keySet()) {
 			i++;
-			System.out.println(i); //SOUT
 			for (Pair<Product, Integer> wareAndAmount : wareAndAmountList) {
 				if (wareAndAmount.getKey().getWareNumber() == p.getWareNumber() && wareAndAmount.getValue() < orderItems.getAmount(p)) {
 					products.add(p);
@@ -67,27 +78,20 @@ public class ServerModel {
 			}
 		}
 		Pair<Boolean, ArrayList<Product>> returnPair = new Pair<>(!orderItems.getBasket().isEmpty() && products.isEmpty(), products);
-		System.out.println(returnPair); //SOUT
 		return returnPair;
 	}
 
-	public void createOrder(int cvr, LocalDateTime dateTime, Basket basket) {
-		try {
-			DAOCustomer.createOrder(cvr, dateTime, basket);
-			for (Product p : basket.getBasket().keySet()) {
-				reduceAmount(new Pair<>(p, basket.getAmount(p)));
-			}
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+	public void createOrder(int cvr, LocalDateTime dateTime, Basket basket) throws SQLException {
+
+		DAOCustomer.createOrder(cvr, dateTime, basket);
+		for (Product p : basket.getBasket().keySet()) {
+			reduceAmount(new Pair<>(p, basket.getAmount(p)));
 		}
+
 	}
 
-	public void createProduct(Pair<Product, Integer> newProduct) {
-		try {
-			DAOGrosser.addNewProduct(newProduct);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void createProduct(Pair<Product, Integer> newProduct) throws SQLException, IllegalArgumentException {
+		DAOGrosser.addNewProduct(newProduct);
 	}
 
 	public List<Pair<Product, Integer>> grosserProductList() {
@@ -137,4 +141,18 @@ public class ServerModel {
 			return false;
 		}
 	}
+
+	public void deleteLatestOrder() {
+		try {
+			DAOGrosser.deleteLatestOrder();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Map<Integer, String> getLoginInfo()
+	{
+		return DAOCustomer.getLoginInfo();
+	}
+
 }
