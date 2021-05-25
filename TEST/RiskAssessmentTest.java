@@ -10,6 +10,7 @@ import javafx.util.Pair;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import server.model.RISK_ASSESSMENT.RiskAssessment;
 import server.model.RISK_ASSESSMENT.RiskContainer;
 import server.model.RISK_ASSESSMENT.RiskInterface;
 import server.network.RMIServer;
@@ -44,6 +45,7 @@ public class RiskAssessmentTest
       throwable.printStackTrace();
     }
     ClientFactory.getInstance().getClient().start();
+    risk = new RiskAssessment();
   }
 
   @Test void stockJustRight(){
@@ -73,8 +75,7 @@ public class RiskAssessmentTest
     ArrayList<RiskContainer> riskList = new ArrayList<>();
     riskList.add(container);
 
-    assertEquals("Green", risk.massAssess(riskList));
-
+    assertEquals(0, risk.massAssess(riskList).size());
   }
 
   @Test void oneTooLittleStock(){
@@ -104,7 +105,7 @@ public class RiskAssessmentTest
     ArrayList<RiskContainer> riskList = new ArrayList<>();
     riskList.add(container);
 
-    assertEquals("Yellow", risk.massAssess(riskList));
+    assertEquals("Yellow", risk.massAssess(riskList).get(0).getType());
   }
 
   @Test void wayTooLittleStock(){
@@ -134,7 +135,7 @@ public class RiskAssessmentTest
     ArrayList<RiskContainer> riskList = new ArrayList<>();
     riskList.add(container);
 
-    assertEquals("Yellow", risk.massAssess(riskList));
+    assertEquals("Yellow", risk.massAssess(riskList).get(0).getType());
   }
 
   @Test void tooMuchStock(){
