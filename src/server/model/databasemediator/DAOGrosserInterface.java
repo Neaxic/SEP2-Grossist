@@ -38,7 +38,7 @@ public interface DAOGrosserInterface extends CollectionDAOInterface {
 	 * @throws SQLException Thrown when Database access is not possible <br>
 	 *                      Often caused by Database not being online
 	 */
-	boolean addNewProduct(Pair<Product, Integer> newProductAndAmount) throws SQLException;
+	boolean addNewProduct(Pair<Product, Integer> newProductAndAmount) throws SQLException, IllegalArgumentException;
 
 	/**
 	 * Accesses the Database and creates an SQL statement, using postgresql, to change the amount in stock of a product in the system. <br>
@@ -87,4 +87,18 @@ public interface DAOGrosserInterface extends CollectionDAOInterface {
 	 *                      Often caused by Database not being online
 	 */
 	boolean addNewCustomer(int cvr, String name, String password, String address) throws SQLException;
+
+	/**
+	 * Accesses the Database and removes the most recent Order made. <br>
+	 * <b>Intentional Use:</b> Cleaning up after Testing. <br>
+	 * <b>Possible Other Use:</b> Undo button.
+	 */
+	void deleteLatestOrder() throws SQLException;
+
+	/**
+	 * Accesses the Database and removes the Customer with the given CVR
+	 *
+	 * @param customerCVR CVR of the Customer whom is to be removed
+	 */
+	void removeCustomer(int customerCVR) throws SQLException;
 }

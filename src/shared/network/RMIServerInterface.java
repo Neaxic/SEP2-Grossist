@@ -10,17 +10,19 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
-// Andreas Young, Andreas Østergaard
+// Andreas Young, Andreas Østergaard, Frederik Bergmann
 
-public interface RMIServerInterface extends Remote {
-	/**
-	 * Registers RMIServer Implementation on port 1099 and binds it with a namespace
-	 *
-	 * @throws RemoteException       when connection cannot be established
-	 * @throws AlreadyBoundException when a server already is bound with the same name
-	 */
-	void startServer() throws RemoteException, AlreadyBoundException;
+public interface RMIServerInterface extends Remote
+{
+  /**
+   * Registers RMIServer Implementation on port 1099 and binds it with a namespace
+   *
+   * @throws RemoteException       when connection cannot be established
+   * @throws AlreadyBoundException when a server already is bound with the same name
+   */
+  void startServer() throws RemoteException, AlreadyBoundException;
 
 	/**
 	 * Registers the callbackClient on the server, allowing the server to easily update the callbackClient using update()
@@ -58,7 +60,7 @@ public interface RMIServerInterface extends Remote {
 	 * @throws RemoteException
 	 */
 	Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket orderItems)
-			throws RemoteException;
+			throws RemoteException, SQLException;
 
 	/**
 	 * Requests all registered orders for the grosser main view.
@@ -74,7 +76,7 @@ public interface RMIServerInterface extends Remote {
 	 * @param newProduct Pair consisting of the Product and the amount of that product there is
 	 * @throws RemoteException
 	 */
-	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException, SQLException;
+	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException, SQLException, IllegalArgumentException;
 
 	/**
 	 * Removes a ware entirely from the Database
@@ -100,11 +102,19 @@ public interface RMIServerInterface extends Remote {
 	 */
 	void reduceAmountInSystem(Pair<Product, Integer> productAndAmountToRemove) throws RemoteException;
 
+  /**
+   *
+   * @param customer Container with info about customer.
+   * @throws RemoteException
+   */
+  boolean addCustomer(CustomerContainer customer) throws RemoteException;
+
+	Map<Integer, String> getLoginInfo() throws RemoteException;
+
 	/**
-	 * Adds a customer to the system, which can be used for identification on Orders
-	 *
-	 * @param customer Container with info about customer.
-	 * @throws RemoteException
+	 * Deletes the latest order made from the Database. Can be used as an Undo or in Cleaning up after Testing
 	 */
-	void addCustomer(CustomerContainer customer) throws RemoteException;
+	void deleteLatestOrder() throws RemoteException;
+
+	void removeCustomer(int customerCVR) throws RemoteException, SQLException;
 }

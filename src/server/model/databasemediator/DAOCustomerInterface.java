@@ -6,6 +6,7 @@ import shared.wares.Product;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 // Young
 
@@ -20,6 +21,8 @@ public interface DAOCustomerInterface extends CollectionDAOInterface{
 	 *                      Often caused by Database not being online
 	 */
 	List<Product> requestAllProducts() throws SQLException;
+
+	Map<Integer, String> getLoginInfo();
 
 	// SETTING
 

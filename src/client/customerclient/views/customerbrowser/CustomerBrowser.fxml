@@ -33,7 +33,7 @@
                      <children>
                               <Button mnemonicParsing="false" onAction="#openProductBrowser" prefHeight="30.0" prefWidth="120.0" text="Produkter" />
                               <Button mnemonicParsing="false" onAction="#openBasket" prefHeight="30.0" prefWidth="120.0" text="Kurv" />
-                              <Button mnemonicParsing="false" onAction="#openSubscriptions" prefHeight="30.0" prefWidth="120.0" text="Abonnemter" />
+                              <!-- <Button mnemonicParsing="false" onAction="#openSubscriptions" prefHeight="30.0" prefWidth="120.0" text="Abonnemter" /> -->
                      </children>
                      <HBox.margin>
                         <Insets right="5.0" />
@@ -52,8 +52,8 @@
                     <children>
                         <HBox prefHeight="32.0" prefWidth="221.0">
                             <children>
-                                <TextField prefHeight="30.0" prefWidth="165.0" style="-fx-background-color: white;" />
-                                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" text="Søg" />
+                                <TextField fx:id="searchText" prefHeight="30.0" prefWidth="165.0" style="-fx-background-color: white;" />
+                                <Button mnemonicParsing="false" onAction="#searchBtn" prefHeight="30.0" prefWidth="71.0" text="Søg" />
                             </children>
                             <VBox.margin>
                                 <Insets bottom="5.0" top="15.0" />
@@ -64,6 +64,14 @@
                                 <Font name="System Bold" size="22.0" />
                             </font>
                         </Text>
+                  <Text fx:id="categoryColonial1" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Alt" wrappingWidth="75.54669380187988">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
                         <Text fx:id="categoryColonial" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Kolonial" wrappingWidth="75.54669380187988">
                             <font>
                                 <Font size="16.0" />
@@ -110,17 +118,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                         </Text>
-                        <Text fx:id="categoryFrozenFoods" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Frostvarer" wrappingWidth="195.9830722808838">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets left="8.0" />
-                            </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                        </Text>
                         <Text fx:id="categoryFruitAndVegetables" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Frugt og grønt" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
@@ -143,17 +140,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                         </Text>
-                        <Text fx:id="categoryDrinks" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Drikkevarer (Uden alkohol)" wrappingWidth="195.9830722808838">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets left="8.0" />
-                            </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                        </Text>
                         <Text fx:id="categoryAlcohol" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Drikkevarer (Med alkohol)" wrappingWidth="195.9830722808838">
                             <font>
                                 <Font size="16.0" />
@@ -165,6 +151,137 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                         </Text>
+                        <Text fx:id="categoryFrozenFoods" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Frostvarer" wrappingWidth="195.9830722808838">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="8.0" />
+                            </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                        </Text>
+                        <Text fx:id="categoryDrinks" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Drikkevarer (Uden alkohol)" wrappingWidth="195.9830722808838">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="8.0" />
+                            </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                        </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tags" underline="true" wrappingWidth="213.91796112060547">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="categoryDrinks1" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Øko" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks2" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Nøgle" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks3" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● GMO" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks4" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Laktosefri" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks5" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Vegansk" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks6" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Vegetar" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks61" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Fedtfattig" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks611" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Halal" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks6111" layoutX="26.0" layoutY="444.0" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● MSE" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks61111" layoutX="26.0" layoutY="464.0" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Sukkerfri" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks611111" layoutX="26.0" layoutY="484.0" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Glutenfri" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks6111111" layoutX="26.0" layoutY="504.0" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Stråforkortere" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="categoryDrinks61111111" layoutX="26.0" layoutY="524.0" onMouseClicked="#loadSpecificCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="● Alkoholfri" wrappingWidth="195.9830722808838">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
                     </children>
                     <HBox.margin>
                         <Insets />

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.postgresql.util.PSQLException;
 import server.network.RMIServer;
 import shared.network.RMIServerInterface;
 import shared.objects.Basket;
@@ -22,7 +21,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 // Young
-public class ReceivingAndOrderTest {
+public class ReceivingAnOrderTest {
 	Basket testBasket;
 	static Product testProduct1, testProduct2, testProduct3;
 	static Client customer;
@@ -76,6 +75,6 @@ public class ReceivingAndOrderTest {
 
 	@Test
 	void clientNoBasket() throws SQLException {
-		assertEquals(false, customer.sendOrder(LoginManager.cvr, null));
+		assertEquals(false, customer.sendOrder(LoginManager.cvr, null).getKey());
 	}
 }

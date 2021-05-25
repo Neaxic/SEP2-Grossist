@@ -2,11 +2,13 @@ package client.grosserclient.model;
 
 import client.network.GrosserClient;
 import javafx.util.Pair;
+import shared.objects.CustomerContainer;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.sql.SQLException;
 
 public class GrosserModel implements GrosserModelInterface {
 	private PropertyChangeSupport support;
@@ -44,7 +46,12 @@ public class GrosserModel implements GrosserModelInterface {
 	}
 
 	@Override
-	public void createNewProduct(Pair<Product, Integer> newProduct) {
+	public boolean addCustomer(CustomerContainer customer) {
+		return client.addCustomer(customer);
+	}
+
+	@Override
+	public void createNewProduct(Pair<Product, Integer> newProduct) throws IllegalArgumentException, SQLException {
 		client.createProduct(newProduct);
 	}
 

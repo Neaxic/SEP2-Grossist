@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // Andreas Østergaard, Andreas Young, Frederik Bergmann
 
@@ -71,7 +72,7 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) throws RemoteException {
+	public Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket basket) throws RemoteException, SQLException {
 		Pair<Boolean, ArrayList<Product>> verification = serverModel.verifyOrder(basket);
 		if (verification.getKey()) {
 			serverModel.createOrder(cvr, LocalDateTime.now(), basket);
@@ -86,7 +87,7 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public void createProduct(Pair<Product, Integer> newProduct) throws RemoteException, SQLException {
+	public void createProduct(Pair<Product, Integer> newProduct) throws RemoteException, SQLException, IllegalArgumentException {
 		serverModel.createProduct(newProduct);
 	}
 
@@ -106,8 +107,24 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public void addCustomer(CustomerContainer customer) throws RemoteException {
-		boolean customerAdded = serverModel.addCustomer(customer);
+	public boolean addCustomer(CustomerContainer customer) throws RemoteException {
+		return serverModel.addCustomer(customer);
+	}
+
+	@Override
+	public Map<Integer, String> getLoginInfo()
+	{
+		return serverModel.getLoginInfo();
+	}
+
+	@Override
+	public void deleteLatestOrder() {
+		serverModel.deleteLatestOrder();
+	}
+
+	@Override
+	public void removeCustomer(int customerCVR) throws RemoteException, SQLException {
+		serverModel.removeCustomer(customerCVR);
 	}
 
 
