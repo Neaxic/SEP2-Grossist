@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-public class RiskAssessment
+public class RiskAssessment implements RiskInterface
 {
-  private static ArrayList<RiskReport> allReports, yellowReports, redReports;
+  private ArrayList<RiskReport> allReports, yellowReports, redReports;
 
-  public static ArrayList<RiskReport> massAssess(
+  public ArrayList<RiskReport> massAssess(
       ArrayList<RiskContainer> itemList)
   {
     allReports = new ArrayList<>();
@@ -25,7 +25,7 @@ public class RiskAssessment
     return allReports;
   }
 
-  private static void riskAssess(RiskContainer item)
+  private void riskAssess(RiskContainer item)
   {
     int soldDaily = item.getSoldDaily();
     int stock = item.getAmountInStock();
@@ -54,17 +54,17 @@ public class RiskAssessment
 
   }
 
-  public static ArrayList<RiskReport> getAllReports()
+  public ArrayList<RiskReport> getAllReports()
   {
     return allReports;
   }
 
-  public static ArrayList<RiskReport> getYellowReports()
+  public ArrayList<RiskReport> getYellowReports()
   {
     return yellowReports;
   }
 
-  public static ArrayList<RiskReport> getRedReports()
+  public ArrayList<RiskReport> getRedReports()
   {
     return redReports;
   }
