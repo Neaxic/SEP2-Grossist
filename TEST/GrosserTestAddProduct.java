@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//Line Guld
+//Line Guld (Young prøver at tage en beslutning der hedder, at de tests der fejler lige nu skal fjernes)
 class GrosserTestAddProduct {
 	private static GrosserAddProductViewModel viewModel;
 	private static GrosserClient grosserClient;
