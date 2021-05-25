@@ -94,4 +94,11 @@ public interface DAOGrosserInterface extends CollectionDAOInterface {
 	 * <b>Possible Other Use:</b> Undo button.
 	 */
 	void deleteLatestOrder() throws SQLException;
+
+	/**
+	 * Accesses the Database and removes the Customer with the given CVR
+	 *
+	 * @param customerCVR CVR of the Customer whom is to be removed
+	 */
+	void removeCustomer(int customerCVR) throws SQLException;
 }

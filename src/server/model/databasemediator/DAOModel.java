@@ -101,8 +101,14 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 		deleteOrder(orderNo);
 	}
 
+	@Override
+	public void removeCustomer(int customerCVR) throws SQLException {
+		removeCustomerFromDatabase(customerCVR);
+	}
+
 
 	// Private Methods for accessing the Database
+
 	private void updateInternalStorage() throws SQLException {
 		map.clear();
 		map.put("Alcohol", getProductsFromTable(SchemaMap.Mapping(Alcohol.class), Alcohol.class));
@@ -280,5 +286,16 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 			conn.prepareStatement("DELETE FROM order_ WHERE orderNo = " + orderNo).execute();
 		}
 		return true;
+	}
+
+	private void removeCustomerFromDatabase(int customerCVR) throws SQLException {
+		try (Connection conn = getConnection()) {
+			ResultSet r = conn.prepareStatement("SELECT orderNo FROM order_ WHERE cvr = " + customerCVR).executeQuery();
+
+			if (r.next()) {
+				deleteOrder(r.getInt("orderNo"));
+			}
+			conn.prepareStatement("DELETE FROM customer WHERE cvr = " + customerCVR).execute();
+		}
 	}
 }

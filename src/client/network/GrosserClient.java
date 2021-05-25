@@ -27,6 +27,8 @@ public interface GrosserClient {
 	boolean addCustomer(CustomerContainer customer);
 
 	void deleteLatestOrder();
+
+	void removeCustomer(int customerCVR);
 }
 
 

@@ -3,10 +3,10 @@ package client.network;
 import javafx.util.Pair;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
-import shared.objects.CustomerContainer;
-import shared.util.Util;
 import shared.objects.Basket;
+import shared.objects.CustomerContainer;
 import shared.objects.Order;
+import shared.util.Util;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
@@ -154,28 +154,30 @@ public class RMIClient implements Client, GrosserClient, CallbackClient, LoginIn
 		}
 	}
 
-	@Override public boolean addCustomer(CustomerContainer customer)
-	{
-		try
-		{
-			return server.addCustomer(customer);
+	@Override
+	public void removeCustomer(int customerCVR) {
+		try {
+			server.removeCustomer(customerCVR);
+		} catch (SQLException | RemoteException throwables) {
+			throwables.printStackTrace();
 		}
-		catch (RemoteException e)
-		{
+	}
+
+	@Override
+	public boolean addCustomer(CustomerContainer customer) {
+		try {
+			return server.addCustomer(customer);
+		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
 
 	@Override
-	public Map<Integer, String> getLoginInfo()
-	{
-		try
-		{
+	public Map<Integer, String> getLoginInfo() {
+		try {
 			return server.getLoginInfo();
-		}
-		catch (RemoteException e)
-		{
+		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		return null;

@@ -122,6 +122,11 @@ public class RMIServer implements RMIServerInterface {
 		serverModel.deleteLatestOrder();
 	}
 
+	@Override
+	public void removeCustomer(int customerCVR) throws RemoteException, SQLException {
+		serverModel.removeCustomer(customerCVR);
+	}
+
 
 	private void getAllProducts() {
 		wares = serverModel.getAllProducts();

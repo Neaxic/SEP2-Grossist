@@ -115,4 +115,6 @@ public interface RMIServerInterface extends Remote
 	 * Deletes the latest order made from the Database. Can be used as an Undo or in Cleaning up after Testing
 	 */
 	void deleteLatestOrder() throws RemoteException;
+
+	void removeCustomer(int customerCVR) throws RemoteException, SQLException;
 }

@@ -36,14 +36,12 @@ public class GrosserModel implements GrosserModelInterface {
 	}
 
 	@Override
-	public void increaseStock(
-			Pair<Product, Integer> productAndAmountToIncrease) {
+	public void increaseStock(Pair<Product, Integer> productAndAmountToIncrease) {
 		client.increaseStock(productAndAmountToIncrease);
 	}
 
 	@Override
-	public void reduceStock(
-			Pair<Product, Integer> productAndAmountToReduce) {
+	public void reduceStock(Pair<Product, Integer> productAndAmountToReduce) {
 		client.reduceStock(productAndAmountToReduce);
 	}
 
@@ -54,9 +52,7 @@ public class GrosserModel implements GrosserModelInterface {
 
 	@Override
 	public void createNewProduct(Pair<Product, Integer> newProduct) throws IllegalArgumentException, SQLException {
-
-			client.createProduct(newProduct);
-
+		client.createProduct(newProduct);
 	}
 
 	@Override

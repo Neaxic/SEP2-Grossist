@@ -56,10 +56,8 @@ public class ServerModel {
 	 */
 
 	public Pair<Boolean, ArrayList<Product>> verifyOrder(Basket orderItems)
-			throws SQLException
-	{
-		if (orderItems == null || orderItems.getBasket().size() < 1)
-		{
+			throws SQLException {
+		if (orderItems == null || orderItems.getBasket().size() < 1) {
 			return new Pair<>(false, null);
 		}
 		wares = DAOCustomer.requestAllProducts();
@@ -135,6 +133,9 @@ public class ServerModel {
 		String name = customer.getName();
 		String password = customer.getPw();
 		String address = customer.getAddress();
+		if (cvr < 10000000 || name.isBlank() || password.isBlank() || address.isBlank()) {
+			throw new IllegalArgumentException("Invalid Customer Details");
+		}
 		try {
 			return DAOGrosser.addNewCustomer(cvr, name, password, address);
 		} catch (SQLException throwables) {
@@ -150,9 +151,11 @@ public class ServerModel {
 		}
 	}
 
-	public Map<Integer, String> getLoginInfo()
-	{
+	public Map<Integer, String> getLoginInfo() {
 		return DAOCustomer.getLoginInfo();
 	}
 
+	public void removeCustomer(int customerCVR) throws SQLException {
+		DAOGrosser.removeCustomer(customerCVR);
+	}
 }
