@@ -150,7 +150,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		switch (className) {
 			case "Alkohol" -> {
 				if (numCheckAndNotNull(alcoholPercent.getText())) {
-					createWarning("Procenten ikke angivet");
+					createWarning("Alkohol procenten ikke angivet");
 					return;
 				}
 
