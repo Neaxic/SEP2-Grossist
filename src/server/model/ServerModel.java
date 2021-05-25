@@ -55,24 +55,16 @@ public class ServerModel {
 	 * Pair [false, null] if the <b>orderItems</b> was empty or null
 	 * @throws SQLException
 	 */
-	public Pair<Boolean, ArrayList<Product>> verifyOrder(Basket orderItems) throws SQLException {
-		if (orderItems == null || orderItems.getBasket().size() < 1) {
+
+	public Pair<Boolean, ArrayList<Product>> verifyOrder(Basket orderItems)
+			throws SQLException
+	{
+		if (orderItems == null || orderItems.getBasket().size() < 1)
+		{
 			return new Pair<>(false, null);
 		}
 		wares = DAOCustomer.requestAllProducts();
 		wareAndAmountList = DAOGrosser.getAllWaresAndAmounts();
-	public Map<Integer, String> getLoginInfo()
-	{
-		return DAOCustomer.getLoginInfo();
-	}
-
-	public Pair<Boolean, ArrayList<Product>> verifyOrder(Basket orderItems) {
-		try {
-			wares = DAOCustomer.requestAllProducts();
-			wareAndAmountList = DAOGrosser.getAllWaresAndAmounts();
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
 
 		// CHECK IF ALL WARES IN THE BASKET ALSO EXISTS IN THE DATABASE
 
@@ -158,4 +150,10 @@ public class ServerModel {
 			e.printStackTrace();
 		}
 	}
+
+	public Map<Integer, String> getLoginInfo()
+	{
+		return DAOCustomer.getLoginInfo();
+	}
+
 }
