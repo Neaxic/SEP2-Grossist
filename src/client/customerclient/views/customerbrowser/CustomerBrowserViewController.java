@@ -3,6 +3,7 @@ package client.customerclient.views.customerbrowser;
 import client.core.ViewHandler;
 import client.core.factories.ViewModelFactory;
 import client.customerclient.views.CustomerViewController;
+import client.grosserclient.model.GrosserModelInterface;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.fxml.FXML;
@@ -19,11 +20,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import server.model.databasemediator.DAOModel;
 import shared.wares.Product;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Month;
 
-// Andreas Young, Line Guld
+// Andreas Young, Line Guld og Kasper Falk
 
 public class CustomerBrowserViewController implements CustomerViewController {
 	// Category Labels
@@ -42,6 +47,10 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	private CustomerBrowserViewModel viewModel;
 
 	private ListProperty<Product> itemList;
+	private DAOModel daomodel2 = new DAOModel();
+
+	public CustomerBrowserViewController() throws SQLException {
+	}
 
 	@Override
 	public void init(ViewHandler viewHandler) {
@@ -76,6 +85,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	}
 
 	private HBox createEntry(Product product) {
+
 		// HBox for the Food Item Entry
 		HBox entry = new HBox();
 
@@ -111,6 +121,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		TextField amount = new TextField();
 		Button addButton = new Button("Tilføj til Kurv");
 		addButton.setPrefSize(100, 50);
+
 		// Design of Nodes
 		title.setFont(Font.font("Segoe UI", FontWeight.BLACK, 21));
 		productID.setFont(Font.font("Segoe UI", FontWeight.BLACK, 15));
@@ -125,8 +136,20 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		prisHBox.getChildren().add(price);
 		vBox.getChildren().add(prisHBox);
 
+
+
 		//textFlow.setPadding(new Insets(5, 30, 10, 0));
 		vBox.getChildren().add(productID);
+
+		//NEDSAT VARE
+		if (getDaysTo(product) <= 3) { //IKKE DONE ENDNU
+			daomodel2.changePrice(product,10);
+			Text NedsatVare = new Text("Kortholdbarhedsdato: " +  getDaysTo(product)+ " dage");
+			vBox.getChildren().add(NedsatVare);
+		}
+
+
+
 		//vBox.getChildren().add(textFlow);
 
 		btnHBox.getChildren().add(amount);
@@ -144,6 +167,12 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		entry.getChildren().add(main);
 		entry.setPadding(new Insets(5, 0, 5, 0));
 		return entry;
+	}
+
+	//
+	public int getDaysTo(Product product) {
+		int days = LocalDate.now().until(product.getBestBefore()).getDays();
+		return days;
 	}
 
 	// Mega hygger mig med at undgå at bruge deres ID fordi det skal være forskellige fra boks til boks

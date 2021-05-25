@@ -28,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ChangeAmountTest {
 
     private static GrosserWaresViewModel viewModel;
-    private static GrosserClient grosserClient;
     static GrosserModelInterface grosserModel;
     static GrosserClient grosser;
     static Product testProduct1, testProduct2, testProduct3;

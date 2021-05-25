@@ -33,7 +33,6 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 	public List<Product> requestAllProducts() throws SQLException {
 		updateInternalStorage();
 
-
 		return salesProducts;
 	}
 
@@ -210,6 +209,21 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 			return false;
 		}
 		return true;
+	}
+
+	public void changePrice(Product p, double procent) { //IKKKE FÆRDIG ENDNU
+		double newAmount = 0;
+		try (Connection conn = getConnection()) {
+			ResultSet r = conn.prepareStatement("SELECT salesprice FROM product WHERE productID = " + p.getWareNumber()).executeQuery();
+			if (r.next()) {
+				//newAmount = r.getInt("salesprice") -  (r.getInt("salesprice")*procent);
+				newAmount = 25;
+			}
+			conn.prepareStatement("UPDATE product SET salesprice = " + newAmount + " WHERE productID = " + p.getWareNumber()).execute();
+			conn.prepareStatement("UPDATE " + SchemaMap.Mapping(p.getClass()) + " SET salesprice = " + newAmount + " WHERE productID = " + p.getWareNumber()).execute();
+		} catch (SQLException throwables) {
+			System.out.println(throwables);
+		}
 	}
 
 	private boolean removeProductFromDatabase(Product p) throws SQLException {
