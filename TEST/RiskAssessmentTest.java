@@ -10,6 +10,8 @@ import javafx.util.Pair;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import server.model.RISK_ASSESSMENT.RiskContainer;
+import server.model.RISK_ASSESSMENT.RiskInterface;
 import server.network.RMIServer;
 import shared.network.RMIServerInterface;
 import shared.wares.Alcohol;
@@ -17,11 +19,17 @@ import shared.wares.Product;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+//Line og Frederik pair-programming baby
 
 public class RiskAssessmentTest
 {
   private static GrosserClient grosserClient;
   static GrosserModelInterface grosserModel;
+  static RiskInterface risk;
 
   @BeforeAll //Hapset fra Young
   static void init()
@@ -54,9 +62,18 @@ public class RiskAssessmentTest
 
     int soldDaily = 5;
     int stock = 150;
-    Pair<Product, Integer> pair = new Pair<>(justRightAlcohol, stock);
 
-    assertEquals("Green", riskAssess(pair, soldDaily));
+    RiskContainer container = new RiskContainer(
+        justRightAlcohol.getWareNumber(),
+        justRightAlcohol.getDeliveryDays(),
+        stock,
+        soldDaily,
+        justRightAlcohol.getBestBefore());
+
+    ArrayList<RiskContainer> riskList = new ArrayList<>();
+    riskList.add(container);
+
+    assertEquals("Green", risk.massAssess(riskList));
 
   }
 
@@ -76,9 +93,18 @@ public class RiskAssessmentTest
 
     int soldDaily = 5;
     int stock = 49;
-    Pair<Product, Integer> pair = new Pair<>(notEnoughAlcohol, stock);
 
-    assertEquals("Yellow", riskAssess(pair, soldDaily));
+    RiskContainer container = new RiskContainer(
+        notEnoughAlcohol.getWareNumber(),
+        notEnoughAlcohol.getDeliveryDays(),
+        stock,
+        soldDaily,
+        notEnoughAlcohol.getBestBefore());
+
+    ArrayList<RiskContainer> riskList = new ArrayList<>();
+    riskList.add(container);
+
+    assertEquals("Yellow", risk.massAssess(riskList));
   }
 
   @Test void wayTooLittleStock(){
@@ -97,9 +123,18 @@ public class RiskAssessmentTest
 
     int soldDaily = 5;
     int stock = 5;
-    Pair<Product, Integer> pair = new Pair<>(notEnoughAlcohol, stock);
 
-    assertEquals("Yellow", riskAssess(pair, soldDaily));
+    RiskContainer container = new RiskContainer(
+        notEnoughAlcohol.getWareNumber(),
+        notEnoughAlcohol.getDeliveryDays(),
+        stock,
+        soldDaily,
+        notEnoughAlcohol.getBestBefore());
+
+    ArrayList<RiskContainer> riskList = new ArrayList<>();
+    riskList.add(container);
+
+    assertEquals("Yellow", risk.massAssess(riskList));
   }
 
   @Test void tooMuchStock(){
