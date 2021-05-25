@@ -104,9 +104,11 @@ public class BasketViewController implements CustomerViewController {
 		swapScene("CustomerBrowser");
 	}
 
+	/*
 	public void openSubscriptions() throws IOException {
 		//swapScene("CustomerSubscriptions");
 	}
+	 */
 
 	public void openBasket() throws IOException {
 		swapScene("CustomerBasket");

@@ -20,8 +20,6 @@ public class RiskAssessment implements RiskInterface
       riskAssess(item);
     }
 
-    System.out.println(allReports.size() == itemList.size());
-
     return allReports;
   }
 

@@ -9,21 +9,22 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.*;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import shared.wares.Product;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-// Andreas Young, Line Guld
+// Andreas Young, Line Guld, Andreas Østergaard
 
 public class CustomerBrowserViewController implements CustomerViewController {
 	// Category Labels
@@ -35,6 +36,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	@FXML private Text categoryDrinks;
 	@FXML private Text categoryAlcohol;
 	@FXML private ScrollPane SPane;
+	@FXML private TextField searchText;
 	// Item List for Product Population
 	@FXML private VBox productItemList;
 
@@ -50,27 +52,33 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		itemList = new SimpleListProperty<>();
 		itemList.bind(viewModel.activeItemListProperty());
 		loadAllProducts();
-		populate("all");
+		populate("Alt");
 	}
 
 	public void loadAllProducts() {
 		viewModel.loadAllProductsToModel();
-		// TODO: Load All Products from the Database
 	}
 
 	public void loadSpecificCategory(MouseEvent mouseEvent) {
 		Node selected = mouseEvent.getPickResult().getIntersectedNode();
 		if (selected instanceof Text) {
 			String category = ((Text) selected).getText().substring(2);
-			System.out.println("Attempting to load this category:" + category); //SOUT
 			populate(category);
 		}
 	}
 
 	private void populate(String category) {
 		productItemList.getChildren().clear();
-		// viewModel.populate(category);
-		for (Product item : itemList) {
+		ArrayList<Product> SpecificItemList = viewModel.populate(category);
+		for(Product item: SpecificItemList){
+			productItemList.getChildren().add(createEntry(item));
+		}
+	}
+
+	public void searchBtn(){
+		productItemList.getChildren().clear();
+		ArrayList<Product> SpecificItemList = viewModel.searchBtn(searchText.textProperty().getValue());
+		for(Product item: SpecificItemList){
 			productItemList.getChildren().add(createEntry(item));
 		}
 	}
@@ -86,17 +94,17 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		main.styleProperty().setValue("-fx-border-color: lightgray;");
 		// Nodes regarding the Item
 		Text title = new Text(product.getWareName());
-		Text productID = new Text("Varenummer: " + product.getWareNumber());
+		Text productID = new Text("Varenummer: "+product.getWareNumber());
 		productID.setId("ProductID");
 		main.setMaxWidth(615);
-		//Text desc = new Text("\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
-		//desc.wrappingWidthProperty().bind(SPane.widthProperty());
-		//TextFlow textFlow = new TextFlow(desc);
+		Text desc = new Text("\" "+product.getTags());
+		desc.wrappingWidthProperty().bind(SPane.widthProperty());
+		TextFlow textFlow = new TextFlow(desc);
 		//main.width
 		Image image;
-		try {
-			image = new Image("shared/images/" + product.getClass().toString().substring(19) + ".jpg");
-		} catch (RuntimeException e) {
+		try{
+			image = new Image("shared/images/" + product.getClass().toString().substring(19) +".jpg");
+		} catch (RuntimeException e){
 			image = new Image("shared/images/150placeholder.png");
 		}
 		ImageView iv2 = new ImageView();
@@ -106,7 +114,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		iv2.setSmooth(true);
 		iv2.setCache(true);
 
-		Text price = new Text("" + product.getPrice() + "DKK ,-");
+		Text price = new Text("" + product.getPrice() + " DKK ,-");
 		price.setTextAlignment(TextAlignment.RIGHT);
 		TextField amount = new TextField();
 		Button addButton = new Button("Tilføj til Kurv");
@@ -114,7 +122,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		// Design of Nodes
 		title.setFont(Font.font("Segoe UI", FontWeight.BLACK, 21));
 		productID.setFont(Font.font("Segoe UI", FontWeight.BLACK, 15));
-		//desc.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 15));
+		desc.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 15));
 		price.setFont(Font.font("Segoe UI", FontWeight.MEDIUM, 21));
 		amount.setPromptText("Mængde");
 		amount.setFont(Font.font("Segoe UI", FontWeight.LIGHT, 16));
@@ -125,9 +133,9 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		prisHBox.getChildren().add(price);
 		vBox.getChildren().add(prisHBox);
 
-		//textFlow.setPadding(new Insets(5, 30, 10, 0));
+		textFlow.setPadding(new Insets(5, 30, 10, 0));
 		vBox.getChildren().add(productID);
-		//vBox.getChildren().add(textFlow);
+		vBox.getChildren().add(textFlow);
 
 		btnHBox.getChildren().add(amount);
 		btnHBox.getChildren().add(addButton);
@@ -176,14 +184,13 @@ public class CustomerBrowserViewController implements CustomerViewController {
 			HBox amountBox = (HBox) button.getParent();
 			TextField amountField = (TextField) amountBox.lookup("TextField");
 			if (amountField.getText().isEmpty() || containsLetters(amountField.getText())) {
-				new Alert(Alert.AlertType.INFORMATION, "Antal skal være et Positivt Heltat", ButtonType.OK);
+				System.out.println("Amount field only accepts Integer Numbers");
 			} else {
 				int amount = Integer.parseInt(amountField.getText());
 				viewModel.addToBasket(itemID, amount);
 			}
 		}
 	}
-
 	// Ved ikke om denne skal være her? Tænker det giver mest mening da den tjekker på noget der er på vores view
 	private boolean containsLetters(String text) {
 		for (char c : text.toCharArray()) {
@@ -204,9 +211,11 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		swapScene("CustomerBrowser");
 	}
 
+	/*
 	public void openSubscriptions() throws IOException {
 		swapScene("CustomerSubscriptions");
 	}
+	 */
 
 	public void openBasket() throws IOException {
 		swapScene("CustomerBasket");

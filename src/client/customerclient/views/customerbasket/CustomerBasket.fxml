@@ -29,7 +29,7 @@
                      <children>
                         <Button mnemonicParsing="false" onAction="#openProductBrowser" prefHeight="30.0" prefWidth="120.0" text="Produkter" />
                         <Button mnemonicParsing="false" onAction="#openBasket" prefHeight="30.0" prefWidth="120.0" text="Kurv" />
-                        <Button mnemonicParsing="false" onAction="#openSubscriptions" prefHeight="30.0" prefWidth="120.0" text="Abonnemter" />
+                        <!-- <Button mnemonicParsing="false" onAction="#openSubscriptions" prefHeight="30.0" prefWidth="120.0" text="Abonnemter" /> -->
                      </children>
                      <HBox.margin>
                         <Insets right="5.0" />
