@@ -7,7 +7,6 @@ import shared.objects.CustomerContainer;
 import shared.util.Util;
 import shared.objects.Basket;
 import shared.objects.Order;
-import shared.util.Util;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
@@ -87,7 +86,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient, LoginIn
 	}
 
 	@Override
-	public void createProduct(Pair<Product, Integer> newProduct) throws SQLException {
+	public void createProduct(Pair<Product, Integer> newProduct) throws SQLException, IllegalArgumentException {
 		try {
 			server.createProduct(newProduct);
 		} catch (RemoteException e) {

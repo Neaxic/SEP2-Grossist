@@ -43,7 +43,6 @@ public abstract class Product implements Serializable {
 	}
 
 
-
 	// Getters for all Field Variables
 	public String getWareName() {
 		return wareName;

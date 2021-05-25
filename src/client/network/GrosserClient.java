@@ -7,11 +7,10 @@ import shared.objects.CustomerContainer;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeListener;
-import java.util.Map;
 import java.sql.SQLException;
 
 public interface GrosserClient {
-	void createProduct(Pair<Product, Integer> newProduct) throws SQLException;
+	void createProduct(Pair<Product, Integer> newProduct) throws SQLException, IllegalArgumentException;
 
 	void getAllOrders();
 

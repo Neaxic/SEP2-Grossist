@@ -5,14 +5,14 @@ import shared.network.Subject;
 import shared.objects.CustomerContainer;
 import shared.wares.Product;
 
-import java.util.Map;
+import java.sql.SQLException;
 
 //Lavet af: Frederik Bergmann, Andreas Young.
 
 public interface GrosserModelInterface extends Subject {
 	void reduceStock(Pair<Product, Integer> productAndAmountToReduce);
 
-	void createNewProduct(Pair<Product, Integer> newProduct);
+	void createNewProduct(Pair<Product, Integer> newProduct) throws IllegalArgumentException, SQLException;
 
 	void getAllOrders();
 

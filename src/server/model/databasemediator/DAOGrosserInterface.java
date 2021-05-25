@@ -38,7 +38,7 @@ public interface DAOGrosserInterface extends CollectionDAOInterface {
 	 * @throws SQLException Thrown when Database access is not possible <br>
 	 *                      Often caused by Database not being online
 	 */
-	boolean addNewProduct(Pair<Product, Integer> newProductAndAmount) throws SQLException;
+	boolean addNewProduct(Pair<Product, Integer> newProductAndAmount) throws SQLException, IllegalArgumentException;
 
 	/**
 	 * Accesses the Database and creates an SQL statement, using postgresql, to change the amount in stock of a product in the system. <br>

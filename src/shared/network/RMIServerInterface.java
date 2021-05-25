@@ -76,7 +76,7 @@ public interface RMIServerInterface extends Remote
 	 * @param newProduct Pair consisting of the Product and the amount of that product there is
 	 * @throws RemoteException
 	 */
-	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException, SQLException;
+	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException, SQLException, IllegalArgumentException;
 
 	/**
 	 * Removes a ware entirely from the Database

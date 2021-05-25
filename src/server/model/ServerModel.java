@@ -7,7 +7,6 @@ import server.model.databasemediator.DAOModel;
 import shared.objects.Basket;
 import shared.objects.CustomerContainer;
 import shared.objects.Order;
-import shared.util.md5;
 import shared.wares.Product;
 
 import java.sql.SQLException;
@@ -91,7 +90,7 @@ public class ServerModel {
 
 	}
 
-	public void createProduct(Pair<Product, Integer> newProduct) throws SQLException {
+	public void createProduct(Pair<Product, Integer> newProduct) throws SQLException, IllegalArgumentException {
 		DAOGrosser.addNewProduct(newProduct);
 	}
 

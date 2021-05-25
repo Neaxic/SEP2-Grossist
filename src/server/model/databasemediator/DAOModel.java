@@ -9,6 +9,7 @@ import shared.wares.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,8 +40,7 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 	}
 
 	@Override
-	public Map<Integer, String> getLoginInfo()
-	{
+	public Map<Integer, String> getLoginInfo() {
 		return getCustomerLoginMap();
 	}
 
@@ -67,7 +67,10 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 	}
 
 	@Override
-	public boolean addNewProduct(Pair<Product, Integer> newProductAndAmount) throws SQLException {
+	public boolean addNewProduct(Pair<Product, Integer> newProductAndAmount) throws SQLException, IllegalArgumentException {
+		if (newProductAndAmount.getValue() <= 0 || newProductAndAmount.getKey().getWareName().isBlank() || newProductAndAmount.getKey().getMeasurementType().isBlank() || newProductAndAmount.getKey().getBestBefore().isBefore(LocalDate.now().plusDays(1)) || newProductAndAmount.getKey().getDeliveryDays() <= 0 || newProductAndAmount.getKey().getPrice() <= 0 || newProductAndAmount.getKey().getProducedBy().isBlank()) {
+			throw new IllegalArgumentException();
+		}
 		int productID = addProductToSuperTable(newProductAndAmount.getKey(), newProductAndAmount.getValue());
 		return addProductToDesignatedTable(productID, newProductAndAmount.getKey(), newProductAndAmount.getValue());
 	}
@@ -237,23 +240,18 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 		return true;
 	}
 
-	private Map<Integer, String> getCustomerLoginMap()
-	{
+	private Map<Integer, String> getCustomerLoginMap() {
 		Map<Integer, String> customerLoginMap = new HashMap<>();
 
-		try (Connection connection = getConnection())
-		{
+		try (Connection connection = getConnection()) {
 			PreparedStatement statement = connection.prepareStatement("SELECT CVR, password FROM customer");
 			ResultSet result = statement.executeQuery();
 
-			while (result.next())
-			{
+			while (result.next()) {
 				customerLoginMap.put(result.getInt(1), result.getString(2));
 			}
 
-		}
-		catch (SQLException throwables)
-		{
+		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
 
@@ -281,6 +279,6 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 			conn.prepareStatement("DELETE FROM orderSpec WHERE orderNo = " + orderNo).execute();
 			conn.prepareStatement("DELETE FROM order_ WHERE orderNo = " + orderNo).execute();
 		}
-			return true;
+		return true;
 	}
 }
