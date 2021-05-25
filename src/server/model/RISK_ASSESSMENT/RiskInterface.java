@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 public interface RiskInterface
 {
-  ArrayList<RiskReport> massAssess(ArrayList<RiskContainer> container);
+  ArrayList<RiskReport> massAssess(ArrayList<RiskContainer> containerList);
 
 }
