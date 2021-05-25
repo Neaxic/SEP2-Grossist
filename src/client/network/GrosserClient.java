@@ -3,9 +3,11 @@ package client.network;
 // Andreas Østergaard
 
 import javafx.util.Pair;
+import shared.objects.CustomerContainer;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeListener;
+import java.util.Map;
 import java.sql.SQLException;
 
 public interface GrosserClient {
@@ -22,6 +24,8 @@ public interface GrosserClient {
 	void increaseStock(Pair<Product, Integer> productWithNewAmount);
 
 	void reduceStock(Pair<Product, Integer> productAndAmountToReduce);
+
+	boolean addCustomer(CustomerContainer customer);
 
 	void deleteLatestOrder();
 }

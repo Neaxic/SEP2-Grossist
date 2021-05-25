@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // Lavet af hele teamet
 
@@ -35,6 +36,12 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 
 
 		return salesProducts;
+	}
+
+	@Override
+	public Map<Integer, String> getLoginInfo()
+	{
+		return getCustomerLoginMap();
 	}
 
 	@Override
@@ -228,6 +235,29 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 			conn.prepareStatement("DELETE FROM " + SchemaMap.Mapping(p.getClass()) + " WHERE productID = " + p.getWareNumber()).execute();
 		}
 		return true;
+	}
+
+	private Map<Integer, String> getCustomerLoginMap()
+	{
+		Map<Integer, String> customerLoginMap = new HashMap<>();
+
+		try (Connection connection = getConnection())
+		{
+			PreparedStatement statement = connection.prepareStatement("SELECT CVR, password FROM customer");
+			ResultSet result = statement.executeQuery();
+
+			while (result.next())
+			{
+				customerLoginMap.put(result.getInt(1), result.getString(2));
+			}
+
+		}
+		catch (SQLException throwables)
+		{
+			throwables.printStackTrace();
+		}
+
+		return customerLoginMap;
 	}
 
 	private boolean addCustomerToDatabase(int cvr, String name, String password, String address) throws SQLException {

@@ -3,6 +3,8 @@ package client.network;
 import javafx.util.Pair;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
+import shared.objects.CustomerContainer;
+import shared.util.Util;
 import shared.objects.Basket;
 import shared.objects.Order;
 import shared.util.Util;
@@ -19,10 +21,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 // Andreas Young og Andreas Østergaard
 
-public class RMIClient implements Client, GrosserClient, CallbackClient {
+public class RMIClient implements Client, GrosserClient, CallbackClient, LoginInfoInterface {
 	private RMIServerInterface server;
 	private PropertyChangeSupport support;
 	private int clientID;
@@ -150,6 +153,33 @@ public class RMIClient implements Client, GrosserClient, CallbackClient {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override public boolean addCustomer(CustomerContainer customer)
+	{
+		try
+		{
+			return server.addCustomer(customer);
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public Map<Integer, String> getLoginInfo()
+	{
+		try
+		{
+			return server.getLoginInfo();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

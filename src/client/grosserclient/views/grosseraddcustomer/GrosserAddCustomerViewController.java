@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import shared.objects.CustomerContainer;
+import shared.util.md5;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -25,13 +26,15 @@ public class GrosserAddCustomerViewController implements GrosserViewController
   @FXML private TextField cityField;
   @FXML private TextField CVRField;
   @FXML private TextField passwordField;
+  @FXML private Button abortButton;
 
   private ViewHandler viewHandler;
   private GrosserAddCustomerViewModel viewModel;
 
   @FXML public void create()
   {
-    if (!(CVRField.getText().matches("[0-9]+$")) || CVRField.getText().length() != 8)
+    if (!(CVRField.getText().matches("[0-9]+$"))
+        || CVRField.getText().length() != 8)
     {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("CVR Fejl");
@@ -71,40 +74,65 @@ public class GrosserAddCustomerViewController implements GrosserViewController
       return;
     }
 
-    int CVR = Integer.parseInt(CVRField.getText());
-    String address = streetField.getText() + ", " + zipField.getText() + " " + cityField.getText();
+    if (fieldsCheck())
+    {
+      int CVR = Integer.parseInt(CVRField.getText());
+      String address =
+          streetField.getText() + ", " + zipField.getText() + " " + cityField
+              .getText();
 
-    CustomerContainer customer = new CustomerContainer(CVR, address, passwordField.getText(), nameField.getText());
+      pw = md5.encode(passwordField.getText());
 
+      CustomerContainer customer = new CustomerContainer(CVR, address, pw, nameField.getText());
 
+      if (viewModel.addCustomer(customer))
+      {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Bekræftelse");
+        alert.setHeaderText(null);
+        alert.setContentText("Ny kunde oprettet succesfuldt");
+
+        alert.showAndWait();
+        abortButton.fire();
+      }
+      else
+      {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Fejl");
+        alert.setHeaderText(null);
+        alert.setContentText("Noget gik galt, prøv igen.");
+
+        alert.showAndWait();
+      }
+    }
+  }
+
+  private boolean fieldsCheck()
+  {
+    if (nameField.getText().isBlank() || zipField.getText().isBlank()
+        || cityField.getText().isBlank() || streetField.getText().isBlank())
+    {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setTitle("Indtastnings fejl");
+      alert.setHeaderText(null);
+      alert.setContentText("Et eller flere felter mangler at blive udfyldt.");
+
+      alert.showAndWait();
+      return false;
+    }
+    else
+    {
+      return true;
+    }
   }
 
   @FXML
-  private void abort(ActionEvent event)
+  public void abort(ActionEvent event)
   {
     Node node = (Node) event.getSource();
-    Stage thisStage = (Stage) node.getScene().getWindow();
+    Stage stage = (Stage) node.getScene().getWindow();
 
-    thisStage.close();
-  }
-
-  private boolean passwordCheck(String input)
-  {
-    char ch;
-    boolean upperFlag = false;
-    boolean lowerFlag = false;
-    boolean numberFlag = false;
-    boolean spaceFlag = false;
-
-    for (int i = 0; i < input.length(); i++)
-    {
-      ch = input.charAt(i);
-      if (Character.isUpperCase(ch)) upperFlag = true;
-      else if (Character.isLowerCase(ch)) lowerFlag = true;
-      else if (Character.isDigit(ch)) numberFlag = true;
-      else if (Character.isWhitespace(ch)) spaceFlag = true;
-    }
-    return upperFlag && lowerFlag && numberFlag && !spaceFlag;
+    stage.close();
   }
 
   @Override public void init(ViewHandler viewHandler)

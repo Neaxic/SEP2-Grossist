@@ -7,12 +7,14 @@ import server.model.databasemediator.DAOModel;
 import shared.objects.Basket;
 import shared.objects.CustomerContainer;
 import shared.objects.Order;
+import shared.util.md5;
 import shared.wares.Product;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 // Lavet af hele teamet
 
@@ -53,8 +55,12 @@ public class ServerModel {
 	 * Pair [false, null] if the <b>orderItems</b> was empty or null
 	 * @throws SQLException
 	 */
-	public Pair<Boolean, ArrayList<Product>> verifyOrder(Basket orderItems) throws SQLException {
-		if (orderItems == null || orderItems.getBasket().size() < 1) {
+
+	public Pair<Boolean, ArrayList<Product>> verifyOrder(Basket orderItems)
+			throws SQLException
+	{
+		if (orderItems == null || orderItems.getBasket().size() < 1)
+		{
 			return new Pair<>(false, null);
 		}
 		wares = DAOCustomer.requestAllProducts();
@@ -144,4 +150,10 @@ public class ServerModel {
 			e.printStackTrace();
 		}
 	}
+
+	public Map<Integer, String> getLoginInfo()
+	{
+		return DAOCustomer.getLoginInfo();
+	}
+
 }

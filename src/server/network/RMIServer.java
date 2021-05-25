@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // Andreas Østergaard, Andreas Young, Frederik Bergmann
 
@@ -106,8 +107,14 @@ public class RMIServer implements RMIServerInterface {
 	}
 
 	@Override
-	public void addCustomer(CustomerContainer customer) throws RemoteException {
-		boolean customerAdded = serverModel.addCustomer(customer);
+	public boolean addCustomer(CustomerContainer customer) throws RemoteException {
+		return serverModel.addCustomer(customer);
+	}
+
+	@Override
+	public Map<Integer, String> getLoginInfo()
+	{
+		return serverModel.getLoginInfo();
 	}
 
 	@Override
