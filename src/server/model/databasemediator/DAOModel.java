@@ -92,8 +92,14 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 		return addCustomerToDatabase(cvr, name, password, address);
 	}
 
-	// Private Methods for accessing the Database
+	@Override
+	public void deleteLatestOrder() throws SQLException {
+		int orderNo = getLatestOrderNo();
+		deleteOrder(orderNo);
+	}
 
+
+	// Private Methods for accessing the Database
 	private void updateInternalStorage() throws SQLException {
 		map.clear();
 		map.put("Alcohol", getProductsFromTable(SchemaMap.Mapping(Alcohol.class), Alcohol.class));
@@ -187,7 +193,11 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 
 	private int addProductToSuperTable(Product p, Integer v) throws SQLException {
 		try (Connection conn = getConnection()) {
-			conn.prepareStatement("INSERT INTO product(productname, measurement, producedby, salesprice, bbdate, amountinstock, tags) VALUES ('" + p.getWareName() + "', '" + p.getMeasurementType() + "', '" + p.getProducedBy() + "', " + p.getPrice() + ", '" + p.getBestBefore() + "', " + v + ", '" + p.getTags() + "')").execute();
+			if (p.getWareNumber() < 0) {
+				conn.prepareStatement("INSERT INTO product(productname, measurement, producedby, salesprice, bbdate, amountinstock, tags) VALUES ('" + p.getWareName() + "', '" + p.getMeasurementType() + "', '" + p.getProducedBy() + "', " + p.getPrice() + ", '" + p.getBestBefore() + "', " + v + ", '" + p.getTags() + "')").execute();
+			} else {
+				conn.prepareStatement("INSERT INTO product(productID, productName, measurement, producedBy, salesPrice, bbDate, amountInStock, tags) VALUES (" + p.getWareNumber() + ", '" + p.getWareName() + "', '" + p.getMeasurementType() + "', '" + p.getProducedBy() + "', " + p.getPrice() + ", '" + p.getBestBefore() + "', " + v + ", '" + p.getTags() + "')").execute();
+			}
 			ResultSet r = conn.prepareStatement("SELECT productID FROM product WHERE productName = '" + p.getWareName() + "' AND producedBy = '" + p.getProducedBy() + "' AND bbDate = '" + p.getBestBefore() + "'").executeQuery();
 			r.next();
 			return r.getInt("productID");
@@ -255,5 +265,22 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 			conn.prepareStatement("INSERT INTO customer VALUES (" + cvr + ",  '" + name + "', '" + password + "', '" + address + "')").execute();
 			return true;
 		}
+	}
+
+	private int getLatestOrderNo() throws SQLException {
+		try (Connection conn = getConnection()) {
+			ResultSet r = conn.prepareStatement("SELECT orderNo FROM order_ ORDER BY orderTime DESC").executeQuery();
+			System.out.println(r.getFetchSize());
+			r.next();
+			return r.getInt("orderNo");
+		}
+	}
+
+	private boolean deleteOrder(int orderNo) throws SQLException {
+		try (Connection conn = getConnection()) {
+			conn.prepareStatement("DELETE FROM orderSpec WHERE orderNo = " + orderNo).execute();
+			conn.prepareStatement("DELETE FROM order_ WHERE orderNo = " + orderNo).execute();
+		}
+			return true;
 	}
 }

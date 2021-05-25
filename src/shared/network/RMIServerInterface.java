@@ -8,6 +8,7 @@ import shared.wares.Product;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -59,7 +60,7 @@ public interface RMIServerInterface extends Remote
 	 * @throws RemoteException
 	 */
 	Pair<Boolean, ArrayList<Product>> sendOrder(int cvr, Basket orderItems)
-			throws RemoteException;
+			throws RemoteException, SQLException;
 
 	/**
 	 * Requests all registered orders for the grosser main view.
@@ -72,10 +73,10 @@ public interface RMIServerInterface extends Remote
 	/**
 	 * Sends a new product to the server
 	 *
-	 * @param newProduct
+	 * @param newProduct Pair consisting of the Product and the amount of that product there is
 	 * @throws RemoteException
 	 */
-	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException;
+	void createProduct(Pair<Product, Integer> newProduct) throws RemoteException, SQLException;
 
 	/**
 	 * Removes a ware entirely from the Database
@@ -109,4 +110,9 @@ public interface RMIServerInterface extends Remote
   boolean addCustomer(CustomerContainer customer) throws RemoteException;
 
 	Map<Integer, String> getLoginInfo() throws RemoteException;
+
+	/**
+	 * Deletes the latest order made from the Database. Can be used as an Undo or in Cleaning up after Testing
+	 */
+	void deleteLatestOrder() throws RemoteException;
 }

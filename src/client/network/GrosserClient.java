@@ -8,9 +8,10 @@ import shared.wares.Product;
 
 import java.beans.PropertyChangeListener;
 import java.util.Map;
+import java.sql.SQLException;
 
 public interface GrosserClient {
-	void createProduct(Pair<Product, Integer> newProduct);
+	void createProduct(Pair<Product, Integer> newProduct) throws SQLException;
 
 	void getAllOrders();
 
@@ -18,13 +19,15 @@ public interface GrosserClient {
 
 	void requestGrosserProducts();
 
-	void deleteWare(Product productID);
+	void deleteWare(Product ware);
 
 	void increaseStock(Pair<Product, Integer> productWithNewAmount);
 
 	void reduceStock(Pair<Product, Integer> productAndAmountToReduce);
 
 	boolean addCustomer(CustomerContainer customer);
+
+	void deleteLatestOrder();
 }
 
 

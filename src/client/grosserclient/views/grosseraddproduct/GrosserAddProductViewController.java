@@ -94,6 +94,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		checkValues.add(checkHalal);
 		checkValues.add(checkGlutenfri);
 		checkValues.add(checkAlkoholfri);
+		System.out.println(checkValues); //SOUT
 	}
 
 	private String getAllTags(){
@@ -103,6 +104,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 				tempTags += i.getText() + ", ";
 			}
 		}
+		System.out.println(activeTags); //SOUT
 
 		// cut det sidste komma fra
 		if(tempTags.length() > 0){
@@ -110,6 +112,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		}
 		return activeTags;
 	}
+
 
 	private void createWarning(String msg) {
 		Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);
@@ -173,7 +176,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						productName.getText(),
 						productMeasurement.getText(),
 						productBestBefore.getValue(),
-						0,
+						-1,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
 						productBy.getText(),
@@ -196,7 +199,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						productName.getText(),
 						productMeasurement.getText(),
 						productBestBefore.getValue(),
-						0,
+						-1,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
 						productBy.getText(),
@@ -217,7 +220,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						productName.getText(),
 						productMeasurement.getText(),
 						productBestBefore.getValue(),
-						0,
+						-1,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
 						productBy.getText(),
@@ -232,7 +235,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						productName.getText(),
 						productMeasurement.getText(),
 						productBestBefore.getValue(),
-						0,
+						-1,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
 						productBy.getText(),
@@ -254,7 +257,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						productName.getText(),
 						productMeasurement.getText(),
 						productBestBefore.getValue(),
-						0,
+						-1,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
 						productBy.getText(),
@@ -275,7 +278,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						productName.getText(),
 						productMeasurement.getText(),
 						productBestBefore.getValue(),
-						0,
+						-1,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
 						productBy.getText(),
@@ -290,7 +293,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						productName.getText(),
 						productMeasurement.getText(),
 						productBestBefore.getValue(),
-						0,
+						-1,
 						Integer.parseInt(productDeliveryDays.getText()),
 						Double.parseDouble(productPrice.getText()),
 						productBy.getText(),

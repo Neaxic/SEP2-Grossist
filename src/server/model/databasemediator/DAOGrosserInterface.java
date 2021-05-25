@@ -87,4 +87,11 @@ public interface DAOGrosserInterface extends CollectionDAOInterface {
 	 *                      Often caused by Database not being online
 	 */
 	boolean addNewCustomer(int cvr, String name, String password, String address) throws SQLException;
+
+	/**
+	 * Accesses the Database and removes the most recent Order made. <br>
+	 * <b>Intentional Use:</b> Cleaning up after Testing. <br>
+	 * <b>Possible Other Use:</b> Undo button.
+	 */
+	void deleteLatestOrder() throws SQLException;
 }

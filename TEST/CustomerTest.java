@@ -1,17 +1,18 @@
-import client.core.factories.ClientFactory;
 import client.core.LoginManager;
+import client.core.factories.ClientFactory;
 import client.core.factories.ModelFactory;
 import client.customerclient.model.CustomerModelInterface;
 import client.customerclient.views.customerbasket.BasketViewModel;
-import shared.objects.ProductAndInt;
 import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import client.network.GrosserClient;
+import javafx.util.Pair;
+import org.junit.jupiter.api.*;
 import server.network.RMIServer;
 import shared.network.RMIServerInterface;
+import shared.objects.ProductAndInt;
 import shared.wares.Alcohol;
+import shared.wares.Drink;
+import shared.wares.FruitsAndVegetable;
 import shared.wares.Product;
 
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // Andreas Young
 
 public class CustomerTest {
-	static Product p = new Alcohol("Soplica Wisniowa", "Liter", LocalDate.now(), 420, 10, 10, "CEDC International","", "Poland", 30d, "Vodka");
+	static Product testProduct1, testProduct2, testProduct3;
 	static int a = 1;
 	static CustomerModelInterface customerModel;
 
@@ -35,7 +36,7 @@ public class CustomerTest {
 		private CustomerBrowserViewModel vm;
 
 		@BeforeAll
-		static void init() {
+		static void init() throws SQLException {
 			try {
 				RMIServerInterface server = new RMIServer();
 				assertDoesNotThrow(server::startServer);
@@ -43,12 +44,27 @@ public class CustomerTest {
 				throwable.printStackTrace();
 			}
 			ClientFactory.getInstance().getClient().start();
+			GrosserClient grosser = ClientFactory.getInstance().getGrosserClient();
+			testProduct1 = new Alcohol("Royal Export", "Liter", LocalDate.now().plusMonths(10), 2001, 10, 4.5, "Royal Unibrew", "", "Danmark", 4.6, "Øl");
+			testProduct2 = new Drink("Jolly Cola Sukkerfri", "Liter", LocalDate.now().plusMonths(3), 2002, 20, 5.95, "Jolly", "Sukkerfri", "Sodavand");
+			testProduct3 = new FruitsAndVegetable("Banan", "Kg", LocalDate.now().plusDays(7), 2003, 1, 2.3, "Palmer", "GMO", "Spanien");
+			grosser.createProduct(new Pair<>(testProduct1, 100));
+			grosser.createProduct(new Pair<>(testProduct2, 100));
+			grosser.createProduct(new Pair<>(testProduct3, 100));
 		}
 
 		@BeforeEach
-		void setUp() {
+		void setUp() throws SQLException {
 			vm = new CustomerBrowserViewModel();
 			customerModel = ModelFactory.getInstance().getCustomerModel();
+		}
+
+		@AfterAll
+		static void adminCleanUp() {
+			GrosserClient admin = ClientFactory.getInstance().getGrosserClient();
+			admin.deleteWare(testProduct1);
+			admin.deleteWare(testProduct2);
+			admin.deleteWare(testProduct3);
 		}
 
 		@Test
@@ -62,7 +78,8 @@ public class CustomerTest {
 		void addToBasket() {
 			vm.loadAllProductsToModel();
 			assertTrue(customerModel.getMyBasket().getBasket().isEmpty());
-			vm.addToBasket(1, 1);
+			vm.addToBasket(2001, 1);
+			System.out.println(vm.activeItemListProperty().get().get(1).getWareNumber());
 			assertFalse(customerModel.getMyBasket().getBasket().isEmpty());
 		}
 	}
@@ -71,7 +88,7 @@ public class CustomerTest {
 		private BasketViewModel vm;
 
 		@BeforeAll
-		static void init() {
+		static void init() throws SQLException {
 			try {
 				RMIServerInterface server = new RMIServer();
 				assertDoesNotThrow(server::startServer);
@@ -79,6 +96,13 @@ public class CustomerTest {
 				throwable.printStackTrace();
 			}
 			ClientFactory.getInstance().getClient().start();
+			GrosserClient grosser = ClientFactory.getInstance().getGrosserClient();
+			testProduct1 = new Alcohol("Royal Export", "Liter", LocalDate.now().plusMonths(10), 2001, 10, 4.5, "Royal Unibrew", "", "Danmark", 4.6, "Øl");
+			testProduct2 = new Drink("Jolly Cola Sukkerfri", "Liter", LocalDate.now().plusMonths(3), 2002, 20, 5.95, "Jolly", "Sukkerfri", "Sodavand");
+			testProduct3 = new FruitsAndVegetable("Banan", "Kg", LocalDate.now().plusDays(7), 2003, 1, 2.3, "Palmer", "GMO", "Spanien");
+			grosser.createProduct(new Pair<>(testProduct1, 100));
+			grosser.createProduct(new Pair<>(testProduct2, 100));
+			grosser.createProduct(new Pair<>(testProduct3, 100));
 		}
 
 		@BeforeEach
@@ -87,11 +111,19 @@ public class CustomerTest {
 			customerModel = ModelFactory.getInstance().getCustomerModel();
 		}
 
+		@AfterAll
+		static void adminCleanUp() {
+			GrosserClient admin = ClientFactory.getInstance().getGrosserClient();
+			admin.deleteWare(testProduct1);
+			admin.deleteWare(testProduct2);
+			admin.deleteWare(testProduct3);
+		}
+
 		@Test
 		void removeFromBasket() {
-			customerModel.addToBasket(p, a);
+			customerModel.addToBasket(testProduct1, a);
 			assertFalse(customerModel.getMyBasket().getBasket().isEmpty());
-			vm.removeFromBasket(new ProductAndInt(p.getWareName(), p.getWareNumber(), a));
+			vm.removeFromBasket(new ProductAndInt(testProduct1.getWareName(), testProduct1.getWareNumber(), a));
 			assertTrue(customerModel.getMyBasket().getBasket().isEmpty());
 		}
 
@@ -99,8 +131,9 @@ public class CustomerTest {
 		void sendOrder() {
 			LoginManager.cvr = 1;
 			assertThrows(MissingResourceException.class, () -> vm.sendOrder());
-			customerModel.addToBasket(p, a);
+			customerModel.addToBasket(testProduct1, a);
 			assertDoesNotThrow(() -> vm.sendOrder());
+			ClientFactory.getInstance().getGrosserClient().deleteLatestOrder();
 		}
 
 		@Test
@@ -111,18 +144,25 @@ public class CustomerTest {
 
 	static class CustomerCustomerModelTest {
 		@BeforeAll
-		static void init() {
+		static void init() throws SQLException {
 			try {
 				RMIServerInterface server = new RMIServer();
 				assertDoesNotThrow(server::startServer);
 			} catch (SQLException throwable) {
 				throwable.printStackTrace();
 			}
+			ClientFactory.getInstance().getClient().start();
+			GrosserClient grosser = ClientFactory.getInstance().getGrosserClient();
+			testProduct1 = new Alcohol("Royal Export", "Liter", LocalDate.now().plusMonths(10), 2001, 10, 4.5, "Royal Unibrew", "", "Danmark", 4.6, "Øl");
+			testProduct2 = new Drink("Jolly Cola Sukkerfri", "Liter", LocalDate.now().plusMonths(3), 2002, 20, 5.95, "Jolly", "Sukkerfri", "Sodavand");
+			testProduct3 = new FruitsAndVegetable("Banan", "Kg", LocalDate.now().plusDays(7), 2003, 1, 2.3, "Palmer", "GMO", "Spanien");
+			grosser.createProduct(new Pair<>(testProduct1, 100));
+			grosser.createProduct(new Pair<>(testProduct2, 100));
+			grosser.createProduct(new Pair<>(testProduct3, 100));
 		}
 
 		@BeforeEach
 		void setUp() {
-			ClientFactory.getInstance().getClient().start();
 			customerModel = ModelFactory.getInstance().getCustomerModel();
 			LoginManager.cvr = 1;
 		}
@@ -133,28 +173,36 @@ public class CustomerTest {
 			customerModel = null;
 		}
 
+		@AfterAll
+		static void adminCleanUp() {
+			GrosserClient admin = ClientFactory.getInstance().getGrosserClient();
+			admin.deleteWare(testProduct1);
+			admin.deleteWare(testProduct2);
+			admin.deleteWare(testProduct3);
+		}
+
 		@Test
 		void addToBasket() {
 			assertTrue(customerModel.getMyBasket().getBasket().isEmpty());
-			assertDoesNotThrow(() -> customerModel.addToBasket(p, a));
+			assertDoesNotThrow(() -> customerModel.addToBasket(testProduct1, a));
 			assertFalse(customerModel.getMyBasket().getBasket().isEmpty());
 		}
 
 		@Test
 		void removeFromBasket() {
-			assertDoesNotThrow(() -> customerModel.removeFromBasket(p)); // Documentation does not state, it shall throw an Error when the basket is empty and you attempt to remove an item from it
-			customerModel.addToBasket(p, a);
+			assertDoesNotThrow(() -> customerModel.removeFromBasket(testProduct1)); // Documentation does not state, it shall throw an Error when the basket is empty and you attempt to remove an item from it
+			customerModel.addToBasket(testProduct1, a);
 			assertFalse(customerModel.getMyBasket().getBasket().isEmpty());
-			assertDoesNotThrow(() -> customerModel.removeFromBasket(p));
+			assertDoesNotThrow(() -> customerModel.removeFromBasket(testProduct1));
 			assertTrue(customerModel.getMyBasket().getBasket().isEmpty());
 		}
 
 		@Test
 		void changeAmount() {
 			int n = 2;
-			customerModel.addToBasket(p, a);
-			assertDoesNotThrow(() -> customerModel.changeAmount(p, n));
-			assertEquals(n, customerModel.getMyBasket().getAmount(p));
+			customerModel.addToBasket(testProduct1, a);
+			assertDoesNotThrow(() -> customerModel.changeAmount(testProduct1, n));
+			assertEquals(n, customerModel.getMyBasket().getAmount(testProduct1));
 		}
 
 		@Test
@@ -167,15 +215,16 @@ public class CustomerTest {
 		void getMyBasket() {
 			assertNotNull(customerModel.getMyBasket());
 			assertTrue(customerModel.getMyBasket().getBasket().isEmpty());
-			customerModel.addToBasket(p, a);
+			customerModel.addToBasket(testProduct1, a);
 			assertFalse(customerModel.getMyBasket().getBasket().isEmpty());
 		}
 
 		@Test
 		void sendOrder() {
 			assertFalse(() -> customerModel.sendOrder(customerModel.getMyBasket(), 10).getKey());
-			customerModel.addToBasket(p, a);
+			customerModel.addToBasket(testProduct1, a);
 			assertDoesNotThrow(() -> customerModel.sendOrder(customerModel.getMyBasket(), 10));
+			ClientFactory.getInstance().getGrosserClient().deleteLatestOrder();
 		}
 
 		@Test
