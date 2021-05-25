@@ -6,6 +6,7 @@ import shared.objects.Basket;
 import shared.wares.Product;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 // Andreas Young
 

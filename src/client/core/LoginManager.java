@@ -1,6 +1,8 @@
 package client.core;
 
+import client.core.factories.ClientFactory;
 import client.core.viewhandlers.ProxyViewHandler;
+import client.network.LoginInfoInterface;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -11,24 +13,32 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import javafx.util.converter.IntegerStringConverter;
+import shared.util.md5;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 // Frederik Bergmann, Andreas Østergaard, Young (Young er på her, fordi jeg fik Systemet til at stoppe når man lukker Login vinduet :D)
 
 public class LoginManager {
-	public final ProxyViewHandler PVH;
+	private final ProxyViewHandler PVH;
+	private final LoginInfoInterface LII;
+
+	public static int cvr = 0;
+
 
 	public LoginManager(ProxyViewHandler PVH) {
 		this.PVH = PVH;
+		LII = (LoginInfoInterface) ClientFactory.getInstance().getClient();
 	}
 
 	//For at vi kan få CVR til vores order sending
-	public static int cvr = 0;
+
 
 	public void login() {
-		Dialog<Pair<Integer, String>> loginDialog = new Dialog<>();
+		Dialog<Pair<String, String>> loginDialog = new Dialog<>();
 		loginDialog.setTitle("Login");
 		loginDialog.setHeaderText("Indtast konto oplysninger.");
 
@@ -53,7 +63,6 @@ public class LoginManager {
 
 		TextField username = new TextField();
 		username.setPromptText("CVR");
-		username.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
 		PasswordField password = new PasswordField();
 		password.setPromptText("Kodeord");
 
@@ -75,45 +84,91 @@ public class LoginManager {
 
 		loginDialog.setResultConverter(dialogButton -> {
 			if (dialogButton == loginButtonType) {
-				return new Pair<>(Integer.parseInt(username.getText()), password.getText());
+				return new Pair<>(username.getText(), password.getText());
 			} else if (dialogButton == ButtonType.CANCEL) {
-				return new Pair<>(-1, null);
+				return new Pair<>("cancel", null);
 			}
 			return null;
 		});
 
-		Optional<Pair<Integer, String>> loginInfo = loginDialog.showAndWait();
+		Optional<Pair<String, String>> loginInfo = loginDialog.showAndWait();
 		checkLogin(loginInfo);
 	}
 
-	private void checkLogin(Optional<Pair<Integer, String>> loginInfo) {
+	private void checkLogin(Optional<Pair<String, String>> loginInfo) {
 		String pw = "";
+		String inputName = "";
 		ViewHandler viewHandler;
 
 		if (loginInfo.isPresent()) {
-			cvr = loginInfo.get().getKey();
+			inputName = loginInfo.get().getKey();
 			pw = loginInfo.get().getValue();
 		}
 
-		if (cvr == -1) {
-			System.out.println("Terminating...");
-			System.exit(0); // Det er specifikt denne linje kode som jeg har lavet ~Young
-		} else if (cvr == 1 && pw.equals("1234")) {
-			PVH.customerLogin();
-		} else if (cvr == 2 && pw.equals("1234")) {
-			PVH.grosserLogin();
-		} else {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setTitle("Fejl!");
-			alert.setHeaderText(null);
-			alert.setContentText("De indtastede kontooplysninger er forkerte!");
+		if (intCheck(inputName))
+		{
+			cvr = Integer.parseInt(inputName);
 
-			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResource("../../shared/images/login.png")).toString()));
+			Map<Integer, String> loginMap = new HashMap<>();
+			loginMap = LII.getLoginInfo();
 
-			alert.showAndWait();
+			if (loginMap.get(cvr) != null)
+			{
+				if (md5.compare(pw, loginMap.get(cvr)))
+				{
+					PVH.customerLogin();
+				}
+				else
+				{
+					Alert alert = new Alert(Alert.AlertType.WARNING);
+					alert.setTitle("Kodeord fejl");
+					alert.setHeaderText(null);
+					alert.setContentText("Kodeord er forkert, prøv igen.");
 
-			login();
+					alert.showAndWait();
+
+					login();
+				}
+
+			}
+			else
+			{
+				cvrError();
+			}
 		}
+		else
+		{
+			if (inputName.equalsIgnoreCase("admin")) PVH.grosserLogin();
+			else if (inputName.equals("cancel")) System.exit(-1);
+			else cvrError();
+		}
+	}
+
+	private boolean intCheck(String str)
+	{
+		if (str == null) return false;
+
+		try
+		{
+			int i = Integer.parseInt(str);
+		}
+		catch (NumberFormatException e)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	private void cvrError()
+	{
+		Alert alert = new Alert(Alert.AlertType.WARNING);
+		alert.setTitle("CVR fejl");
+		alert.setHeaderText(null);
+		alert.setContentText(
+				"Det indtastede CVR nummer er ikke registreret, prøv igen.");
+
+		alert.showAndWait();
+
+		login();
 	}
 }

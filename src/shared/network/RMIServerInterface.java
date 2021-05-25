@@ -9,17 +9,19 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Map;
 
-// Andreas Young, Andreas Østergaard
+// Andreas Young, Andreas Østergaard, Frederik Bergmann
 
-public interface RMIServerInterface extends Remote {
-	/**
-	 * Registers RMIServer Implementation on port 1099 and binds it with a namespace
-	 *
-	 * @throws RemoteException       when connection cannot be established
-	 * @throws AlreadyBoundException when a server already is bound with the same name
-	 */
-	void startServer() throws RemoteException, AlreadyBoundException;
+public interface RMIServerInterface extends Remote
+{
+  /**
+   * Registers RMIServer Implementation on port 1099 and binds it with a namespace
+   *
+   * @throws RemoteException       when connection cannot be established
+   * @throws AlreadyBoundException when a server already is bound with the same name
+   */
+  void startServer() throws RemoteException, AlreadyBoundException;
 
 	/**
 	 * Registers the callbackClient on the server, allowing the server to easily update the callbackClient using update()
@@ -99,9 +101,12 @@ public interface RMIServerInterface extends Remote {
 	 */
 	void reduceAmountInSystem(Pair<Product, Integer> productAndAmountToRemove) throws RemoteException;
 
-	/**
-	 * @param customer Container with info about customer.
-	 * @throws RemoteException
-	 */
-	void addCustomer(CustomerContainer customer) throws RemoteException;
+  /**
+   *
+   * @param customer Container with info about customer.
+   * @throws RemoteException
+   */
+  boolean addCustomer(CustomerContainer customer) throws RemoteException;
+
+	Map<Integer, String> getLoginInfo() throws RemoteException;
 }
