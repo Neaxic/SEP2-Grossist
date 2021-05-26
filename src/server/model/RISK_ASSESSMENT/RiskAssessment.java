@@ -3,6 +3,7 @@ package server.model.RISK_ASSESSMENT;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+//Line og Frederik
 
 public class RiskAssessment implements RiskInterface
 {

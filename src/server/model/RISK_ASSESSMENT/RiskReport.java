@@ -1,5 +1,7 @@
 package server.model.RISK_ASSESSMENT;
 
+//Line og Frederik
+
 public class RiskReport
 {
   private String type;

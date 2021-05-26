@@ -33,7 +33,7 @@ public class ChangeAmountTest {
     static Product testProduct1, testProduct2, testProduct3;
 
     @BeforeAll //Hapset fra Young
-    static void init()
+    static void init() throws SQLException
     {
         try
         {
