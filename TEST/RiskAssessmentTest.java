@@ -33,22 +33,7 @@ public class RiskAssessmentTest
   static GrosserModelInterface grosserModel;
   static RiskInterface risk;
 
-  @BeforeAll //Hapset fra Young
-  static void init()
-  {
-    try
-    {
-      RMIServerInterface server = new RMIServer();
-      assertDoesNotThrow(server::startServer);
-    }
-    catch (SQLException throwable)
-    {
-      throwable.printStackTrace();
-    }
-    ClientFactory.getInstance().getClient().start();
-    risk = new RiskAssessment();
-  }
-
+  //Lige et par produkter til at teste på
   Alcohol red1 = new Alcohol(
       "Dom Perignon 2010, 75cl",
       "kasser af 6",
@@ -78,6 +63,22 @@ public class RiskAssessmentTest
       "Champagne");
   int soldDaily_yellow1 = 5;
   int stock_yellow1 = 49;
+
+  @BeforeAll //Hapset fra Young
+  static void init()
+  {
+    try
+    {
+      RMIServerInterface server = new RMIServer();
+      assertDoesNotThrow(server::startServer);
+    }
+    catch (SQLException throwable)
+    {
+      throwable.printStackTrace();
+    }
+    ClientFactory.getInstance().getClient().start();
+    risk = new RiskAssessment();
+  }
 
 
   @Test void stockJustRight(){
