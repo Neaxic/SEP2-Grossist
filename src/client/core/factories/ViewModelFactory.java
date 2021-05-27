@@ -7,6 +7,7 @@ import client.grosserclient.views.GrosserViewModel;
 import client.grosserclient.views.grosseraddcustomer.GrosserAddCustomerViewModel;
 import client.grosserclient.views.grosseraddproduct.GrosserAddProductViewModel;
 import client.grosserclient.views.grossermain.GrosserMainViewModel;
+import client.grosserclient.views.grosserrisk.GrosserRiskViewModel;
 import client.grosserclient.views.grosserwares.GrosserWaresViewModel;
 
 // Andreas Østergaard, Frederik Bergmann, Andreas Young
@@ -23,6 +24,7 @@ public class ViewModelFactory
   private GrosserAddProductViewModel grosserAddProductViewModel;
   private GrosserWaresViewModel grosserWaresViewModel;
   private GrosserAddCustomerViewModel grosserAddCustomerViewModel;
+  private GrosserRiskViewModel grosserRiskViewModel;
 
 	private ViewModelFactory() {
 		this.modelFactory = ModelFactory.getInstance();
@@ -84,5 +86,12 @@ public class ViewModelFactory
     if (grosserAddCustomerViewModel == null)
       grosserAddCustomerViewModel = new GrosserAddCustomerViewModel();
     return grosserAddCustomerViewModel;
+  }
+
+  public GrosserRiskViewModel grosserRiskViewModel()
+  {
+    if (grosserRiskViewModel == null)
+      grosserRiskViewModel = new GrosserRiskViewModel();
+    return grosserRiskViewModel;
   }
 }

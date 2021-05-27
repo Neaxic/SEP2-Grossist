@@ -3,11 +3,14 @@ package client.network;
 // Andreas Østergaard
 
 import javafx.util.Pair;
+import server.model.RISK_ASSESSMENT.RiskContainer;
+import server.model.RISK_ASSESSMENT.RiskReport;
 import shared.objects.CustomerContainer;
 import shared.wares.Product;
 
 import java.beans.PropertyChangeListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface GrosserClient {
 	void createProduct(Pair<Product, Integer> newProduct) throws SQLException, IllegalArgumentException;
@@ -29,6 +32,8 @@ public interface GrosserClient {
 	void deleteLatestOrder();
 
 	void removeCustomer(int customerCVR);
+
+	void getRiskData();
 }
 
 

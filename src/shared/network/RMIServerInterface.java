@@ -1,6 +1,8 @@
 package shared.network;
 
 import javafx.util.Pair;
+import server.model.RISK_ASSESSMENT.RiskContainer;
+import server.model.RISK_ASSESSMENT.RiskReport;
 import shared.objects.Basket;
 import shared.objects.CustomerContainer;
 import shared.wares.Product;
@@ -117,4 +119,6 @@ public interface RMIServerInterface extends Remote
 	void deleteLatestOrder() throws RemoteException;
 
 	void removeCustomer(int customerCVR) throws RemoteException, SQLException;
+
+	void getRiskData(int clientId) throws RemoteException;
 }

@@ -1,11 +1,13 @@
 package client.grosserclient.model;
 
 import javafx.util.Pair;
+import server.model.RISK_ASSESSMENT.RiskContainer;
 import shared.network.Subject;
 import shared.objects.CustomerContainer;
 import shared.wares.Product;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 //Lavet af: Frederik Bergmann, Andreas Young.
 
@@ -23,4 +25,6 @@ public interface GrosserModelInterface extends Subject {
 	void increaseStock(Pair<Product, Integer> newPair);
 
 	boolean addCustomer(CustomerContainer customer);
+
+	void getRiskData();
 }

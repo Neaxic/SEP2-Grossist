@@ -2,14 +2,22 @@ package server.model.RISK_ASSESSMENT;
 
 //Line og Frederik
 
-public class RiskReport
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public class RiskReport implements Serializable
 {
   private String type;
-  private final RiskContainer item;
+  private final int productId, deliveryDays, amountInStock, soldDaily;
+  private final LocalDate bestBefore;
 
   public RiskReport(RiskContainer item, char type)
   {
-    this.item = item;
+    productId = item.getProductId();
+    deliveryDays = item.getDeliveryDays();
+    amountInStock = item.getAmountInStock();
+    soldDaily = item.getSoldDaily();
+    bestBefore = item.getBestBefore();
 
     if (type == 'g') this.type = "Green";
     if (type == 'y') this.type = "Yellow";
@@ -21,8 +29,28 @@ public class RiskReport
     return type;
   }
 
-  public RiskContainer getItem()
+  public int getProductId()
   {
-    return item;
+    return productId;
+  }
+
+  public int getDeliveryDays()
+  {
+    return deliveryDays;
+  }
+
+  public int getAmountInStock()
+  {
+    return amountInStock;
+  }
+
+  public int getSoldDaily()
+  {
+    return soldDaily;
+  }
+
+  public LocalDate getBestBefore()
+  {
+    return bestBefore;
   }
 }

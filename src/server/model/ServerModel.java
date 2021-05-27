@@ -1,6 +1,9 @@
 package server.model;
 
 import javafx.util.Pair;
+import server.model.RISK_ASSESSMENT.RiskAssessment;
+import server.model.RISK_ASSESSMENT.RiskContainer;
+import server.model.RISK_ASSESSMENT.RiskReport;
 import server.model.databasemediator.DAOCustomerInterface;
 import server.model.databasemediator.DAOGrosserInterface;
 import server.model.databasemediator.DAOModel;
@@ -20,6 +23,7 @@ import java.util.Map;
 public class ServerModel {
 	private final DAOGrosserInterface DAOGrosser = new DAOModel();
 	private final DAOCustomerInterface DAOCustomer = new DAOModel();
+	private final RiskAssessment riskAssessment = new RiskAssessment();
 	private List<Pair<Product, Integer>> wareAndAmountList;
 	private List<Product> wares;
 
@@ -157,5 +161,10 @@ public class ServerModel {
 
 	public void removeCustomer(int customerCVR) throws SQLException {
 		DAOGrosser.removeCustomer(customerCVR);
+	}
+
+	public ArrayList<RiskReport> getRiskData()
+	{
+		return riskAssessment.massAssess(DAOGrosser.getRiskData());
 	}
 }
