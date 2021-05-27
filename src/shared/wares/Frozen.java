@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class Frozen extends Product implements ProductInterface {
 	public Frozen(Object[] params) {
-		super((String) params[1], (String) params[2], ((Date) params[5]).toLocalDate(), (Integer) params[0], 10, ((BigDecimal) params[4]).doubleValue(), (String) params[3], (String) params[7]);
+		super((String) params[1], (String) params[2], ((Date) params[5]).toLocalDate(), (Integer) params[0], (Integer)params[8], ((BigDecimal) params[4]).doubleValue(), (String) params[3], (String) params[7]);
 	}
 
 	public Frozen(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, String producedBy, String tags) {

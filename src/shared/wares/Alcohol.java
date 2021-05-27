@@ -13,10 +13,10 @@ public class Alcohol extends Product implements ProductInterface {
 
 	// TODO: Opdater med params når database opdateres, eller anden aftale er lavet
 	public Alcohol(Object[] params) {
-		super((String) params[1], (String) params[2], ((Date) params[5]).toLocalDate(), (Integer) params[0], 10, ((BigDecimal) params[4]).doubleValue(), (String) params[3], (String) params[7]);
-		originCountry = (String) params[9];
-		percentage = ((BigDecimal) params[8]).doubleValue();
-		beverageType = (String) params[10];
+		super((String) params[1], (String) params[2], ((Date) params[5]).toLocalDate(), (Integer) params[0], (Integer)params[8], ((BigDecimal) params[4]).doubleValue(), (String) params[3], (String) params[7]);
+		originCountry = (String) params[11];
+		percentage = ((BigDecimal) params[10]).doubleValue();
+		beverageType = (String) params[12];
 	}
 
 	public Alcohol(String wareName, String measurementType, LocalDate bestBefore, int wareNumber, int deliveryDays, double price, String producedBy, String tags, String originCountry, double percentage, String beverageType) {

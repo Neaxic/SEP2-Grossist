@@ -109,7 +109,7 @@ public abstract class Product implements Serializable {
 	 * @return INSERT INTO query open ended for SQL Column Names
 	 */
 	public String sqlTemplate() {
-		return "productName, measurement, producedBy, salesprice, bbDate, tags";
+		return "productName, measurement, producedBy, salesprice, bbDate, deliveryDays, tags";
 	}
 
 	/**
@@ -118,7 +118,7 @@ public abstract class Product implements Serializable {
 	 * @return Information regarding product, open ended for SQL Column Information
 	 */
 	public String sqlInformation() { // Produced By
-		return " '" + wareName + "', '" + measurementType + "', '" + producedBy + "', " + price + ", '" + bestBefore + "', '" + tags + "'";
+		return " '" + wareName + "', '" + measurementType + "', '" + producedBy + "', " + price + ", '" + bestBefore + "', " + deliveryDays +  ", '" + tags + "'";
 	}
 }
 

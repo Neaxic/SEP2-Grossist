@@ -202,7 +202,7 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 	private int addProductToSuperTable(Product p, Integer v) throws SQLException {
 		try (Connection conn = getConnection()) {
 			if (p.getWareNumber() < 0) {
-				conn.prepareStatement("INSERT INTO product(productname, measurement, producedby, salesprice, bbdate, amountinstock, tags) VALUES ('" + p.getWareName() + "', '" + p.getMeasurementType() + "', '" + p.getProducedBy() + "', " + p.getPrice() + ", '" + p.getBestBefore() + "', " + v + ", '" + p.getTags() + "')").execute();
+				conn.prepareStatement("INSERT INTO product(productname, measurement, producedby, salesprice, bbdate, deliveryDays, amountinstock, tags) VALUES ('" + p.getWareName() + "', '" + p.getMeasurementType() + "', '" + p.getProducedBy() + "', " + p.getPrice() + ", '" + p.getBestBefore() + "', " + p.getDeliveryDays() + ", " + v + ", '" + p.getTags() + "')").execute();
 			} else {
 				conn.prepareStatement("INSERT INTO product(productID, productName, measurement, producedBy, salesPrice, bbDate, amountInStock, tags) VALUES (" + p.getWareNumber() + ", '" + p.getWareName() + "', '" + p.getMeasurementType() + "', '" + p.getProducedBy() + "', " + p.getPrice() + ", '" + p.getBestBefore() + "', " + v + ", '" + p.getTags() + "')").execute();
 			}
