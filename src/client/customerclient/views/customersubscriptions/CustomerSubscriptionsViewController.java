@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 // Andreas Young, Line Guld
 
@@ -28,19 +29,19 @@ public class CustomerSubscriptionsViewController implements CustomerViewControll
 
 	// SCENE MANAGING
 	@Override
-	public void swapScene(String sceneName) throws IOException {
+	public void swapScene(String sceneName) throws IOException, SQLException {
 		viewHandler.openView(sceneName);
 	}
 
-	public void openProductBrowser() throws IOException {
+	public void openProductBrowser() throws IOException, SQLException {
 		swapScene("CustomerBrowser");
 	}
 
-	public void openSubscriptions() throws IOException {
+	public void openSubscriptions() throws IOException, SQLException {
 		swapScene("CustomerSubscriptions");
 	}
 
-	public void openBasket() throws IOException {
+	public void openBasket() throws IOException, SQLException {
 		swapScene("CustomerBasket");
 	}
 }

@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -58,7 +59,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	}
 
 	@Override
-	public void init(ViewHandler viewHandler) {
+	public void init(ViewHandler viewHandler) throws SQLException {
 		this.viewHandler = viewHandler;
 		viewModel = (CustomerBrowserViewModel) ViewModelFactory.getInstance().customerBrowseViewModel();
 		itemList = new SimpleListProperty<>();
@@ -69,9 +70,11 @@ public class CustomerBrowserViewController implements CustomerViewController {
 
 	public void loadAllProducts() {
 		viewModel.loadAllProductsToModel();
+
+
 	}
 
-	public void loadSpecificCategory(MouseEvent mouseEvent) {
+	public void loadSpecificCategory(MouseEvent mouseEvent) throws SQLException {
 		Node selected = mouseEvent.getPickResult().getIntersectedNode();
 		if (selected instanceof Text) {
 			String category = ((Text) selected).getText().substring(2);
@@ -79,15 +82,25 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		}
 	}
 
-	private void populate(String category) {
+	private void populate(String category) throws SQLException {
 		productItemList.getChildren().clear();
 		ArrayList<Product> SpecificItemList = viewModel.populate(category);
+
+		for (Product item: SpecificItemList) {
+			if (daomodel2.getDiscounted(item) == false && getDaysTo(item) <= 3)  {
+				daomodel2.changePrice(item,.75);
+				daomodel2.setDiscounted(item);
+			}
+		}
+
+
 		for(Product item: SpecificItemList){
 			productItemList.getChildren().add(createEntry(item));
+
 		}
 	}
 
-	public void searchBtn(){
+	public void searchBtn() throws SQLException {
 		productItemList.getChildren().clear();
 		ArrayList<Product> SpecificItemList = viewModel.searchBtn(searchText.textProperty().getValue());
 		for(Product item: SpecificItemList){
@@ -95,7 +108,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		}
 	}
 
-	private HBox createEntry(Product product) {
+	private HBox createEntry(Product product) throws SQLException {
 		// HBox for the Food Item Entry
 		HBox entry = new HBox();
 
@@ -152,9 +165,14 @@ public class CustomerBrowserViewController implements CustomerViewController {
 		vBox.getChildren().add(productID);
 
 		//NEDSAT VARE
-		if (getDaysTo(product) <= 3) { //IKKE DONE ENDNU
-			daomodel2.changePrice(product,10);
-			Text NedsatVare = new Text("Kortholdbarhedsdato: " +  getDaysTo(product)+ " dage");
+		if (getDaysTo(product) <= 3) {
+			Text NedsatVare = null;
+			if (getDaysTo(product) == 1) {
+				NedsatVare = new Text("Kort holdbarhedsdato: " +  getDaysTo(product)+ " dag");
+			} else {
+				NedsatVare = new Text("Kort holdbarhedsdato: " +  getDaysTo(product)+ " dage");
+			}
+			NedsatVare.setFill(Color.RED);
 			vBox.getChildren().add(NedsatVare);
 		}
 
@@ -236,11 +254,11 @@ public class CustomerBrowserViewController implements CustomerViewController {
 
 	// SCENE MANAGING
 	@Override
-	public void swapScene(String sceneName) throws IOException {
+	public void swapScene(String sceneName) throws IOException, SQLException {
 		viewHandler.openView(sceneName);
 	}
 
-	public void openProductBrowser() throws IOException {
+	public void openProductBrowser() throws IOException, SQLException {
 		swapScene("CustomerBrowser");
 	}
 
@@ -250,7 +268,7 @@ public class CustomerBrowserViewController implements CustomerViewController {
 	}
 	 */
 
-	public void openBasket() throws IOException {
+	public void openBasket() throws IOException, SQLException {
 		swapScene("CustomerBasket");
 	}
 }

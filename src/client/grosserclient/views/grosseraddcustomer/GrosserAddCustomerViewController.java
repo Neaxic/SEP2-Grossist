@@ -16,6 +16,7 @@ import shared.objects.CustomerContainer;
 import shared.util.md5;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 public class GrosserAddCustomerViewController implements GrosserViewController
@@ -141,8 +142,7 @@ public class GrosserAddCustomerViewController implements GrosserViewController
     viewModel = ViewModelFactory.getInstance().grosserAddCustomerViewModel();
   }
 
-  @Override public void swapScene(String sceneName) throws IOException
-  {
+  @Override public void swapScene(String sceneName) throws IOException, SQLException {
     viewHandler.openView(sceneName);
   }
 }

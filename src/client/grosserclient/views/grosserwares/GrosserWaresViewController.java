@@ -13,6 +13,7 @@ import shared.objects.ProductAndInt;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.sql.SQLException;
 
 // Young
 
@@ -93,12 +94,12 @@ public class GrosserWaresViewController
 	}
 
 	@FXML
-	private void homeScreen() throws IOException {
+	private void homeScreen() throws IOException, SQLException {
 		swapScene("GrosserMain");
 	}
 
 	@FXML
-	private void addNewProductScene() throws IOException {
+	private void addNewProductScene() throws IOException, SQLException {
 		swapScene("GrosserAddProduct");
 	}
 
@@ -108,7 +109,7 @@ public class GrosserWaresViewController
 	} // Hiver fat i databasen hver gang, ikke det smarteste men klart det sikreste
 
 	@Override
-	public void swapScene(String sceneName) throws IOException {
+	public void swapScene(String sceneName) throws IOException, SQLException {
 		viewHandler.openView(sceneName);
 	}
 

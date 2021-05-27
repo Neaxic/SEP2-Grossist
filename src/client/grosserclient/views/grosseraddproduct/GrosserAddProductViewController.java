@@ -339,19 +339,19 @@ public class GrosserAddProductViewController implements GrosserViewController {
 	}
 
 	@Override
-	public void swapScene(String sceneName) throws IOException {
+	public void swapScene(String sceneName) throws IOException, SQLException {
 		viewHandler.openView(sceneName);
 	}
 
-	public void waresScene() throws IOException {
+	public void waresScene() throws IOException, SQLException {
 		swapScene("GrosserWares");
 	}
 
-	public void homeScreen() throws IOException {
+	public void homeScreen() throws IOException, SQLException {
 		swapScene("GrosserAddProduct");
 	}
 
-	public void addCustomerScene() throws IOException {
+	public void addCustomerScene() throws IOException, SQLException {
 		swapScene("GrosserAddCustomer");
 	}
 }

@@ -242,11 +242,31 @@ public class DAOModel extends BaseDAO implements DAOCustomerInterface, DAOGrosse
 		try (Connection conn = getConnection()) {
 			ResultSet r = conn.prepareStatement("SELECT salesprice FROM product WHERE productID = " + p.getWareNumber()).executeQuery();
 			if (r.next()) {
-				//newAmount = r.getInt("salesprice") -  (r.getInt("salesprice")*procent);
-				newAmount = 25;
+				newAmount = r.getInt("salesprice")*procent;
+				//newAmount = 45;
 			}
 			conn.prepareStatement("UPDATE product SET salesprice = " + newAmount + " WHERE productID = " + p.getWareNumber()).execute();
 			conn.prepareStatement("UPDATE " + SchemaMap.Mapping(p.getClass()) + " SET salesprice = " + newAmount + " WHERE productID = " + p.getWareNumber()).execute();
+		} catch (SQLException throwables) {
+			System.out.println(throwables);
+		}
+	}
+
+	public boolean getDiscounted(Product p) throws SQLException {
+		boolean discounted;
+		try (Connection conn = getConnection()) {
+			PreparedStatement s = conn.prepareStatement("SELECT discounted FROM product WHERE productID = " + p.getWareNumber());
+			ResultSet r = s.executeQuery();
+			r.next();
+			discounted = r.getBoolean("discounted");
+		}
+		return discounted;
+	}
+
+	public void setDiscounted(Product p)throws SQLException {
+		boolean newBool = true;
+		try (Connection conn = getConnection()) {
+			conn.prepareStatement("UPDATE product SET discounted = " + newBool + " WHERE productID = " + p.getWareNumber()).execute();
 		} catch (SQLException throwables) {
 			System.out.println(throwables);
 		}

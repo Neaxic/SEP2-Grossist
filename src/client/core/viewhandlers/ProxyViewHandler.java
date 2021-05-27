@@ -9,6 +9,7 @@ import client.core.viewhandlers.GrosserViewHandler;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 // Andreas Østergaard, Frederik Bergmann
 
@@ -24,12 +25,12 @@ public class ProxyViewHandler implements ViewHandler {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws IOException {
+	public void start(Stage primaryStage) throws IOException, SQLException {
 		viewHandler.start(primaryStage);
 	}
 
 	@Override
-	public void openView(String viewToOpen) throws IOException {
+	public void openView(String viewToOpen) throws IOException, SQLException {
 		viewHandler.openView(viewToOpen);
 	}
 
@@ -50,7 +51,7 @@ public class ProxyViewHandler implements ViewHandler {
 			viewHandler = new CustomerViewHandler(this);
 			start(stage);
 		}
-		catch (IOException e)
+		catch (IOException | SQLException e)
 		{
 			e.printStackTrace();
 		}
@@ -63,7 +64,7 @@ public class ProxyViewHandler implements ViewHandler {
 			viewHandler = new GrosserViewHandler(this);
 			start(stage);
 		}
-		catch (IOException e)
+		catch (IOException | SQLException e)
 		{
 			e.printStackTrace();
 		}

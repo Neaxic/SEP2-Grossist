@@ -37,7 +37,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient, LoginIn
 	public void start() {
 		System.out.println("Connecting to Server...");
 		try {
-			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+			Registry registry = LocateRegistry.getRegistry("localhost", 1098);
 			server = (RMIServerInterface) registry.lookup(Util.SERVERNAME);
 			UnicastRemoteObject.exportObject(this, 0);
 		} catch (RemoteException | NotBoundException e) {

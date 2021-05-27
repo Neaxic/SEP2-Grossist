@@ -11,6 +11,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 // Andreas Østergaard, Frederik Bergmann, Andreas Young
 
@@ -25,7 +26,7 @@ public class CustomerViewHandler implements ViewHandler {
 		this.proxyViewHandler = proxyViewHandler;
 	}
 
-	private Scene sceneLoader(String view) throws IOException {
+	private Scene sceneLoader(String view) throws IOException, SQLException {
 		Scene scene;
 		Parent root;
 
@@ -42,14 +43,14 @@ public class CustomerViewHandler implements ViewHandler {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws IOException {
+	public void start(Stage primaryStage) throws IOException, SQLException {
 		this.primaryStage = primaryStage;
 		this.currentScene = new Scene(new Region());
 		openView("CustomerBrowser");
 	}
 
 	@Override
-	public void openView(String viewToOpen) throws IOException {
+	public void openView(String viewToOpen) throws IOException, SQLException {
 		Scene scene = sceneLoader(viewToOpen);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);

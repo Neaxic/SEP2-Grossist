@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import shared.objects.Order;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 // Frederik Bergmann
@@ -60,22 +61,21 @@ public class GrosserMainViewController implements GrosserViewController {
 	}
 
 	@FXML
-	private void addCustomerScene() throws IOException
-	{
+	private void addCustomerScene() throws IOException, SQLException {
 		swapScene("GrosserAddCustomer");
 	}
 
 	@FXML
-	private void addNewProductScene() throws IOException {
+	private void addNewProductScene() throws IOException, SQLException {
 		swapScene("GrosserAddProduct");
 	}
 	@FXML
-	private void waresScene() throws IOException {
+	private void waresScene() throws IOException, SQLException {
 		swapScene("GrosserWares");
 	}
 
 	@Override
-	public void swapScene(String sceneName) throws IOException {
+	public void swapScene(String sceneName) throws IOException, SQLException {
 		viewHandler.openView(sceneName);
 	}
 }

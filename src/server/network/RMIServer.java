@@ -37,7 +37,7 @@ public class RMIServer implements RMIServerInterface {
 	@Override
 	public void startServer() throws RemoteException, AlreadyBoundException {
 		System.out.println("Server starting...");
-		Registry registry = LocateRegistry.createRegistry(1099);
+		Registry registry = LocateRegistry.createRegistry(1098);
 		registry.bind(Util.SERVERNAME, this);
 		UnicastRemoteObject.exportObject(this, 0);
 		System.out.println("Connecting to database... (This might take a while)");

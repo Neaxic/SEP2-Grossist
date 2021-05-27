@@ -14,6 +14,7 @@ import shared.objects.ProductAndInt;
 import shared.wares.Product;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 // Andreas Østergaard, Andreas Young, Line Guld
@@ -96,11 +97,11 @@ public class BasketViewController implements CustomerViewController {
 	// SCENE MANAGING
 
 	@Override
-	public void swapScene(String sceneName) throws IOException {
+	public void swapScene(String sceneName) throws IOException, SQLException {
 		viewHandler.openView(sceneName);
 	}
 
-	public void openProductBrowser() throws IOException {
+	public void openProductBrowser() throws IOException, SQLException {
 		swapScene("CustomerBrowser");
 	}
 
@@ -110,7 +111,7 @@ public class BasketViewController implements CustomerViewController {
 	}
 	 */
 
-	public void openBasket() throws IOException {
+	public void openBasket() throws IOException, SQLException {
 		swapScene("CustomerBasket");
 	}
 
