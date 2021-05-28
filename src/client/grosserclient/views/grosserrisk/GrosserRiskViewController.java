@@ -37,7 +37,7 @@ public class GrosserRiskViewController implements GrosserViewController
   private void populateTable()
   {
     idColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
-    // action column
+    actionColumn.setCellValueFactory(new PropertyValueFactory<>("recommendation"));
     typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
 
     riskTable.getItems().addAll(riskList);

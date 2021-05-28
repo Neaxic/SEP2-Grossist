@@ -19,9 +19,35 @@ public class RiskReport implements Serializable
     soldDaily = item.getSoldDaily();
     bestBefore = item.getBestBefore();
 
-    if (type == 'g') this.type = "Green";
-    if (type == 'y') this.type = "Yellow";
-    if (type == 'r') this.type = "Red";
+    if (type == 'y') this.type = "Lager";
+    if (type == 'r') this.type = "Dato";
+  }
+
+  public String getRecommendation()
+  {
+    if (type.equals("Lager"))
+    {
+      double daysOfSupply = (double) amountInStock / soldDaily;
+      boolean critical = daysOfSupply <= deliveryDays;
+
+      if (critical)
+      {
+        int emptyStorage = (int) Math.ceil(deliveryDays - daysOfSupply);
+
+        return "Kritisk lagerbeholdning! Bestil straks!\nNuværende beholdning: " + amountInStock +
+            "\nGennemsnitlig dagligt salg: " + soldDaily + "\nLager tømt cirka " + emptyStorage +
+            " dage før vare kan leveres.";
+      }
+      else
+      {
+        int buffer = (int) Math.ceil(daysOfSupply - deliveryDays);
+
+        return "Lav lagerbeholdning.\nNuværende beholdning: " + amountInStock +
+            "\nGennemsnitlig dagligt salg: " + soldDaily + "\nCirka " + buffer +
+            " dages salg tilbage før kritisk niveau.";
+      }
+    }
+    return "Not done yet!";
   }
 
   public String getType()
