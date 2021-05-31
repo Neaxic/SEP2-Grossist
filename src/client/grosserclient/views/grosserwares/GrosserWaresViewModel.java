@@ -14,7 +14,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-// Young
+// Andreas Young.
 
 public class GrosserWaresViewModel implements GrosserViewModel, Subject {
 	private GrosserModelInterface grosserModel;

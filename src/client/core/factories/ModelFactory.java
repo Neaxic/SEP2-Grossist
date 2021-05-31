@@ -5,7 +5,7 @@ import client.customerclient.model.CustomerModel;
 import client.grosserclient.model.GrosserModel;
 import client.grosserclient.model.GrosserModelInterface;
 
-// Andreas Østergaard, Frederik Bergmann
+// Andreas Østergaard & Frederik Bergmann.
 
 public class ModelFactory {
 	private static ModelFactory instance;

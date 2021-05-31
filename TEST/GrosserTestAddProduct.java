@@ -16,7 +16,8 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//Line Guld (Young prøver at tage en beslutning der hedder, at de tests der fejler lige nu skal fjernes)
+//Line Guld
+
 class GrosserTestAddProduct {
 	private static GrosserAddProductViewModel viewModel;
 	private static GrosserClient grosserClient;
@@ -31,7 +32,7 @@ class GrosserTestAddProduct {
 	static LocalDate invalidBestBeforeIsToday = LocalDate.now();
 	static Pair<Product, Integer> pair;
 
-	@BeforeAll //Hapset fra Young
+	@BeforeAll
 	static void init() {
 		try {
 			RMIServerInterface server = new RMIServer();

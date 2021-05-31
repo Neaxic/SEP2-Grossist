@@ -6,18 +6,17 @@ import client.grosserclient.views.GrosserViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import shared.objects.CustomerContainer;
 import shared.util.md5;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.regex.Pattern;
+
+// Frederik Bergmann.
 
 public class GrosserAddCustomerViewController implements GrosserViewController
 {

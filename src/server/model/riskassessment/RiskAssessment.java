@@ -1,9 +1,10 @@
-package server.model.RISK_ASSESSMENT;
+package server.model.riskassessment;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-//Line og Frederik
+
+//Line Guld og Frederik Bergmann
 
 public class RiskAssessment implements RiskInterface
 {

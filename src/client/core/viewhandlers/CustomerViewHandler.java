@@ -1,25 +1,20 @@
 package client.core.viewhandlers;
 
 import client.core.ViewHandler;
-import client.core.ViewModel;
-import client.core.factories.ViewModelFactory;
 import client.customerclient.views.CustomerViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
-// Andreas Østergaard, Frederik Bergmann, Andreas Young
+// Andreas Østergaard, Frederik Bergmann, Andreas Young.
 
 public class CustomerViewHandler implements ViewHandler {
 
 	private Stage primaryStage;
-	private Scene currentScene;
-	private ViewModelFactory viewModelFactory;
 	private final ViewHandler proxyViewHandler;
 
 	public CustomerViewHandler(ViewHandler proxyViewHandler) {
@@ -36,7 +31,7 @@ public class CustomerViewHandler implements ViewHandler {
 		root = loader.load();
 
 		CustomerViewController viewController = loader.getController();
-		viewController.init(proxyViewHandler); //TODO: 'this' giver en customer view handler ikke en proxy. Muligvis Singleton?
+		viewController.init(proxyViewHandler);
 
 		scene = new Scene(root);
 		return scene;
@@ -45,7 +40,6 @@ public class CustomerViewHandler implements ViewHandler {
 	@Override
 	public void start(Stage primaryStage) throws IOException, SQLException {
 		this.primaryStage = primaryStage;
-		this.currentScene = new Scene(new Region());
 		openView("CustomerBrowser");
 	}
 
@@ -55,17 +49,6 @@ public class CustomerViewHandler implements ViewHandler {
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
-	}
-
-	//Problemet er ViewModel interface forventer viewmodel men vi har kun Customer eller GrosistViewmodel..
-	@Override
-	public ViewModel getViewModelByViewName(String viewName) {
-		return switch(viewName){
-			case "customerbrowse" -> viewModelFactory.customerBrowseViewModel();
-			case "customerbasket" -> viewModelFactory.basketViewModel();
-			//case "customersubscriptions" -> viewModelFactory.customerBrowseViewModel();
-			default -> null;
-		};
 	}
 
 }

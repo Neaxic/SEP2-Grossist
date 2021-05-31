@@ -6,7 +6,6 @@ import client.grosserclient.views.GrosserViewController;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -28,8 +27,6 @@ public class GrosserMainViewController implements GrosserViewController {
 	@FXML private TableColumn<Order, Double> tableSum;
 
 	private ListProperty<Order> orderList;
-
-	@FXML private MenuBar mainNavBar;
 
 	private ViewHandler viewHandler;
 	private GrosserMainViewModel viewModel;

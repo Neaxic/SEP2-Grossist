@@ -12,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import javafx.util.converter.IntegerStringConverter;
 import shared.util.md5;
 
 import java.util.HashMap;
@@ -20,7 +19,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-// Frederik Bergmann, Andreas Østergaard, Young (Young er på her, fordi jeg fik Systemet til at stoppe når man lukker Login vinduet :D)
+// Frederik Bergmann, Andreas Østergaard, Andreas Young.
 
 public class LoginManager {
 	private final ProxyViewHandler PVH;
@@ -33,9 +32,6 @@ public class LoginManager {
 		this.PVH = PVH;
 		LII = (LoginInfoInterface) ClientFactory.getInstance().getClient();
 	}
-
-	//For at vi kan få CVR til vores order sending
-
 
 	public void login() {
 		Dialog<Pair<String, String>> loginDialog = new Dialog<>();
@@ -98,7 +94,6 @@ public class LoginManager {
 	private void checkLogin(Optional<Pair<String, String>> loginInfo) {
 		String pw = "";
 		String inputName = "";
-		ViewHandler viewHandler;
 
 		if (loginInfo.isPresent()) {
 			inputName = loginInfo.get().getKey();
@@ -109,7 +104,7 @@ public class LoginManager {
 		{
 			cvr = Integer.parseInt(inputName);
 
-			Map<Integer, String> loginMap = new HashMap<>();
+			Map<Integer, String> loginMap;
 			loginMap = LII.getLoginInfo();
 
 			if (loginMap.get(cvr) != null)

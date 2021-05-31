@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-// Frederik Bergmann, Andreas Østergaard, Andreas Young
+// Frederik Bergmann, Andreas Østergaard, Andreas Young.
 
 public class GrosserAddProductViewController implements GrosserViewController {
 	private ViewHandler viewHandler;
@@ -37,7 +37,6 @@ public class GrosserAddProductViewController implements GrosserViewController {
 	@FXML private TextField meatCountry;
 
 	@FXML private TabPane tabPane;
-
 
 	@FXML private CheckBox checkØko;
 	@FXML private CheckBox checkNøgle;
@@ -75,12 +74,9 @@ public class GrosserAddProductViewController implements GrosserViewController {
 			}
 		}
 		return false;
-		// Ved ikke præcist hvad 0f var, og det fuckede op Har et punktum check over^
-		// return Double.parseDouble(text) > 0f;
 	}
 
 	private void fillTagsArr() {
-		//man kunne kigge på noden og tage alle checkboxe childs.
 		checkValues.add(checkØko);
 		checkValues.add(checkNøgle);
 		checkValues.add(checkGMO);
@@ -104,7 +100,6 @@ public class GrosserAddProductViewController implements GrosserViewController {
 			}
 		}
 
-		// cut det sidste komma fra
 		if (tempTags.length() > 0) {
 			activeTags = tempTags.substring(0, tempTags.length() - 2);
 		}
@@ -118,7 +113,6 @@ public class GrosserAddProductViewController implements GrosserViewController {
 	}
 
 	private boolean checkAllDefaults() {
-		//Check for tal i tal felter
 		if (numCheckAndNotNull(productPrice.getText()) || numCheckAndNotNull(productAmount.getText()) || numCheckAndNotNull(productDeliveryDays.getText())) {
 			createWarning("Et af felterne 'Pris', 'Ledig mængde' eller 'Leverings dage' indeholder bogstaver, eller tomme.");
 			return false;
@@ -132,7 +126,7 @@ public class GrosserAddProductViewController implements GrosserViewController {
 		if (productBestBefore.getValue() == null) {
 			createWarning("Udløbsdatoen er ikke sat");
 			return false;
-		} //minus 1 så vi kan tilføje et produkt med samme udløbsdato som idag
+		}
 		else if (!(productBestBefore.getValue().isAfter(LocalDate.now().minusDays(1)))) {
 			createWarning("Daoten sat er før idag og er derfor ugyldig");
 			return false;
@@ -155,8 +149,6 @@ public class GrosserAddProductViewController implements GrosserViewController {
 						return;
 					}
 
-					//    DATABASE check ( type in ('Rødvin', 'Hvidvin', 'Rose', 'Spiritus', 'Øl', 'Cider') )
-					//if (!alcoholType.getText().equalsIgnoreCase("Spiritus") || !(alcoholType.getText().equalsIgnoreCase("øl")) || !alcoholType.getText().equalsIgnoreCase("Rødvin") || !alcoholType.getText().equalsIgnoreCase("Hvidvin") || !alcoholType.getText().equalsIgnoreCase("Rose") || !alcoholType.getText().equalsIgnoreCase("Cider"))  {
 					if (alcoholType.getText().isBlank()) {
 						createWarning("Feltet 'Type' er tomt");
 						return;

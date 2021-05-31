@@ -10,12 +10,11 @@ import client.grosserclient.views.grossermain.GrosserMainViewModel;
 import client.grosserclient.views.grosserrisk.GrosserRiskViewModel;
 import client.grosserclient.views.grosserwares.GrosserWaresViewModel;
 
-// Andreas Østergaard, Frederik Bergmann, Andreas Young
+// Andreas Østergaard, Frederik Bergmann, Andreas Young.
 
 public class ViewModelFactory
 {
   private static ViewModelFactory instance;
-  private final ModelFactory modelFactory;
 
   private CustomerBrowserViewModel customerBrowseViewModel;
   private BasketViewModel basketViewModel;
@@ -25,10 +24,6 @@ public class ViewModelFactory
   private GrosserWaresViewModel grosserWaresViewModel;
   private GrosserAddCustomerViewModel grosserAddCustomerViewModel;
   private GrosserRiskViewModel grosserRiskViewModel;
-
-	private ViewModelFactory() {
-		this.modelFactory = ModelFactory.getInstance();
-	}
 
   public static ViewModelFactory getInstance()
   {

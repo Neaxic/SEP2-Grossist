@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 // Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
 
-public class MeatAndFish extends Product implements ProductInterface {
-	private String originCountry;
+public class MeatAndFish extends Product {
+	private final String originCountry;
 
 	public MeatAndFish(Object[] params) {
 		super((String) params[1], (String) params[2], ((Date) params[5]).toLocalDate(), (Integer) params[0], (Integer)params[8], ((BigDecimal) params[4]).doubleValue(), (String) params[3], (String) params[7]);

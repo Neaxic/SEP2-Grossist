@@ -6,7 +6,7 @@ import client.network.Client;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-//Frederik Bergmann og Andreas Østergaard (Young er nu her fordi han fik systemet til at stoppe når vinduerne lukkes)
+//Frederik Bergmann og Andreas Østergaard, Andreas Young.
 
 public class GrosserApp extends Application
 {
@@ -15,6 +15,6 @@ public class GrosserApp extends Application
     stage.setOnCloseRequest(e -> System.exit(0));
     Client client = ClientFactory.getInstance().getClient();
     client.start();
-    ProxyViewHandler proxy = new ProxyViewHandler(stage);
+    new ProxyViewHandler(stage);
   }
 }

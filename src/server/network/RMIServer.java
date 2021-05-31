@@ -24,7 +24,7 @@ import java.util.Map;
 // Andreas Østergaard, Andreas Young, Frederik Bergmann
 
 public class RMIServer implements RMIServerInterface {
-	private HashMap<Integer, CallbackClient> callbackClients;
+	private final HashMap<Integer, CallbackClient> callbackClients;
 	private List<Product> wares;
 
 	// Dummy Data:

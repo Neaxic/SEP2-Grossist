@@ -1,12 +1,11 @@
 package server.model;
 
 import javafx.util.Pair;
-import server.model.RISK_ASSESSMENT.RiskAssessment;
-import server.model.RISK_ASSESSMENT.RiskContainer;
-import server.model.RISK_ASSESSMENT.RiskReport;
 import server.model.databasemediator.DAOCustomerInterface;
 import server.model.databasemediator.DAOGrosserInterface;
 import server.model.databasemediator.DAOModel;
+import server.model.riskassessment.RiskAssessment;
+import server.model.riskassessment.RiskReport;
 import shared.objects.Basket;
 import shared.objects.CustomerContainer;
 import shared.objects.Order;

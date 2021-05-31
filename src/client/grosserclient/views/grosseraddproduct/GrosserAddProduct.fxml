@@ -19,6 +19,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<!-- Andreas Østergaard -->
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.grosserclient.views.grosseraddproduct.GrosserAddProductViewController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="545.0" prefWidth="712.0" BorderPane.alignment="CENTER">

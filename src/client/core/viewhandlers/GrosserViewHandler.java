@@ -1,8 +1,6 @@
 package client.core.viewhandlers;
 
 import client.core.ViewHandler;
-import client.core.ViewModel;
-import client.core.factories.ViewModelFactory;
 import client.grosserclient.views.GrosserViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,17 +11,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-// Andreas Østergaard, Frederik Bergmann, Andreas Young
+// Andreas Østergaard, Frederik Bergmann, Andreas Young.
 
 public class GrosserViewHandler implements ViewHandler {
 	private Stage primaryStage;
 	private Scene currentScene;
 
-	private ViewModelFactory viewModelFactory;
-	private ViewHandler proxyViewHandler;
-
 	public GrosserViewHandler(ProxyViewHandler proxyViewHandler) {
-		this.proxyViewHandler = proxyViewHandler;
 	}
 
 	private Scene sceneLoader(String view) throws IOException {
@@ -70,11 +64,6 @@ public class GrosserViewHandler implements ViewHandler {
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
-	}
-
-	@Override
-	public ViewModel getViewModelByViewName(String viewName) {
-		return null;
 	}
 
 

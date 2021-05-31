@@ -3,8 +3,6 @@ package client.customerclient.views.customerbasket;
 import client.core.ViewHandler;
 import client.core.factories.ViewModelFactory;
 import client.customerclient.views.CustomerViewController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,24 +15,20 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-// Andreas Østergaard, Andreas Young, Line Guld
+// Andreas Østergaard, Andreas Young, Line Guld.
 
 public class BasketViewController implements CustomerViewController {
 	@FXML
-	private TableView basketTable;
+	private TableView<ProductAndInt> basketTable;
 	@FXML
-	private TableColumn basketAntal;
+	private TableColumn<ProductAndInt, Integer> basketAntal;
 	@FXML
-	private TableColumn basketProduct;
+	private TableColumn<ProductAndInt, String> basketProduct;
 	@FXML
 	private Text basketSum;
 
 	private ViewHandler viewHandler;
 	private BasketViewModel viewModel;
-	private ProductAndInt productAndInt;
-
-	private final ObservableList<Product> data =
-			FXCollections.observableArrayList();
 
 	@Override
 	public void init(ViewHandler viewHandler) {
@@ -59,13 +53,8 @@ public class BasketViewController implements CustomerViewController {
 	}
 
 	public void removeItemFromBasket() {
-		Object item = basketTable.getSelectionModel().getSelectedItem(); // Item is an instance of ´ProductAndInt´
+		Object item = basketTable.getSelectionModel().getSelectedItem();
 		viewModel.removeFromBasket(item);
-		//basketTable.refresh(); // Denne metode blev tilføjet for 4 år siden til JavaFX og burde opdatere et TableView, men den virker ikke
-	}
-
-	public void saveBasketToBin() {
-		//TODO: (SaveBasket) Ekstra funktionallitet, slet ikke vigtig
 	}
 
 	public void sendOrder() {
@@ -79,7 +68,7 @@ public class BasketViewController implements CustomerViewController {
 			String test = OrderPopUpError.display(verification.getValue());
 			switch (test) {
 				case "confirm":
-					viewModel.removeFromBasket(verification.getValue()); // TODO: Skal fjerne de Products der er her
+					viewModel.removeFromBasket(verification.getValue());
 					break;
 				case "cancel":
 					break;
@@ -104,12 +93,6 @@ public class BasketViewController implements CustomerViewController {
 	public void openProductBrowser() throws IOException, SQLException {
 		swapScene("CustomerBrowser");
 	}
-
-	/*
-	public void openSubscriptions() throws IOException {
-		//swapScene("CustomerSubscriptions");
-	}
-	 */
 
 	public void openBasket() throws IOException, SQLException {
 		swapScene("CustomerBasket");

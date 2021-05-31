@@ -4,6 +4,8 @@ import shared.wares.*;
 
 import java.util.HashMap;
 
+// Andreas Young.
+
 public class SchemaMap {
 	private static HashMap<Class, String> map;
 

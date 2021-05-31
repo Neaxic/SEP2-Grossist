@@ -3,7 +3,6 @@ package client.customerclient.views.customerbrowser;
 import client.core.ViewHandler;
 import client.core.factories.ViewModelFactory;
 import client.customerclient.views.CustomerViewController;
-import client.grosserclient.model.GrosserModelInterface;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.fxml.FXML;
@@ -20,17 +19,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import server.model.databasemediator.DAOModel;
 import shared.wares.Product;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 
 // Andreas Young, Line Guld, Andreas Østergaard og Kasper Falk

@@ -8,6 +8,8 @@ import shared.wares.Product;
 import java.util.ArrayList;
 import java.util.List;
 
+// Andreas Young, Andreas Østergaard, Frederik Bergmann.
+
 public interface CustomerModelInterface extends Subject {
 	void updateWares();
 

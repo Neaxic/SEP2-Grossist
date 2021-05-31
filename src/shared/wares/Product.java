@@ -9,14 +9,14 @@ import java.util.TreeSet;
 // Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
 
 public abstract class Product implements Serializable {
-	private String wareName;
-	private String measurementType;
-	private LocalDate bestBefore;
-	private int wareNumber;
-	private int deliveryDays;
-	private double price;
-	private String producedBy;
-	String tags;
+	private final String wareName;
+	private final String measurementType;
+	private final LocalDate bestBefore;
+	private final int wareNumber;
+	private final int deliveryDays;
+	private final double price;
+	private final String producedBy;
+	private String tags;
 
 	/**
 	 * Generic Product Constructor

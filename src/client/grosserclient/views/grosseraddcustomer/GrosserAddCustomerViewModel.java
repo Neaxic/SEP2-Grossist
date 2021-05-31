@@ -8,6 +8,8 @@ import shared.objects.CustomerContainer;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+// Frederik Bergmann
+
 public class GrosserAddCustomerViewModel implements GrosserViewModel,
     PropertyChangeListener
 {

@@ -2,6 +2,8 @@ package shared.objects;
 
 import java.io.Serializable;
 
+// Frederik Bergmann
+
 public class CustomerContainer implements Serializable
 {
   private final int CVR;

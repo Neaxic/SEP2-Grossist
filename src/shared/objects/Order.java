@@ -1,7 +1,6 @@
 package shared.objects;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 // Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann

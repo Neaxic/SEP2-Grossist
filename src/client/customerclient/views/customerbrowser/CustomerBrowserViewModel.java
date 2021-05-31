@@ -11,7 +11,6 @@ import shared.wares.Product;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 // Andreas Young, Line Guld, Andreas Østergaard
@@ -39,7 +38,6 @@ public class CustomerBrowserViewModel implements CustomerViewModel, PropertyChan
 		if (amount <= 0) {
 			new Alert(Alert.AlertType.ERROR, "Mængde skal være et Positivt Heltal", ButtonType.OK).showAndWait();
 		} else {
-			// TODO: Tjek om søgning virker
 			for (Product product : activeItemList) {
 				if (product.getWareNumber() == productWareNumber) {
 					customerModelInterface.addToBasket(product, amount);

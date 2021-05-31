@@ -1,8 +1,8 @@
-package server.model.RISK_ASSESSMENT;
+package server.model.riskassessment;
 
 import java.util.ArrayList;
 
-//Line og Frederik
+//Line Guld og Frederik Bergmann
 
 public interface RiskInterface
 {

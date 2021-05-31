@@ -10,5 +10,4 @@ import java.sql.SQLException;
 public interface ViewHandler {
 	void start(Stage primaryStage) throws IOException, SQLException;
 	void openView(String viewToOpen) throws IOException, SQLException;
-	ViewModel getViewModelByViewName(String viewName);
 }

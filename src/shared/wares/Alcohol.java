@@ -6,12 +6,11 @@ import java.time.LocalDate;
 
 // Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
 
-public class Alcohol extends Product implements ProductInterface {
-	private String originCountry;
-	private double percentage;     // Kommer bare til at være et tallet
-	private String beverageType;   // Øl, Vin, Cider, småbarns spiritus(små sure), Spiritus (spiritus er alt over 16.4%)
+public class Alcohol extends Product{
+	private final String originCountry;
+	private final double percentage;
+	private final String beverageType;
 
-	// TODO: Opdater med params når database opdateres, eller anden aftale er lavet
 	public Alcohol(Object[] params) {
 		super((String) params[1], (String) params[2], ((Date) params[5]).toLocalDate(), (Integer) params[0], (Integer)params[8], ((BigDecimal) params[4]).doubleValue(), (String) params[3], (String) params[7]);
 		originCountry = (String) params[11];

@@ -1,7 +1,7 @@
 package client.network;
 
 import javafx.util.Pair;
-import server.model.RISK_ASSESSMENT.RiskReport;
+import server.model.riskassessment.RiskReport;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.objects.Basket;
@@ -23,11 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-// Andreas Young og Andreas Østergaard
+// Andreas Young, Andreas Østergaard, Frederik Bergmann.
 
 public class RMIClient implements Client, GrosserClient, CallbackClient, LoginInfoInterface {
 	private RMIServerInterface server;
-	private PropertyChangeSupport support;
+	private final PropertyChangeSupport support;
 	private int clientID;
 
 	public RMIClient() {
@@ -96,7 +96,7 @@ public class RMIClient implements Client, GrosserClient, CallbackClient, LoginIn
 	}
 
 	@Override
-	public void update(String info, List list) { // CustomerModel.java is a listener
+	public void update(String info, List list) {
 		support.firePropertyChange(info, null, list);
 	}
 

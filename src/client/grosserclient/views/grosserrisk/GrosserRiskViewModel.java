@@ -6,17 +6,19 @@ import client.grosserclient.views.GrosserViewModel;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import server.model.RISK_ASSESSMENT.RiskReport;
+import server.model.riskassessment.RiskReport;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
+// Frederik Bergmann
+
 public class GrosserRiskViewModel implements GrosserViewModel,
     PropertyChangeListener
 {
   private final ListProperty<RiskReport> riskReports;
-  private GrosserModelInterface grosserModel;
+  private final GrosserModelInterface grosserModel;
 
   public GrosserRiskViewModel()
   {

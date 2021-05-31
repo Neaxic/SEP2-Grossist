@@ -13,13 +13,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-// Andreas Young
+// Andreas Young, Andreas Østergaard, Frederik Bergmann.
 
 public class CustomerModel implements CustomerModelInterface {
-	private PropertyChangeSupport support;
-	private Client client;
-	private Basket myBasket; //question: Måske fjerne klassen da metodekaldene ikke ændres
-	private List<Product> wareList; //question: Lave dette til en klasse hvis vi beholder Basket?
+	private final PropertyChangeSupport support;
+	private final Client client;
+	private final Basket myBasket;
+	private List<Product> wareList;
 
 	public CustomerModel(Client client) {
 		support = new PropertyChangeSupport(this);
@@ -81,7 +81,6 @@ public class CustomerModel implements CustomerModelInterface {
 	 * @param sum    The summed price of all the items in the order
 	 * @return True if order was correctly sent, false if any error occured
 	 */
-	//TODO: KOM TILBAGE HER TIL NOT DONE MAKKER
 	public Pair<Boolean, ArrayList<Product>> sendOrder(Basket basket, double sum) {
 		try {
 			return client.sendOrder(LoginManager.cvr, basket);

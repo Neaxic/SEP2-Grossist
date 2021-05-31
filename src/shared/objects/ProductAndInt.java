@@ -4,9 +4,9 @@ package shared.objects;
 
 public class ProductAndInt {
 
-    private String product;
-    private int amount;
-    private int productID;
+    private final String product;
+    private final int amount;
+    private final int productID;
 
     public ProductAndInt(String product, int ID, int v){
         this.product = product;

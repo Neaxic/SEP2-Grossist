@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+//Frederik Bergmann
+
 public class md5
 {
   public static String encode(String input)

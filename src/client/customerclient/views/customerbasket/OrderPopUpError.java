@@ -1,6 +1,6 @@
 package client.customerclient.views.customerbasket;
 
-// Young
+// Andreas Young.
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

@@ -1,13 +1,13 @@
-
 import client.core.factories.ClientFactory;
 import client.core.factories.ModelFactory;
-import client.customerclient.views.customerbrowser.CustomerBrowserViewModel;
 import client.grosserclient.model.GrosserModelInterface;
-import client.grosserclient.views.grosseraddproduct.GrosserAddProductViewModel;
 import client.grosserclient.views.grosserwares.GrosserWaresViewModel;
 import client.network.GrosserClient;
 import javafx.util.Pair;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import server.network.RMIServer;
 import shared.network.RMIServerInterface;
 import shared.wares.Alcohol;
@@ -15,11 +15,11 @@ import shared.wares.Drink;
 import shared.wares.FruitsAndVegetable;
 import shared.wares.Product;
 
-
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //Kasper Falk Mikkelsen
 
@@ -32,7 +32,7 @@ public class ChangeAmountTest {
     static GrosserClient grosser;
     static Product testProduct1, testProduct2, testProduct3;
 
-    @BeforeAll //Hapset fra Young
+    @BeforeAll
     static void init() throws SQLException
     {
         try
@@ -73,7 +73,7 @@ public class ChangeAmountTest {
 
 
     @Test
-    void changeAmount() { //Når nedenstående køres, virker det ikke første gang det køres... Køres det så 2 gange virker det fint
+    void changeAmount() {
         //Upper boundry
         viewModel.reduceStock(viewModel.getListForView().get(0),99);
         System.out.println(viewModel.getListForView());
@@ -88,7 +88,7 @@ public class ChangeAmountTest {
         //Lower boundry
         viewModel.reduceStock(viewModel.getListForView().get(0),1);
         viewModel.updateWareList();
-        assertEquals(0,viewModel.getListForView().get(0).getAmount()); //This should just ignore the change
+        assertEquals(0,viewModel.getListForView().get(0).getAmount());
     }
 }
 

@@ -10,6 +10,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 
+// Frederik Bergmann, Andreas Young.
+
 public class GrosserModel implements GrosserModelInterface {
 	private PropertyChangeSupport support;
 	private final GrosserClient client;

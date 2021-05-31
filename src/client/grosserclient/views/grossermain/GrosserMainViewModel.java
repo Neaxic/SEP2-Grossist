@@ -11,6 +11,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
+// Frederik Bergmann
+
 public class GrosserMainViewModel implements GrosserViewModel,
     PropertyChangeListener
 {

@@ -1,13 +1,15 @@
 package server.model.databasemediator;
 
 import javafx.util.Pair;
-import server.model.RISK_ASSESSMENT.RiskContainer;
+import server.model.riskassessment.RiskContainer;
 import shared.objects.Order;
 import shared.wares.Product;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+// Andreas Young, Frederik Bergmann
 
 public interface DAOGrosserInterface extends CollectionDAOInterface {
 	// GETTING

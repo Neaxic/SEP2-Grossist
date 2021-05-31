@@ -1,6 +1,6 @@
-package server.model.RISK_ASSESSMENT;
+package server.model.riskassessment;
 
-//Line og Frederik
+//Line Guld og Frederik Bergmann
 
 import java.io.Serializable;
 import java.time.LocalDate;

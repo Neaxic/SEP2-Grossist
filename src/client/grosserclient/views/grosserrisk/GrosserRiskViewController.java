@@ -9,10 +9,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import server.model.RISK_ASSESSMENT.RiskReport;
+import server.model.riskassessment.RiskReport;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
+// Frederik Bergmann
 
 public class GrosserRiskViewController implements GrosserViewController
 {

@@ -1,17 +1,14 @@
 package shared.network;
 
-import javafx.util.Pair;
-import server.model.RISK_ASSESSMENT.RiskReport;
+import server.model.riskassessment.RiskReport;
 import shared.objects.Order;
-import shared.wares.Product;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-// Andreas Young
+// Andreas Young, Frederik Bergmann.
 
 public interface CallbackClient extends Remote {
 	/**

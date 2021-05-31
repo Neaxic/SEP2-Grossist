@@ -13,10 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.MissingResourceException;
 
-// Andreas Young, Andreas Østergaard
+// Andreas Young, Andreas Østergaard, Line Guld.
 
 public class BasketViewModel implements CustomerViewModel {
-	private CustomerModelInterface customerModel;
+	private final CustomerModelInterface customerModel;
 
 	public BasketViewModel() {
 		customerModel = ModelFactory.getInstance().getCustomerModel();

@@ -15,7 +15,7 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
-// Young
+// Andreas Young, Frederik Bergmann.
 
 public class GrosserWaresViewController
 		implements GrosserViewController, PropertyChangeListener {
@@ -38,7 +38,6 @@ public class GrosserWaresViewController
 		amounts.setCellValueFactory(new PropertyValueFactory<>("amount"));
 		newWareAmountField.clear();
 
-		// Mangler lige indikation af, at der er varer på vej fra Databasen
 		Thread t = new Thread(() -> viewModel.updateWareList());
 		t.setDaemon(true);
 		t.start();
@@ -106,7 +105,7 @@ public class GrosserWaresViewController
 	@FXML
 	private void refresh() {
 		init(viewHandler);
-	} // Hiver fat i databasen hver gang, ikke det smarteste men klart det sikreste
+	}
 
 	@Override
 	public void swapScene(String sceneName) throws IOException, SQLException {

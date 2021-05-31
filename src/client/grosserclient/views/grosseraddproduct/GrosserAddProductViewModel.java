@@ -8,6 +8,7 @@ import shared.wares.Product;
 
 import java.sql.SQLException;
 
+// Frederik Bergmann, Andreas Østergaard, Andreas Young.
 
 public class GrosserAddProductViewModel implements GrosserViewModel {
 	private GrosserModelInterface grosserModel;

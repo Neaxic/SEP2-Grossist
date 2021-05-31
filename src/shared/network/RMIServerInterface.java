@@ -1,8 +1,6 @@
 package shared.network;
 
 import javafx.util.Pair;
-import server.model.RISK_ASSESSMENT.RiskContainer;
-import server.model.RISK_ASSESSMENT.RiskReport;
 import shared.objects.Basket;
 import shared.objects.CustomerContainer;
 import shared.wares.Product;

@@ -1,7 +1,8 @@
-package server.model.RISK_ASSESSMENT;
+package server.model.riskassessment;
 
 import java.time.LocalDate;
-//Line og Frederik
+
+//Line Guld og Frederik Bergmann
 
 public class RiskContainer
 {

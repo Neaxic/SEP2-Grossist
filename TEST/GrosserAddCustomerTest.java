@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// Young
+// Andreas Young
 
 public class GrosserAddCustomerTest {
 	static private GrosserAddCustomerViewModel vm;

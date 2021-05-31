@@ -11,16 +11,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-// Andreas Østergaard, Frederik Bergmann
+// Andreas Østergaard, Frederik Bergmann.
 
 public class ProxyViewHandler implements ViewHandler {
 	private ViewHandler viewHandler;
-	private final ViewModelFactory viewModelFactory;
 	private final Stage stage;
 
 	public ProxyViewHandler(Stage stage) {
 		this.stage = stage;
-		viewModelFactory = ViewModelFactory.getInstance();
 		login();
 	}
 
@@ -32,11 +30,6 @@ public class ProxyViewHandler implements ViewHandler {
 	@Override
 	public void openView(String viewToOpen) throws IOException, SQLException {
 		viewHandler.openView(viewToOpen);
-	}
-
-	@Override
-	public ViewModel getViewModelByViewName(String viewName) {
-		return viewHandler.getViewModelByViewName(viewName);
 	}
 
 	private void login()

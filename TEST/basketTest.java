@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import shared.wares.Alcohol;
 import shared.objects.Basket;
+import shared.wares.Alcohol;
 
 import java.time.LocalDate;
 

@@ -11,6 +11,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<!--Kasper Falk, Andreas Østergaard.-->
+
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.customerclient.views.customerbasket.BasketViewController">
    <children>
       <VBox prefHeight="120.0" prefWidth="900.0" style="-fx-background-color: lightblue;">
@@ -64,7 +66,7 @@
                                              <children>
                                                 <Button layoutX="652.0" layoutY="15.0" mnemonicParsing="false" onAction="#emptyBasket" prefHeight="25.0" prefWidth="95.0" text="Tøm Kurv" />
                                                 <Button mnemonicParsing="false" onAction="#removeItemFromBasket" prefHeight="25.0" prefWidth="95.0" text="Fjern Fra Kurv" />
-                                                <Button layoutX="762.0" layoutY="11.0" mnemonicParsing="false" onAction="#saveBasketToBin" prefHeight="25.0" prefWidth="95.0" text="Gem kurv" />
+                                                <Button layoutX="762.0" layoutY="11.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Gem kurv" />
                                              </children>
                                              <padding>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

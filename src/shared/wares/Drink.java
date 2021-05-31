@@ -1,14 +1,13 @@
 package shared.wares;
 
-
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 
 // Andreas Young, Kasper Falk, Andreas Østergaard, Frederik Bergmann
 
-public class Drink extends Product implements ProductInterface {
-	private String beverageType;
+public class Drink extends Product {
+	private final String beverageType;
 
 	public Drink(Object[] params) {
 		super((String) params[1], (String) params[2], ((Date) params[5]).toLocalDate(), (Integer) params[0], (Integer)params[8], ((BigDecimal) params[4]).doubleValue(), (String) params[3], (String) params[7]);

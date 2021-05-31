@@ -1,31 +1,24 @@
 import client.core.factories.ClientFactory;
-import client.core.factories.ModelFactory;
 import client.grosserclient.model.GrosserModelInterface;
-import client.grosserclient.views.grosseraddproduct.GrosserAddProductViewModel;
 import client.network.GrosserClient;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import javafx.util.Pair;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import server.model.RISK_ASSESSMENT.RiskAssessment;
-import server.model.RISK_ASSESSMENT.RiskContainer;
-import server.model.RISK_ASSESSMENT.RiskInterface;
-import server.model.RISK_ASSESSMENT.RiskReport;
+import server.model.riskassessment.RiskAssessment;
+import server.model.riskassessment.RiskContainer;
+import server.model.riskassessment.RiskInterface;
+import server.model.riskassessment.RiskReport;
 import server.network.RMIServer;
 import shared.network.RMIServerInterface;
 import shared.wares.Alcohol;
-import shared.wares.Product;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-//Line og Frederik pair-programming baby
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+//Line Guld og Frederik Bergmann
 
 public class RiskAssessmentTest
 {
@@ -64,7 +57,7 @@ public class RiskAssessmentTest
   int soldDaily_yellow1 = 5;
   int stock_yellow1 = 49;
 
-  @BeforeAll //Hapset fra Young
+  @BeforeAll
   static void init()
   {
     try

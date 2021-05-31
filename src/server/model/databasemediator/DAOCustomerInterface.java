@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-// Young
+// Andreas Young
 
 public interface DAOCustomerInterface extends CollectionDAOInterface{
 	// GETTING

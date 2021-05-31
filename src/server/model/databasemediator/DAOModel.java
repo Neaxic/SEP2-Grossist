@@ -1,7 +1,7 @@
 package server.model.databasemediator;
 
 import javafx.util.Pair;
-import server.model.RISK_ASSESSMENT.RiskContainer;
+import server.model.riskassessment.RiskContainer;
 import shared.objects.Basket;
 import shared.objects.Order;
 import shared.util.SchemaMap;
