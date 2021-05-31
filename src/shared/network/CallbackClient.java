@@ -1,6 +1,7 @@
 package shared.network;
 
 import javafx.util.Pair;
+import server.model.RISK_ASSESSMENT.RiskReport;
 import shared.objects.Order;
 import shared.wares.Product;
 
@@ -22,4 +23,6 @@ public interface CallbackClient extends Remote {
 	void update(String info, List list) throws RemoteException;
 
 	void updateAllOrders(List<Order> orders) throws RemoteException;
+
+	void updateRiskData(ArrayList<RiskReport> reports) throws RemoteException;
 }

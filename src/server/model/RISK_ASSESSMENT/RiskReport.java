@@ -2,18 +2,52 @@ package server.model.RISK_ASSESSMENT;
 
 //Line og Frederik
 
-public class RiskReport
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public class RiskReport implements Serializable
 {
   private String type;
-  private final RiskContainer item;
+  private final int productId, deliveryDays, amountInStock, soldDaily;
+  private final LocalDate bestBefore;
 
   public RiskReport(RiskContainer item, char type)
   {
-    this.item = item;
+    productId = item.getProductId();
+    deliveryDays = item.getDeliveryDays();
+    amountInStock = item.getAmountInStock();
+    soldDaily = item.getSoldDaily();
+    bestBefore = item.getBestBefore();
 
-    if (type == 'g') this.type = "Green";
-    if (type == 'y') this.type = "Yellow";
-    if (type == 'r') this.type = "Red";
+    if (type == 'y') this.type = "Lager";
+    if (type == 'r') this.type = "Dato";
+  }
+
+  public String getRecommendation()
+  {
+    if (type.equals("Lager"))
+    {
+      double daysOfSupply = (double) amountInStock / soldDaily;
+      boolean critical = daysOfSupply <= deliveryDays;
+
+      if (critical)
+      {
+        int emptyStorage = (int) Math.ceil(deliveryDays - daysOfSupply);
+
+        return "Kritisk lagerbeholdning! Bestil straks!\nNuværende beholdning: " + amountInStock +
+            "\nGennemsnitlig dagligt salg: " + soldDaily + "\nLager tømt cirka " + emptyStorage +
+            " dage før vare kan leveres.";
+      }
+      else
+      {
+        int buffer = (int) Math.ceil(daysOfSupply - deliveryDays);
+
+        return "Lav lagerbeholdning.\nNuværende beholdning: " + amountInStock +
+            "\nGennemsnitlig dagligt salg: " + soldDaily + "\nCirka " + buffer +
+            " dages salg tilbage før kritisk niveau.";
+      }
+    }
+    return "Not done yet!";
   }
 
   public String getType()
@@ -21,8 +55,28 @@ public class RiskReport
     return type;
   }
 
-  public RiskContainer getItem()
+  public int getProductId()
   {
-    return item;
+    return productId;
+  }
+
+  public int getDeliveryDays()
+  {
+    return deliveryDays;
+  }
+
+  public int getAmountInStock()
+  {
+    return amountInStock;
+  }
+
+  public int getSoldDaily()
+  {
+    return soldDaily;
+  }
+
+  public LocalDate getBestBefore()
+  {
+    return bestBefore;
   }
 }

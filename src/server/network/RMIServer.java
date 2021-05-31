@@ -127,6 +127,10 @@ public class RMIServer implements RMIServerInterface {
 		serverModel.removeCustomer(customerCVR);
 	}
 
+	@Override public void getRiskData(int id) throws RemoteException
+	{
+		callbackClients.get(id).updateRiskData(serverModel.getRiskData());
+	}
 
 	private void getAllProducts() {
 		wares = serverModel.getAllProducts();

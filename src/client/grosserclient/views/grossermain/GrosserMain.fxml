@@ -57,6 +57,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#waresScene" text="Se varer" />
                   <MenuItem mnemonicParsing="false" onAction="#addNewProductScene" text="Tilføj nyt produkt" />
+                  <MenuItem mnemonicParsing="false" onAction="#riskScene" text="Risikoanalyse" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#addCustomerScene" text="Opret kunde" />
                   <SeparatorMenuItem mnemonicParsing="false" />

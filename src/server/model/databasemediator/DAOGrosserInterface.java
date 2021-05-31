@@ -1,10 +1,12 @@
 package server.model.databasemediator;
 
 import javafx.util.Pair;
+import server.model.RISK_ASSESSMENT.RiskContainer;
 import shared.objects.Order;
 import shared.wares.Product;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface DAOGrosserInterface extends CollectionDAOInterface {
@@ -101,4 +103,6 @@ public interface DAOGrosserInterface extends CollectionDAOInterface {
 	 * @param customerCVR CVR of the Customer whom is to be removed
 	 */
 	void removeCustomer(int customerCVR) throws SQLException;
+
+	ArrayList<RiskContainer> getRiskData();
 }

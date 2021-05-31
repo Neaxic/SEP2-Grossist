@@ -50,6 +50,11 @@ public class GrosserModel implements GrosserModelInterface {
 		return client.addCustomer(customer);
 	}
 
+	@Override public void getRiskData()
+	{
+		client.getRiskData();
+	}
+
 	@Override
 	public void createNewProduct(Pair<Product, Integer> newProduct) throws IllegalArgumentException, SQLException {
 		client.createProduct(newProduct);

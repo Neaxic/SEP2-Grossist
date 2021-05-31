@@ -61,6 +61,12 @@ public class GrosserMainViewController implements GrosserViewController {
 	}
 
 	@FXML
+	private void riskScene() throws SQLException, IOException
+	{
+		swapScene("GrosserRisk");
+	}
+
+	@FXML
 	private void addCustomerScene() throws IOException, SQLException {
 		swapScene("GrosserAddCustomer");
 	}

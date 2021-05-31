@@ -1,6 +1,7 @@
 package client.network;
 
 import javafx.util.Pair;
+import server.model.RISK_ASSESSMENT.RiskReport;
 import shared.network.CallbackClient;
 import shared.network.RMIServerInterface;
 import shared.objects.Basket;
@@ -104,6 +105,12 @@ public class RMIClient implements Client, GrosserClient, CallbackClient, LoginIn
 		support.firePropertyChange("orderList", null, orders);
 	}
 
+	@Override public void updateRiskData(ArrayList<RiskReport> reports)
+			throws RemoteException
+	{
+		support.firePropertyChange("riskReports", null, reports);
+	}
+
 	@Override
 	public void addListener(PropertyChangeListener listener) {
 		support.addPropertyChangeListener(listener);
@@ -160,6 +167,18 @@ public class RMIClient implements Client, GrosserClient, CallbackClient, LoginIn
 			server.removeCustomer(customerCVR);
 		} catch (SQLException | RemoteException throwables) {
 			throwables.printStackTrace();
+		}
+	}
+
+	@Override public void getRiskData()
+	{
+		try
+		{
+			server.getRiskData(clientID);
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
 		}
 	}
 

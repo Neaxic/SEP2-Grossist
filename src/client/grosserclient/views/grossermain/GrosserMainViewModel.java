@@ -14,14 +14,14 @@ import java.util.ArrayList;
 public class GrosserMainViewModel implements GrosserViewModel,
     PropertyChangeListener
 {
-  private final GrosserModelInterface GrosserModel;
-  private SimpleListProperty<Order> orderList;
+  private final GrosserModelInterface grosserModel;
+  private final SimpleListProperty<Order> orderList;
 
   public GrosserMainViewModel()
   {
     orderList= new SimpleListProperty<>();
-    GrosserModel = ModelFactory.getInstance().getGrosserModel();
-    GrosserModel.addListener(this);
+    grosserModel = ModelFactory.getInstance().getGrosserModel();
+    grosserModel.addListener(this);
   }
 
   private void updateOrderList(ArrayList<Order> orderArrayList)
@@ -31,7 +31,7 @@ public class GrosserMainViewModel implements GrosserViewModel,
 
   public void getAllOrders()
   {
-    GrosserModel.getAllOrders();
+    grosserModel.getAllOrders();
   }
 
   public SimpleListProperty<Order> getOrderListProperty()

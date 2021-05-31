@@ -29,7 +29,6 @@ public class RiskAssessment implements RiskInterface
     int soldDaily = item.getSoldDaily();
     int stock = item.getAmountInStock();
     int dDays = item.getDeliveryDays();
-    int id = item.getProductId();
     LocalDate BB = item.getBestBefore();
 
     LocalDate today = LocalDate.now();
@@ -37,7 +36,7 @@ public class RiskAssessment implements RiskInterface
 
     double daysOfSupply = (double) stock / soldDaily;
 
-    if (daysOfSupply < dDays)
+    if (daysOfSupply <= dDays + 3)
     {
       RiskReport report = new RiskReport(item, 'y');
       allReports.add(report);
