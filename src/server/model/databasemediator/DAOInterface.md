@@ -38,3 +38,5 @@ I dette dokument, kan du læse om hvad de forskellige interfaces skal kunde, pri
 	* (cvr, navn, kodeord, adresse)
 	
 * Fjerne en ordre (int) [bool]
+
+<b><i>Skrevet af: Andreas Young Andersen</i></b>
